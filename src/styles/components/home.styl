@@ -1,0 +1,41 @@
+.home
+	height: 100vh
+	width: 100vw
+	display: flex
+	flex-flow: column
+	justify-content: space-around
+	align-items: center
+
+	> div
+		&:first-of-type
+			height: 20vh
+			width: 100vw
+			display: flex
+			justify-content: flex-start
+			> div
+				height: 20vh
+				width: 75vw
+				background-color: rgba(252, 247, 247, 0.50)
+				border-radius: 1rem
+		&:last-of-type
+			height: 20vh
+			width: 100vw
+			border-radius: 1.5rem
+			display: flex
+			justify-content: flex-end
+			> div
+				height: 20vh
+				width: 75vw
+				background-color: rgba(252, 247, 247, 0.50)
+				display: flex
+				flex-flow: column
+				justify-content: center
+				align-items: center
+				border-top-left-radius: 1rem
+				border-bottom-left-radius: 1rem
+
+		form
+			display: flex
+			flex-flow: column
+			justify-content: center
+			align-items: center
