@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=East+Sea+Dokdo|Press+Start+2P");
 * {
   user-select: none;
   box-sizing: border-box;
@@ -30,6 +31,7 @@ body {
   right: 0;
   width: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
   margin: 0;
   display: flex;
   flex-flow: column;
@@ -89,8 +91,19 @@ p {
 .home > div:first-of-type > div {
   height: 20vh;
   width: 75vw;
-  background-color: rgba(252,247,247,0.5);
   border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+}
+.home > div:first-of-type > div h1 {
+  font-size: 4rem;
+  color: #f00;
+  font-family: 'Press Start 2P', cursive;
+}
+.home > div:first-of-type > div span {
+  font-size: 5rem;
+  color: #1469b2;
+  font-family: 'East Sea Dokdo', cursive;
 }
 .home > div:last-of-type {
   height: 20vh;
@@ -101,14 +114,56 @@ p {
 }
 .home > div:last-of-type > div {
   height: 20vh;
-  width: 75vw;
-  background-color: rgba(252,247,247,0.5);
+  width: 50vw;
+  color: #fff;
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
+}
+.home > div:last-of-type > div form > div {
+  height: 1rem;
+  width: 25rem;
+  border-left: 0.2rem solid #fff;
+  border-right: 0.2rem solid #fff;
+  border-bottom: 0.2rem solid #fff;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+.home > div:last-of-type > div form > div input {
+  transform: translateY(-1.7rem);
+  position: relative;
+  border: none;
+  width: 24.6rem;
+  height: 2.5rem;
+  background-color: #000;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  color: #fff;
+  font-size: 1.5rem;
+  padding-left: 1rem;
+}
+.home > div:last-of-type > div form > div input:focus {
+  outline: none;
+}
+.home > div:last-of-type > div form > div input::placeholder {
+  color: #fff;
+  font-size: 1.5rem;
+}
+.home > div:last-of-type > div form > div > div {
+  width: 25rem;
+  display: flex;
+  justify-content: flex-end;
+}
+.home > div:last-of-type > div form > div > div div {
+  width: 8rem;
+  cursor: pointer;
+  text-align: center;
+  font-size: 1.5rem;
+  border: 0.2rem solid #fff;
+  border-radius: 0.5rem;
 }
 .home > div form {
   display: flex;

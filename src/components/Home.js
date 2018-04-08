@@ -6,17 +6,22 @@ class Home extends Component {
 			<div className="home">
 				<div>
 					<div>
-						<h1>RED TETRIS</h1>
+						<h1>RED_TETRIS</h1>
+						<span>Worldwide</span>
 					</div>
 				</div>
 				<div>
 					<div>
-						<h1>Welcome to Red_Tetris</h1>
-						<h2>To begin please select a username</h2>
 						<form action="">
 							<div>
-								<label htmlFor="username">Username:</label>
-								<input type="text" name="username" />
+								<input
+									type="text"
+									placeholder="Choose a username to begin"
+									name="username"
+								/>
+								<div>
+									<div>Start →</div>
+								</div>
 							</div>
 						</form>
 					</div>

@@ -15,8 +15,18 @@
 			> div
 				height: 20vh
 				width: 75vw
-				background-color: rgba(252, 247, 247, 0.50)
+				// background-color: rgba(252, 247, 247, 0.50)
 				border-radius: 1rem
+				display: flex
+				justify-content: center
+				h1
+					font-size: 4rem
+					color: red
+					font-family: 'Press Start 2P', cursive
+				span
+					font-size: 5rem
+					color: #1469B2
+					font-family: 'East Sea Dokdo', cursive
 		&:last-of-type
 			height: 20vh
 			width: 100vw
@@ -25,14 +35,53 @@
 			justify-content: flex-end
 			> div
 				height: 20vh
-				width: 75vw
-				background-color: rgba(252, 247, 247, 0.50)
+				width: 50vw
+				// background-color: rgba(252, 247, 247, 0.50)
+				color: white
 				display: flex
 				flex-flow: column
 				justify-content: center
 				align-items: center
 				border-top-left-radius: 1rem
 				border-bottom-left-radius: 1rem
+
+				form
+					> div
+						height: 1rem
+						width: 25rem
+						border-left: 0.2rem solid white
+						border-right: 0.2rem solid white
+						border-bottom: 0.2rem solid white
+						border-bottom-left-radius: .5rem
+						border-bottom-right-radius: .5rem
+						input
+							transform: translateY(-1.7rem)
+							position: relative
+							border: none
+							width: 24.6rem
+							height: 2.5rem
+							background-color: black
+							border-bottom-left-radius: .5rem
+							border-bottom-right-radius: .5rem
+							color: white
+							font-size: 1.5rem
+							padding-left: 1rem
+							&:focus
+								outline: none
+							&::placeholder
+								color: white
+								font-size: 1.5rem
+						> div
+							width: 25rem
+							display: flex
+							justify-content: flex-end
+							div
+								width: 8rem
+								cursor pointer
+								text-align: center
+								font-size: 1.5rem
+								border: 0.2rem solid white
+								border-radius: .5rem
 
 		form
 			display: flex
