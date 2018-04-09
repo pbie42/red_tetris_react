@@ -1,4 +1,15 @@
 import React, { Component } from 'react'
+import { Link, withRouter } from 'react-router-dom'
+
+const Button = withRouter(({ history }) => (
+	<div
+		onClick={() => {
+			history.push('/chat')
+		}}
+	>
+		Start →
+	</div>
+))
 
 function Home() {
 	const component = new Component()
@@ -37,7 +48,7 @@ function Home() {
 									name="username"
 								/>
 								<div>
-									<div>Start →</div>
+									<Button />
 								</div>
 							</div>
 						</form>
