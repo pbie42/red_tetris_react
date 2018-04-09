@@ -1,7 +1,19 @@
 import React, { Component } from 'react'
 
-class Home extends Component {
-	render() {
+function Home() {
+	const component = new Component()
+	component.state = {
+		placeholder: ''
+	}
+	function placeHolder() {
+		if (!component.state.placeholder)
+			component.setState({ placeholder: 'Choose a username to begin' })
+		else component.setState({ placeholder: '' })
+	}
+	component.componentDidMount = function() {
+		setInterval(placeHolder(), 1000)
+	}
+	component.render = () => {
 		return (
 			<div className="home">
 				<div>
@@ -16,7 +28,7 @@ class Home extends Component {
 							<div>
 								<input
 									type="text"
-									placeholder="Choose a username to begin"
+									placeholder={component.state.placeholder}
 									name="username"
 								/>
 								<div>
@@ -29,6 +41,7 @@ class Home extends Component {
 			</div>
 		)
 	}
+	return component
 }
 
 export default Home
