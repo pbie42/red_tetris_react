@@ -114,7 +114,7 @@ p {
 }
 .home > div:last-of-type > div {
   height: 20vh;
-  width: 50vw;
+  width: 70vw;
   color: #fff;
   display: flex;
   flex-flow: column;
@@ -149,8 +149,11 @@ p {
   outline: none;
 }
 .home > div:last-of-type > div form > div input::placeholder {
+  transform: translateX(-1rem);
+  text-align: center;
   color: #fff;
   font-size: 1.5rem;
+  animation: blink 1.5s linear infinite;
 }
 .home > div:last-of-type > div form > div > div {
   width: 25rem;
@@ -170,4 +173,48 @@ p {
   flex-flow: column;
   justify-content: center;
   align-items: center;
+}
+@-moz-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }

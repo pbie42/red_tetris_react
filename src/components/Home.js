@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 function Home() {
 	const component = new Component()
 	component.state = {
-		placeholder: ''
+		placeholder: '',
+		interval: ''
 	}
 	function placeHolder() {
 		if (!component.state.placeholder)
@@ -11,7 +12,11 @@ function Home() {
 		else component.setState({ placeholder: '' })
 	}
 	component.componentDidMount = function() {
-		setInterval(placeHolder(), 1000)
+		const interval = setInterval(placeHolder, 750)
+		component.setState({ interval })
+	}
+	component.componentWillUnmount = function() {
+		clearInterval(component.state.interval)
 	}
 	component.render = () => {
 		return (

@@ -35,7 +35,7 @@
 			justify-content: flex-end
 			> div
 				height: 20vh
-				width: 50vw
+				width: 70vw
 				// background-color: rgba(252, 247, 247, 0.50)
 				color: white
 				display: flex
@@ -69,8 +69,11 @@
 							&:focus
 								outline: none
 							&::placeholder
+								transform: translateX(-1rem)
+								text-align: center
 								color: white
 								font-size: 1.5rem
+								animation: blink 1.5s linear infinite
 						> div
 							width: 25rem
 							display: flex
@@ -88,3 +91,10 @@
 			flex-flow: column
 			justify-content: center
 			align-items: center
+
+
+@keyframes blink {
+	0%{opacity: 0;}
+	50%{opacity: .5;}
+	100%{opacity: 1;}
+}
