@@ -122,12 +122,6 @@ p {
   font-family: 'Press Start 2P', cursive;
   animation: neonRed 1.5s ease-in-out infinite alternate;
 }
-.home > div:first-of-type > div span {
-  font-size: 7rem;
-  color: #fff;
-  font-family: 'East Sea Dokdo', cursive;
-  animation: neonBlue 1.5s ease-in-out infinite alternate;
-}
 .home > div:last-of-type {
   height: 20vh;
   width: 100vw;
@@ -181,7 +175,6 @@ p {
   width: 25rem;
   display: flex;
   justify-content: flex-end;
-  animation: neonBlue 1.5s ease-in-out infinite alternate;
 }
 .home > div:last-of-type > div form > div > div div {
   width: 8rem;
@@ -190,7 +183,6 @@ p {
   font-size: 1.5rem;
   border: 0.2rem solid #fff;
   border-radius: 0.5rem;
-  animation: neonBlue 1.5s ease-in-out infinite alternate;
 }
 .home > div form {
   display: flex;

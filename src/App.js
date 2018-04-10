@@ -5,7 +5,7 @@ import './App.css'
 // import { MessagesList } from './containers/MessagesList'
 // import { AddMessage } from './containers/AddMessage'
 import Chat from './components/Chat'
-import { Home } from './containers/Home'
+import Home from './components/home/Home'
 
 function App(props) {
 	const C = new Component()
