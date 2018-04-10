@@ -27,3 +27,8 @@ export const populateUsersList = users => ({
 	type: types.USERS_LIST,
 	users
 })
+
+export const setNickname = nickname => ({
+	type: types.SET_NICKNAME,
+	nickname
+})

@@ -20,13 +20,16 @@
 				display: flex
 				justify-content: center
 				h1
-					font-size: 4rem
-					color: red
+					padding-top: 7rem
+					font-size: 6rem
+					color: #fff
 					font-family: 'Press Start 2P', cursive
+					animation: neonRed 1.5s ease-in-out infinite alternate
 				span
-					font-size: 5rem
-					color: #1469B2
+					font-size: 7rem
+					color: #fff;
 					font-family: 'East Sea Dokdo', cursive
+					animation: neonBlue 1.5s ease-in-out infinite alternate
 		&:last-of-type
 			height: 20vh
 			width: 100vw
@@ -73,11 +76,11 @@
 								text-align: center
 								color: white
 								font-size: 1.5rem
-								animation: blink 1.5s linear infinite
 						> div
 							width: 25rem
 							display: flex
 							justify-content: flex-end
+							animation: neonBlue 1.5s ease-in-out infinite alternate
 							div
 								width: 8rem
 								cursor pointer
@@ -85,6 +88,7 @@
 								font-size: 1.5rem
 								border: 0.2rem solid white
 								border-radius: .5rem
+								animation: neonBlue 1.5s ease-in-out infinite alternate
 
 		form
 			display: flex
@@ -97,4 +101,22 @@
 	0%{opacity: 0;}
 	50%{opacity: .5;}
 	100%{opacity: 1;}
+}
+
+@keyframes neonRed {
+	from {
+		text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+	}
+	to {
+		text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+	}
+}
+
+@keyframes neonBlue {
+	from {
+		text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF;
+	}
+	to {
+		text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228DFF, 0 0 35px #228DFF, 0 0 40px #228DFF, 0 0 50px #228DFF, 0 0 75px #228DFF;
+	}
 }

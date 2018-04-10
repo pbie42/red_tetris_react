@@ -11,53 +11,71 @@ const Button = withRouter(({ history }) => (
 	</div>
 ))
 
-function Home() {
-	const component = new Component()
-	component.state = {
+function Home(props) {
+	const C = new Component()
+	let input
+
+	C.state = {
 		placeholder: '',
 		interval: ''
 	}
+
 	function placeHolder() {
-		if (!component.state.placeholder)
-			component.setState({ placeholder: 'Choose a username to begin' })
-		else component.setState({ placeholder: '' })
+		if (!C.state.placeholder)
+			C.setState({ placeholder: 'Choose a username to begin' })
+		else C.setState({ placeholder: '' })
 	}
-	component.componentDidMount = function() {
+
+	C.componentDidMount = function() {
 		const interval = setInterval(placeHolder, 750)
-		component.setState({ interval })
+		C.setState({ interval })
 	}
-	component.componentWillUnmount = function() {
-		clearInterval(component.state.interval)
+
+	C.componentWillUnmount = function() {
+		clearInterval(C.state.interval)
 	}
-	component.render = () => {
+
+	C.render = () => {
 		return (
-			<div className="home">
-				<div>
+			<div className="container-home">
+				<div className="home">
 					<div>
-						<h1>RED_TETRIS</h1>
-						<span>Worldwide</span>
+						<div>
+							<h1>RED_TETRIS</h1>
+							{/* <span>Worldwide</span> */}
+						</div>
 					</div>
-				</div>
-				<div>
 					<div>
-						<form action="">
-							<div>
-								<input
-									type="text"
-									placeholder={component.state.placeholder}
-									name="username"
-								/>
+						<div>
+							<form action="">
 								<div>
-									<Button />
+									<input
+										type="text"
+										placeholder={C.state.placeholder}
+										name="username"
+										ref={node => {
+											input = node
+										}}
+										onKeyPress={e => {
+											// e.preventDefault()
+											if (e.key === 'Enter') {
+												props.dispatch(input.value)
+												input.value = ''
+											}
+										}}
+									/>
+									<div>
+										<Button />
+									</div>
 								</div>
-							</div>
-						</form>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
 		)
 	}
-	return component
+	return C
 }
 
 export default Home
