@@ -9,19 +9,19 @@ function Form(props) {
 		interval: ''
 	}
 
-	function placeHolder() {
-		if (!C.state.placeholder)
-			C.setState({ placeholder: 'Choose a username to begin' })
-		else C.setState({ placeholder: '' })
-	}
-
 	C.componentDidMount = function() {
-		const interval = setInterval(placeHolder, 750)
+		const interval = setInterval(C.placeHolder, 750)
 		C.setState({ interval })
 	}
 
 	C.componentWillUnmount = function() {
 		clearInterval(C.state.interval)
+	}
+
+	C.placeHolder = function() {
+		if (!C.state.placeholder)
+			C.setState({ placeholder: 'Choose a username to begin' })
+		else C.setState({ placeholder: '' })
 	}
 
 	C.render = () => {
