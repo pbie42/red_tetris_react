@@ -4,8 +4,8 @@ import './index.css'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router } from 'react-router-dom'
 import { createStore, applyMiddleware, compose } from 'redux'
+import { BrowserRouter as Router } from 'react-router-dom'
 import createSagaMiddleware from 'redux-saga'
 
 import reducers from './reducers'
@@ -22,17 +22,19 @@ const enhancer = composeEnhancers(
 	// other store enhancers if any
 )
 
-const store = createStore(reducers, enhancer)
+export const store = createStore(reducers, enhancer)
 
-const socket = setupSocket(store.dispatch, username)
+// const socket = setupSocket(store.dispatch, username)
 
-sagaMiddleware.run(handleNewMessage, { socket, username })
+// sagaMiddleware.run(handleNewMessage, { socket, username })
 
 ReactDOM.render(
 	<Provider store={store}>
-		<Router>
-			<App />
-		</Router>
+		<div className="container">
+			<Router>
+				<App />
+			</Router>
+		</div>
 	</Provider>,
 	document.getElementById('root')
 )

@@ -1,7 +1,7 @@
 import { expect } from 'chai'
-import user from '../src/reducers/user'
+import user from '../../src/reducers/user'
 
-describe('user reducers', () => {
+describe('User Reducers', () => {
 	it('sets nickname', () => {
 		const state = { nickname: '' }
 		const updatedState = user(state, { type: 'SET_NICKNAME', nickname: 'pbie' })

@@ -14,11 +14,18 @@
 		"socket.io": "^2.1.0",
 		"socket.io-client": "^2.1.0"
 	},
+	"jest": {
+		"moduleNameMapper": {
+			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+			"\\.(css|sass)$": "<rootDir>/__mocks__/styleMock.js"
+		}
+	},
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"test":
-			"./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --require babel-register tests/*.spec.js",
+		"test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --env=jsdom --require babel-register --require ignore-styles test/**/*.test.js",
+		"oldtest": "./node_modules/.bin/istanbul cover react-scripts test -- --env=jsdom",
+		"coverage": " npm test",
 		"eject": "react-scripts eject",
 		"style": "stylus src/styles --out ./src/App.css --watch"
 	},
@@ -30,8 +37,14 @@
 		"babel-preset-env": "^1.6.1",
 		"babel-preset-es2015": "^6.24.1",
 		"chai": "^4.1.2",
+		"enzyme": "^3.3.0",
+		"enzyme-adapter-react-16": "^1.1.1",
+		"ignore-styles": "^5.0.1",
 		"istanbul": "^1.1.0-alpha.1",
+		"jsdom": "^11.7.0",
 		"mocha": "^5.0.5",
+		"redux-mock-store": "^1.5.1",
+		"redux-test-utils": "^0.2.2",
 		"stylus": "^0.54.5"
 	}
 }

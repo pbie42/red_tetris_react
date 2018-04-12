@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form } from '../../containers/home/Form'
 
-function Home(props) {
+function Home() {
 	const C = new Component()
 
 	C.render = () => {
@@ -14,9 +14,7 @@ function Home(props) {
 						</div>
 					</div>
 					<div>
-						<div>
-							<Form history={props.history} />
-						</div>
+						<div>{/* <Form history={props.history} /> */}</div>
 					</div>
 				</div>
 			</div>
