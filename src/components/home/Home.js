@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form } from '../../containers/home/Form'
+import { HomeFormContainer } from '../../containers/home/HomeForm'
 
 function Home(props) {
 	const C = new Component()
@@ -14,7 +14,7 @@ function Home(props) {
 						</div>
 					</div>
 					<div>
-						<div>{/* <Form history={props.history} /> */}</div>
+						<div>{/* <HomeFormContainer history={props.history} /> */}</div>
 					</div>
 				</div>
 			</div>
