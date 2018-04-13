@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import FormComponent from '../../components/home/Form'
+import FormComponent from '../../components/home/FormHome'
 import { setNickname } from '../../actions'
 
 const mapDispatchToProps = dispatch => ({

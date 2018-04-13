@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form } from '../../containers/home/Form'
 
-function Home() {
+function Home(props) {
 	const C = new Component()
 
 	C.render = () => {
