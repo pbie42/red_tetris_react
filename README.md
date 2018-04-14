@@ -1,4 +1,6 @@
-This project (Red_Tetris is part of the 42 web development branch.
+## Red_Tetris
+
+This project is part of the 42 web development branch.
 
 The goal is to to make an online multiplayer tetris game.
 
