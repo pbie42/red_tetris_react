@@ -13,6 +13,8 @@ const mockStore = configureMockStore()
 // global.window = dom.window
 // global.document = dom.window.document
 import Home from '../../src/components/home/Home'
+import { HomeFormContainer } from '../../src/containers/home/HomeForm'
+import HomeForm from '../../src/components/home/HomeForm'
 
 describe('Home', () => {
 	// let props
@@ -45,9 +47,19 @@ describe('Home', () => {
 			</Provider>
 		)
 		const divs = mountedHome.find('div')
-		expect(divs.length).to.equal(0)
+		expect(divs.length).to.be.gt(0)
 		mountedHome.unmount()
-		console.log(`getting here bruh`)
+		mountedHome = undefined
+	})
+
+	it('has a HomeForm container component', () => {
+		mountedHome = mount(
+			<Provider store={store}>
+				<Home />
+			</Provider>
+		)
+		expect(mountedHome.find(HomeFormContainer).length).to.equal(1)
+		mountedHome.unmount()
 		mountedHome = undefined
 	})
 })
