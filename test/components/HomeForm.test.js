@@ -2,6 +2,7 @@ import React from 'react'
 import sinon from 'sinon'
 import { Provider } from 'react-redux'
 import { mount, shallow } from 'enzyme'
+import { MemoryRouter } from 'react-router'
 import chai from 'chai'
 import spies from 'chai-spies'
 chai.use(spies)
@@ -34,9 +35,6 @@ describe('Container HomeForm', () => {
 		expect(wrapper.find(HomeFormContainer).length).to.equal(1)
 		const container = wrapper.find(HomeForm)
 		expect(container.find(HomeForm).length).to.equal(1)
-		// expect(container.find(HomeForm).props().auth).to.eql({
-		// 	sport: 'BASKETBALL'
-		// })
 		wrapper.unmount()
 	})
 
@@ -67,6 +65,55 @@ describe('Container HomeForm', () => {
 		wrapper.unmount()
 	})
 
+	it('has a method called placeHolder that changes placeholder in component state', () => {
+		const wrapper = mount(<HomeForm store={store} />)
+		wrapper.update()
+		wrapper.instance().setState({ placeholder: '' })
+		wrapper.instance().placeHolder()
+		expect(wrapper.instance().state.placeholder).to.equal(
+			'Choose a username to begin'
+		)
+		wrapper.instance().setState({ placeholder: 'Choose a username to begin' })
+		wrapper.instance().placeHolder()
+		expect(wrapper.instance().state.placeholder).to.equal('')
+		wrapper.unmount()
+	})
+
+	it('calls method submitNickname which calls setNickname dispatch, sets ref value, changes page', () => {
+		const dispatchSpy2 = sinon.spy()
+		const wrapper = mount(
+			<HomeForm store={store} history={[]} setNickname={dispatchSpy2} />
+		)
+		wrapper.update()
+		wrapper.ref('input').value = 'test'
+		wrapper.instance().submitNickname({ value: 'test' })
+		expect(wrapper.ref('input').value).to.equal('')
+		expect(dispatchSpy2.called).to.be.true
+		wrapper.unmount()
+	})
+
+	it('calls method enterNickname which calls setNickname dispatch, sets ref value, changes page, if Enter key is pressed', () => {
+		const dispatchSpy2 = sinon.spy()
+		const preventSpy = sinon.spy()
+		const wrapper = mount(
+			<HomeForm store={store} history={[]} setNickname={dispatchSpy2} />
+		)
+		wrapper.update()
+		wrapper.ref('input').value = 'test'
+		wrapper
+			.instance()
+			.enterNickname({ key: 'Enter', preventDefault: preventSpy })
+		expect(wrapper.ref('input').value).to.equal('')
+		expect(dispatchSpy2.called).to.be.true
+		expect(preventSpy.called).to.be.true
+		wrapper.ref('input').value = 'test'
+		wrapper
+			.instance()
+			.enterNickname({ key: 'Delete', preventDefault: preventSpy })
+		expect(wrapper.ref('input').value).to.equal('test')
+		wrapper.unmount()
+	})
+
 	it('should show user value as empty object in state', () => {
 		const wrapper = mount(
 			<Provider store={store}>
@@ -79,16 +126,13 @@ describe('Container HomeForm', () => {
 		wrapper.unmount()
 	})
 
-	it('should call dispatch setNickname', () => {
-		const wrapper = mount(<HomeFormContainer store={store} />)
-		wrapper.update()
+	it('should call dispatch setNickname with property nickname', () => {
 		const dispatchSpy = sinon.spy()
 		const { setNickname } = mapDispatchToProps(dispatchSpy)
-		setNickname()
-		const expectedAction = actions.setNickname('Paul')
+		setNickname('Paul')
+		const expectedAction = actions.setNickname()
 		const spyLastCall = dispatchSpy.args[0][0]
-		console.log(`spyLastCall`, spyLastCall)
-		expect(spyLastCall.type).to.be.eql(expectedAction.type)
-		wrapper.unmount()
+		expect(spyLastCall.type).to.eql(expectedAction.type)
+		expect(spyLastCall.nickname).to.equal('Paul')
 	})
 })

@@ -24,20 +24,22 @@ function HomeForm(props) {
 		else C.setState({ placeholder: '' })
 	}
 
-	C.submitNickname = function() {
-		if (!input.value) return
-		props.setNickname(input.value)
-		props.history.push('/chat')
-		input.value = ''
+	C.submitNickname = function(input) {
+		if (C.refs.input.value) {
+			props.setNickname(C.refs.input.value)
+			props.history.push('/chat')
+			C.refs.input.value = ''
+		}
 	}
 
 	C.enterNickname = function(e) {
 		if (e.key === 'Enter') {
 			e.preventDefault()
-			if (!input.value) return
-			props.setNickname(input.value)
-			props.history.push('/chat')
-			input.value = ''
+			if (C.refs.input.value) {
+				props.setNickname(C.refs.input.value)
+				props.history.push('/chat')
+				C.refs.input.value = ''
+			}
 		}
 	}
 
@@ -54,16 +56,17 @@ function HomeForm(props) {
 						className="nicknameinput"
 						placeholder={C.state.placeholder}
 						name="username"
-						ref={node => {
-							input = node
-						}}
+						ref="input"
 						onKeyPress={e => {
 							C.enterNickname(e)
 						}}
-						onChange={() => C.setNickname(input.value)}
+						onChange={() => C.setNickname(C.refs.input.value)}
 					/>
 					<div>
-						<div className="nickname-button" onClick={() => C.submitNickname()}>
+						<div
+							className="nickname-button"
+							onClick={() => C.submitNickname(input)}
+						>
 							Start →
 						</div>
 					</div>
