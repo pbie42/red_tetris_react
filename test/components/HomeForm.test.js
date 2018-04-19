@@ -5,8 +5,12 @@ import { mount, shallow } from 'enzyme'
 import chai from 'chai'
 import spies from 'chai-spies'
 chai.use(spies)
-import { HomeFormContainer } from '../../src/containers/home/HomeForm'
+import {
+	HomeFormContainer,
+	mapDispatchToProps
+} from '../../src/containers/home/HomeForm'
 import HomeForm from '../../src/components/home/HomeForm'
+import * as actions from '../../src/actions'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 const expect = chai.expect
@@ -17,9 +21,7 @@ describe('Container HomeForm', () => {
 	let store
 	beforeEach(() => {
 		store = mockStore({
-			auth: {
-				sport: 'BASKETBALL'
-			}
+			user: {}
 		})
 	})
 	it('should render the container component', () => {
@@ -65,12 +67,28 @@ describe('Container HomeForm', () => {
 		wrapper.unmount()
 	})
 
-	// it('props.setNickname should be called', () => {
-	// 	const fn = sinon.spy()
-	// 	const wrapper = mount(<HomeForm submitNickname={fn} store={store} />)
-	// 	wrapper.update()
-	// 	wrapper.find('.nickname-button').simulate('click')
-	// 	expect(fn.calledOnce).to.be.true
-	// 	wrapper.unmount()
-	// })
+	it('should show user value as empty object in state', () => {
+		const wrapper = mount(
+			<Provider store={store}>
+				<HomeFormContainer />
+			</Provider>
+		)
+		wrapper.update()
+		const state = wrapper.props().store.getState()
+		expect(state).to.eql({ user: {} })
+		wrapper.unmount()
+	})
+
+	it('should call dispatch setNickname', () => {
+		const wrapper = mount(<HomeFormContainer store={store} />)
+		wrapper.update()
+		const dispatchSpy = sinon.spy()
+		const { setNickname } = mapDispatchToProps(dispatchSpy)
+		setNickname()
+		const expectedAction = actions.setNickname('Paul')
+		const spyLastCall = dispatchSpy.args[0][0]
+		console.log(`spyLastCall`, spyLastCall)
+		expect(spyLastCall.type).to.be.eql(expectedAction.type)
+		wrapper.unmount()
+	})
 })

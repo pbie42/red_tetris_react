@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import HomeFormComponent from '../../components/home/HomeForm'
 import { setNickname } from '../../actions'
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
 	setNickname: nickname => {
 		dispatch(setNickname(nickname))
 	}
