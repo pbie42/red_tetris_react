@@ -1,22 +1,18 @@
 import React from 'react'
 import sinon from 'sinon'
+import configureMockStore from 'redux-mock-store'
+import { expect } from 'chai'
 import { Provider } from 'react-redux'
 import { mount, shallow } from 'enzyme'
-import { MemoryRouter } from 'react-router'
-import chai from 'chai'
-import spies from 'chai-spies'
-chai.use(spies)
+
 import {
 	HomeFormContainer,
 	mapDispatchToProps
 } from '../../src/containers/home/HomeForm'
 import HomeForm from '../../src/components/home/HomeForm'
 import * as actions from '../../src/actions'
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
-const expect = chai.expect
 
-const mockStore = configureMockStore([thunk])
+const mockStore = configureMockStore()
 
 describe('HomeForm', () => {
 	let store
@@ -40,53 +36,74 @@ describe('HomeForm', () => {
 	})
 
 	describe('Methods', () => {
-		it('has a method called placeHolder that changes placeholder in component state', () => {
+		describe('placeHolder', () => {
 			const wrapper = mount(<HomeForm store={store} />)
-			wrapper.update()
-			wrapper.instance().setState({ placeholder: '' })
-			wrapper.instance().placeHolder()
-			expect(wrapper.instance().state.placeholder).to.equal(
-				'Choose a username to begin'
-			)
-			wrapper.instance().setState({ placeholder: 'Choose a username to begin' })
-			wrapper.instance().placeHolder()
-			expect(wrapper.instance().state.placeholder).to.equal('')
-			wrapper.unmount()
+			it('sets state.plaeholder to "Choose a username to begin" if placeholder is currently ""', () => {
+				wrapper.update()
+				wrapper.instance().setState({ placeholder: '' })
+				wrapper.instance().placeHolder()
+				expect(wrapper.instance().state.placeholder).to.equal(
+					'Choose a username to begin'
+				)
+			})
+			it('sets state.plaeholder to "" if placeholder is currently "Choose a username to begin"', () => {
+				wrapper
+					.instance()
+					.setState({ placeholder: 'Choose a username to begin' })
+				wrapper.instance().placeHolder()
+				expect(wrapper.instance().state.placeholder).to.equal('')
+			})
 		})
 
-		it('calls method submitNickname which calls setNickname dispatch, sets ref value, changes page', () => {
-			const dispatchSpy2 = sinon.spy()
+		describe('submitNickname', () => {
+			const setNicknameSpy = sinon.spy()
 			const wrapper = mount(
-				<HomeForm store={store} history={[]} setNickname={dispatchSpy2} />
+				<HomeForm store={store} history={[]} setNickname={setNicknameSpy} />
 			)
 			wrapper.update()
 			wrapper.ref('input').value = 'test'
 			wrapper.instance().submitNickname({ value: 'test' })
-			expect(wrapper.ref('input').value).to.equal('')
-			expect(dispatchSpy2.called).to.be.true
-			wrapper.unmount()
+
+			it('calls setNickname dispatch, sets ref value, changes page', () => {
+				expect(setNicknameSpy.called).to.be.true
+			})
+
+			it('pushes new page route "/chat" into history', () => {
+				expect(wrapper.instance().props.history[0]).to.equal('/chat')
+			})
+
+			it('resets input value to ""', () => {
+				expect(wrapper.ref('input').value).to.equal('')
+			})
 		})
 
-		it('calls method enterNickname which calls setNickname dispatch, sets ref value, changes page, if Enter key is pressed', () => {
-			const dispatchSpy2 = sinon.spy()
+		describe('enterNickname', () => {
+			const setNicknameSpy = sinon.spy()
 			const preventSpy = sinon.spy()
 			const wrapper = mount(
-				<HomeForm store={store} history={[]} setNickname={dispatchSpy2} />
+				<HomeForm store={store} history={[]} setNickname={setNicknameSpy} />
 			)
-			wrapper.update()
-			wrapper.ref('input').value = 'test'
-			wrapper
-				.instance()
-				.enterNickname({ key: 'Enter', preventDefault: preventSpy })
-			expect(wrapper.ref('input').value).to.equal('')
-			expect(dispatchSpy2.called).to.be.true
-			expect(preventSpy.called).to.be.true
-			wrapper.ref('input').value = 'test'
-			wrapper
-				.instance()
-				.enterNickname({ key: 'Delete', preventDefault: preventSpy })
-			expect(wrapper.ref('input').value).to.equal('test')
-			wrapper.unmount()
+			it('calls setNickname dispatch', () => {
+				wrapper.update()
+				wrapper.ref('input').value = 'test'
+				wrapper
+					.instance()
+					.enterNickname({ key: 'Enter', preventDefault: preventSpy })
+				expect(setNicknameSpy.called).to.be.true
+				expect(preventSpy.called).to.be.true
+			})
+
+			it('resets ref value to "" if Enter key is pressed', () => {
+				expect(wrapper.ref('input').value).to.equal('')
+			})
+
+			it('does not change ref value if other key is pressed', () => {
+				wrapper.ref('input').value = 'test'
+				wrapper
+					.instance()
+					.enterNickname({ key: 'Delete', preventDefault: preventSpy })
+				expect(wrapper.ref('input').value).to.equal('test')
+			})
 		})
 	})
 
