@@ -3,7 +3,7 @@ import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
 import React from 'react'
 import { expect } from 'chai'
-import { mount } from 'enzyme'
+import { mount, ShallowWrapper, shallow } from 'enzyme'
 import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 const mockStore = configureMockStore()
@@ -21,24 +21,33 @@ describe('Home', () => {
 		lastRolledNumber: 1
 	}
 	store = mockStore(initialState)
-	const home = () => {
-		if (!mountedHome) {
-			mountedHome = mount(<Home />)
-		}
-		return mountedHome
-	}
+	// const home = () => {
+	// 	if (!mountedHome) {
+	// 		mountedHome = shallow(<Home />)
+	// 	}
+	// 	return mountedHome
+	// }
 
-	beforeEach(() => {
-		// props = {
-		// 	wallpaperPath: undefined,
-		// 	userInfoMessage: undefined,
-		// 	onUnlocked: undefined
-		// }
-		mountedHome = undefined
-	})
+	// beforeEach(() => {
+	// 	// props = {
+	// 	// 	wallpaperPath: undefined,
+	// 	// 	userInfoMessage: undefined,
+	// 	// 	onUnlocked: undefined
+	// 	// }
+	// 	mountedHome = undefined
+	// })
 
 	it('always renders a div', () => {
-		const divs = home().find('div')
-		expect(divs.length).to.be.above(0)
+		// console.log(`home().shallow()`, home().shallow())
+		mountedHome = mount(
+			<Provider store={store}>
+				<Home />
+			</Provider>
+		)
+		const divs = mountedHome.find('div')
+		expect(divs.length).to.equal(0)
+		mountedHome.unmount()
+		console.log(`getting here bruh`)
+		mountedHome = undefined
 	})
 })

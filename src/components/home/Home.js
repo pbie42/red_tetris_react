@@ -14,7 +14,9 @@ function Home(props) {
 						</div>
 					</div>
 					<div>
-						<div>{/* <HomeFormContainer history={props.history} /> */}</div>
+						<div>
+							<HomeFormContainer history={props.history} />
+						</div>
 					</div>
 				</div>
 			</div>
