@@ -36,6 +36,35 @@ describe('HomeForm', () => {
 	})
 
 	describe('Methods', () => {
+		describe('enterNickname', () => {
+			const setNicknameSpy = sinon.spy()
+			const preventSpy = sinon.spy()
+			const wrapper = mount(
+				<HomeForm store={store} history={[]} setNickname={setNicknameSpy} />
+			)
+			it('calls setNickname dispatch', () => {
+				wrapper.update()
+				wrapper.ref('input').value = 'test'
+				wrapper
+					.instance()
+					.enterNickname({ key: 'Enter', preventDefault: preventSpy })
+				expect(setNicknameSpy.called).to.be.true
+				expect(preventSpy.called).to.be.true
+			})
+
+			it('resets ref value to "" if Enter key is pressed', () => {
+				expect(wrapper.ref('input').value).to.equal('')
+			})
+
+			it('does not change ref value if other key is pressed', () => {
+				wrapper.ref('input').value = 'test'
+				wrapper
+					.instance()
+					.enterNickname({ key: 'Delete', preventDefault: preventSpy })
+				expect(wrapper.ref('input').value).to.equal('test')
+			})
+		})
+
 		describe('placeHolder', () => {
 			const wrapper = mount(<HomeForm store={store} />)
 			it('sets state.plaeholder to "Choose a username to begin" if placeholder is currently ""', () => {
@@ -74,35 +103,6 @@ describe('HomeForm', () => {
 
 			it('resets input value to ""', () => {
 				expect(wrapper.ref('input').value).to.equal('')
-			})
-		})
-
-		describe('enterNickname', () => {
-			const setNicknameSpy = sinon.spy()
-			const preventSpy = sinon.spy()
-			const wrapper = mount(
-				<HomeForm store={store} history={[]} setNickname={setNicknameSpy} />
-			)
-			it('calls setNickname dispatch', () => {
-				wrapper.update()
-				wrapper.ref('input').value = 'test'
-				wrapper
-					.instance()
-					.enterNickname({ key: 'Enter', preventDefault: preventSpy })
-				expect(setNicknameSpy.called).to.be.true
-				expect(preventSpy.called).to.be.true
-			})
-
-			it('resets ref value to "" if Enter key is pressed', () => {
-				expect(wrapper.ref('input').value).to.equal('')
-			})
-
-			it('does not change ref value if other key is pressed', () => {
-				wrapper.ref('input').value = 'test'
-				wrapper
-					.instance()
-					.enterNickname({ key: 'Delete', preventDefault: preventSpy })
-				expect(wrapper.ref('input').value).to.equal('test')
 			})
 		})
 	})
