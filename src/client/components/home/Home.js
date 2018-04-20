@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import { HomeFormContainer } from '../../containers/home/HomeForm'
 
-function Home(props) {
+function HomeComponent(props) {
 	const C = new Component()
+
+	C.componentDidMount = function() {
+		// console.log(`C`, C)
+	}
 
 	C.render = () => {
 		return (
@@ -25,4 +29,4 @@ function Home(props) {
 	return C
 }
 
-export default Home
+export default HomeComponent
