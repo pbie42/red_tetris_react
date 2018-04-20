@@ -1,17 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
-import registerServiceWorker from './registerServiceWorker'
+import './client/index.css'
+import App from './client/App'
+import registerServiceWorker from './client/registerServiceWorker'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import createSagaMiddleware from 'redux-saga'
 
-import reducers from './reducers'
-import setupSocket from './sockets'
-import handleNewMessage from './sagas'
-import username from './utils/username'
+import reducers from './client/reducers'
+import setupSocket from './client/sockets'
+import handleNewMessage from './client/sagas'
+import username from './client/utils/username'
 
 const sagaMiddleware = createSagaMiddleware()
 

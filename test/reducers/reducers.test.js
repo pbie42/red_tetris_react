@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import user from '../../src/reducers/user'
+import user from '../../src/client/reducers/user'
 
 describe('User Reducers', () => {
 	it('sets nickname', () => {

@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { setNickname } from '../../src/actions'
+import { setNickname } from '../../src/client/actions'
 
 describe('Actions', () => {
 	it('setNickname returns an object for the set nickname action', () => {

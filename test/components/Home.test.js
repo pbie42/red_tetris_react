@@ -12,9 +12,9 @@ const mockStore = configureMockStore()
 
 // global.window = dom.window
 // global.document = dom.window.document
-import Home from '../../src/components/home/Home'
-import { HomeFormContainer } from '../../src/containers/home/HomeForm'
-import HomeForm from '../../src/components/home/HomeForm'
+import Home from '../../src/client/components/home/Home'
+import { HomeFormContainer } from '../../src/client/containers/home/HomeForm'
+import HomeForm from '../../src/client/components/home/HomeForm'
 
 describe('Home', () => {
 	// let props
