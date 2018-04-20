@@ -21,7 +21,8 @@ global.document = dom.window.document
 describe('App', () => {
 	let mountedApp, store
 	const initialState = {
-		lastRolledNumber: 1
+		user: {},
+		users: []
 	}
 	store = mockStore(initialState)
 
@@ -58,7 +59,7 @@ describe('App', () => {
 	})
 })
 
-// it('renders without crashing', () => {
+// xit('renders without crashing', () => {
 // 	const div = document.createElement('div')
 // 	ReactDOM.render(<App />, div)
 // 	ReactDOM.unmountComponentAtNode(div)

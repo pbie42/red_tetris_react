@@ -17,30 +17,14 @@ import { HomeFormContainer } from '../../src/client/containers/home/HomeForm'
 import HomeForm from '../../src/client/components/home/HomeForm'
 
 describe('Home', () => {
-	// let props
 	let mountedHome, store
 	const initialState = {
-		lastRolledNumber: 1
+		user: {},
+		users: []
 	}
 	store = mockStore(initialState)
-	// const home = () => {
-	// 	if (!mountedHome) {
-	// 		mountedHome = shallow(<Home />)
-	// 	}
-	// 	return mountedHome
-	// }
-
-	// beforeEach(() => {
-	// 	// props = {
-	// 	// 	wallpaperPath: undefined,
-	// 	// 	userInfoMessage: undefined,
-	// 	// 	onUnlocked: undefined
-	// 	// }
-	// 	mountedHome = undefined
-	// })
 
 	it('always renders a div', () => {
-		// console.log(`home().shallow()`, home().shallow())
 		mountedHome = mount(
 			<Provider store={store}>
 				<Home />
