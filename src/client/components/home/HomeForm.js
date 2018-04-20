@@ -69,6 +69,7 @@ function HomeForm(props) {
 			<form className={C.state.error ? 'home-form-error' : 'nothing'}>
 				<div>
 					<input
+						autoComplete="off"
 						className="usernameinput"
 						name="username"
 						onChange={() => C.noError()}
