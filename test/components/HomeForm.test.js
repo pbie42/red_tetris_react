@@ -78,6 +78,18 @@ describe('HomeForm', () => {
 			})
 		})
 
+		describe('noError', () => {
+			const wrapper = mount(
+				<HomeForm users={[{ id: 0, name: 'Jen' }]} store={store} />
+			)
+			it('sets state.error to false', () => {
+				wrapper.update()
+				wrapper.instance().setState({ error: true })
+				wrapper.instance().noError()
+				expect(wrapper.instance().state.error).to.be.false
+			})
+		})
+
 		describe('placeHolder', () => {
 			const wrapper = mount(
 				<HomeForm users={[{ id: 0, name: 'Jen' }]} store={store} />
@@ -96,6 +108,16 @@ describe('HomeForm', () => {
 					.setState({ placeholder: 'Choose a username to begin' })
 				wrapper.instance().placeHolder()
 				expect(wrapper.instance().state.placeholder).to.equal('')
+			})
+			it('sets state.placeholder to "Username already taken" if state.error is true', () => {
+				wrapper
+					.instance()
+					.setState({ placeholder: 'Choose a username to begin' })
+				wrapper.instance().setState({ error: true })
+				wrapper.instance().placeHolder()
+				expect(wrapper.instance().state.placeholder).to.equal(
+					'Username already taken'
+				)
 			})
 		})
 
@@ -215,6 +237,15 @@ describe('HomeForm', () => {
 			wrapper.update()
 			wrapper.find('.nicknameinput').simulate('keypress', { key: 'Enter' })
 			expect(enterNickname.calledOnce).to.be.true
+			wrapper.unmount()
+		})
+
+		it('should call noError method onChange', () => {
+			const wrapper = mount(<HomeForm noError={() => {}} store={store} />)
+			const noError = sinon.spy(wrapper.instance(), 'noError')
+			wrapper.update()
+			wrapper.find('input').simulate('change')
+			expect(noError.calledOnce).to.be.true
 			wrapper.unmount()
 		})
 	})

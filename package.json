@@ -31,7 +31,7 @@
 			"./node_modules/.bin/istanbul cover react-scripts test -- --env=jsdom",
 		"coverage": " npm test",
 		"eject": "react-scripts eject",
-		"style": "stylus src/styles --out ./src/App.css --watch"
+		"style": "stylus src/client/styles --out ./src/client/App.css --watch"
 	},
 	"devDependencies": {
 		"babel": "^6.23.0",

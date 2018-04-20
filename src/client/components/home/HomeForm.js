@@ -6,7 +6,8 @@ function HomeForm(props) {
 
 	C.state = {
 		placeholder: '',
-		interval: ''
+		interval: '',
+		error: false
 	}
 
 	C.componentDidMount = function() {
@@ -32,7 +33,9 @@ function HomeForm(props) {
 	}
 
 	C.placeHolder = function() {
-		if (!C.state.placeholder)
+		if (C.state.error) {
+			C.setState({ placeholder: 'Username already taken' })
+		} else if (!C.state.placeholder)
 			C.setState({ placeholder: 'Choose a username to begin' })
 		else C.setState({ placeholder: '' })
 	}
@@ -55,12 +58,17 @@ function HomeForm(props) {
 	}
 
 	C.setSubmitError = function() {
+		C.setState({ error: true })
 		console.log(`ERROR BRO`)
+	}
+
+	C.noError = function() {
+		C.setState({ error: false })
 	}
 
 	C.render = () => {
 		return (
-			<form action="">
+			<form className={C.state.error ? 'home-form-error' : 'nothing'}>
 				<div>
 					<input
 						type="text"
@@ -71,6 +79,7 @@ function HomeForm(props) {
 						onKeyPress={e => {
 							C.enterNickname(e)
 						}}
+						onChange={() => C.noError()}
 					/>
 					<div>
 						<div
