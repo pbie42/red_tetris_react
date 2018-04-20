@@ -1,19 +1,19 @@
 import { connect } from 'react-redux'
 import HomeFormComponent from '../../components/home/HomeForm'
-import { setNickname, addUser } from '../../actions'
+import { setUsername, addUser } from '../../actions'
 
 export const mapDispatchToProps = dispatch => ({
-	setNickname: nickname => {
-		dispatch(setNickname(nickname))
+	setUsername: username => {
+		dispatch(setUsername(username))
 	},
-	addUser: nickname => {
-		dispatch(addUser(nickname))
+	addUser: username => {
+		dispatch(addUser(username))
 	}
 })
 
 export function mapStateToProps(state) {
 	return {
-		nickname: state.user.nickname,
+		username: state.user.username,
 		users: state.users
 	}
 }

@@ -19,12 +19,12 @@ function HomeForm(props) {
 		clearInterval(C.state.interval)
 	}
 
-	C.enterNickname = function(e) {
+	C.enterUsername = function(e) {
 		let value = C.refs.input.value
 		if (e.key === 'Enter') {
 			e.preventDefault()
-			if (value && C.verifyNickname(value)) {
-				props.setNickname(value)
+			if (value && C.verifyUsername(value)) {
+				props.setUsername(value)
 				props.addUser(value)
 				props.history.push('/chat')
 			} else C.setSubmitError()
@@ -40,18 +40,18 @@ function HomeForm(props) {
 		else C.setState({ placeholder: '' })
 	}
 
-	C.submitNickname = function() {
-		console.log(`submitNickname`)
+	C.submitUsername = function() {
+		console.log(`submitUsername`)
 		let value = C.refs.input.value
-		if (value && C.verifyNickname(value)) {
-			props.setNickname(value)
+		if (value && C.verifyUsername(value)) {
+			props.setUsername(value)
 			props.addUser(value)
 			props.history.push('/chat')
 		} else C.setSubmitError()
 		C.refs.input.value = ''
 	}
 
-	C.verifyNickname = function(value) {
+	C.verifyUsername = function(value) {
 		const index = C.props.users.findIndex(user => value === user.name)
 		if (index >= 0) return false
 		return true
@@ -59,7 +59,6 @@ function HomeForm(props) {
 
 	C.setSubmitError = function() {
 		C.setState({ error: true })
-		console.log(`ERROR BRO`)
 	}
 
 	C.noError = function() {
@@ -71,20 +70,20 @@ function HomeForm(props) {
 			<form className={C.state.error ? 'home-form-error' : 'nothing'}>
 				<div>
 					<input
-						type="text"
-						className="nicknameinput"
-						placeholder={C.state.placeholder}
+						className="usernameinput"
 						name="username"
-						ref="input"
-						onKeyPress={e => {
-							C.enterNickname(e)
-						}}
 						onChange={() => C.noError()}
+						onKeyPress={e => {
+							C.enterUsername(e)
+						}}
+						placeholder={C.state.placeholder}
+						ref="input"
+						type="text"
 					/>
 					<div>
 						<div
-							className="nickname-button"
-							onClick={() => C.submitNickname(input)}
+							className="username-button"
+							onClick={() => C.submitUsername(input)}
 						>
 							Start →
 						</div>

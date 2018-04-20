@@ -28,7 +28,7 @@ export const addUser = name => ({
 // 	users
 // })
 
-export const setNickname = nickname => ({
-	type: types.SET_NICKNAME,
-	nickname
+export const setUsername = username => ({
+	type: types.SET_USERNAME,
+	username
 })

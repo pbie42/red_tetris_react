@@ -2,23 +2,23 @@ import { expect } from 'chai'
 import user from '../../src/client/reducers/user'
 
 describe('User Reducers', () => {
-	it('sets nickname', () => {
-		const state = { nickname: '' }
-		const updatedState = user(state, { type: 'SET_NICKNAME', nickname: 'pbie' })
-		expect(updatedState.nickname).to.equal('pbie')
+	it('sets username', () => {
+		const state = { username: '' }
+		const updatedState = user(state, { type: 'SET_USERNAME', username: 'pbie' })
+		expect(updatedState.username).to.equal('pbie')
 	})
 	it('returns state if not valid action type', () => {
-		const state = { nickname: 'pbie' }
+		const state = { username: 'pbie' }
 		const updatedState = user(state, {
 			type: 'TEST_ACTION',
-			nickname: 'jennzmee'
+			username: 'jennzmee'
 		})
-		expect(updatedState.nickname).to.equal('pbie')
+		expect(updatedState.username).to.equal('pbie')
 	})
 	it('returns empty state if no state is given', () => {
 		const action = {
 			type: 'TEST_ACTION',
-			nickname: 'jennzmee'
+			username: 'jennzmee'
 		}
 		const state = user(undefined, action)
 		expect(state).to.eql({})

@@ -37,8 +37,8 @@ describe('HomeForm', () => {
 	})
 
 	describe('Methods', () => {
-		describe('enterNickname', () => {
-			const setNicknameSpy = sinon.spy()
+		describe('enterUsername', () => {
+			const setUsernameSpy = sinon.spy()
 			const addUserSpy = sinon.spy()
 			const preventSpy = sinon.spy()
 			const wrapper = mount(
@@ -47,17 +47,17 @@ describe('HomeForm', () => {
 					store={store}
 					history={[]}
 					addUser={addUserSpy}
-					setNickname={setNicknameSpy}
+					setUsername={setUsernameSpy}
 				/>
 			)
 
-			it('calls setNickname dispatch', () => {
+			it('calls setUsername dispatch', () => {
 				wrapper.update()
 				wrapper.ref('input').value = 'test'
 				wrapper
 					.instance()
-					.enterNickname({ key: 'Enter', preventDefault: preventSpy })
-				expect(setNicknameSpy.called).to.be.true
+					.enterUsername({ key: 'Enter', preventDefault: preventSpy })
+				expect(setUsernameSpy.called).to.be.true
 				expect(preventSpy.called).to.be.true
 			})
 
@@ -73,7 +73,7 @@ describe('HomeForm', () => {
 				wrapper.ref('input').value = 'test'
 				wrapper
 					.instance()
-					.enterNickname({ key: 'Delete', preventDefault: preventSpy })
+					.enterUsername({ key: 'Delete', preventDefault: preventSpy })
 				expect(wrapper.ref('input').value).to.equal('test')
 			})
 		})
@@ -121,26 +121,26 @@ describe('HomeForm', () => {
 			})
 		})
 
-		describe('submitNickname', () => {
-			const setNicknameSpy = sinon.spy()
+		describe('submitUsername', () => {
+			const setUsernameSpy = sinon.spy()
 			const addUserSpy = sinon.spy()
-			const verifyNicknameSpy = sinon.spy()
+			const verifyUsernameSpy = sinon.spy()
 			const wrapper = mount(
 				<HomeForm
 					store={store}
 					history={[]}
 					addUser={addUserSpy}
-					setNickname={setNicknameSpy}
-					verifyNickname={verifyNicknameSpy}
+					setUsername={setUsernameSpy}
+					verifyUsername={verifyUsernameSpy}
 					users={[{ id: 0, name: 'Jen' }]}
 				/>
 			)
 			wrapper.update()
 			wrapper.ref('input').value = 'test'
-			wrapper.instance().submitNickname({ value: 'test' })
+			wrapper.instance().submitUsername({ value: 'test' })
 
-			it('calls setNickname dispatch', () => {
-				expect(setNicknameSpy.called).to.be.true
+			it('calls setUsername dispatch', () => {
+				expect(setUsernameSpy.called).to.be.true
 			})
 
 			it('calls addUser dispatch', () => {
@@ -156,17 +156,17 @@ describe('HomeForm', () => {
 			})
 		})
 
-		describe('verifyNickname', () => {
+		describe('verifyUsername', () => {
 			const wrapper = mount(
 				<HomeForm store={store} history={[]} users={[{ id: 0, name: 'Jen' }]} />
 			)
 			wrapper.update()
-			it('returns true if new nickname is unique', () => {
-				const result = wrapper.instance().verifyNickname('Paul')
+			it('returns true if new username is unique', () => {
+				const result = wrapper.instance().verifyUsername('Paul')
 				expect(result).to.be.true
 			})
-			it('returns false if new nickname is not unique', () => {
-				const result = wrapper.instance().verifyNickname('Jen')
+			it('returns false if new username is not unique', () => {
+				const result = wrapper.instance().verifyUsername('Jen')
 				expect(result).to.be.false
 			})
 		})
@@ -186,17 +186,17 @@ describe('HomeForm', () => {
 		})
 
 		describe('Dispatch', () => {
-			it('should call dispatch setNickname with property nickname', () => {
+			it('should call dispatch setUsername with property username', () => {
 				const dispatchSpy = sinon.spy()
-				const { setNickname } = mapDispatchToProps(dispatchSpy)
-				setNickname('Paul')
-				const expectedAction = actions.setNickname()
+				const { setUsername } = mapDispatchToProps(dispatchSpy)
+				setUsername('Paul')
+				const expectedAction = actions.setUsername()
 				const spyLastCall = dispatchSpy.args[0][0]
 				expect(spyLastCall.type).to.eql(expectedAction.type)
-				expect(spyLastCall.nickname).to.equal('Paul')
+				expect(spyLastCall.username).to.equal('Paul')
 			})
 
-			it('should call dispatch addUser with property nickname', () => {
+			it('should call dispatch addUser with property username', () => {
 				const dispatchSpy = sinon.spy()
 				const { addUser } = mapDispatchToProps(dispatchSpy)
 				addUser('Dan')
@@ -210,33 +210,33 @@ describe('HomeForm', () => {
 	})
 
 	describe('User Events', () => {
-		it('should call submitNickname onClick', () => {
+		it('should call submitUsername onClick', () => {
 			const wrapper = mount(
 				<HomeForm
 					users={[{ id: 0, name: 'Jen' }]}
-					submitNickname={() => {}}
+					submitUsername={() => {}}
 					store={store}
 				/>
 			)
-			const submitNickname = sinon.spy(wrapper.instance(), 'submitNickname')
+			const submitUsername = sinon.spy(wrapper.instance(), 'submitUsername')
 			wrapper.update()
-			wrapper.find('.nickname-button').simulate('click')
-			expect(submitNickname.calledOnce).to.be.true
+			wrapper.find('.username-button').simulate('click')
+			expect(submitUsername.calledOnce).to.be.true
 			wrapper.unmount()
 		})
 
-		it('should call enterNickname onKeyPress', () => {
+		it('should call enterUsername onKeyPress', () => {
 			const wrapper = mount(
 				<HomeForm
 					users={[{ id: 0, name: 'Jen' }]}
-					enterNickname={e => {}}
+					enterUsername={e => {}}
 					store={store}
 				/>
 			)
-			const enterNickname = sinon.spy(wrapper.instance(), 'enterNickname')
+			const enterUsername = sinon.spy(wrapper.instance(), 'enterUsername')
 			wrapper.update()
-			wrapper.find('.nicknameinput').simulate('keypress', { key: 'Enter' })
-			expect(enterNickname.calledOnce).to.be.true
+			wrapper.find('.usernameinput').simulate('keypress', { key: 'Enter' })
+			expect(enterUsername.calledOnce).to.be.true
 			wrapper.unmount()
 		})
 
