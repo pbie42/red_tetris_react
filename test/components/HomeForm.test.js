@@ -50,6 +50,7 @@ describe('HomeForm', () => {
 					setNickname={setNicknameSpy}
 				/>
 			)
+
 			it('calls setNickname dispatch', () => {
 				wrapper.update()
 				wrapper.ref('input').value = 'test'
@@ -58,6 +59,10 @@ describe('HomeForm', () => {
 					.enterNickname({ key: 'Enter', preventDefault: preventSpy })
 				expect(setNicknameSpy.called).to.be.true
 				expect(preventSpy.called).to.be.true
+			})
+
+			it('calls addUser dispatch', () => {
+				expect(addUserSpy.called).to.be.true
 			})
 
 			it('resets ref value to "" if Enter key is pressed', () => {
@@ -77,7 +82,7 @@ describe('HomeForm', () => {
 			const wrapper = mount(
 				<HomeForm users={[{ id: 0, name: 'Jen' }]} store={store} />
 			)
-			it('sets state.plaeholder to "Choose a username to begin" if placeholder is currently ""', () => {
+			it('sets state.placeholder to "Choose a username to begin" if placeholder is currently ""', () => {
 				wrapper.update()
 				wrapper.instance().setState({ placeholder: '' })
 				wrapper.instance().placeHolder()
@@ -85,7 +90,7 @@ describe('HomeForm', () => {
 					'Choose a username to begin'
 				)
 			})
-			it('sets state.plaeholder to "" if placeholder is currently "Choose a username to begin"', () => {
+			it('sets state.placeholder to "" if placeholder is currently "Choose a username to begin"', () => {
 				wrapper
 					.instance()
 					.setState({ placeholder: 'Choose a username to begin' })
@@ -97,12 +102,14 @@ describe('HomeForm', () => {
 		describe('submitNickname', () => {
 			const setNicknameSpy = sinon.spy()
 			const addUserSpy = sinon.spy()
+			const verifyNicknameSpy = sinon.spy()
 			const wrapper = mount(
 				<HomeForm
 					store={store}
 					history={[]}
 					addUser={addUserSpy}
 					setNickname={setNicknameSpy}
+					verifyNickname={verifyNicknameSpy}
 					users={[{ id: 0, name: 'Jen' }]}
 				/>
 			)
@@ -110,8 +117,12 @@ describe('HomeForm', () => {
 			wrapper.ref('input').value = 'test'
 			wrapper.instance().submitNickname({ value: 'test' })
 
-			it('calls setNickname dispatch, sets ref value, changes page', () => {
+			it('calls setNickname dispatch', () => {
 				expect(setNicknameSpy.called).to.be.true
+			})
+
+			it('calls addUser dispatch', () => {
+				expect(addUserSpy.called).to.be.true
 			})
 
 			it('pushes new page route "/chat" into history', () => {
@@ -124,8 +135,18 @@ describe('HomeForm', () => {
 		})
 
 		describe('verifyNickname', () => {
-			it('returns true if new nickname is unique', () => {})
-			it('returns false if new nickname is not unique', () => {})
+			const wrapper = mount(
+				<HomeForm store={store} history={[]} users={[{ id: 0, name: 'Jen' }]} />
+			)
+			wrapper.update()
+			it('returns true if new nickname is unique', () => {
+				const result = wrapper.instance().verifyNickname('Paul')
+				expect(result).to.be.true
+			})
+			it('returns false if new nickname is not unique', () => {
+				const result = wrapper.instance().verifyNickname('Jen')
+				expect(result).to.be.false
+			})
 		})
 	})
 
