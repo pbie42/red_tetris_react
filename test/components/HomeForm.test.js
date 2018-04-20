@@ -69,7 +69,7 @@ describe('HomeForm', () => {
 				expect(wrapper.ref('input').value).to.equal('')
 			})
 
-			it('does not change ref value if other key is pressed', () => {
+			it('does not change ref value if another key is pressed', () => {
 				wrapper.ref('input').value = 'test'
 				wrapper
 					.instance()
