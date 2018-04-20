@@ -41,7 +41,6 @@ function HomeForm(props) {
 	}
 
 	C.submitUsername = function() {
-		console.log(`submitUsername`)
 		let value = C.refs.input.value
 		if (value && C.verifyUsername(value)) {
 			props.setUsername(value)
