@@ -10,10 +10,12 @@ function LobbyComponent(props) {
 	C.render = () => {
 		return (
 			<div className="container-lobby">
-				<div className="lobby">
+				<div className="lobby-rooms">
 					<div>
 						<h1 className="neon-red">Rooms</h1>
 					</div>
+				</div>
+				<div className="lobby-chat">
 					<div>
 						<h1 className="neon-blue">Chat</h1>
 					</div>

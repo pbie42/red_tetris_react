@@ -1,8 +1,8 @@
-.lobby
+.lobby-rooms
 	background: rgba(66, 129, 255, 0.15)
 	background-attachment:fixed
 	background-position:center
-	height: 80vh
+	height: 45vh
 	width: 80vw
 	display: flex
 	flex-flow: column
@@ -31,13 +31,46 @@
 			font-family: 'Press Start 2P', cursive
 			transform: translate(-2rem, -1.5rem)
 
+.lobby-chat
+	background: rgba(66, 129, 255, 0.15)
+	background-attachment:fixed
+	background-position:center
+	height: 45vh
+	width: 80vw
+	display: flex
+	flex-flow: column
+	border-radius: 1.5rem
+	transform: translateY(-200rem)
+	animation: moveInLeft 2s
+	animation-delay: .5s
+	animation-fill-mode: forwards
+
+	> div
+		background: linear-gradient(rgba(131, 166, 230, 0.15), rgba(131, 166, 230, 0.15)), url('./static/hex.png')
+		height: 100%
+		width: 100%
+		border-radius: 1.5rem
+
+		> div
+			background: rgba(71, 132, 255, 0.5)
+			width: 20rem
+			height: 20rem
+			border-radius: 1.5rem
+
+		h1
+			z-index: 100
+			color: white
+			font-size: 3rem
+			font-family: 'Press Start 2P', cursive
+			transform: translate(-2rem, -1.5rem)
+
 .neon-red
 	animation: neonRed 1.5s ease-in-out infinite alternate
 .neon-blue
-	animation: neonBlue 1.5s ease-in-out infinite alternate
+	animation: neonViolet 1.5s ease-in-out infinite alternate
 
 
-@keyframes moveInRight{
+@keyframes moveInUp{
 	0% {
 		opacity: 1
 		transform: translateY(200rem)
@@ -48,6 +81,39 @@
 	}
 }
 
+@keyframes moveInDown{
+	0% {
+		opacity: 1
+		transform: translateY(-200rem)
+	}
+	100% {
+		opacity: 1
+		transform: translateY(0rem)
+	}
+}
+
+@keyframes moveInLeft{
+	0% {
+		opacity: 1
+		transform: translateX(200rem)
+	}
+	100% {
+		opacity: 1
+		transform: translateX(0rem)
+	}
+}
+
+@keyframes moveInRight{
+	0% {
+		opacity: 1
+		transform: translateX(-200rem)
+	}
+	100% {
+		opacity: 1
+		transform: translateX(0rem)
+	}
+}
+
 
 @keyframes neonBlue {
 	from {
@@ -55,5 +121,23 @@
 	}
 	to {
 		text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228DFF, 0 0 35px #228DFF, 0 0 40px #228DFF, 0 0 50px #228DFF, 0 0 75px #228DFF;
+	}
+}
+
+@keyframes neonGreen {
+	from {
+		text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #B6FF00, 0 0 70px #B6FF00, 0 0 80px #B6FF00, 0 0 100px #B6FF00, 0 0 150px #B6FF00;
+	}
+	to {
+		text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #B6FF00, 0 0 35px #B6FF00, 0 0 40px #B6FF00, 0 0 50px #B6FF00, 0 0 75px #B6FF00;
+	}
+}
+
+@keyframes neonViolet {
+	from {
+		text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
+	}
+	to {
+		text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff00de, 0 0 35px #ff00de, 0 0 40px #ff00de, 0 0 50px #ff00de, 0 0 75px #ff00de;
 	}
 }
