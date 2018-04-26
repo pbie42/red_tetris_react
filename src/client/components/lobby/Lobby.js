@@ -17,7 +17,12 @@ function LobbyComponent(props) {
 				</div>
 				<div className="lobby-chat">
 					<div>
-						<h1 className="neon-blue">Chat</h1>
+						<h1 className="neon-red">Chat</h1>
+					</div>
+					<div>
+						<div>
+							<h1>test</h1>
+						</div>
 					</div>
 				</div>
 			</div>

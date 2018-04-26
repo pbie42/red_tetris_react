@@ -567,6 +567,7 @@ p {
   background: linear-gradient(rgba(131,166,230,0.15), rgba(131,166,230,0.15)), url("./static/hex.png");
   height: 100%;
   width: 100%;
+  border: #fff 1px solid;
   border-radius: 1.5rem;
 }
 .lobby-rooms > div > div {
@@ -590,6 +591,7 @@ p {
   width: 80vw;
   display: flex;
   flex-flow: column;
+  border: #fff 1px solid;
   border-radius: 1.5rem;
   transform: translateY(-200rem);
   animation: moveInLeft 2s;
@@ -600,15 +602,26 @@ p {
   background: linear-gradient(rgba(131,166,230,0.15), rgba(131,166,230,0.15)), url("./static/hex.png");
   height: 100%;
   width: 100%;
+}
+.lobby-chat > div:first-of-type {
+  height: 6rem;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+}
+.lobby-chat > div:last-of-type {
+  border-bottom-left-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.lobby-chat > div:last-of-type > div {
+  background: rgba(0,0,0,0.5);
+  width: 100%;
+  height: 100%;
   border-radius: 1.5rem;
 }
-.lobby-chat > div > div {
-  background: rgba(71,132,255,0.5);
-  width: 20rem;
-  height: 20rem;
-  border-radius: 1.5rem;
-}
-.lobby-chat > div h1 {
+.lobby-chat > div > h1 {
   z-index: 100;
   color: #fff;
   font-size: 3rem;
