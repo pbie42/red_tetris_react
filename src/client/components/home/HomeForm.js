@@ -26,7 +26,7 @@ function HomeForm(props) {
 			if (value && C.verifyUsername(value)) {
 				props.setUsername(value)
 				props.addUser(value)
-				props.history.push('/chat')
+				props.history.push('/lobby')
 			} else C.setSubmitError()
 			C.refs.input.value = ''
 		}
@@ -45,7 +45,7 @@ function HomeForm(props) {
 		if (value && C.verifyUsername(value)) {
 			props.setUsername(value)
 			props.addUser(value)
-			props.history.push('/chat')
+			props.history.push('/lobby')
 		} else C.setSubmitError()
 		C.refs.input.value = ''
 	}

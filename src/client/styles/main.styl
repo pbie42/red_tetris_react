@@ -21,7 +21,7 @@ body
 	min-width 500px
 
 
-.container-home
+.container
 	background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.10)), url('./static/tetris_world.jpg')
 	background-repeat: no-repeat
 	background-size: cover
@@ -41,7 +41,44 @@ body
 	justify-content: flex-start
 	align-items: center
 
-.container
+.container-lobby
+	background: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%)
+	position: fixed
+	top: 0
+	left: 0
+	bottom: 0
+	right 0
+	width: 100%
+	overflow-y: scroll
+	overflow-x: hidden
+	margin: 0
+	display: flex
+	flex-flow: column
+	justify-content: center
+	align-items: center
+	z-index: 100
+
+	&:before
+		background: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(26,22,130,1) 100%)
+		content: ''
+		position: fixed
+		top: 0
+		left: 0
+		bottom: 0
+		right 0
+		width: 100%
+		overflow-y: scroll
+		overflow-x: hidden
+		margin: 0
+		display: flex
+		flex-flow: column
+		justify-content: center
+		align-items: center
+		opacity: 1
+		z-index: -100
+		animation: gradientEaseIn 1.5s ease-out
+
+.container-home
 	background: black
 	background-repeat: no-repeat
 	background-size: cover
@@ -90,3 +127,15 @@ h1, h2, h3, h4, h5, p
 
 @import "./components/sidebar"
 @import "./components/home"
+@import "./components/lobby"
+
+
+@keyframes gradientEaseIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}

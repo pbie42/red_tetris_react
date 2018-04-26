@@ -18,7 +18,7 @@ body {
   font-family: 'Quicksand', sans-serif;
   min-width: 500px;
 }
-.container-home {
+.container {
   background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.1)), url("./static/tetris_world.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -38,7 +38,44 @@ body {
   justify-content: flex-start;
   align-items: center;
 }
-.container {
+.container-lobby {
+  background: linear-gradient(135deg, #000 0%, #000 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin: 0;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+.container-lobby:before {
+  background: linear-gradient(135deg, #000 0%, #1a1682 100%);
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin: 0;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  z-index: -100;
+  animation: gradientEaseIn 1.5s ease-out;
+}
+.container-home {
   background: #000;
   background-repeat: no-repeat;
   background-size: cover;
@@ -99,7 +136,7 @@ p {
   width: 100vw;
   display: flex;
   flex-flow: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 .home > div:first-of-type {
@@ -110,7 +147,7 @@ p {
 }
 .home > div:first-of-type > div {
   height: 20vh;
-  width: 75vw;
+  width: 100vw;
   border-radius: 1rem;
   display: flex;
   justify-content: center;
@@ -124,7 +161,7 @@ p {
 }
 .home > div:last-of-type {
   height: 20vh;
-  width: 100vw;
+  width: 85vw;
   border-radius: 1.5rem;
   display: flex;
   justify-content: flex-end;
@@ -367,5 +404,63 @@ p {
   }
   40%, 60% {
     transform: translate3d(4px, 0, 0);
+  }
+}
+.lobby {
+  background: linear-gradient(135deg, #000 0%, #000 100%);
+  height: 70vh;
+  width: 70vw;
+  display: flex;
+  flex-flow: column;
+  border-radius: 1.5rem;
+  z-index: 100;
+}
+.lobby:before {
+  background: linear-gradient(135deg, #000 0%, #831643 100%);
+  height: 70vh;
+  width: 70vw;
+  display: flex;
+  flex-flow: column;
+  border-radius: 1.5rem;
+  z-index: -100;
+  opacity: 0;
+  transition: opacity 0.45s;
+}
+.lobby:hover:before {
+  opacity: 1;
+}
+.lobby h1 {
+  color: #fff;
+}
+@-moz-keyframes gradientEaseIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes gradientEaseIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes gradientEaseIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes gradientEaseIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

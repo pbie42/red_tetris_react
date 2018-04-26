@@ -65,6 +65,10 @@ describe('HomeForm', () => {
 				expect(addUserSpy.called).to.be.true
 			})
 
+			it('pushes new page route "/lobby" into history', () => {
+				expect(wrapper.instance().props.history[0]).to.equal('/lobby')
+			})
+
 			it('resets ref value to "" if Enter key is pressed', () => {
 				expect(wrapper.ref('input').value).to.equal('')
 			})
@@ -147,8 +151,8 @@ describe('HomeForm', () => {
 				expect(addUserSpy.called).to.be.true
 			})
 
-			it('pushes new page route "/chat" into history', () => {
-				expect(wrapper.instance().props.history[0]).to.equal('/chat')
+			it('pushes new page route "/lobby" into history', () => {
+				expect(wrapper.instance().props.history[0]).to.equal('/lobby')
 			})
 
 			it('resets input value to ""', () => {
