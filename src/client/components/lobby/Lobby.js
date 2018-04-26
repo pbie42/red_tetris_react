@@ -11,7 +11,12 @@ function LobbyComponent(props) {
 		return (
 			<div className="container-lobby">
 				<div className="lobby">
-					<h1>SUPPPPP</h1>
+					<div>
+						<h1 className="neon-red">Rooms</h1>
+					</div>
+					<div>
+						<h1 className="neon-blue">Chat</h1>
+					</div>
 				</div>
 			</div>
 		)

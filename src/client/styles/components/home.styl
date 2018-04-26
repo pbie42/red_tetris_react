@@ -11,7 +11,8 @@
 			height: 20vh
 			width: 100vw
 			display: flex
-			justify-content: flex-start
+			justify-content: center
+
 			> div
 				height: 20vh
 				width: 100vw
@@ -27,13 +28,14 @@
 					animation: neonRed 1.5s ease-in-out infinite alternate
 		&:last-of-type
 			height: 20vh
-			width: 85vw
+			width: 100vw
 			border-radius: 1.5rem
 			display: flex
 			justify-content: flex-end
 			> div
 				height: 20vh
-				width: 70vw
+				width: 93vw
+				padding-top: 20rem
 				// background-color: rgba(252, 247, 247, 0.50)
 				color: white
 				display: flex
@@ -58,7 +60,7 @@
 							border: none
 							width: 24.6rem
 							height: 2.5rem
-							background-color: black
+							background-color: rgba(0, 0, 0, 0)
 							border-bottom-left-radius: .5rem
 							border-bottom-right-radius: .5rem
 							color: white
@@ -69,7 +71,7 @@
 							&::placeholder
 								transform: translateX(-1rem)
 								text-align: center
-								color: white
+								color: #00F000
 								font-size: 1.5rem
 						> div
 							width: 25rem
@@ -99,11 +101,74 @@
 			justify-content: center
 			align-items: center
 
+	.test
+		height: auto
+		width: auto
+
+	.moveInDivTop
+		animation: moveInTop 2.5s
+	.moveOutDivDown
+		animation: moveOutDown 2.5s ease-in-out
+	.hideDiv
+		animation: moveOutDown 2.5s ease-in-out
+		animation-fill-mode: forwards
+	.showDiv
+		animation: moveInBottom 2.5s
+
 
 @keyframes blink {
 	0%{opacity: 0;}
 	50%{opacity: .5;}
 	100%{opacity: 1;}
+}
+
+@keyframes moveInTop {
+	0%{
+		opacity: 0;
+		transform: translateY(-100rem);
+	}
+	100%{
+		opacity: 1;
+		transform: translateY(0rem);
+	}
+}
+
+@keyframes moveInBottom {
+	0%{
+		opacity: 0;
+		transform: translateY(100rem);
+	}
+	100%{
+		opacity: 1;
+		transform: translateY(0rem);
+	}
+}
+
+@keyframes moveOutDown {
+	0%{
+		opacity: 1;
+		transform: translateY(0rem);
+	}
+	100%{
+		opacity: 0;
+		transform: translateY(500rem);
+	}
+}
+
+@keyframes opacityIn {
+	0%{
+		opacity: 0
+	}
+	100%{
+		opacity: 1
+	}
+}
+
+@keyframes opacityOut {
+	0%{opacity: 1}
+	100%{
+		opacity: 0
+	}
 }
 
 @keyframes neonRed {
@@ -112,15 +177,6 @@
 	}
 	to {
 		text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
-	}
-}
-
-@keyframes neonBlue {
-	from {
-		text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF;
-	}
-	to {
-		text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228DFF, 0 0 35px #228DFF, 0 0 40px #228DFF, 0 0 50px #228DFF, 0 0 75px #228DFF;
 	}
 }
 

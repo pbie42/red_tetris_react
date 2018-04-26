@@ -26,7 +26,11 @@ function HomeForm(props) {
 			if (value && C.verifyUsername(value)) {
 				props.setUsername(value)
 				props.addUser(value)
-				props.history.push('/lobby')
+				function test() {
+					props.history.push('/lobby')
+				}
+				props.pageChange()
+				setTimeout(test, 800)
 			} else C.setSubmitError()
 			C.refs.input.value = ''
 		}

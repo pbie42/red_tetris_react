@@ -41,6 +41,7 @@ describe('HomeForm', () => {
 			const setUsernameSpy = sinon.spy()
 			const addUserSpy = sinon.spy()
 			const preventSpy = sinon.spy()
+			const pageChangeSpy = sinon.spy()
 			const wrapper = mount(
 				<HomeForm
 					users={[{ id: 0, name: 'Jen' }]}
@@ -48,6 +49,7 @@ describe('HomeForm', () => {
 					history={[]}
 					addUser={addUserSpy}
 					setUsername={setUsernameSpy}
+					pageChange={pageChangeSpy}
 				/>
 			)
 
@@ -65,8 +67,11 @@ describe('HomeForm', () => {
 				expect(addUserSpy.called).to.be.true
 			})
 
-			it('pushes new page route "/lobby" into history', () => {
-				expect(wrapper.instance().props.history[0]).to.equal('/lobby')
+			it('pushes new page route "/lobby" into history', done => {
+				setTimeout(function() {
+					expect(wrapper.instance().props.history[0]).to.equal('/lobby')
+					done()
+				}, 800)
 			})
 
 			it('resets ref value to "" if Enter key is pressed', () => {

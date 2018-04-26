@@ -8,9 +8,11 @@
 
 html
 	font-size: 10px
+	background: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%)
 
 
 body
+	background: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%)
 	position: fixed
 	top: 0
 	left: 0
@@ -21,7 +23,7 @@ body
 	min-width 500px
 
 
-.container
+.container-home
 	background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.10)), url('./static/tetris_world.jpg')
 	background-repeat: no-repeat
 	background-size: cover
@@ -40,46 +42,14 @@ body
 	flex-flow: column
 	justify-content: flex-start
 	align-items: center
+	z-index: 100
+	animation: gradientEaseIn 1.5s ease-out
+
+.container-fade
+	animation: gradientEaseOut 1.5s ease-out
 
 .container-lobby
-	background: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%)
-	position: fixed
-	top: 0
-	left: 0
-	bottom: 0
-	right 0
-	width: 100%
-	overflow-y: scroll
-	overflow-x: hidden
-	margin: 0
-	display: flex
-	flex-flow: column
-	justify-content: center
-	align-items: center
-	z-index: 100
-
-	&:before
-		background: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(163,13,13,1) 100%)
-		content: ''
-		position: fixed
-		top: 0
-		left: 0
-		bottom: 0
-		right 0
-		width: 100%
-		overflow-y: scroll
-		overflow-x: hidden
-		margin: 0
-		display: flex
-		flex-flow: column
-		justify-content: center
-		align-items: center
-		opacity: 1
-		z-index: -100
-		animation: gradientEaseIn 1.5s ease-out
-
-.container-home
-	background: black
+	background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.10)), url('./static/lobby.jpg')
 	background-repeat: no-repeat
 	background-size: cover
 	background-attachment:fixed
@@ -95,8 +65,31 @@ body
 	margin: 0
 	display: flex
 	flex-flow: column
-	justify-content: flex-start
+	justify-content: center
 	align-items: center
+	z-index: 100
+	overflow: hidden
+	animation: gradientEaseIn 2.5s ease-out
+
+// .container-home
+// 	background: black
+// 	background-repeat: no-repeat
+// 	background-size: cover
+// 	background-attachment:fixed
+// 	background-position:center
+// 	position: fixed
+// 	top: 0
+// 	left: 0
+// 	bottom: 0
+// 	right 0
+// 	width: 100%
+// 	overflow-y: scroll
+// 	overflow-x: hidden
+// 	margin: 0
+// 	display: flex
+// 	flex-flow: column
+// 	justify-content: flex-start
+// 	align-items: center
 
 
 h1, h2, h3, h4, h5, p
@@ -137,5 +130,27 @@ h1, h2, h3, h4, h5, p
 
 	100% {
 		opacity: 1;
+	}
+}
+
+@keyframes gradientEaseInRight {
+	0% {
+		transform: translateX(-100rem);
+		opacity: 0;
+	}
+
+	100% {
+		transform: translateX(0rem);
+		opacity: 1;
+	}
+}
+
+@keyframes gradientEaseOut {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
 	}
 }
