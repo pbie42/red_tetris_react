@@ -10,45 +10,37 @@ function LobbyComponent(props) {
 	C.render = () => {
 		return (
 			<div className="container-lobby">
-				<div className="lobby-rooms">
-					<div>
-						<div />
-						<div>
-							<div>
-								<div>
-									<h1>Rooms</h1>
-								</div>
-							</div>
-							<div>
-								<div>
-									<h2>test</h2>
-								</div>
-							</div>
-						</div>
-						<div />
-						<div>
-							<div>
-								<div>
-									<h1>New Room</h1>
-								</div>
-								<div>
-									<h2>test</h2>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="lobby-chat">
+				<div className="lobby-chat-new">
 					<div>
 						<div>
 							<div>
 								<h1>Chat</h1>
 							</div>
 						</div>
+						<div>
+							<div>
+								<h2>test</h2>
+							</div>
+						</div>
 					</div>
+					<div />
 					<div>
 						<div>
-							<h1>test</h1>
+							<div>
+								<h1>New Room</h1>
+							</div>
+							<div>
+								<h2>test</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className="lobby-rooms">
+					<div>
+						<div>
+							<div>
+								<h1>Rooms</h1>
+							</div>
 						</div>
 					</div>
 				</div>

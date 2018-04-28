@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { HomeFormContainer } from '../../containers/home/HomeForm'
-import logo from '../../static/Tetris-logo.png'
+import logo from '../../static/tetris_logo.png'
 
 function RedTetris() {
 	const C = new Component()
