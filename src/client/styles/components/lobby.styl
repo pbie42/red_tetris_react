@@ -1,13 +1,14 @@
 $inset-glow = 0px 0px 30px 0px rgba(0,0,0,0.75), \
 						inset 0rem 0 5.8rem #1F62D4
 
+$menu-background = rgba(34, 34, 44, 0.5)
+
 .lobby-chat-new
-	// background: rgba(2, 70, 195, 0.5)
+	// background: $menu-background
 	background-attachment:fixed
 	background-position:center
 	height: 50vh
 	width: 80vw
-	border-radius: 1.5rem
 	transform: translateY(-200rem)
 	animation: moveInRight 2s
 	animation-delay: .5s
@@ -16,18 +17,19 @@ $inset-glow = 0px 0px 30px 0px rgba(0,0,0,0.75), \
 	flex-flow: row
 
 	> div
+		background: $menu-background
 		display: flex
 		flex-flow: row
 		justify-content: space-around
 		height: 100%
-		border-radius: 1.5rem
 
 		&:nth-of-type(1)
-			flex-grow: 2
+			flex-grow: 3
 			display: flex
 			flex-flow: column
 			// box-shadow: $inset-glow
 		&:nth-of-type(2)
+			background: none
 			max-width: 2rem
 			min-width: 2rem
 		&:last-of-type
@@ -35,8 +37,9 @@ $inset-glow = 0px 0px 30px 0px rgba(0,0,0,0.75), \
 			// box-shadow: $inset-glow
 
 		> div
+			display: flex
+			justify-content: center
 			&:first-of-type
-				background: rgba(130, 12, 227, 0.5)
 				height: 3rem
 				border-top-left-radius: 1.5rem
 				border-top-right-radius: 1.5rem
@@ -45,13 +48,14 @@ $inset-glow = 0px 0px 30px 0px rgba(0,0,0,0.75), \
 				flex-grow: 2
 
 			h1
-				color: white
+				color: $tetris-red
 				font-size: 3rem
-				font-family: 'Audiowide', cursive
+				// font-family: 'Rajdhani', sans-serif
+				font-family: 'Gugi', cursive;
 
 
 .lobby-rooms
-	background: linear-gradient(135deg, rgba(51,61,71,1) 0%, rgba(51,61,71,1) 60%, rgba(34,34,44,1) 100%)
+	background: $menu-background
 	background-attachment:fixed
 	background-position:center
 	height: 45vh
@@ -83,12 +87,19 @@ $inset-glow = 0px 0px 30px 0px rgba(0,0,0,0.75), \
 				> div
 					width: 100%
 					height: 3rem
+					display: flex
+					justify-content: center
 
 					h1
 						z-index: 100
-						color: white
+						color: $tetris-red
 						font-size: 3rem
-						font-family: 'Audiowide', cursive
+						// font-family: 'Audiowide', cursive
+						// font-family: 'Mandali', sans-serif;
+						// font-family: 'Poiret One', cursive;
+						// font-family: 'Questrial', sans-serif;
+						// font-family: 'Rajdhani', sans-serif;
+						font-family: 'Gugi', cursive;
 
 			// > div
 			// 	background: rgba(0, 0, 0, 0.5)
@@ -98,7 +109,7 @@ $inset-glow = 0px 0px 30px 0px rgba(0,0,0,0.75), \
 
 		> h1
 			z-index: 100
-			color: white
+			color: #24D9C5
 			font-size: 3rem
 			font-family: 'Audiowide', cursive
 			// transform: translate(-2rem, -1.5rem)
