@@ -4,53 +4,128 @@ $inset-glow = 0px 0px 30px 0px rgba(0,0,0,0.75), \
 $menu-background = rgba(34, 34, 44, 0.5)
 
 .lobby-chat-new
-	// background: $menu-background
 	background-attachment:fixed
 	background-position:center
 	height: 50vh
 	width: 80vw
-	transform: translateY(-200rem)
-	animation: moveInRight 2s
-	animation-delay: .5s
-	animation-fill-mode: forwards
 	display: flex
 	flex-flow: row
 
 	> div
 		background: $menu-background
 		display: flex
-		flex-flow: row
+		flex-flow: column
 		justify-content: space-around
 		height: 100%
 
 		&:nth-of-type(1)
 			flex-grow: 3
-			display: flex
-			flex-flow: column
-			// box-shadow: $inset-glow
+			transform: translateY(-200rem)
+			animation: moveInRight 2s
+			animation-delay: .5s
+			animation-fill-mode: forwards
 		&:nth-of-type(2)
 			background: none
 			max-width: 2rem
 			min-width: 2rem
 		&:last-of-type
 			flex-grow: 1
-			// box-shadow: $inset-glow
+			transform: translateY(200rem)
+			animation: moveInLeft 2s
+			animation-delay: .1s
+			animation-fill-mode: forwards
 
 		> div
-			display: flex
-			justify-content: center
 			&:first-of-type
-				height: 3rem
-				border-top-left-radius: 1.5rem
-				border-top-right-radius: 1.5rem
-			// animation: neonBlue 1.5s ease-in-out infinite alternate
-			&:last-of-type
+				height: 4rem
+				display: flex
+				justify-content: center
+			&:nth-of-type(2)
 				flex-grow: 2
+				width: 100%
+				display: flex
+				justify-content: center
 
+				> div
+					width: 90%
+					border-top: grey 1px solid
+					display: flex
+					flex-flow: column
+					justify-content: space-around
+					align-items: center
+
+					> div
+						height: 1rem
+						width: 60%
+						border-left: 0.2rem solid grey
+						border-right: 0.2rem solid grey
+						border-bottom: 0.2rem solid grey
+						border-bottom-left-radius: .5rem
+						border-bottom-right-radius: .5rem
+						display: flex
+						justify-content: center
+
+						> input
+							transform: translateY(-1rem)
+							height: 2rem
+							width: 100%
+							text-align: center
+							background: none
+							border: none
+							// border-bottom: grey 1px solid
+							font-family: 'Gugi', cursive;
+							font-size: 1.5rem
+
+							&::placeholder
+								color: white
+								font-family: 'Gugi', cursive;
+
+
+
+			&:last-of-type
+				width: 100%
+				display: flex
+				justify-content: center
+				min-height: 2rem
+
+				> div
+					width: 30%
+					min-height: 2.1rem
+					// border: grey 1px solid
+					border-left: grey 1px solid
+					border-right: grey 1px solid
+					border-top: grey 1px solid
+					font-family: 'Gugi', cursive;
+					// border-radius: .5rem
+					// border-top-left-radius: 0.2rem
+					// border-top-right-radius: 0.2rem
+					color: white
+					text-align: center
+
+					> div
+						min-height: 2.1rem
+						padding-top: 0.2rem
+						cursor: pointer
+				
+				> input
+					width: 90%
+					background: none
+					border: none
+					border-top: grey 1px solid
+					border-bottom: grey 1px solid
+					color: white
+					font-family: 'Gugi', cursive;
+					padding-left: 1rem
+
+					&:focus
+						outline: none
+
+					&::placeholder
+						color: white
+						font-family: 'Gugi', cursive;
 			h1
-				color: $tetris-red
+				color: white
 				font-size: 3rem
-				// font-family: 'Rajdhani', sans-serif
 				font-family: 'Gugi', cursive;
 
 
@@ -62,15 +137,12 @@ $menu-background = rgba(34, 34, 44, 0.5)
 	width: 80vw
 	display: flex
 	flex-flow: column
-	// border: white 1px solid
 	transform: translateY(-200rem)
-	animation: moveInLeft 2s
+	animation: moveInUp 2s
 	animation-delay: .5s
 	animation-fill-mode: forwards
-	// box-shadow: $inset-glow
 
 	> div
-		// background: linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)), url('./static/hex.png')
 		height: 100%
 		width: 100%
 
@@ -79,10 +151,8 @@ $menu-background = rgba(34, 34, 44, 0.5)
 			display: flex
 			justify-content: center
 			> div
-				// background: rgba(4, 106, 247, 0.98)
 				width: 100%
 				height: 3rem
-				// animation: neonBlue 1.5s ease-in-out infinite alternate
 
 				> div
 					width: 100%
@@ -92,7 +162,7 @@ $menu-background = rgba(34, 34, 44, 0.5)
 
 					h1
 						z-index: 100
-						color: $tetris-red
+						color: white
 						font-size: 3rem
 						// font-family: 'Audiowide', cursive
 						// font-family: 'Mandali', sans-serif;
@@ -101,18 +171,6 @@ $menu-background = rgba(34, 34, 44, 0.5)
 						// font-family: 'Rajdhani', sans-serif;
 						font-family: 'Gugi', cursive;
 
-			// > div
-			// 	background: rgba(0, 0, 0, 0.5)
-			// 	width: 100%
-			// 	height: 100%
-			// 	border-radius: 1.5rem
-
-		> h1
-			z-index: 100
-			color: #24D9C5
-			font-size: 3rem
-			font-family: 'Audiowide', cursive
-			// transform: translate(-2rem, -1.5rem)
 
 .neon-red
 	animation: neonRed 1.5s ease-in-out infinite alternate

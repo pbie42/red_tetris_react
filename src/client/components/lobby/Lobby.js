@@ -22,6 +22,9 @@ function LobbyComponent(props) {
 								<h2>test</h2>
 							</div>
 						</div>
+						<div>
+							<input type="text" name="" id="" placeholder="Enter message" />
+						</div>
 					</div>
 					<div />
 					<div>
@@ -29,8 +32,23 @@ function LobbyComponent(props) {
 							<div>
 								<h1>New Room</h1>
 							</div>
+						</div>
+						<div className="new-room-inputs">
 							<div>
-								<h2>test</h2>
+								<div>
+									<input type="text" name="" id="" placeholder="Room Name" />
+								</div>
+								<div>
+									<input type="text" name="" id="" placeholder="Room Name" />
+								</div>
+								<div>
+									<input type="text" name="" id="" placeholder="Room Name" />
+								</div>
+							</div>
+						</div>
+						<div>
+							<div>
+								<div>Create</div>
 							</div>
 						</div>
 					</div>
