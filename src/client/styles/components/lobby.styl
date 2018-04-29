@@ -55,18 +55,19 @@ $menu-background = rgba(34, 34, 44, 0.5)
 					align-items: center
 
 					> div
-						height: 1rem
-						width: 60%
-						border-left: 0.2rem solid grey
-						border-right: 0.2rem solid grey
-						border-bottom: 0.2rem solid grey
-						border-bottom-left-radius: .5rem
-						border-bottom-right-radius: .5rem
+						height: 2.5rem
+						width: 100%
+						border-left: 0.2rem solid #23D6C0
+						border-right: 0.2rem solid #23D6C0
+						border-bottom: 0.2rem solid #23D6C0
+						border-top: 0.2rem solid #23D6C0
+						// border-bottom-left-radius: .5rem
+						// border-bottom-right-radius: .5rem
 						display: flex
 						justify-content: center
 
 						> input
-							transform: translateY(-1rem)
+							// transform: translateY(-1.2rem)
 							height: 2rem
 							width: 100%
 							text-align: center
@@ -91,14 +92,12 @@ $menu-background = rgba(34, 34, 44, 0.5)
 				> div
 					width: 30%
 					min-height: 2.1rem
-					// border: grey 1px solid
 					border-left: grey 1px solid
 					border-right: grey 1px solid
 					border-top: grey 1px solid
 					font-family: 'Gugi', cursive;
-					// border-radius: .5rem
-					// border-top-left-radius: 0.2rem
-					// border-top-right-radius: 0.2rem
+					border-top-left-radius: 0.2rem
+					border-top-right-radius: 0.2rem
 					color: white
 					text-align: center
 
@@ -121,12 +120,12 @@ $menu-background = rgba(34, 34, 44, 0.5)
 						outline: none
 
 					&::placeholder
-						color: white
+						color: #FC1576
 						font-family: 'Gugi', cursive;
 			h1
 				color: white
 				font-size: 3rem
-				font-family: 'Gugi', cursive;
+				font-family: 'Catamaran', sans-serif;
 
 
 .lobby-rooms
@@ -143,33 +142,64 @@ $menu-background = rgba(34, 34, 44, 0.5)
 	animation-fill-mode: forwards
 
 	> div
-		height: 100%
-		width: 100%
+		display: flex
+		height 100%
 
-		&:first-of-type
-			height: 6rem
-			display: flex
-			justify-content: center
-			> div
-				width: 100%
-				height: 3rem
+		> div
+			height: 100%
 
+			&:first-of-type
+				flex-grow: 2
+			
+			&:last-of-type
+				flex-grow: 1
+				height 100%
+				display: flex
+				justify-content: flex-end
+
+				> div
+					background: #fc1576;
+					height: 3rem;
+					width: 3rem;
+					text-align: center;
+					align-items: center;
+					align-content: center;
+					font-size: 2.3rem;
+					border-bottom-left-radius: .5rem;
+					cursor: pointer;
+
+			&:nth-of-type(2)
+				display: flex
+				justify-content: center
+				flex-flow: column
+				height 100%
+				align-items: center
+				flex-grow: 28
 				> div
 					width: 100%
 					height: 3rem
-					display: flex
-					justify-content: center
 
-					h1
-						z-index: 100
-						color: white
-						font-size: 3rem
-						// font-family: 'Audiowide', cursive
-						// font-family: 'Mandali', sans-serif;
-						// font-family: 'Poiret One', cursive;
-						// font-family: 'Questrial', sans-serif;
-						// font-family: 'Rajdhani', sans-serif;
-						font-family: 'Gugi', cursive;
+					&:last-of-type
+						flex-grow: 2
+						border-top: grey 1px solid
+						width: 100%
+
+					> div
+						width: 100%
+						height: 3rem
+						display: flex
+						justify-content: center
+
+						h1
+							z-index: 100
+							color: white
+							font-size: 3rem
+							// font-family: 'Audiowide', cursive
+							// font-family: 'Mandali', sans-serif;
+							// font-family: 'Poiret One', cursive;
+							// font-family: 'Questrial', sans-serif;
+							font-family: 'Rajdhani', sans-serif;
+							// font-family: 'Gugi', cursive;
 
 
 .neon-red

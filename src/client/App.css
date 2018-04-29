@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css?family=Audiowide|Gugi|Jura|Orbitron|VT323|Varela+Round");
 @import url("https://fonts.googleapis.com/css?family=Armata|Asap|Chathura|Dosis|Encode+Sans|Mandali|Maven+Pro|Montserrat|Offside|PT+Sans+Caption|Poiret+One|Questrial|Rajdhani|Saira|Unica+One|Varela+Round|Yanone+Kaffeesatz");
 @import url("https://fonts.googleapis.com/css?family=Biryani:700|Cantarell:700|Do+Hyeon|Dosis:700|Exo+2:600|Gugi|Miriam+Libre:700");
+@import url("https://fonts.googleapis.com/css?family=Catamaran");
 * {
   user-select: none;
   box-sizing: border-box;
@@ -610,18 +611,16 @@ p {
   align-items: center;
 }
 .lobby-chat-new > div > div:nth-of-type(2) > div > div {
-  height: 1rem;
-  width: 60%;
-  border-left: 0.2rem solid #808080;
-  border-right: 0.2rem solid #808080;
-  border-bottom: 0.2rem solid #808080;
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
+  height: 2.5rem;
+  width: 100%;
+  border-left: 0.2rem solid #23d6c0;
+  border-right: 0.2rem solid #23d6c0;
+  border-bottom: 0.2rem solid #23d6c0;
+  border-top: 0.2rem solid #23d6c0;
   display: flex;
   justify-content: center;
 }
 .lobby-chat-new > div > div:nth-of-type(2) > div > div > input {
-  transform: translateY(-1rem);
   height: 2rem;
   width: 100%;
   text-align: center;
@@ -647,6 +646,8 @@ p {
   border-right: #808080 1px solid;
   border-top: #808080 1px solid;
   font-family: 'Gugi', cursive;
+  border-top-left-radius: 0.2rem;
+  border-top-right-radius: 0.2rem;
   color: #fff;
   text-align: center;
 }
@@ -669,13 +670,13 @@ p {
   outline: none;
 }
 .lobby-chat-new > div > div:last-of-type > input::placeholder {
-  color: #fff;
+  color: #fc1576;
   font-family: 'Gugi', cursive;
 }
 .lobby-chat-new > div > div h1 {
   color: #fff;
   font-size: 3rem;
-  font-family: 'Gugi', cursive;
+  font-family: 'Catamaran', sans-serif;
 }
 .lobby-rooms {
   background: rgba(34,34,44,0.5);
@@ -691,29 +692,60 @@ p {
   animation-fill-mode: forwards;
 }
 .lobby-rooms > div {
+  display: flex;
   height: 100%;
-  width: 100%;
 }
-.lobby-rooms > div:first-of-type {
-  height: 6rem;
+.lobby-rooms > div > div {
+  height: 100%;
+}
+.lobby-rooms > div > div:first-of-type {
+  flex-grow: 2;
+}
+.lobby-rooms > div > div:last-of-type {
+  flex-grow: 1;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.lobby-rooms > div > div:last-of-type > div {
+  background: #fc1576;
+  height: 3rem;
+  width: 3rem;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  font-size: 2.3rem;
+  border-bottom-left-radius: 0.5rem;
+  cursor: pointer;
+}
+.lobby-rooms > div > div:nth-of-type(2) {
   display: flex;
   justify-content: center;
+  flex-flow: column;
+  height: 100%;
+  align-items: center;
+  flex-grow: 28;
 }
-.lobby-rooms > div:first-of-type > div {
+.lobby-rooms > div > div:nth-of-type(2) > div {
   width: 100%;
   height: 3rem;
 }
-.lobby-rooms > div:first-of-type > div > div {
+.lobby-rooms > div > div:nth-of-type(2) > div:last-of-type {
+  flex-grow: 2;
+  border-top: #808080 1px solid;
+  width: 100%;
+}
+.lobby-rooms > div > div:nth-of-type(2) > div > div {
   width: 100%;
   height: 3rem;
   display: flex;
   justify-content: center;
 }
-.lobby-rooms > div:first-of-type > div > div h1 {
+.lobby-rooms > div > div:nth-of-type(2) > div > div h1 {
   z-index: 100;
   color: #fff;
   font-size: 3rem;
-  font-family: 'Gugi', cursive;
+  font-family: 'Rajdhani', sans-serif;
 }
 .neon-red {
   animation: neonRed 1.5s ease-in-out infinite alternate;
