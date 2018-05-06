@@ -3,6 +3,10 @@ import React, { Component } from 'react'
 function ChatComponent(props) {
 	const C = new Component()
 
+	C.state = {
+		hide: true
+	}
+
 	C.render = () => {
 		return (
 			<div className="lobby-chat-new">
@@ -21,8 +25,8 @@ function ChatComponent(props) {
 						<input type="text" name="" id="" placeholder="Enter message" />
 					</div>
 				</div>
-				<div />
-				<div>
+				<div className={C.props.showNewRoom ? 'hide' : ''} />
+				<div className={C.props.showNewRoom ? 'hide' : ''}>
 					<div>
 						<div>
 							<h1>New Room</h1>
@@ -43,7 +47,7 @@ function ChatComponent(props) {
 					</div>
 					<div>
 						<div>
-							<div>Create</div>
+							<div onClick={() => C.props.hideNewRoom()}>Create</div>
 						</div>
 					</div>
 				</div>
@@ -75,7 +79,7 @@ function RoomsComponent(props) {
 						</div>
 					</div>
 					<div>
-						<div>+</div>
+						<div onClick={() => C.props.showNewRoom()}>+</div>
 					</div>
 				</div>
 			</div>
@@ -88,15 +92,27 @@ function RoomsComponent(props) {
 function LobbyComponent(props) {
 	const C = new Component()
 
+	C.state = {
+		hide: true
+	}
+
 	C.componentDidMount = function() {
 		// console.log(`C`, C)
+	}
+
+	C.showNewRoom = function() {
+		C.setState({ hide: false })
+	}
+
+	C.hideNewRoom = function() {
+		C.setState({ hide: true })
 	}
 
 	C.render = () => {
 		return (
 			<div className="container-lobby">
-				<RoomsComponent />
-				<ChatComponent />
+				<RoomsComponent showNewRoom={C.showNewRoom} />
+				<ChatComponent showNewRoom={C.state.hide} hideNewRoom={C.hideNewRoom} />
 			</div>
 		)
 	}

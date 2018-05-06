@@ -24,6 +24,7 @@ $menu-background = rgba(34, 34, 44, 0.5)
 			animation: moveInRight 2s
 			animation-delay: .5s
 			animation-fill-mode: forwards
+			transition: width 2s ease-in-out
 		&:nth-of-type(2)
 			background: none
 			max-width: 2rem
@@ -127,6 +128,8 @@ $menu-background = rgba(34, 34, 44, 0.5)
 				font-size: 3rem
 				font-family: 'Catamaran', sans-serif;
 
+	.hide
+		display: none
 
 .lobby-rooms
 	background: $menu-background
