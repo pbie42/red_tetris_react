@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes'
-import { addUser, messageReceived } from '../actions'
+import { addUser, messageReceived, populateUsersList } from '../actions'
 import { store } from '../../index'
 
 import openSocket from 'socket.io-client'
@@ -33,11 +33,11 @@ const setupSocket = dispatch => {
 				console.log(`ADD_USER`)
 				dispatch(addUser(data.name))
 				break
-			// case types.USERS_LIST:
-			// 	console.log(`USERS_LIST`)
-			// 	console.log(`data.users`, data.users)
-			// 	dispatch(populateUsersList(data.users))
-			// 	break
+			case types.USERS_LIST:
+				console.log(`USERS_LIST`)
+				console.log(`data.users`, data.users)
+				dispatch(populateUsersList(data.users))
+				break
 			default:
 				break
 		}

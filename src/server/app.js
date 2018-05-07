@@ -5,6 +5,13 @@ let index
 
 io.on('connection', socket => {
 	console.log(`a client is connected`)
+	socket.emit(
+		'message',
+		JSON.stringify({
+			type: 'USERS_LIST',
+			users
+		})
+	)
 
 	socket.on('message', message => {
 		console.log(`new message`)
