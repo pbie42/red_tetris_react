@@ -1,6 +1,7 @@
 const io = require('socket.io')()
 
 const users = []
+let index
 
 io.on('connection', socket => {
 	console.log(`a client is connected`)

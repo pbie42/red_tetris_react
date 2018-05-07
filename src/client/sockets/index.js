@@ -1,5 +1,6 @@
 import * as types from '../constants/ActionTypes'
-import { addUser } from '../actions'
+import { addUser, messageReceived } from '../actions'
+import { store } from '../../index'
 
 import openSocket from 'socket.io-client'
 
@@ -23,11 +24,11 @@ const setupSocket = dispatch => {
 		const data = JSON.parse(event)
 		console.log(`data`, data)
 		switch (data.type) {
-			// case types.ADD_MESSAGE:
-			// 	console.log(`ADD_MESSAGE`)
-			// 	if (data.author !== username)
-			// 		dispatch(messageReceived(data.message, data.author))
-			// 	break
+			case types.ADD_MESSAGE:
+				console.log(`ADD_MESSAGE`)
+				if (data.author !== store.getState().user.username)
+					dispatch(messageReceived(data.message, data.author))
+				break
 			case types.ADD_USER:
 				console.log(`ADD_USER`)
 				dispatch(addUser(data.name))

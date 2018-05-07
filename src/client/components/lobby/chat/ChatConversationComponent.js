@@ -23,14 +23,19 @@ export function ChatConversationComponent(props) {
 	C.render = () => {
 		return (
 			<div ref={node => (div = node)} className="chat-room">
-				{C.props.messages.map(message => (
+				{C.props.messages.map((message, index) => (
 					<div
-						className={message.author === 'Me' ? 'my-message' : 'message'}
+						key={index}
+						className={
+							message.author === C.props.username ? 'my-message' : 'message'
+						}
 					>
-						{message.author !== 'Me' && <div className="other-message" />}
+						{message.author !== C.props.username && (
+							<div className="other-message" />
+						)}
 						<div
 							className={
-								message.author === 'Me'
+								message.author === C.props.username
 									? 'message-right'
 									: 'message-left'
 							}
@@ -40,7 +45,9 @@ export function ChatConversationComponent(props) {
 								<h2>{message.message}</h2>
 							</div>
 						</div>
-						{message.author === 'Me' && <div className="own-message" />}
+						{message.author === C.props.username && (
+							<div className="own-message" />
+						)}
 					</div>
 				))}
 			</div>

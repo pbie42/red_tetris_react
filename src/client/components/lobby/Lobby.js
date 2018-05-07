@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
 import { RoomsComponent } from './rooms/RoomsComponent'
 import { ChatComponent } from './chat/ChatComponent'
+import { ChatContainer } from '../../containers/lobby/chat/ChatContainer'
 
 function LobbyComponent(props) {
 	const C = new Component()
+
+	C.componentWillMount = function() {
+		if (!C.props.username) {
+			props.history.push('/')
+		}
+	}
 
 	C.state = {
 		hide: true
@@ -25,10 +32,7 @@ function LobbyComponent(props) {
 		return (
 			<div className="container-lobby">
 				<RoomsComponent showNewRoom={C.showNewRoom} />
-				<ChatComponent
-					showNewRoom={C.state.hide}
-					hideNewRoom={C.hideNewRoom}
-				/>
+				<ChatContainer showNewRoom={C.state.hide} hideNewRoom={C.hideNewRoom} />
 			</div>
 		)
 	}
