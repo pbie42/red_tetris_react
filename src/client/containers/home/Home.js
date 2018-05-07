@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import HomeComponent from '../../components/home/Home'
-import { setUsername, addUser } from '../../actions'
 
 export function mapStateToProps(state) {
 	return {

@@ -10,7 +10,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import reducers from './client/reducers'
 import setupSocket from './client/sockets'
-import handleNewMessage from './client/sagas'
+import { handleNewMessage, handleNewUser } from './client/sagas'
 import username from './client/utils/username'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -24,12 +24,18 @@ const enhancer = composeEnhancers(
 
 export const store = createStore(reducers, enhancer)
 
-// const socket = setupSocket(store.dispatch, username)
+const socket = setupSocket(store.dispatch)
 
-// sagaMiddleware.run(handleNewMessage, { socket, username })
+sagaMiddleware.run(handleNewMessage, {
+	socket
+})
+
+sagaMiddleware.run(handleNewUser, {
+	socket
+})
 
 ReactDOM.render(
-	<Provider store={store}>
+	<Provider store={store} saga={sagaMiddleware}>
 		<div className="container">
 			<Router>
 				<App />

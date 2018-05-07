@@ -12,6 +12,7 @@ io.on('connection', socket => {
 		switch (data.type) {
 			case 'ADD_USER':
 				console.log(`ADD_USER`)
+				console.log(`data`, data)
 				index = users.length
 				users.push({ name: data.name, id: index + 1 })
 				console.log(`users`, users)

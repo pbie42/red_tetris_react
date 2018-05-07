@@ -2,24 +2,6 @@ import React, { Component } from 'react'
 import { HomeFormContainer } from '../../containers/home/HomeForm'
 import logo from '../../static/tetris_logo.png'
 
-function RedTetris() {
-	const C = new Component()
-
-	C.componentWillLeave = function(cb) {
-		setTimeout(cb(), 10000)
-	}
-
-	C.render = () => {
-		return (
-			<div>
-				<h1>RED</h1>
-			</div>
-		)
-	}
-
-	return C
-}
-
 function HomeComponent(props) {
 	const C = new Component()
 
@@ -28,7 +10,7 @@ function HomeComponent(props) {
 	}
 
 	C.componentDidMount = function() {
-		// console.log(`C`, C)
+		console.log(`C`, C)
 	}
 
 	C.pageChange = function() {
@@ -54,7 +36,9 @@ function HomeComponent(props) {
 						<img className="test" src={logo} alt="" />
 					</div>
 					<div>
-						<div className={C.state.change === true ? 'hideDiv' : 'showDiv'}>
+						<div
+							className={C.state.change === true ? 'hideDiv' : 'showDiv'}
+						>
 							<HomeFormContainer
 								history={props.history}
 								pageChange={C.pageChange}

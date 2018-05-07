@@ -8,6 +8,12 @@ const mapDispatchToProps = dispatch => ({
 	}
 })
 
-export const ChatInputContainer = connect(() => ({}), mapDispatchToProps)(
+const mapStateToProps = state => {
+	return {
+		username: state.user.username
+	}
+}
+
+export const ChatInputContainer = connect(mapStateToProps, mapDispatchToProps)(
 	ChatInputComponent
 )

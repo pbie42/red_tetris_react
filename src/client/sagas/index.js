@@ -3,9 +3,15 @@ import * as types from '../constants/ActionTypes'
 
 const handleNewMessage = function* handleNewMessage(params) {
 	yield takeEvery(types.ADD_MESSAGE, action => {
-		action.author = params.username
+		console.log(`action`, action)
 		params.socket.emit('message', JSON.stringify(action))
 	})
 }
 
-export default handleNewMessage
+const handleNewUser = function* handleNewUser(params) {
+	yield takeEvery(types.ADD_USER, action => {
+		params.socket.emit('message', JSON.stringify(action))
+	})
+}
+
+export { handleNewMessage, handleNewUser }
