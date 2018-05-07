@@ -47,7 +47,15 @@ $menu-background = rgba(34, 34, 44, 0.5)
 				display: flex
 				justify-content: center
 
-				> div
+				> div.chat-room
+					width: 90%
+					border-top: grey 1px solid
+					display: flex
+					flex-flow: column
+					align-items: center
+					// background: white
+
+				> div.new-room-inputs
 					width: 90%
 					border-top: grey 1px solid
 					display: flex
@@ -88,11 +96,11 @@ $menu-background = rgba(34, 34, 44, 0.5)
 				width: 100%
 				display: flex
 				justify-content: center
-				min-height: 2rem
+				min-height: 3rem
 
 				> div
 					width: 30%
-					min-height: 2.1rem
+					min-height: 3rem
 					border-left: grey 1px solid
 					border-right: grey 1px solid
 					border-top: grey 1px solid
@@ -103,9 +111,12 @@ $menu-background = rgba(34, 34, 44, 0.5)
 					text-align: center
 
 					> div
-						min-height: 2.1rem
+						min-height: 3rem
 						padding-top: 0.2rem
 						cursor: pointer
+						display: flex
+						justify-content: center
+						align-items: center
 				
 				> input
 					width: 90%

@@ -603,7 +603,14 @@ p {
   display: flex;
   justify-content: center;
 }
-.lobby-chat-new > div > div:nth-of-type(2) > div {
+.lobby-chat-new > div > div:nth-of-type(2) > div.chat-room {
+  width: 90%;
+  border-top: #808080 1px solid;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+.lobby-chat-new > div > div:nth-of-type(2) > div.new-room-inputs {
   width: 90%;
   border-top: #808080 1px solid;
   display: flex;
@@ -611,7 +618,7 @@ p {
   justify-content: space-around;
   align-items: center;
 }
-.lobby-chat-new > div > div:nth-of-type(2) > div > div {
+.lobby-chat-new > div > div:nth-of-type(2) > div.new-room-inputs > div {
   height: 2.5rem;
   width: 100%;
   border-left: 0.2rem solid #23d6c0;
@@ -621,7 +628,7 @@ p {
   display: flex;
   justify-content: center;
 }
-.lobby-chat-new > div > div:nth-of-type(2) > div > div > input {
+.lobby-chat-new > div > div:nth-of-type(2) > div.new-room-inputs > div > input {
   height: 2rem;
   width: 100%;
   text-align: center;
@@ -630,7 +637,7 @@ p {
   font-family: 'Gugi', cursive;
   font-size: 1.5rem;
 }
-.lobby-chat-new > div > div:nth-of-type(2) > div > div > input::placeholder {
+.lobby-chat-new > div > div:nth-of-type(2) > div.new-room-inputs > div > input::placeholder {
   color: #fff;
   font-family: 'Gugi', cursive;
 }
@@ -638,11 +645,11 @@ p {
   width: 100%;
   display: flex;
   justify-content: center;
-  min-height: 2rem;
+  min-height: 3rem;
 }
 .lobby-chat-new > div > div:last-of-type > div {
   width: 30%;
-  min-height: 2.1rem;
+  min-height: 3rem;
   border-left: #808080 1px solid;
   border-right: #808080 1px solid;
   border-top: #808080 1px solid;
@@ -653,9 +660,12 @@ p {
   text-align: center;
 }
 .lobby-chat-new > div > div:last-of-type > div > div {
-  min-height: 2.1rem;
+  min-height: 3rem;
   padding-top: 0.2rem;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .lobby-chat-new > div > div:last-of-type > input {
   width: 90%;
