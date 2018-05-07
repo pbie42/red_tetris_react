@@ -71,6 +71,7 @@ body {
   z-index: 100;
   overflow: hidden;
   animation: gradientEaseIn 2.5s ease-out;
+  padding: 3rem;
 }
 h1,
 h2,
@@ -560,7 +561,7 @@ p {
 .lobby-chat-new {
   background-attachment: fixed;
   background-position: center;
-  height: 50vh;
+  height: 45vh;
   width: 80vw;
   display: flex;
   flex-flow: row;
@@ -571,6 +572,7 @@ p {
   flex-flow: column;
   justify-content: space-around;
   height: 100%;
+  border-radius: 0.5rem;
 }
 .lobby-chat-new > div:nth-of-type(1) {
   flex-grow: 3;
@@ -579,6 +581,7 @@ p {
   animation-delay: 0.5s;
   animation-fill-mode: forwards;
   transition: width 2s ease-in-out;
+  padding: 1rem;
 }
 .lobby-chat-new > div:nth-of-type(2) {
   background: none;
@@ -593,7 +596,6 @@ p {
   animation-fill-mode: forwards;
 }
 .lobby-chat-new > div > div:first-of-type {
-  height: 4rem;
   display: flex;
   justify-content: center;
 }
@@ -606,9 +608,58 @@ p {
 .lobby-chat-new > div > div:nth-of-type(2) > div.chat-room {
   width: 90%;
   border-top: #808080 1px solid;
+  overflow-y: scroll;
+  padding: 10rem;
+}
+.lobby-chat-new > div > div:nth-of-type(2) > div.chat-room::-webkit-scrollbar {
+  background-color: transparent !important;
+}
+.lobby-chat-new > div > div:nth-of-type(2) > div.chat-room > div {
+  width: 100%;
   display: flex;
-  flex-flow: column;
-  align-items: center;
+  margin: 0.5rem 0;
+}
+.lobby-chat-new > div > div:nth-of-type(2) > div.chat-room > div > div {
+  background: #7647f5;
+  min-width: 30rem;
+  max-width: 30rem;
+  padding: 1rem;
+  color: #fff;
+}
+.lobby-chat-new > div > div:nth-of-type(2) > div.chat-room > div > div > div > h3 {
+  margin-bottom: 1rem;
+}
+.lobby-chat-new > div > div:nth-of-type(2) > div.chat-room > div .other-message {
+  width: 1rem;
+  max-width: 1rem;
+  min-width: 1rem;
+  max-height: 6rem;
+  padding: 0;
+  clip-path: polygon(100% 0, 0 0, 100% 36%);
+  box-shadow: 0px 0px 40px -8px rgba(0,0,0,0.75);
+}
+.lobby-chat-new > div > div:nth-of-type(2) > div.chat-room > div .own-message {
+  width: 1rem;
+  max-width: 1rem;
+  min-width: 1rem;
+  max-height: 6rem;
+  padding: 0;
+  clip-path: polygon(100% 0, 0 0, 0 36%);
+  box-shadow: 0px 0px 40px -8px rgba(0,0,0,0.75);
+}
+.lobby-chat-new > div > div:nth-of-type(2) > div.chat-room > div .message-right {
+  border-radius: 0.8rem 0 0.8rem 0.8rem;
+  box-shadow: 0px 0px 40px -8px rgba(0,0,0,0.75);
+}
+.lobby-chat-new > div > div:nth-of-type(2) > div.chat-room > div .message-left {
+  border-radius: 0 0.8rem 0.8rem 0.8rem;
+  border-top-right-radius: 0.8rem;
+  border-bottom-left-radius: 0.8rem;
+  border-bottom-right-radius: 0.8rem;
+  box-shadow: 0px 0px 40px -8px rgba(0,0,0,0.75);
+}
+.lobby-chat-new > div > div:nth-of-type(2) > div.chat-room .my-message {
+  justify-content: flex-end;
 }
 .lobby-chat-new > div > div:nth-of-type(2) > div.new-room-inputs {
   width: 90%;
@@ -646,6 +697,7 @@ p {
   display: flex;
   justify-content: center;
   min-height: 3rem;
+  margin-bottom: 1rem;
 }
 .lobby-chat-new > div > div:last-of-type > div {
   width: 30%;
@@ -704,6 +756,7 @@ p {
   animation: moveInUp 2s;
   animation-delay: 0.5s;
   animation-fill-mode: forwards;
+  border-radius: 0.5rem;
 }
 .lobby-rooms > div {
   display: flex;
@@ -729,7 +782,7 @@ p {
   align-items: center;
   align-content: center;
   font-size: 2.3rem;
-  border-bottom-left-radius: 0.5rem;
+  border-radius: 0 0.5rem 0 0.5rem;
   cursor: pointer;
 }
 .lobby-rooms > div > div:nth-of-type(2) {

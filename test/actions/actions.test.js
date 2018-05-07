@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { setUsername, addUser } from '../../src/client/actions'
+import { setUsername, addUser, addMessage } from '../../src/client/actions'
 
 describe('Actions', () => {
 	it('setUsername returns an object for the set username action', () => {
@@ -18,6 +18,18 @@ describe('Actions', () => {
 			type: 'ADD_USER',
 			id: 0,
 			name: 'pbie'
+		})
+	})
+
+	it('addMessage returns an object for the add message action', () => {
+		const username = 'pbie'
+		const message = 'hello'
+		const addUserAction = addMessage(message, username)
+		expect(addUserAction).to.eql({
+			type: 'ADD_MESSAGE',
+			id: 0,
+			author: 'pbie',
+			message: 'hello'
 		})
 	})
 })
