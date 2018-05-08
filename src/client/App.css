@@ -767,7 +767,16 @@ p {
   height: 100%;
 }
 .lobby-rooms > div > div:first-of-type {
-  flex-grow: 2;
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+.lobby-rooms > div > div:first-of-type > div {
+  width: 40%;
+  font-size: 4rem;
+  margin-left: 2rem;
 }
 .lobby-rooms > div > div:last-of-type {
   flex-grow: 1;

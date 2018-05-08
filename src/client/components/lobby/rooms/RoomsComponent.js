@@ -55,7 +55,9 @@ export function RoomsComponent(props) {
 		return (
 			<div className="lobby-rooms">
 				<div>
-					<div />
+					<div>
+						<div>&#60;</div>
+					</div>
 					<div>
 						<div>
 							<div>

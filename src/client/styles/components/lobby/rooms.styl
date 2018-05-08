@@ -20,7 +20,16 @@
 			height: 100%
 
 			&:first-of-type
-				flex-grow: 2
+				flex-grow: 1
+				display: flex
+				flex-flow: column
+				justify-content: center
+				align-items: flex-end
+
+				> div
+					width: 40%
+					font-size: 4rem
+					margin-left: 2rem
 			
 			&:last-of-type
 				flex-grow: 1
