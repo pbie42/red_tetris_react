@@ -40,6 +40,11 @@ export function RoomsComponent(props) {
 	let scrollMax
 	let div
 
+	C.state = {
+		hideOthers: false,
+		index: 0
+	}
+
 	C.componentDidMount = function() {
 		// C.scrollToLeft()
 		scrollMax = div.scrollWidth - div.clientWidth
@@ -73,6 +78,14 @@ export function RoomsComponent(props) {
 		$(div).animate({ scrollLeft: scroll }, 'fast')
 	}
 
+	C.hideOthers = function(index) {
+		C.setState({ hideOthers: true, index })
+	}
+
+	C.showOthers = function(index) {
+		C.setState({ hideOthers: false, index: 0 })
+	}
+
 	C.render = () => {
 		return (
 			<div className="lobby-rooms">
@@ -90,11 +103,47 @@ export function RoomsComponent(props) {
 						</div>
 						<div>
 							<div ref={node => (div = node)} className="testing">
-								{rooms.map((room, index) => (
-									<div key={index}>
-										<h1>{room.name}</h1>
-									</div>
-								))}
+								{!C.state.hideOthers
+									? rooms.map((room, index) => (
+											<div key={index} onMouseOver={() => C.hideOthers(index)}>
+												<h1>{room.name}</h1>
+												<div>
+													{room.people.map(person => <h2>{person}</h2>)}
+												</div>
+												<div>
+													<h2>
+														{5 - room.people.length} player{5 -
+															room.people.length >
+														1
+															? 's'
+															: ''}{' '}
+														can still join
+													</h2>
+												</div>
+											</div>
+									  ))
+									: rooms.map((room, index) => (
+											<div
+												key={index}
+												className={index !== C.state.index ? 'hide-it' : ''}
+												onMouseLeave={() => C.showOthers()}
+											>
+												<h1>{room.name}</h1>
+												<div>
+													{room.people.map(person => <h2>{person}</h2>)}
+												</div>
+												<div>
+													<h2>
+														{5 - room.people.length} player{5 -
+															room.people.length >
+														1
+															? 's'
+															: ''}{' '}
+														can still join
+													</h2>
+												</div>
+											</div>
+									  ))}
 							</div>
 						</div>
 					</div>

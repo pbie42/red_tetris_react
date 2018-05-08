@@ -9,7 +9,7 @@ export function ChatComponent(props) {
 	C.render = () => {
 		return (
 			<div className="lobby-chat-new">
-				<div>
+				<div className={C.props.showNewRoom ? 'move-in' : 'change-width'}>
 					<div>
 						<div>
 							<h1>Chat</h1>

@@ -107,7 +107,7 @@
 							flex-flow: row
 							overflow-x: scroll
 							overflow-y: hidden
-							// overflow-y: hidden
+							padding: 5rem 0
 
 							&::-webkit-scrollbar
 								background-color: transparent !important
@@ -118,9 +118,27 @@
 								background: rgba(111, 108, 133, 0.55)
 								transition: all .2s ease-in-out
 								color: white
+								display: flex
+								flex-flow: column
+								align-items: center
+								padding: 7rem
+								text-align: center
+
+								> h1
+									flex-grow: 3
+									font-family: 'Catamaran', sans-serif;
+									font-size: 2.5rem
+
+								> div
+									flex-grow: 7
+									font-family: 'Jura', sans-serif;
 
 								&:hover
 									transform: scale(1.1)
 									box-shadow: 0px 0px 38px -1px rgba(0,0,0,0.75)
 									background: rgba(35, 214, 192, 0.85)
-									color: black
+									color: white
+
+
+							.hide-it
+								opacity: .5

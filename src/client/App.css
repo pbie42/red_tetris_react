@@ -580,7 +580,6 @@ p {
   animation: moveInRight 2s;
   animation-delay: 0.5s;
   animation-fill-mode: forwards;
-  transition: width 2s ease-in-out;
   padding: 1rem;
 }
 .lobby-chat-new > div:nth-of-type(2) {
@@ -745,6 +744,9 @@ p {
 .lobby-chat-new .hide {
   display: none;
 }
+.lobby-chat-new .change-width {
+  transition: all 2s linear;
+}
 .lobby-rooms {
   background: rgba(34,34,44,0.5);
   background-attachment: fixed;
@@ -855,6 +857,7 @@ p {
   flex-flow: row;
   overflow-x: scroll;
   overflow-y: hidden;
+  padding: 5rem 0;
 }
 .lobby-rooms > div > div:nth-of-type(2) > div:last-of-type > div::-webkit-scrollbar {
   background-color: transparent !important;
@@ -865,12 +868,29 @@ p {
   background: rgba(111,108,133,0.55);
   transition: all 0.2s ease-in-out;
   color: #fff;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 7rem;
+  text-align: center;
+}
+.lobby-rooms > div > div:nth-of-type(2) > div:last-of-type > div > div > h1 {
+  flex-grow: 3;
+  font-family: 'Catamaran', sans-serif;
+  font-size: 2.5rem;
+}
+.lobby-rooms > div > div:nth-of-type(2) > div:last-of-type > div > div > div {
+  flex-grow: 7;
+  font-family: 'Jura', sans-serif;
 }
 .lobby-rooms > div > div:nth-of-type(2) > div:last-of-type > div > div:hover {
   transform: scale(1.1);
   box-shadow: 0px 0px 38px -1px rgba(0,0,0,0.75);
   background: rgba(35,214,192,0.85);
-  color: #000;
+  color: #fff;
+}
+.lobby-rooms > div > div:nth-of-type(2) > div:last-of-type > div .hide-it {
+  opacity: 0.5;
 }
 @-moz-keyframes moveInUp {
   0% {
