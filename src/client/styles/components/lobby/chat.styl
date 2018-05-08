@@ -1,8 +1,3 @@
-$inset-glow = 0px 0px 30px 0px rgba(0,0,0,0.75), \
-						inset 0rem 0 5.8rem #1F62D4
-
-$menu-background = rgba(34, 34, 44, 0.5)
-
 .lobby-chat-new
 	background-attachment:fixed
 	background-position:center
@@ -105,7 +100,6 @@ $menu-background = rgba(34, 34, 44, 0.5)
 					.my-message
 						justify-content: flex-end
 
-
 				> div.new-room-inputs
 					width: 90%
 					border-top: grey 1px solid
@@ -140,8 +134,6 @@ $menu-background = rgba(34, 34, 44, 0.5)
 							&::placeholder
 								color: white
 								font-family: 'Gugi', cursive;
-
-
 
 			&:last-of-type
 				width: 100%
@@ -193,156 +185,3 @@ $menu-background = rgba(34, 34, 44, 0.5)
 
 	.hide
 		display: none
-
-.lobby-rooms
-	background: $menu-background
-	background-attachment:fixed
-	background-position:center
-	height: 45vh
-	width: 80vw
-	display: flex
-	flex-flow: column
-	transform: translateY(-200rem)
-	animation: moveInUp 2s
-	animation-delay: .5s
-	animation-fill-mode: forwards
-	border-radius: .5rem
-
-	> div
-		display: flex
-		height 100%
-
-		> div
-			height: 100%
-
-			&:first-of-type
-				flex-grow: 2
-			
-			&:last-of-type
-				flex-grow: 1
-				height 100%
-				display: flex
-				justify-content: flex-end
-
-				> div
-					background: #fc1576;
-					height: 3rem;
-					width: 3rem;
-					text-align: center;
-					align-items: center;
-					align-content: center;
-					font-size: 2.3rem;
-					border-radius: 0 .5rem 0 .5rem
-					cursor: pointer;
-
-			&:nth-of-type(2)
-				display: flex
-				justify-content: center
-				flex-flow: column
-				height 100%
-				align-items: center
-				flex-grow: 28
-				> div
-					width: 100%
-					height: 3rem
-
-					&:last-of-type
-						flex-grow: 2
-						border-top: grey 1px solid
-						width: 100%
-
-					> div
-						width: 100%
-						height: 3rem
-						display: flex
-						justify-content: center
-
-						h1
-							z-index: 100
-							color: white
-							font-size: 3rem
-							// font-family: 'Audiowide', cursive
-							// font-family: 'Mandali', sans-serif;
-							// font-family: 'Poiret One', cursive;
-							// font-family: 'Questrial', sans-serif;
-							font-family: 'Rajdhani', sans-serif;
-							// font-family: 'Gugi', cursive;
-
-
-.neon-red
-	animation: neonRed 1.5s ease-in-out infinite alternate
-.neon-blue
-	animation: neonViolet 1.5s ease-in-out infinite alternate
-
-
-@keyframes moveInUp{
-	0% {
-		opacity: 1
-		transform: translateY(200rem)
-	}
-	100% {
-		opacity: 1
-		transform: translateY(0rem)
-	}
-}
-
-@keyframes moveInDown{
-	0% {
-		opacity: 1
-		transform: translateY(-200rem)
-	}
-	100% {
-		opacity: 1
-		transform: translateY(0rem)
-	}
-}
-
-@keyframes moveInLeft{
-	0% {
-		opacity: 1
-		transform: translateX(200rem)
-	}
-	100% {
-		opacity: 1
-		transform: translateX(0rem)
-	}
-}
-
-@keyframes moveInRight{
-	0% {
-		opacity: 1
-		transform: translateX(-200rem)
-	}
-	100% {
-		opacity: 1
-		transform: translateX(0rem)
-	}
-}
-
-
-@keyframes neonBlue {
-	from {
-		box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF;
-	}
-	to {
-		box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228DFF, 0 0 35px #228DFF, 0 0 40px #228DFF, 0 0 50px #228DFF, 0 0 75px #228DFF;
-	}
-}
-
-@keyframes neonGreen {
-	from {
-		text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #B6FF00, 0 0 70px #B6FF00, 0 0 80px #B6FF00, 0 0 100px #B6FF00, 0 0 150px #B6FF00;
-	}
-	to {
-		text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #B6FF00, 0 0 35px #B6FF00, 0 0 40px #B6FF00, 0 0 50px #B6FF00, 0 0 75px #B6FF00;
-	}
-}
-
-@keyframes neonViolet {
-	from {
-		text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
-	}
-	to {
-		text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff00de, 0 0 35px #ff00de, 0 0 40px #ff00de, 0 0 50px #ff00de, 0 0 75px #ff00de;
-	}
-}
