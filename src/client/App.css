@@ -621,7 +621,7 @@ p {
   margin: 0.5rem 0;
 }
 .lobby-chat-new > div > div:nth-of-type(2) > div.chat-room > div > div {
-  background: #7647f5;
+  background: rgba(118,71,245,0.8);
   min-width: 30rem;
   max-width: 30rem;
   padding: 1rem;
@@ -740,7 +740,7 @@ p {
 .lobby-chat-new > div > div h1 {
   color: #fff;
   font-size: 3rem;
-  font-family: 'Catamaran', sans-serif;
+  font-family: 'Rajdhani', sans-serif;
 }
 .lobby-chat-new .hide {
   display: none;
@@ -777,43 +777,63 @@ p {
 }
 .lobby-rooms > div > div:last-of-type > div {
   background: #fc1576;
-  height: 3rem;
-  width: 3rem;
-  text-align: center;
+  height: 4rem;
+  width: 4rem;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  align-content: center;
-  font-size: 2.3rem;
   border-radius: 0 0.5rem 0 0.5rem;
   cursor: pointer;
+  box-shadow: -4px 4px 25px -1px rgba(0,0,0,0.75);
 }
 .lobby-rooms > div > div:nth-of-type(2) {
   display: flex;
   justify-content: center;
   flex-flow: column;
   height: 100%;
+  width: 20%;
   align-items: center;
   flex-grow: 28;
 }
 .lobby-rooms > div > div:nth-of-type(2) > div {
   width: 100%;
   height: 3rem;
+  margin: 0.7rem 0;
+}
+.lobby-rooms > div > div:nth-of-type(2) > div:first-of-type {
+  display: flex;
+  justify-content: center;
+}
+.lobby-rooms > div > div:nth-of-type(2) > div:first-of-type h1 {
+  z-index: 100;
+  color: #fff;
+  font-size: 3rem;
+  font-family: 'Rajdhani', sans-serif;
 }
 .lobby-rooms > div > div:nth-of-type(2) > div:last-of-type {
   flex-grow: 2;
   border-top: #808080 1px solid;
   width: 100%;
 }
-.lobby-rooms > div > div:nth-of-type(2) > div > div {
+.lobby-rooms > div > div:nth-of-type(2) > div:last-of-type > div {
   width: 100%;
-  height: 3rem;
+  height: 100%;
   display: flex;
-  justify-content: center;
+  flex-flow: row;
+  overflow-y: hidden;
 }
-.lobby-rooms > div > div:nth-of-type(2) > div > div h1 {
-  z-index: 100;
+.lobby-rooms > div > div:nth-of-type(2) > div:last-of-type > div > div {
+  min-width: 25rem;
+  margin: 4rem 1rem;
+  background: rgba(111,108,133,0.55);
+  transition: all 0.2s ease-in-out;
   color: #fff;
-  font-size: 3rem;
-  font-family: 'Rajdhani', sans-serif;
+}
+.lobby-rooms > div > div:nth-of-type(2) > div:last-of-type > div > div:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 38px -1px rgba(0,0,0,0.75);
+  background: rgba(255,245,0,0.9);
+  color: #000;
 }
 @-moz-keyframes moveInUp {
   0% {
