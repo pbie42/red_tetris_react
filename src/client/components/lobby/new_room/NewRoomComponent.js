@@ -14,13 +14,7 @@ export function NewRoomComponent(props) {
 				<div>
 					<div className="new-room-inputs">
 						<div>
-							<input type="text" name="" id="" placeholder="Room Name" />
-						</div>
-						<div>
-							<input type="text" name="" id="" placeholder="Room Name" />
-						</div>
-						<div>
-							<input type="text" name="" id="" placeholder="Room Name" />
+							<input type="text" name="" id="" placeholder="Enter Room Name" />
 						</div>
 					</div>
 				</div>
