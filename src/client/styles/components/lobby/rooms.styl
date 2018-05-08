@@ -30,23 +30,48 @@
 					width: 40%
 					font-size: 4rem
 					margin-left: 2rem
+					cursor pointer
+					color: white
+
+					&:hover
+								color: #fc1576
 			
 			&:last-of-type
 				flex-grow: 1
 				height 100%
 				display: flex
+				flex-flow: column
 				justify-content: flex-end
+				align-items: flex-end
 
 				> div
-					background: #fc1576
-					height: 4rem
-					width: 4rem
-					display: flex
-					justify-content: center
-					align-items: center
-					border-radius: 0 .5rem 0 .5rem
-					cursor: pointer
-					box-shadow: -4px 4px 25px -1px rgba(0,0,0,0.75)
+					&:first-of-type
+						flex-grow: 1
+						background: #fc1576
+						height: 4rem
+						width: 4rem
+						display: flex
+						justify-content: center
+						align-items: center
+						border-radius: 0 .5rem 0 .5rem
+						cursor: pointer
+						box-shadow: -4px 4px 25px -1px rgba(0,0,0,0.75)
+					
+					&:last-of-type
+						flex-grow: 135
+						color: white
+						font-size: 4rem
+						width: 100%
+						display: flex
+						justify-content: center
+						align-items: center
+
+						> i
+							transform: translate(-1rem, -2.6rem)
+							cursor pointer
+
+							&:hover
+								color: #fc1576
 
 			&:nth-of-type(2)
 				display: flex
@@ -80,8 +105,12 @@
 							height: 100%
 							display: flex
 							flex-flow: row
-							// overflow-x: hidden
+							overflow-x: scroll
 							overflow-y: hidden
+							// overflow-y: hidden
+
+							&::-webkit-scrollbar
+								background-color: transparent !important
 
 							> div
 								min-width: 25rem
@@ -93,5 +122,5 @@
 								&:hover
 									transform: scale(1.1)
 									box-shadow: 0px 0px 38px -1px rgba(0,0,0,0.75)
-									background: rgba(255, 245, 0, .9)
+									background: rgba(35, 214, 192, 0.85)
 									color: black

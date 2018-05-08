@@ -7,9 +7,9 @@ function LobbyComponent(props) {
 	const C = new Component()
 
 	C.componentWillMount = function() {
-		if (!C.props.username) {
-			props.history.push('/')
-		}
+		// if (!C.props.username) {
+		// 	props.history.push('/')
+		// }
 	}
 
 	C.state = {

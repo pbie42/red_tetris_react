@@ -777,14 +777,22 @@ p {
   width: 40%;
   font-size: 4rem;
   margin-left: 2rem;
+  cursor: pointer;
+  color: #fff;
+}
+.lobby-rooms > div > div:first-of-type > div:hover {
+  color: #fc1576;
 }
 .lobby-rooms > div > div:last-of-type {
   flex-grow: 1;
   height: 100%;
   display: flex;
+  flex-flow: column;
   justify-content: flex-end;
+  align-items: flex-end;
 }
-.lobby-rooms > div > div:last-of-type > div {
+.lobby-rooms > div > div:last-of-type > div:first-of-type {
+  flex-grow: 1;
   background: #fc1576;
   height: 4rem;
   width: 4rem;
@@ -794,6 +802,22 @@ p {
   border-radius: 0 0.5rem 0 0.5rem;
   cursor: pointer;
   box-shadow: -4px 4px 25px -1px rgba(0,0,0,0.75);
+}
+.lobby-rooms > div > div:last-of-type > div:last-of-type {
+  flex-grow: 135;
+  color: #fff;
+  font-size: 4rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.lobby-rooms > div > div:last-of-type > div:last-of-type > i {
+  transform: translate(-1rem, -2.6rem);
+  cursor: pointer;
+}
+.lobby-rooms > div > div:last-of-type > div:last-of-type > i:hover {
+  color: #fc1576;
 }
 .lobby-rooms > div > div:nth-of-type(2) {
   display: flex;
@@ -829,7 +853,11 @@ p {
   height: 100%;
   display: flex;
   flex-flow: row;
+  overflow-x: scroll;
   overflow-y: hidden;
+}
+.lobby-rooms > div > div:nth-of-type(2) > div:last-of-type > div::-webkit-scrollbar {
+  background-color: transparent !important;
 }
 .lobby-rooms > div > div:nth-of-type(2) > div:last-of-type > div > div {
   min-width: 25rem;
@@ -841,7 +869,7 @@ p {
 .lobby-rooms > div > div:nth-of-type(2) > div:last-of-type > div > div:hover {
   transform: scale(1.1);
   box-shadow: 0px 0px 38px -1px rgba(0,0,0,0.75);
-  background: rgba(255,245,0,0.9);
+  background: rgba(35,214,192,0.85);
   color: #000;
 }
 @-moz-keyframes moveInUp {
