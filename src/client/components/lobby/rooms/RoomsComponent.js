@@ -149,7 +149,7 @@ export function RoomsComponent(props) {
 					</div>
 					<div>
 						<div onClick={() => C.props.showNewRoom()}>
-							<h1>+</h1>
+							<h1>{C.props.hideInput ? '+' : '-'}</h1>
 						</div>
 						<div>
 							<i className="fas fa-caret-right" onClick={() => C.goRight()} />

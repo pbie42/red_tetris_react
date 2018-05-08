@@ -31,7 +31,7 @@ function LobbyComponent(props) {
 	C.render = () => {
 		return (
 			<div className="container-lobby">
-				<RoomsComponent showNewRoom={C.showNewRoom} />
+				<RoomsComponent showNewRoom={C.showNewRoom} hideInput={C.state.hide} />
 				<ChatContainer showNewRoom={C.state.hide} hideNewRoom={C.hideNewRoom} />
 			</div>
 		)
