@@ -26,11 +26,11 @@ function HomeForm(props) {
 			if (value && C.verifyUsername(value)) {
 				props.setUsername(value)
 				props.addUser(value)
-				function test() {
+				function delayRouteChange() {
 					props.history.push('/lobby')
 				}
 				props.pageChange()
-				setTimeout(test, 800)
+				setTimeout(delayRouteChange, 800)
 			} else C.setSubmitError()
 			C.refs.input.value = ''
 		}
@@ -49,7 +49,11 @@ function HomeForm(props) {
 		if (value && C.verifyUsername(value)) {
 			props.setUsername(value)
 			props.addUser(value)
-			props.history.push('/lobby')
+			function delayRouteChange() {
+				props.history.push('/lobby')
+			}
+			props.pageChange()
+			setTimeout(delayRouteChange, 800)
 		} else C.setSubmitError()
 		C.refs.input.value = ''
 	}

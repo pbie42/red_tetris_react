@@ -32,3 +32,15 @@ export const setUsername = username => ({
 	type: types.SET_USERNAME,
 	username
 })
+
+export const addRoom = (roomName, members) => ({
+	type: types.ADD_ROOM,
+	roomName,
+	members
+})
+
+export const roomAdded = (roomName, members) => ({
+	type: types.ROOM_ADDED,
+	roomName,
+	members
+})

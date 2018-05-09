@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NewRoomComponent } from '../new_room/NewRoomComponent'
+import { NewRoomContainer } from '../../../containers/lobby/new_room/NewRoomContainer'
 import { ChatInputContainer } from '../../../containers/lobby/chat/ChatInputContainer'
 import { ChatConversationContainer } from '../../../containers/lobby/chat/ChatConversationContainer'
 
@@ -21,7 +21,7 @@ export function ChatComponent(props) {
 					<ChatInputContainer />
 				</div>
 				<div className={C.props.showNewRoom ? 'hide' : ''} />
-				<NewRoomComponent
+				<NewRoomContainer
 					showNewRoom={C.props.showNewRoom}
 					hideNewRoom={C.props.hideNewRoom}
 				/>

@@ -114,6 +114,7 @@
 
 							> div
 								min-width: 25rem
+								min-height: 20rem
 								margin: 4rem 1rem
 								background: rgba(111, 108, 133, 0.55)
 								transition: all .2s ease-in-out
@@ -121,8 +122,9 @@
 								display: flex
 								flex-flow: column
 								align-items: center
-								padding: 7rem
+								padding: 2rem
 								text-align: center
+								cursor pointer
 
 								> h1
 									flex-grow: 3
@@ -142,3 +144,73 @@
 
 							.hide-it
 								opacity: .5
+
+
+@media (max-height: 785px)
+	.lobby-rooms
+		> div
+			> div
+				&:nth-of-type(2)
+					> div
+						&:first-of-type
+							h1
+						&:last-of-type
+							> div
+								padding: 2rem
+								&::-webkit-scrollbar
+								> div
+									margin: 0 1rem
+
+@media (max-width: 400px)
+	.lobby-rooms
+		> div
+			> div
+				&:nth-of-type(2)
+					> div
+						&:first-of-type
+							h1
+						&:last-of-type
+							> div
+								min-width 15rem
+								padding: 2rem
+								&::-webkit-scrollbar
+								> div
+									padding: 0 3rem 0 0
+									margin: 0 1rem
+
+									&:hover
+										transform: scale(1)
+										box-shadow: 0px 0px 38px -1px rgba(0,0,0,0.75)
+										background: rgba(35, 214, 192, 0.85)
+										color: white
+
+@media (max-width: 390px)
+	.lobby-rooms
+		> div
+			> div
+				&:nth-of-type(2)
+					> div
+						&:first-of-type
+							h1
+						&:last-of-type
+							> div
+								min-width 15rem
+								padding: 2rem
+								&::-webkit-scrollbar
+								> div
+									padding: 0 10rem 0 0
+									margin: 0 1rem
+									min-height: 0rem
+
+									h1
+										font-size: 1rem
+									
+									div
+										h2
+											font-size: 1rem
+
+									&:hover
+										transform: scale(1)
+										box-shadow: 0px 0px 38px -1px rgba(0,0,0,0.75)
+										background: rgba(35, 214, 192, 0.85)
+										color: white

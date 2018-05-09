@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { RoomsComponent } from './rooms/RoomsComponent'
+import { RoomsContainer } from '../../containers/lobby/rooms/RoomsContainer'
 import { ChatComponent } from './chat/ChatComponent'
 import { ChatContainer } from '../../containers/lobby/chat/ChatContainer'
 
@@ -31,8 +31,14 @@ function LobbyComponent(props) {
 	C.render = () => {
 		return (
 			<div className="container-lobby">
-				<RoomsComponent showNewRoom={C.showNewRoom} hideInput={C.state.hide} />
-				<ChatContainer showNewRoom={C.state.hide} hideNewRoom={C.hideNewRoom} />
+				<RoomsContainer
+					showNewRoom={C.showNewRoom}
+					hideInput={C.state.hide}
+				/>
+				<ChatContainer
+					showNewRoom={C.state.hide}
+					hideNewRoom={C.hideNewRoom}
+				/>
 			</div>
 		)
 	}
