@@ -53,14 +53,15 @@ io.on('connection', socket => {
 				break
 			case 'ADD_ROOM':
 				console.log(`ADD_ROOM`)
-				// socket.broadcast.emit(
-				// 	'message',
-				// 	JSON.stringify({
-				// 		type: 'ADD_MESSAGE',
-				// 		message: data.message,
-				// 		author: data.author
-				// 	})
-				// )
+				console.log(`roomData`, data)
+				rooms.push({ roomName: data.roomName, members: data.members })
+				socket.broadcast.emit(
+					'message',
+					JSON.stringify({
+						type: 'ROOMS_LIST',
+						rooms
+					})
+				)
 				break
 			default:
 				break
