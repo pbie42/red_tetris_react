@@ -1,5 +1,11 @@
 import * as types from '../constants/ActionTypes'
-import { addUser, messageReceived, populateUsersList } from '../actions'
+import {
+	addUser,
+	addRoom,
+	messageReceived,
+	populateUsersList,
+	populateRoomsList
+} from '../actions'
 import { store } from '../../index'
 
 import openSocket from 'socket.io-client'
@@ -33,10 +39,19 @@ const setupSocket = dispatch => {
 				console.log(`ADD_USER`)
 				dispatch(addUser(data.name))
 				break
+			case types.ADD_ROOM:
+				console.log(`ADD_ROOM`)
+				dispatch(addRoom(data.roomName, data.members))
+				break
 			case types.USERS_LIST:
 				console.log(`USERS_LIST`)
 				console.log(`data.users`, data.users)
 				dispatch(populateUsersList(data.users))
+				break
+			case types.ROOMS_LIST:
+				console.log(`ROOMS_LIST`)
+				console.log(`data.rooms`, data.rooms)
+				dispatch(populateRoomsList(data.rooms))
 				break
 			default:
 				break

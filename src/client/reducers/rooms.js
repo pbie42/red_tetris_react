@@ -11,7 +11,8 @@ const rooms = (state = [], action) => {
 					// id: action.id
 				}
 			])
-
+		case types.ROOMS_LIST:
+			return action.rooms
 		default:
 			return state
 	}

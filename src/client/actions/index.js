@@ -28,6 +28,11 @@ export const populateUsersList = users => ({
 	users
 })
 
+export const populateRoomsList = rooms => ({
+	type: types.ROOMS_LIST,
+	rooms
+})
+
 export const setUsername = username => ({
 	type: types.SET_USERNAME,
 	username

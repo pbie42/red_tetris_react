@@ -10,7 +10,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import reducers from './client/reducers'
 import setupSocket from './client/sockets'
-import { handleNewMessage, handleNewUser } from './client/sagas'
+import { handleNewMessage, handleNewUser, handleNewRoom } from './client/sagas'
 import username from './client/utils/username'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -31,6 +31,10 @@ sagaMiddleware.run(handleNewMessage, {
 })
 
 sagaMiddleware.run(handleNewUser, {
+	socket
+})
+
+sagaMiddleware.run(handleNewRoom, {
 	socket
 })
 

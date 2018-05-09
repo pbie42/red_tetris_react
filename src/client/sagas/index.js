@@ -14,4 +14,10 @@ const handleNewUser = function* handleNewUser(params) {
 	})
 }
 
-export { handleNewMessage, handleNewUser }
+const handleNewRoom = function* handleNewRoom(params) {
+	yield takeEvery(types.ADD_ROOM, action => {
+		params.socket.emit('message', JSON.stringify(action))
+	})
+}
+
+export { handleNewMessage, handleNewUser, handleNewRoom }

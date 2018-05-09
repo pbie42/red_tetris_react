@@ -1,6 +1,7 @@
 const io = require('socket.io')()
 
 const users = []
+const rooms = []
 let index
 
 io.on('connection', socket => {
@@ -49,6 +50,17 @@ io.on('connection', socket => {
 						author: data.author
 					})
 				)
+				break
+			case 'ADD_ROOM':
+				console.log(`ADD_ROOM`)
+				// socket.broadcast.emit(
+				// 	'message',
+				// 	JSON.stringify({
+				// 		type: 'ADD_MESSAGE',
+				// 		message: data.message,
+				// 		author: data.author
+				// 	})
+				// )
 				break
 			default:
 				break
