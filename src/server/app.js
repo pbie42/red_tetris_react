@@ -13,6 +13,13 @@ io.on('connection', socket => {
 			users
 		})
 	)
+	socket.emit(
+		'message',
+		JSON.stringify({
+			type: 'ROOMS_LIST',
+			rooms
+		})
+	)
 
 	socket.on('message', message => {
 		console.log(`new message`)
@@ -55,6 +62,28 @@ io.on('connection', socket => {
 				console.log(`ADD_ROOM`)
 				console.log(`roomData`, data)
 				rooms.push({ roomName: data.roomName, members: data.members })
+				socket.broadcast.emit(
+					'message',
+					JSON.stringify({
+						type: 'ROOMS_LIST',
+						rooms
+					})
+				)
+				break
+			case 'ADD_USER_TO_ROOM':
+				console.log(`ADD_USER_TO_ROOM`)
+				console.log(`add to room data`, data)
+				const roomIndex = rooms.findIndex(
+					room => room.roomName === data.roomName
+				)
+				if (
+					roomIndex >= 0 &&
+					!rooms[roomIndex].members.find(
+						member => member === data.username
+					)
+				) {
+					rooms[roomIndex].members.push(data.username)
+				}
 				socket.broadcast.emit(
 					'message',
 					JSON.stringify({

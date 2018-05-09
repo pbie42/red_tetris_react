@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 import { RoomsComponent } from '../../../components/lobby/rooms/RoomsComponent'
-import { addRoom } from '../../../actions'
+import { addUserToRoom } from '../../../actions'
 
-// const mapDispatchToProps = dispatch => ({
-// 	addRoom: (roomName, members) => {
-// 		dispatch(addRoom(roomName, members))
-// 	}
-// })
+const mapDispatchToProps = dispatch => ({
+	addUserToRoom: (username, roomName) => {
+		dispatch(addUserToRoom(username, roomName))
+	}
+})
 
 const mapStateToProps = state => {
 	return {
@@ -15,4 +15,6 @@ const mapStateToProps = state => {
 	}
 }
 
-export const RoomsContainer = connect(mapStateToProps)(RoomsComponent)
+export const RoomsContainer = connect(mapStateToProps, mapDispatchToProps)(
+	RoomsComponent
+)

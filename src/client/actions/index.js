@@ -16,6 +16,12 @@ export const addUser = name => ({
 	name
 })
 
+export const addUserToRoom = (username, roomName) => ({
+	type: types.ADD_USER_TO_ROOM,
+	roomName,
+	username
+})
+
 export const messageReceived = (message, author) => ({
 	type: types.MESSAGE_RECEIVED,
 	id: nextMessageId++,

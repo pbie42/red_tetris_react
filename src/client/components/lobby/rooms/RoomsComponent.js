@@ -1,46 +1,11 @@
 import React, { Component } from 'react'
 import $ from 'jquery'
 
-// const rooms = [
-// 	{ name: 'test1', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test2', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test3', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test4', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test5', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test6', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test7', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test8', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test9', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test1', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test2', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test3', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test4', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test5', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test6', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test7', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test8', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test9', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test1', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test2', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test3', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test4', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test5', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test6', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test7', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test8', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test9', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test1', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test2', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ name: 'test3', members: ['john', 'paul', 'george', 'ringo'] }
-// ]
-
 export function RoomsComponent(props) {
 	const C = new Component()
 	let scroll = 0
 	let scrollMax
 	let div
-
-	console.log(`C.props`, C.props)
 
 	C.state = {
 		hideOthers: false,
@@ -48,36 +13,34 @@ export function RoomsComponent(props) {
 	}
 
 	C.componentDidMount = function() {
-		// C.scrollToLeft()
 		scrollMax = div.scrollWidth - div.clientWidth
-		console.log(`scrollMax`, scrollMax)
 	}
 
 	C.componentWillUpdate = function() {
-		// C.scrollToLeft()
+		scrollMax = div.scrollWidth - div.clientWidth
 	}
 
-	C.scrollToLeft = function() {
-		const { scrollWidth, clientWidth } = div
-		const maxScrollTop = scrollWidth - clientWidth
-		div.scrollLeft = maxScrollTop > 0 ? maxScrollTop : 0
+	C.selectRoom = function(roomName) {
+		console.log(`room selected`)
+		C.props.addUserToRoom(C.props.username, roomName)
 	}
+
+	// C.scrollToLeft = function() {
+	// 	const { scrollWidth, clientWidth } = div
+	// 	const maxScrollTop = scrollWidth - clientWidth
+	// 	div.scrollLeft = maxScrollTop > 0 ? maxScrollTop : 0
+	// }
 
 	C.goRight = function() {
-		console.log(`scroll`, scroll)
 		scroll += 270
-		if (scroll > scrollMax + 180) {
-			console.log(`scrollMax hit`, scroll)
-			scroll = 0
-		}
-		$(div).animate({ scrollLeft: scroll }, 'fast')
+		if (scroll > scrollMax + 180) scroll = 0
+		$(div).animate({ scrollLeft: scroll }, 'slow')
 	}
 
 	C.goLeft = function() {
-		console.log(`scroll`, scroll)
 		scroll -= 270
 		if (scroll < 0) scroll = 0
-		$(div).animate({ scrollLeft: scroll }, 'fast')
+		$(div).animate({ scrollLeft: scroll }, 'slow')
 	}
 
 	C.hideOthers = function(index) {
@@ -110,6 +73,7 @@ export function RoomsComponent(props) {
 											<div
 												key={index}
 												onMouseOver={() => C.hideOthers(index)}
+												onClick={() => C.selectRoom(room.roomName)}
 											>
 												<h1>{room.roomName}</h1>
 												<div>
@@ -137,6 +101,7 @@ export function RoomsComponent(props) {
 													index !== C.state.index ? 'hide-it' : ''
 												}
 												onMouseLeave={() => C.showOthers()}
+												onClick={() => C.selectRoom(room.roomName)}
 											>
 												<h1>{room.roomName}</h1>
 												<div>
