@@ -16,7 +16,6 @@ import {
 	handleNewRoom,
 	handleAddUserToRoom
 } from './client/sagas'
-import username from './client/utils/username'
 
 const sagaMiddleware = createSagaMiddleware()
 

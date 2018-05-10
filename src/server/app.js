@@ -78,9 +78,7 @@ io.on('connection', socket => {
 				)
 				if (
 					roomIndex >= 0 &&
-					!rooms[roomIndex].members.find(
-						member => member === data.username
-					)
+					!rooms[roomIndex].members.find(member => member === data.username)
 				) {
 					rooms[roomIndex].members.push(data.username)
 				}

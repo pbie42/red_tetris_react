@@ -597,6 +597,7 @@ p {
 .lobby-chat-new > div > div:first-of-type {
   display: flex;
   justify-content: center;
+  margin-bottom: 2rem;
 }
 .lobby-chat-new > div > div:nth-of-type(2) {
   flex-grow: 2;
