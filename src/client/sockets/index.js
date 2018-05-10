@@ -4,7 +4,8 @@ import {
 	addRoom,
 	messageReceived,
 	populateUsersList,
-	populateRoomsList
+	populateRoomsList,
+	connected
 } from '../actions'
 import { store } from '../../index'
 
@@ -15,13 +16,7 @@ const setupSocket = dispatch => {
 
 	socket.on('connect', () => {
 		console.log(`connected`)
-		// socket.emit(
-		// 	'message',
-		// 	JSON.stringify({
-		// 		type: types.ADD_USER,
-		// 		name: 'test'
-		// 	})
-		// )
+		dispatch(connected())
 	})
 
 	socket.on('message', event => {

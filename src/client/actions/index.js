@@ -55,3 +55,13 @@ export const roomAdded = (roomName, members) => ({
 	roomName,
 	members
 })
+
+export const connected = () => ({
+	type: types.CONNECTED,
+	connected: true
+})
+
+export const disconnected = () => ({
+	type: types.DISCONNECTED,
+	connected: false
+})

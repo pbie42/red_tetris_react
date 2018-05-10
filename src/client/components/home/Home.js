@@ -9,8 +9,12 @@ function HomeComponent(props) {
 		change: false
 	}
 
+	C.componentWillMount = function() {
+		console.log(`Home will mount`)
+	}
+
 	C.componentDidMount = function() {
-		console.log(`C`, C)
+		console.log(`Home Mounted`)
 	}
 
 	C.pageChange = function() {
@@ -36,9 +40,7 @@ function HomeComponent(props) {
 						<img className="test" src={logo} alt="" />
 					</div>
 					<div>
-						<div
-							className={C.state.change === true ? 'hideDiv' : 'showDiv'}
-						>
+						<div className={C.state.change === true ? 'hideDiv' : 'showDiv'}>
 							<HomeFormContainer
 								history={props.history}
 								pageChange={C.pageChange}
