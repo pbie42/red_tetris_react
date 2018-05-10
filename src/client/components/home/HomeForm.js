@@ -7,12 +7,17 @@ function HomeForm(props) {
 	C.state = {
 		placeholder: '',
 		interval: '',
+		focus: '',
 		error: false
 	}
 
 	C.componentDidMount = function() {
 		const interval = setInterval(C.placeHolder, 750)
 		C.setState({ interval })
+		function focus() {
+			C.refs.input.focus()
+		}
+		setTimeout(focus, 2000)
 	}
 
 	C.componentWillUnmount = function() {

@@ -589,15 +589,12 @@ p {
 }
 .lobby-chat-new > div:last-of-type {
   flex-grow: 1;
-  transform: translateY(200rem);
-  animation: moveInUp 2s;
-  animation-fill-mode: forwards;
   padding: 1rem;
 }
 .lobby-chat-new > div > div:first-of-type {
   display: flex;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .lobby-chat-new > div > div:nth-of-type(2) {
   flex-grow: 2;
@@ -749,10 +746,64 @@ p {
   font-family: 'Rajdhani', sans-serif;
 }
 .lobby-chat-new .hide {
-  display: none;
+  animation: moveOutDownInput 2s ease-in-out;
+  animation-fill-mode: forwards;
+}
+.lobby-chat-new .show {
+  transform: translateY(200rem);
+  animation: moveInUp 2s;
+  animation-delay: 0.1s;
+  animation-fill-mode: forwards;
 }
 .lobby-chat-new .change-width {
   transition: all 2s linear;
+}
+@media (max-height: 840px) {
+  .lobby-chat-new > div > div:first-of-type {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+}
+@-moz-keyframes moveOutDownInput {
+  0% {
+    opacity: 1;
+    transform: translateY(0rem);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(500rem);
+  }
+}
+@-webkit-keyframes moveOutDownInput {
+  0% {
+    opacity: 1;
+    transform: translateY(0rem);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(500rem);
+  }
+}
+@-o-keyframes moveOutDownInput {
+  0% {
+    opacity: 1;
+    transform: translateY(0rem);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(500rem);
+  }
+}
+@keyframes moveOutDownInput {
+  0% {
+    opacity: 1;
+    transform: translateY(0rem);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(500rem);
+  }
 }
 .lobby-rooms {
   background: rgba(34,34,44,0.5);

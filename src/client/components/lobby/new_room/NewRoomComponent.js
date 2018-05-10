@@ -46,7 +46,10 @@ export function NewRoomComponent(props) {
 
 	C.render = () => {
 		return (
-			<div className={C.props.showNewRoom ? 'hide' : ''}>
+			<div
+				className={C.props.showNewRoom ? 'hide' : 'show'}
+				style={{ display: C.props.display ? '' : 'none' }}
+			>
 				<div>
 					<div>
 						<h1>New Room</h1>

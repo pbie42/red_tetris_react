@@ -20,10 +20,14 @@ export function ChatComponent(props) {
 					</div>
 					<ChatInputContainer />
 				</div>
-				<div className={C.props.showNewRoom ? 'hide' : ''} />
+				<div
+					className={C.props.showNewRoom ? 'hide' : ''}
+					style={{ display: C.props.display ? '' : 'none' }}
+				/>
 				<NewRoomContainer
 					showNewRoom={C.props.showNewRoom}
 					hideNewRoom={C.props.hideNewRoom}
+					display={C.props.display}
 				/>
 			</div>
 		)

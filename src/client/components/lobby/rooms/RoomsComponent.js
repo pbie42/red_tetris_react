@@ -9,7 +9,8 @@ export function RoomsComponent(props) {
 
 	C.state = {
 		hideOthers: false,
-		index: 0
+		index: 0,
+		display: ''
 	}
 
 	C.componentDidMount = function() {
@@ -49,6 +50,11 @@ export function RoomsComponent(props) {
 
 	C.showOthers = function(index) {
 		C.setState({ hideOthers: false, index: 0 })
+	}
+
+	C.hideShowNewRoom = function() {
+		if (C.props.hideInput) C.props.showNewRoom()
+		else C.props.hideNewRoom()
 	}
 
 	C.render = () => {
@@ -97,9 +103,7 @@ export function RoomsComponent(props) {
 									: C.props.rooms.map((room, index) => (
 											<div
 												key={index}
-												className={
-													index !== C.state.index ? 'hide-it' : ''
-												}
+												className={index !== C.state.index ? 'hide-it' : ''}
 												onMouseLeave={() => C.showOthers()}
 												onClick={() => C.selectRoom(room.roomName)}
 											>
@@ -126,14 +130,11 @@ export function RoomsComponent(props) {
 						</div>
 					</div>
 					<div>
-						<div onClick={() => C.props.showNewRoom()}>
+						<div onClick={() => C.hideShowNewRoom()}>
 							<h1>{C.props.hideInput ? '+' : '-'}</h1>
 						</div>
 						<div>
-							<i
-								className="fas fa-caret-right"
-								onClick={() => C.goRight()}
-							/>
+							<i className="fas fa-caret-right" onClick={() => C.goRight()} />
 						</div>
 					</div>
 				</div>

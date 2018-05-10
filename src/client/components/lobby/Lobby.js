@@ -11,8 +11,11 @@ function LobbyComponent(props) {
 		}
 	}
 
+	console.log(`C.props.match`, props.match)
+
 	C.state = {
-		hide: true
+		hide: true,
+		display: false
 	}
 
 	C.componentDidMount = function() {
@@ -20,18 +23,30 @@ function LobbyComponent(props) {
 	}
 
 	C.showNewRoom = function() {
-		C.setState({ hide: false })
+		C.setState({ hide: false, display: true })
 	}
 
 	C.hideNewRoom = function() {
 		C.setState({ hide: true })
+		function delayDisplay() {
+			C.setState({ display: false })
+		}
+		setTimeout(delayDisplay, 500)
 	}
 
 	C.render = () => {
 		return (
 			<div className="container-lobby">
-				<RoomsContainer showNewRoom={C.showNewRoom} hideInput={C.state.hide} />
-				<ChatContainer showNewRoom={C.state.hide} hideNewRoom={C.hideNewRoom} />
+				<RoomsContainer
+					showNewRoom={C.showNewRoom}
+					hideInput={C.state.hide}
+					hideNewRoom={C.hideNewRoom}
+				/>
+				<ChatContainer
+					showNewRoom={C.state.hide}
+					hideNewRoom={C.hideNewRoom}
+					display={C.state.display}
+				/>
 			</div>
 		)
 	}

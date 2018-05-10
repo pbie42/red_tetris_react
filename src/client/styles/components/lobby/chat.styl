@@ -27,17 +27,13 @@
 			min-width: 2rem
 		&:last-of-type
 			flex-grow: 1
-			transform: translateY(200rem)
-			animation: moveInUp 2s
-			// animation-delay: .1s
-			animation-fill-mode: forwards
 			padding: 1rem
 
 		> div
 			&:first-of-type
 				display: flex
 				justify-content: center
-				margin-bottom: 2rem
+				margin-bottom: 1rem
 			&:nth-of-type(2)
 				flex-grow: 2
 				width: 100%
@@ -192,6 +188,39 @@
 				font-family: 'Rajdhani', sans-serif;
 
 	.hide
-		display: none
+		// transform: translateY(200rem)
+		animation: moveOutDownInput 2s ease-in-out
+		// animation-delay: .1s
+		animation-fill-mode: forwards
+		// display: none
+
+	.show
+		transform: translateY(200rem)
+		animation: moveInUp 2s
+		animation-delay: .1s
+		animation-fill-mode: forwards
 	.change-width
 		transition: all 2s linear
+
+
+@media (max-height: 840px)
+	.lobby-chat-new
+
+		> div
+
+			> div
+				&:first-of-type
+					display: flex
+					justify-content: center
+					margin-bottom: 2rem
+
+@keyframes moveOutDownInput {
+	0%{
+		opacity: 1;
+		transform: translateY(0rem);
+	}
+	100%{
+		opacity: 0;
+		transform: translateY(500rem);
+	}
+}
