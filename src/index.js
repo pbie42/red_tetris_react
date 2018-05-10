@@ -5,7 +5,7 @@ import App from './client/App'
 import registerServiceWorker from './client/registerServiceWorker'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, HashRouter } from 'react-router-dom'
 import createSagaMiddleware from 'redux-saga'
 
 import reducers from './client/reducers'
@@ -49,9 +49,9 @@ sagaMiddleware.run(handleAddUserToRoom, {
 ReactDOM.render(
 	<Provider store={store} saga={sagaMiddleware}>
 		<div className="container">
-			<Router>
+			<HashRouter hashType="noslash">
 				<App />
-			</Router>
+			</HashRouter>
 		</div>
 	</Provider>,
 	document.getElementById('root')
