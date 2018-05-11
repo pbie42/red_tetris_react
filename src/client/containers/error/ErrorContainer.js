@@ -35,7 +35,8 @@ export function mapStateToProps(state) {
 	return {
 		error: state.errors.error,
 		errorRoom: state.errors.errorRoom,
-		errorName: state.errors.errorName
+		errorName: state.errors.errorName,
+		errorTooManyMembers: state.errors.errorTooManyMembers
 	}
 }
 

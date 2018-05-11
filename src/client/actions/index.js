@@ -4,7 +4,7 @@ import { addMessage, messageReceived } from './chat'
 
 import { connected, disconnected } from './connections'
 
-import { errorUsernameTaken } from './errors'
+import { errorUsernameTaken, errorTooManyMembers } from './errors'
 
 import {
 	addUser,
@@ -32,6 +32,7 @@ export {
 	addUserToRoom,
 	connected,
 	disconnected,
+	errorTooManyMembers,
 	errorUsernameTaken,
 	messageReceived,
 	populateRoomsList,

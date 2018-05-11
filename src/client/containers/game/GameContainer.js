@@ -8,7 +8,8 @@ import {
 	removeUser,
 	removeUserFromRoom,
 	usernameSet,
-	errorUsernameTaken
+	errorUsernameTaken,
+	errorTooManyMembers
 } from '../../actions'
 
 export const mapDispatchToProps = dispatch => ({
@@ -32,6 +33,9 @@ export const mapDispatchToProps = dispatch => ({
 	},
 	errorUsernameTaken: username => {
 		dispatch(errorUsernameTaken(username))
+	},
+	errorTooManyMembers: username => {
+		dispatch(errorTooManyMembers(username))
 	}
 })
 

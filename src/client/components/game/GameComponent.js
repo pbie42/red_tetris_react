@@ -68,9 +68,16 @@ function GameComponent(props) {
 			} else {
 				console.log(`room exists`)
 				C.setState({ room })
-				if (C.verifyMembers(C.props.username, room))
-					C.props.addUserToRoom(C.props.username, room)
-				else console.log(`already room member or too many people`)
+				if (C.verifyMemberCount(room)) {
+					if (C.verifyMembers(C.props.username, room))
+						C.props.addUserToRoom(C.props.username, room)
+					else {
+						console.log(`already room member member`)
+					}
+				} else {
+					C.props.errorTooManyMembers()
+					console.log(`too many members`)
+				}
 			}
 			doneRoom = true
 		}
@@ -79,6 +86,12 @@ function GameComponent(props) {
 	C.componentCleanup = function() {
 		// C.props.removeUserFromRoom(C.props.username, C.state.room)
 		// C.props.removeUser(C.props.username)
+	}
+
+	C.verifyMemberCount = function(roomName) {
+		const room = C.props.rooms.find(room => room.roomName === roomName)
+		if (room.members.length < 5) return true
+		return false
 	}
 
 	C.verifyMembers = function(username, roomName) {
