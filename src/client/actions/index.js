@@ -16,8 +16,29 @@ export const addUser = name => ({
 	name
 })
 
+export const removeUser = username => ({
+	type: types.REMOVE_USER,
+	username
+})
+
+export const setUsername = username => ({
+	type: types.SET_USERNAME,
+	username
+})
+
+export const unsetUsername = username => ({
+	type: types.UNSET_USERNAME,
+	username
+})
+
 export const addUserToRoom = (username, roomName) => ({
 	type: types.ADD_USER_TO_ROOM,
+	roomName,
+	username
+})
+
+export const removeUserFromRoom = (username, roomName) => ({
+	type: types.REMOVE_USER_FROM_ROOM,
 	roomName,
 	username
 })
@@ -37,11 +58,6 @@ export const populateUsersList = users => ({
 export const populateRoomsList = rooms => ({
 	type: types.ROOMS_LIST,
 	rooms
-})
-
-export const setUsername = username => ({
-	type: types.SET_USERNAME,
-	username
 })
 
 export const addRoom = (roomName, members) => ({
@@ -64,4 +80,14 @@ export const connected = () => ({
 export const disconnected = () => ({
 	type: types.DISCONNECTED,
 	connected: false
+})
+
+export const roomsListReceived = () => ({
+	type: types.ROOMS_LIST_RECEIVED,
+	rooms: true
+})
+
+export const usersListReceived = () => ({
+	type: types.USERS_LIST_RECEIVED,
+	users: true
 })

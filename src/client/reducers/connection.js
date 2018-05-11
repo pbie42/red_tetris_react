@@ -1,11 +1,21 @@
 import * as types from '../constants/ActionTypes'
 
-const connection = (state = false, action) => {
+const initialConnectionState = {
+	connected: false,
+	users: false,
+	rooms: false
+}
+
+const connection = (state = initialConnectionState, action) => {
 	switch (action.type) {
 		case types.CONNECTED:
-			return true
+			return { ...state, connected: true }
 		case types.DISCONNECTED:
-			return false
+			return { ...state, connected: false }
+		case types.ROOMS_LIST_RECEIVED:
+			return { ...state, rooms: true }
+		case types.USERS_LIST_RECEIVED:
+			return { ...state, users: true }
 
 		default:
 			return state

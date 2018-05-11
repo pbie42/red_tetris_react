@@ -14,6 +14,12 @@ const handleNewUser = function* handleNewUser(params) {
 	})
 }
 
+const handleRemoveUser = function* handleRemoveUser(params) {
+	yield takeEvery(types.REMOVE_USER, action => {
+		params.socket.emit('message', JSON.stringify(action))
+	})
+}
+
 const handleNewRoom = function* handleNewRoom(params) {
 	yield takeEvery(types.ADD_ROOM, action => {
 		params.socket.emit('message', JSON.stringify(action))
@@ -26,4 +32,10 @@ const handleAddUserToRoom = function* handleAddUserToRoom(params) {
 	})
 }
 
-export { handleNewMessage, handleNewUser, handleNewRoom, handleAddUserToRoom }
+export {
+	handleNewMessage,
+	handleNewUser,
+	handleNewRoom,
+	handleAddUserToRoom,
+	handleRemoveUser
+}

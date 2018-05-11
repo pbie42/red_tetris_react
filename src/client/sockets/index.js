@@ -5,7 +5,9 @@ import {
 	messageReceived,
 	populateUsersList,
 	populateRoomsList,
-	connected
+	connected,
+	usersListReceived,
+	roomsListReceived
 } from '../actions'
 import { store } from '../../index'
 
@@ -42,11 +44,13 @@ const setupSocket = dispatch => {
 				console.log(`USERS_LIST`)
 				console.log(`data.users`, data.users)
 				dispatch(populateUsersList(data.users))
+				dispatch(usersListReceived())
 				break
 			case types.ROOMS_LIST:
 				console.log(`ROOMS_LIST`)
 				console.log(`data.rooms`, data.rooms)
 				dispatch(populateRoomsList(data.rooms))
+				dispatch(roomsListReceived())
 				break
 			default:
 				break

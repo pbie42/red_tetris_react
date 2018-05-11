@@ -2,48 +2,74 @@ import React, { Component } from 'react'
 import { parseUrl } from '../../utils/parse_url'
 
 function GameComponent(props) {
-	const C = new Component()
+	const C = new Component(props)
+	let done = false
+
+	C.state = {
+		connection: false,
+		room: ''
+	}
 
 	C.componentWillMount = function() {
 		console.log(`props`, props)
-		if (props.connection) {
-			console.log(`props.connection`, props.connection)
-			const url = props.match.params.game
+	}
+
+	C.componentDidMount = function() {
+		console.log(`Mounted in this bitch`)
+		console.log(`NOT CONNECTED`)
+	}
+
+	C.componentDidUpdate = function() {
+		const { connection, usersReceived, roomsReceived } = C.props
+		if (connection && usersReceived && roomsReceived && !done) {
+			console.log(`CONNECTED!!!!!!!!!!!!!!!!!`)
+			const url = C.props.match.params.game
 			if (
 				url.indexOf('[') < 0 ||
 				url.indexOf(']') < 0 ||
 				url[url.length - 1] !== ']'
 			)
-				props.history.push('/')
+				C.props.history.push('/')
 			const { room, player } = parseUrl(url)
-			if (!props.username) {
+			if (!C.props.username) {
 				if (C.verifyUsername(player)) {
 					console.log(`username not set`)
-					props.setUsername(player)
-					props.addUser(player)
+					C.props.setUsername(player)
+					C.props.addUser(player)
 				} else {
 					console.log(`username already taken`)
+					C.props.history.push('/')
 				}
-			}
-			console.log(`username set already`)
+			} else console.log(`username set already`)
 			if (C.verifyRoomName(room)) {
-				props.addRoom(room, [player])
+				C.props.addRoom(room, [player])
+				C.setState({ room })
+				console.log(`room added`)
 			} else {
 				console.log(`room exists`)
-				if (C.verifyMembers(props.username, room))
-					props.addUserToRoom(props.username, room)
+				C.setState({ room })
+				if (C.verifyMembers(C.props.username, room))
+					C.props.addUserToRoom(C.props.username, room)
 				else console.log(`already room member or too many people`)
 			}
+			done = true
 		}
 	}
 
-	C.componentDidMount = function() {
-		console.log(`Mounted in this bitch`)
+	C.componentWillUnmount = function() {
+		C.props.removeUserFromRoom(C.props.username, C.state.room)
+		C.props.removeUser(C.props.username)
 	}
 
 	C.verifyMembers = function(username, roomName) {
-		const room = props.rooms.find(room => room.roomName === roomName)
-		const user = room.members.find(member => member === username)
+		const room = C.props.rooms.find(room => room.roomName === roomName)
+		const user = room.members.find(member => {
+			console.log(`member`, member)
+			console.log(`username`, username)
+			return member === username
+		})
+		console.log(`user`, user)
+		console.log(`room.members`, room.members)
 		if (room.members.length >= 5) {
 			console.log(`too many people`)
 			return false
@@ -54,21 +80,27 @@ function GameComponent(props) {
 	}
 
 	C.verifyRoomName = function(value) {
-		const index = props.rooms.findIndex(room => value === room.roomName)
-		if (index >= 0) return false
-		return true
+		const index = C.props.rooms.findIndex(room => value === room.roomName)
+		console.log(`C.props.rooms`, C.props.rooms)
+		console.log(`index`, index)
+		if (index < 0) return true
+		return false
 	}
 
 	C.verifyUsername = function(value) {
-		const index = props.users.findIndex(user => value === user.name)
+		const index = C.props.users.findIndex(user => value === user.name)
 		if (index >= 0) return false
 		return true
 	}
 
 	C.render = () => {
 		return (
-			<div className="container-lobby">
-				<h1>{props.connection ? 'CONNECTED' : 'NOT CONNECTED'}</h1>
+			<div className="container-game">
+				{!C.props.connection ? (
+					<i className="fas fa-spinner fa-pulse" />
+				) : (
+					<h1>{C.props.connection ? 'CONNECTED' : 'NOT CONNECTED'}</h1>
+				)}
 			</div>
 		)
 	}

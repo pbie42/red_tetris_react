@@ -18,8 +18,8 @@ function LobbyComponent(props) {
 		display: false
 	}
 
-	C.componentDidMount = function() {
-		// console.log(`C`, C)
+	C.componentWillUnmount = function() {
+		C.props.removeUser(C.props.username)
 	}
 
 	C.showNewRoom = function() {

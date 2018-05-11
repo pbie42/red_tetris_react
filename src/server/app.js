@@ -1,7 +1,7 @@
 const io = require('socket.io')()
 
-const users = []
-const rooms = []
+let users = []
+let rooms = []
 let index
 
 io.on('connection', socket => {
@@ -46,6 +46,26 @@ io.on('connection', socket => {
 						users
 					})
 				)
+				break
+			case 'REMOVE_USER':
+				console.log(`REMOVE_USER`)
+				console.log(`data`, data)
+				users = users.filter(user => user.name === data.username)
+				console.log(`users`, users)
+				socket.broadcast.emit(
+					'message',
+					JSON.stringify({
+						type: 'USERS_LIST',
+						users
+					})
+				)
+				// socket.emit(
+				// 	'message',
+				// 	JSON.stringify({
+				// 		type: 'USERS_LIST',
+				// 		users
+				// 	})
+				// )
 				break
 			case 'ADD_MESSAGE':
 				console.log(`ADD_MESSAGE`)

@@ -34,6 +34,7 @@ import * as types from '../constants/ActionTypes'
 // ]
 
 const rooms = (state = [], action) => {
+	let rooms, index
 	switch (action.type) {
 		case types.ADD_ROOM:
 		case types.ROOM_ADDED:
@@ -47,13 +48,26 @@ const rooms = (state = [], action) => {
 		case types.ROOMS_LIST:
 			return action.rooms
 		case types.ADD_USER_TO_ROOM:
-			const rooms = state
-			const index = rooms.findIndex(room => room.roomName === action.roomName)
+			rooms = state
+			index = rooms.findIndex(room => room.roomName === action.roomName)
 			if (
 				index >= 0 &&
 				!rooms[index].members.find(member => member === action.username)
 			) {
 				rooms[index].members.push(action.username)
+				return rooms
+			}
+			return state
+		case types.REMOVE_USER_FROM_ROOM:
+			rooms = state
+			index = rooms.findIndex(room => room.roomName === action.roomName)
+			if (
+				index >= 0 &&
+				!rooms[index].members.find(member => member === action.username)
+			) {
+				rooms[index].members = rooms[index].members.filter(
+					member => member === action.username
+				)
 				return rooms
 			}
 			return state

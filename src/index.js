@@ -13,6 +13,7 @@ import setupSocket from './client/sockets'
 import {
 	handleNewMessage,
 	handleNewUser,
+	handleRemoveUser,
 	handleNewRoom,
 	handleAddUserToRoom
 } from './client/sagas'
@@ -35,6 +36,10 @@ sagaMiddleware.run(handleNewMessage, {
 })
 
 sagaMiddleware.run(handleNewUser, {
+	socket
+})
+
+sagaMiddleware.run(handleRemoveUser, {
 	socket
 })
 
