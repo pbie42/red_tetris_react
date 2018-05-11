@@ -7,7 +7,8 @@ import {
 	populateRoomsList,
 	connected,
 	usersListReceived,
-	roomsListReceived
+	roomsListReceived,
+	usernameSet
 } from '../actions'
 import { store } from '../../index'
 
@@ -39,6 +40,10 @@ const setupSocket = dispatch => {
 			case types.ADD_ROOM:
 				console.log(`ADD_ROOM`)
 				dispatch(addRoom(data.roomName, data.members))
+				break
+			case types.USERNAME_SET:
+				console.log(`USERNAME_SET`)
+				dispatch(usernameSet())
 				break
 			case types.USERS_LIST:
 				console.log(`USERS_LIST`)

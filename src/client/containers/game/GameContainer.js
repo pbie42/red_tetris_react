@@ -6,7 +6,9 @@ import {
 	addRoom,
 	addUserToRoom,
 	removeUser,
-	removeUserFromRoom
+	removeUserFromRoom,
+	usernameSet,
+	errorUsernameTaken
 } from '../../actions'
 
 export const mapDispatchToProps = dispatch => ({
@@ -27,6 +29,9 @@ export const mapDispatchToProps = dispatch => ({
 	},
 	addUserToRoom: (roomName, members) => {
 		dispatch(addUserToRoom(roomName, members))
+	},
+	errorUsernameTaken: username => {
+		dispatch(errorUsernameTaken(username))
 	}
 })
 
@@ -36,6 +41,7 @@ export function mapStateToProps(state) {
 		roomsReceived: state.connection.rooms,
 		usersReceived: state.connection.users,
 		username: state.user.username,
+		usernameIsSet: state.user.usernameSet,
 		users: state.users,
 		rooms: state.rooms
 	}

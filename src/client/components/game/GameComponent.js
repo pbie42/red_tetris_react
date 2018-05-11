@@ -3,7 +3,8 @@ import { parseUrl } from '../../utils/parse_url'
 
 function GameComponent(props) {
 	const C = new Component(props)
-	let done = false
+	let doneUser = false
+	let doneRoom = false
 
 	C.state = {
 		connection: false,
@@ -15,22 +16,29 @@ function GameComponent(props) {
 	}
 
 	C.componentDidMount = function() {
-		console.log(`Mounted in this bitch`)
 		console.log(`NOT CONNECTED`)
+		window.addEventListener('beforeunload', C.componentCleanup)
 	}
 
 	C.componentDidUpdate = function() {
-		const { connection, usersReceived, roomsReceived } = C.props
-		if (connection && usersReceived && roomsReceived && !done) {
+		const { connection, usersReceived, roomsReceived, usernameIsSet } = C.props
+		const url = C.props.match.params.game
+		const { room, player } = parseUrl(url)
+		console.log(`usernameIsSet`, usernameIsSet)
+		if (
+			connection &&
+			usersReceived &&
+			roomsReceived &&
+			!usernameIsSet &&
+			!doneUser
+		) {
 			console.log(`CONNECTED!!!!!!!!!!!!!!!!!`)
-			const url = C.props.match.params.game
 			if (
 				url.indexOf('[') < 0 ||
 				url.indexOf(']') < 0 ||
 				url[url.length - 1] !== ']'
 			)
 				C.props.history.push('/')
-			const { room, player } = parseUrl(url)
 			if (!C.props.username) {
 				if (C.verifyUsername(player)) {
 					console.log(`username not set`)
@@ -38,9 +46,21 @@ function GameComponent(props) {
 					C.props.addUser(player)
 				} else {
 					console.log(`username already taken`)
-					C.props.history.push('/')
+					C.props.errorUsernameTaken()
+					C.props.history.push('/error')
 				}
 			} else console.log(`username set already`)
+			doneUser = true
+		}
+		if (
+			connection &&
+			usersReceived &&
+			roomsReceived &&
+			usernameIsSet &&
+			doneUser &&
+			!doneRoom
+		) {
+			console.log(`ROOOOOMMMMM TIIMMMEEEE !!!!!!!`)
 			if (C.verifyRoomName(room)) {
 				C.props.addRoom(room, [player])
 				C.setState({ room })
@@ -52,17 +72,19 @@ function GameComponent(props) {
 					C.props.addUserToRoom(C.props.username, room)
 				else console.log(`already room member or too many people`)
 			}
-			done = true
+			doneRoom = true
 		}
 	}
 
-	C.componentWillUnmount = function() {
-		C.props.removeUserFromRoom(C.props.username, C.state.room)
-		C.props.removeUser(C.props.username)
+	C.componentCleanup = function() {
+		// C.props.removeUserFromRoom(C.props.username, C.state.room)
+		// C.props.removeUser(C.props.username)
 	}
 
 	C.verifyMembers = function(username, roomName) {
+		console.log(`C.props`, C.props)
 		const room = C.props.rooms.find(room => room.roomName === roomName)
+		console.log(`room verify`, room)
 		const user = room.members.find(member => {
 			console.log(`member`, member)
 			console.log(`username`, username)

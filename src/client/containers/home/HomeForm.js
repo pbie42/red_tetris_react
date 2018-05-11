@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import HomeFormComponent from '../../components/home/HomeForm'
-import { setUsername, addUser } from '../../actions'
+import { setUsername, addUser, usernameSet } from '../../actions'
 
 export const mapDispatchToProps = dispatch => ({
 	setUsername: username => {

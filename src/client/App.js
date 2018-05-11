@@ -4,6 +4,7 @@ import './App.css'
 import { HomeContainer } from './containers/home/Home'
 import { LobbyContainer } from './containers/lobby/LobbyContainer'
 import { GameContainer } from './containers/game/GameContainer'
+import { ErrorContainer } from './containers/error/ErrorContainer'
 
 function App() {
 	const C = new Component()
@@ -13,6 +14,7 @@ function App() {
 				<Switch>
 					<Route path="/" exact component={HomeContainer} />
 					<Route path="/lobby" exact component={LobbyContainer} />
+					<Route path="/error" exact component={ErrorContainer} />
 					<Route path="/:game" component={GameContainer} />
 				</Switch>
 			</div>

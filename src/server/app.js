@@ -3,6 +3,7 @@ const io = require('socket.io')()
 let users = []
 let rooms = []
 let index
+let roomIndex
 
 io.on('connection', socket => {
 	console.log(`a client is connected`)
@@ -46,6 +47,12 @@ io.on('connection', socket => {
 						users
 					})
 				)
+				socket.emit(
+					'message',
+					JSON.stringify({
+						type: 'USERNAME_SET'
+					})
+				)
 				break
 			case 'REMOVE_USER':
 				console.log(`REMOVE_USER`)
@@ -57,6 +64,33 @@ io.on('connection', socket => {
 					JSON.stringify({
 						type: 'USERS_LIST',
 						users
+					})
+				)
+				// socket.emit(
+				// 	'message',
+				// 	JSON.stringify({
+				// 		type: 'USERS_LIST',
+				// 		users
+				// 	})
+				// )
+				break
+			case 'REMOVE_USER_FROM_ROOM':
+				console.log(`REMOVE_USER_FROM_ROOM`)
+				console.log(`data`, data)
+				roomIndex = rooms.findIndex(room => room.roomName === data.roomName)
+				if (
+					roomIndex >= 0 &&
+					rooms[roomIndex].members.find(member => member === data.username)
+				) {
+					rooms[roomIndex].members = rooms[roomIndex].members.filter(
+						member => member === data.username
+					)
+				}
+				socket.broadcast.emit(
+					'message',
+					JSON.stringify({
+						type: 'ROOMS_LIST',
+						rooms
 					})
 				)
 				// socket.emit(
@@ -93,9 +127,7 @@ io.on('connection', socket => {
 			case 'ADD_USER_TO_ROOM':
 				console.log(`ADD_USER_TO_ROOM`)
 				console.log(`add to room data`, data)
-				const roomIndex = rooms.findIndex(
-					room => room.roomName === data.roomName
-				)
+				roomIndex = rooms.findIndex(room => room.roomName === data.roomName)
 				if (
 					roomIndex >= 0 &&
 					!rooms[roomIndex].members.find(member => member === data.username)
@@ -116,7 +148,7 @@ io.on('connection', socket => {
 	})
 
 	socket.on('disconnect', () => {
-		users.splice(index, 1)
+		// users.splice(index, 1)
 		console.log(`DISCONNECT`)
 		socket.broadcast.emit(
 			'message',
