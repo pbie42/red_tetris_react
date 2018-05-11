@@ -105,10 +105,7 @@ function GameComponent(props) {
 		})
 		console.log(`user`, user)
 		console.log(`room.members`, room.members)
-		if (room.members.length >= 5) {
-			console.log(`too many people`)
-			return false
-		} else if (user) {
+		if (user) {
 			console.log(`already a member`)
 			return false
 		} else return true
