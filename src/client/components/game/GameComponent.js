@@ -27,6 +27,20 @@ function GameComponent(props) {
 		window.addEventListener('beforeunload', C.componentCleanup)
 	}
 
+	C.componentDidUpdate = function() {
+		const { connection, usersReceived, roomsReceived, usernameIsSet } = C.props
+		const url = C.props.match.params.game
+		if (!verifyUrl(url)) C.props.history.push('/')
+		const { room, player } = parseUrl(url)
+		if (C.verifyConnection()) doneUser = C.handlePlayer(player)
+		if (C.verifyPlayerHandled()) doneRoom = C.handleRoom(room, player)
+	}
+
+	C.componentCleanup = function() {
+		// C.props.removeUserFromRoom(C.props.username, C.state.room)
+		// C.props.removeUser(C.props.username)
+	}
+
 	C.verifyConnection = function() {
 		if (
 			C.props.connection &&
@@ -39,7 +53,7 @@ function GameComponent(props) {
 		return false
 	}
 
-	C.verifyUserHandled = function() {
+	C.verifyPlayerHandled = function() {
 		if (
 			C.props.connection &&
 			C.props.usersReceived &&
@@ -71,20 +85,6 @@ function GameComponent(props) {
 			} else C.errorTooManyMembers()
 		}
 		return true
-	}
-
-	C.componentDidUpdate = function() {
-		const { connection, usersReceived, roomsReceived, usernameIsSet } = C.props
-		const url = C.props.match.params.game
-		if (!verifyUrl(url)) C.props.history.push('/')
-		const { room, player } = parseUrl(url)
-		if (C.verifyConnection()) doneUser = C.handlePlayer(player)
-		if (C.verifyUserHandled()) doneRoom = C.handleRoom(room, player)
-	}
-
-	C.componentCleanup = function() {
-		// C.props.removeUserFromRoom(C.props.username, C.state.room)
-		// C.props.removeUser(C.props.username)
 	}
 
 	C.updateUser = function(player) {
