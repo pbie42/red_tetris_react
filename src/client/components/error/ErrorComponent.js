@@ -14,6 +14,7 @@ function ErrorComponent(props) {
 					!C.props.error && <h1>ERROR: Username Taken</h1>}
 				{!C.props.errorName &&
 					!C.props.roomName &&
+					!C.props.errorTooManyMembers &&
 					!C.props.error && <h1>ERROR: Accident</h1>}
 				{!C.props.errorName &&
 					!C.props.roomName &&

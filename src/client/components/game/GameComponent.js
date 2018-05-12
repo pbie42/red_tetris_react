@@ -84,6 +84,7 @@ function GameComponent(props) {
 				}
 			} else {
 				C.props.errorTooManyMembers()
+				C.props.history.push('/error')
 				console.log(`too many members`)
 			}
 		}
@@ -107,12 +108,6 @@ function GameComponent(props) {
 		// C.props.removeUserFromRoom(C.props.username, C.state.room)
 		// C.props.removeUser(C.props.username)
 	}
-
-	// C.verifyMemberCount = function(roomName) {
-	// 	const room = C.props.rooms.find(room => room.roomName === roomName)
-	// 	if (room.members.length < 5) return true
-	// 	return false
-	// }
 
 	C.updateUser = function(player) {
 		C.props.setUsername(player)
