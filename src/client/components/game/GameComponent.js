@@ -24,6 +24,8 @@ function GameComponent(props) {
 		const { connection, usersReceived, roomsReceived, usernameIsSet } = C.props
 		const url = C.props.match.params.game
 		const { room, player } = parseUrl(url)
+		console.log(`room`, room)
+		console.log(`player`, player)
 		console.log(`usernameIsSet`, usernameIsSet)
 		if (
 			connection &&

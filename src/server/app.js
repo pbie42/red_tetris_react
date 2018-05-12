@@ -1,7 +1,9 @@
 const io = require('socket.io')()
 
 let users = []
-let rooms = []
+let rooms = [
+	{ roomName: 'Test Room', members: ['John', 'Paul', 'George', 'Ringo', 'Bob'] }
+]
 let index
 let roomIndex
 

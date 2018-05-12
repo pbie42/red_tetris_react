@@ -11,5 +11,7 @@ export function parseUrl(url) {
 		if (url[x] === ']') break
 		room += url[x]
 	}
+	room = room.replace(/_/, ' ')
+	player = player.replace(/_/, ' ')
 	return { room, player }
 }
