@@ -28,8 +28,8 @@ export const mapDispatchToProps = dispatch => ({
 	addRoom: (roomName, members) => {
 		dispatch(addRoom(roomName, members))
 	},
-	addUserToRoom: (roomName, members) => {
-		dispatch(addUserToRoom(roomName, members))
+	addUserToRoom: (username, roomName) => {
+		dispatch(addUserToRoom(username, roomName))
 	},
 	errorUsernameTaken: username => {
 		dispatch(errorUsernameTaken(username))

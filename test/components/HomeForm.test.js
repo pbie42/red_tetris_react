@@ -262,7 +262,7 @@ describe('HomeForm', () => {
 				const spyLastCall = dispatchSpy.args[0][0]
 				expect(spyLastCall.type).to.eql(expectedAction.type)
 				expect(spyLastCall.name).to.equal('Dan')
-				expect(spyLastCall.id).to.equal(1)
+				expect(spyLastCall.id).to.equal(3)
 			})
 		})
 	})
