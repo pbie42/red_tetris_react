@@ -27,95 +27,80 @@ function GameComponent(props) {
 		window.addEventListener('beforeunload', C.componentCleanup)
 	}
 
+	C.verifyConnection = function() {
+		if (
+			C.props.connection &&
+			C.props.usersReceived &&
+			C.props.roomsReceived &&
+			!C.propsusernameIsSet &&
+			!doneUser
+		)
+			return true
+		return false
+	}
+
+	C.verifyUserHandled = function() {
+		if (
+			C.props.connection &&
+			C.props.usersReceived &&
+			C.props.roomsReceived &&
+			C.props.usernameIsSet &&
+			doneUser &&
+			!doneRoom
+		)
+			return true
+		return false
+	}
+
+	C.handlePlayer = function(player) {
+		console.log(`CONNECTED!!!!!!!!!!!!!!!!!`)
+		if (!C.props.username) {
+			if (verifyUsername(player, C.props.users)) {
+				console.log(`username not set`)
+				C.updateUser(player)
+			} else {
+				console.log(`username already taken`)
+				C.props.errorUsernameTaken()
+				C.props.history.push('/error')
+			}
+		}
+		return true
+	}
+
+	C.handleRoom = function(room, player) {
+		console.log(`ROOOOOMMMMM TIIMMMEEEE !!!!!!!`)
+		if (verifyRoomName(room, C.props.rooms)) {
+			C.props.addRoom(room, [player])
+			C.setState({ room })
+			console.log(`room added`)
+		} else {
+			console.log(`room exists`)
+			C.setState({ room })
+			if (verifyMemberCount(C.props.rooms, room)) {
+				if (verifyMembers(C.props.username, room, C.props.rooms))
+					C.props.addUserToRoom(C.props.username, room)
+				else {
+					console.log(`already room member member`)
+				}
+			} else {
+				C.props.errorTooManyMembers()
+				console.log(`too many members`)
+			}
+		}
+		return true
+	}
+
 	C.componentDidUpdate = function() {
 		const { connection, usersReceived, roomsReceived, usernameIsSet } = C.props
 		const url = C.props.match.params.game
+		if (!verifyUrl(url)) C.props.history.push('/')
 		console.log(`url`, url)
 		const { room, player } = parseUrl(url)
 		console.log(`room`, room)
 		console.log(`player`, player)
 		console.log(`usernameIsSet`, usernameIsSet)
-		if (
-			connection &&
-			usersReceived &&
-			roomsReceived &&
-			!usernameIsSet &&
-			!doneUser
-		) {
-			console.log(`CONNECTED!!!!!!!!!!!!!!!!!`)
-			if (!verifyUrl(url)) C.props.history.push('/')
-			if (!C.props.username) {
-				if (verifyUsername(player, C.props.users)) {
-					console.log(`username not set`)
-					C.updateUser(player)
-				} else {
-					console.log(`username already taken`)
-					C.props.errorUsernameTaken()
-					C.props.history.push('/error')
-				}
-			} else console.log(`username set already`)
-			doneUser = true
-		}
-		if (
-			connection &&
-			usersReceived &&
-			roomsReceived &&
-			usernameIsSet &&
-			doneUser &&
-			!doneRoom
-		) {
-			console.log(`ROOOOOMMMMM TIIMMMEEEE !!!!!!!`)
-			if (verifyRoomName(room, C.props.rooms)) {
-				C.props.addRoom(room, [player])
-				C.setState({ room })
-				console.log(`room added`)
-			} else {
-				console.log(`room exists`)
-				C.setState({ room })
-				if (verifyMemberCount(C.props.rooms, room)) {
-					if (verifyMembers(C.props.username, room))
-						C.props.addUserToRoom(C.props.username, room)
-					else {
-						console.log(`already room member member`)
-					}
-				} else {
-					C.props.errorTooManyMembers()
-					console.log(`too many members`)
-				}
-			}
-			doneRoom = true
-		}
-	}
-
-	C.handlePlayer = function(currentProps, player) {
-		const {
-			connection,
-			usersReceived,
-			roomsReceived,
-			usernameIsSet,
-			username,
-			users
-		} = currentProps
-		if (
-			connection &&
-			usersReceived &&
-			roomsReceived &&
-			!usernameIsSet &&
-			!doneUser
-		) {
-			console.log(`CONNECTED!!!!!!!!!!!!!!!!!`)
-			if (!username) {
-				if (verifyUsername(player, users)) {
-					console.log(`username not set`)
-					C.updateUser(player)
-				} else {
-					console.log(`username already taken`)
-					currentProps.errorUsernameTaken()
-					currentProps.history.push('/error')
-				}
-			} else console.log(`username set already`)
-			return true
-		} else return false
+		if (C.verifyConnection()) doneUser = C.handlePlayer(player)
+		if (C.verifyUserHandled()) doneRoom = C.handleRoom(room, player)
 	}
 
 	C.componentCleanup = function() {
