@@ -12,7 +12,7 @@ function GameComponent(props) {
 	}
 
 	C.componentWillMount = function() {
-		console.log(`props`, props)
+		// console.log(`props`, props)
 	}
 
 	C.componentDidMount = function() {

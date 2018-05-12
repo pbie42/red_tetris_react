@@ -34,7 +34,7 @@ function HomeForm(props) {
 				function delayRouteChange() {
 					props.history.push('/lobby')
 				}
-				props.pageChange()
+				C.props.pageChange()
 				setTimeout(delayRouteChange, 800)
 			} else C.setSubmitError()
 			C.refs.input.value = ''
@@ -57,7 +57,7 @@ function HomeForm(props) {
 			function delayRouteChange() {
 				props.history.push('/lobby')
 			}
-			props.pageChange()
+			C.props.pageChange()
 			setTimeout(delayRouteChange, 800)
 		} else C.setSubmitError()
 		C.refs.input.value = ''

@@ -5,8 +5,6 @@ import logo from '../../static/tetris_logo.png'
 function HomeComponent(props) {
 	const C = new Component(props)
 
-	console.log(`C.props`, C.props)
-
 	C.state = {
 		change: false
 	}
