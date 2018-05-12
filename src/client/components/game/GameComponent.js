@@ -53,40 +53,22 @@ function GameComponent(props) {
 	}
 
 	C.handlePlayer = function(player) {
-		console.log(`CONNECTED!!!!!!!!!!!!!!!!!`)
 		if (!C.props.username) {
-			if (verifyUsername(player, C.props.users)) {
-				console.log(`username not set`)
-				C.updateUser(player)
-			} else {
-				console.log(`username already taken`)
-				C.props.errorUsernameTaken()
-				C.props.history.push('/error')
-			}
+			if (verifyUsername(player, C.props.users)) C.updateUser(player)
+			else C.errorUsername()
 		}
 		return true
 	}
 
 	C.handleRoom = function(room, player) {
-		console.log(`ROOOOOMMMMM TIIMMMEEEE !!!!!!!`)
-		if (verifyRoomName(room, C.props.rooms)) {
-			C.props.addRoom(room, [player])
-			C.setState({ room })
-			console.log(`room added`)
-		} else {
-			console.log(`room exists`)
+		if (verifyRoomName(room, C.props.rooms)) C.updateRoom(room, player)
+		else {
 			C.setState({ room })
 			if (verifyMemberCount(C.props.rooms, room)) {
-				if (verifyMembers(C.props.username, room, C.props.rooms))
+				if (verifyMembers(player, room, C.props.rooms))
 					C.props.addUserToRoom(C.props.username, room)
-				else {
-					console.log(`already room member member`)
-				}
-			} else {
-				C.props.errorTooManyMembers()
-				C.props.history.push('/error')
-				console.log(`too many members`)
-			}
+				else console.log(`already room member member`)
+			} else C.errorTooManyMembers()
 		}
 		return true
 	}
@@ -95,11 +77,7 @@ function GameComponent(props) {
 		const { connection, usersReceived, roomsReceived, usernameIsSet } = C.props
 		const url = C.props.match.params.game
 		if (!verifyUrl(url)) C.props.history.push('/')
-		console.log(`url`, url)
 		const { room, player } = parseUrl(url)
-		console.log(`room`, room)
-		console.log(`player`, player)
-		console.log(`usernameIsSet`, usernameIsSet)
 		if (C.verifyConnection()) doneUser = C.handlePlayer(player)
 		if (C.verifyUserHandled()) doneRoom = C.handleRoom(room, player)
 	}
@@ -113,6 +91,22 @@ function GameComponent(props) {
 		C.props.setUsername(player)
 		C.props.addUser(player)
 	}
+
+	C.updateRoom = function(room, player) {
+		C.props.addRoom(room, [player])
+		C.setState({ room })
+	}
+
+	C.errorUsername = function() {
+		C.props.errorUsernameTaken()
+		C.props.history.push('/error')
+	}
+
+	C.errorTooManyMembers = function() {
+		C.props.errorTooManyMembers()
+		C.props.history.push('/error')
+	}
+
 	C.render = () => {
 		return (
 			<div className="container-game">
