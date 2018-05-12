@@ -45,7 +45,7 @@ function GameComponent(props) {
 			console.log(`CONNECTED!!!!!!!!!!!!!!!!!`)
 			if (!verifyUrl(url)) C.props.history.push('/')
 			if (!C.props.username) {
-				if (verifyUsername(player)) {
+				if (verifyUsername(player, C.props.users)) {
 					console.log(`username not set`)
 					C.updateUser(player)
 				} else {
@@ -65,7 +65,7 @@ function GameComponent(props) {
 			!doneRoom
 		) {
 			console.log(`ROOOOOMMMMM TIIMMMEEEE !!!!!!!`)
-			if (verifyRoomName(room)) {
+			if (verifyRoomName(room, C.props.rooms)) {
 				C.props.addRoom(room, [player])
 				C.setState({ room })
 				console.log(`room added`)
@@ -85,6 +85,37 @@ function GameComponent(props) {
 			}
 			doneRoom = true
 		}
+	}
+
+	C.handlePlayer = function(currentProps, player) {
+		const {
+			connection,
+			usersReceived,
+			roomsReceived,
+			usernameIsSet,
+			username,
+			users
+		} = currentProps
+		if (
+			connection &&
+			usersReceived &&
+			roomsReceived &&
+			!usernameIsSet &&
+			!doneUser
+		) {
+			console.log(`CONNECTED!!!!!!!!!!!!!!!!!`)
+			if (!username) {
+				if (verifyUsername(player, users)) {
+					console.log(`username not set`)
+					C.updateUser(player)
+				} else {
+					console.log(`username already taken`)
+					currentProps.errorUsernameTaken()
+					currentProps.history.push('/error')
+				}
+			} else console.log(`username set already`)
+			return true
+		} else return false
 	}
 
 	C.componentCleanup = function() {

@@ -16,6 +16,25 @@ describe('Utils', () => {
 			expect(room).to.equal('Todd Room')
 			expect(player).to.equal('Todd Man')
 		})
+
+		it('parses all variations of strings', () => {
+			let url1 = 'Todd_Room[Todd_Man]'
+			let url2 = 'Todd_RoomTodd_Man]'
+			let url3 = 'Todd_RoomTodd_Man'
+			let url4 = 'Todd_Room[Todd_Man'
+			let parsed = parseUrl(url1)
+			expect(parsed.room).to.equal('Todd Room')
+			expect(parsed.player).to.equal('Todd Man')
+			parsed = parseUrl(url2)
+			expect(parsed.room).to.equal('Todd RoomTodd Man')
+			expect(parsed.player).to.equal('')
+			parsed = parseUrl(url3)
+			expect(parsed.room).to.equal('Todd RoomTodd Man')
+			expect(parsed.player).to.equal('')
+			parsed = parseUrl(url1)
+			expect(parsed.room).to.equal('Todd Room')
+			expect(parsed.player).to.equal('Todd Man')
+		})
 	})
 	describe('verifyMemberCount', () => {
 		const rooms = [
