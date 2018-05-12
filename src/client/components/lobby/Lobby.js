@@ -3,15 +3,13 @@ import { RoomsContainer } from '../../containers/lobby/rooms/RoomsContainer'
 import { ChatContainer } from '../../containers/lobby/chat/ChatContainer'
 
 function LobbyComponent(props) {
-	const C = new Component()
+	const C = new Component(props)
 
 	C.componentWillMount = function() {
 		if (!C.props.username) {
-			props.history.push('/')
+			C.props.history.push('/')
 		}
 	}
-
-	console.log(`C.props.match`, props.match)
 
 	C.state = {
 		hide: true,
@@ -41,6 +39,7 @@ function LobbyComponent(props) {
 					showNewRoom={C.showNewRoom}
 					hideInput={C.state.hide}
 					hideNewRoom={C.hideNewRoom}
+					history={C.props.history}
 				/>
 				<ChatContainer
 					showNewRoom={C.state.hide}

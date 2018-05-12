@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import $ from 'jquery'
 
 export function RoomsComponent(props) {
-	const C = new Component()
+	const C = new Component(props)
 	let scroll = 0
 	let scrollMax
 	let div
@@ -23,7 +23,8 @@ export function RoomsComponent(props) {
 
 	C.selectRoom = function(roomName) {
 		console.log(`room selected`)
-		C.props.addUserToRoom(C.props.username, roomName)
+		// C.props.addUserToRoom(C.props.username, roomName)
+		C.props.history.push(`/${roomName.replace(/ /g, '_')}[${C.props.username}]`)
 	}
 
 	// C.scrollToLeft = function() {
