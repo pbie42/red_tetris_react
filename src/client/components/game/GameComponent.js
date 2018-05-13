@@ -115,7 +115,19 @@ function GameComponent(props) {
 					<i className="fas fa-spinner fa-pulse" />
 				) : (
 					// <h1>{C.props.connection ? 'CONNECTED' : 'NOT CONNECTED'}</h1>
-					<BoardComponent />
+					<div className="container-boards">
+						<div className="players-others">
+							<BoardComponent id="others-grid" />
+							<BoardComponent id="others-grid" />
+						</div>
+						<div className="player-main">
+							<BoardComponent id="player-grid" />
+						</div>
+						<div className="players-others">
+							<BoardComponent id="others-grid" />
+							<BoardComponent id="others-grid" />
+						</div>
+					</div>
 				)}
 			</div>
 		)

@@ -25,7 +25,7 @@ function BoardComponent(props) {
 	}
 
 	C.render = () => {
-		return <div id="player-grid" ref={node => (grid = node)} />
+		return <div id={C.props.id} ref={node => (grid = node)} />
 	}
 
 	return C
