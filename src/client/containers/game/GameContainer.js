@@ -5,8 +5,11 @@ import {
 	addUser,
 	addRoom,
 	addUserToRoom,
+	gameReady,
 	removeUser,
 	removeUserFromRoom,
+	setGameRoom,
+	unsetGameRoom,
 	usernameSet,
 	errorUsernameTaken,
 	errorTooManyMembers
@@ -36,6 +39,15 @@ export const mapDispatchToProps = dispatch => ({
 	},
 	errorTooManyMembers: username => {
 		dispatch(errorTooManyMembers(username))
+	},
+	gameReady: (roomName, members) => {
+		dispatch(gameReady(roomName, members))
+	},
+	setGameRoom: roomName => {
+		dispatch(setGameRoom(roomName))
+	},
+	unsetGameRoom: roomName => {
+		dispatch(unsetGameRoom(roomName))
 	}
 })
 

@@ -7,6 +7,13 @@ import { connected, disconnected } from './connections'
 import { errorUsernameTaken, errorTooManyMembers } from './errors'
 
 import {
+	gameReady,
+	setGameRoom,
+	unsetGameRoom,
+	updateGameMembers
+} from './games'
+
+import {
 	addUser,
 	populateUsersList,
 	removeUser,
@@ -34,6 +41,7 @@ export {
 	disconnected,
 	errorTooManyMembers,
 	errorUsernameTaken,
+	gameReady,
 	messageReceived,
 	populateRoomsList,
 	populateUsersList,
@@ -41,7 +49,10 @@ export {
 	removeUserFromRoom,
 	roomAdded,
 	roomsListReceived,
+	setGameRoom,
 	setUsername,
+	updateGameMembers,
+	unsetGameRoom,
 	unsetUsername,
 	usersListReceived,
 	usernameSet

@@ -38,7 +38,14 @@ const handleAddUserToRoom = function* handleAddUserToRoom(params) {
 	})
 }
 
+const handleGameReady = function* handleGameReady(params) {
+	yield takeEvery(types.GAME_READY, action => {
+		params.socket.emit('game', JSON.stringify(action))
+	})
+}
+
 export {
+	handleGameReady,
 	handleNewMessage,
 	handleNewUser,
 	handleNewRoom,

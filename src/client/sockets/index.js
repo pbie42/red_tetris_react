@@ -8,6 +8,7 @@ import {
 	connected,
 	usersListReceived,
 	roomsListReceived,
+	updateGameMembers,
 	usernameSet
 } from '../actions'
 import { store } from '../../index'
@@ -56,6 +57,11 @@ const setupSocket = dispatch => {
 				console.log(`data.rooms`, data.rooms)
 				dispatch(populateRoomsList(data.rooms))
 				dispatch(roomsListReceived())
+				break
+			case types.GAME_MEMBERS_UPDATE:
+				console.log(`GAME_MEMBERS_UPDATE`)
+				console.log(`data.members`, data.members)
+				dispatch(updateGameMembers(data.members))
 				break
 			default:
 				break

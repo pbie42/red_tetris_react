@@ -20,6 +20,11 @@ let pieces = [
 		pieces: pieceOrder()
 	}
 ]
+
+let boards = [
+	{ username: 'John', roomName: 'Test Room', board: newUserBoard() }
+]
+
 let index
 let roomIndex
 
@@ -115,6 +120,7 @@ io.on('connection', socket => {
 			case 'ADD_ROOM':
 				console.log(`ADD_ROOM`)
 				console.log(`roomData`, data)
+				socket.join(data.roomName)
 				rooms.push({
 					roomName: data.roomName,
 					members: data.members,
@@ -129,17 +135,34 @@ io.on('connection', socket => {
 						rooms
 					})
 				)
+				console.log(`sending GAME_MEMBERS_UPDATE`)
+				io.to(data.roomName).emit(
+					'message',
+					JSON.stringify({
+						type: 'GAME_MEMBERS_UPDATE',
+						members: rooms.find(room => room.roomName === data.roomName).members
+					})
+				)
 				break
 			case 'ADD_USER_TO_ROOM':
 				console.log(`ADD_USER_TO_ROOM`)
 				console.log(`add to room data`, data)
 				rooms = addUserToRoom(data.username, data.roomName, rooms)
 				console.log(`rooms`, rooms)
+				socket.join(data.roomName)
 				socket.broadcast.emit(
 					'message',
 					JSON.stringify({
 						type: 'ROOMS_LIST',
 						rooms
+					})
+				)
+				console.log(`sending GAME_MEMBERS_UPDATE`)
+				io.to(data.roomName).emit(
+					'message',
+					JSON.stringify({
+						type: 'GAME_MEMBERS_UPDATE',
+						members: rooms.find(room => room.roomName === data.roomName).members
 					})
 				)
 				break
@@ -175,6 +198,8 @@ io.on('connection', socket => {
 		switch (data.type) {
 			case 'GAME_READY':
 				console.log(`GAME_READY`)
+				newGamePieces(data.roomName, pieces)
+				newBoards(data.members, data.roomName, boards)
 				break
 			case 'GAME_STARTING':
 				console.log(`GAME_STARTING`)
@@ -210,3 +235,38 @@ io.on('connection', socket => {
 const port = 8000
 io.listen(port)
 console.log(`listening on port`, port)
+
+function newUserBoard(params) {
+	return [
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	]
+}
+
+function newGamePieces(roomName, pieces) {
+	pieces.push({ roomName, pieces: pieceOrder() })
+}
+
+function newBoards(members, roomName, boards) {
+	members.forEach(member => {
+		boards.push({ username, roomName, board: newUserBoard() })
+	})
+}

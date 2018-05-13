@@ -17,11 +17,17 @@ function GameComponent(props) {
 
 	C.state = {
 		connection: false,
-		room: ''
+		room: '',
+		members: []
 	}
 
 	C.componentWillMount = function() {
 		// console.log(`props`, props)
+	}
+
+	C.componentWillUnmount = function() {
+		C.props.unsetGameRoom(C.state.room)
+		C.props.removeUserFromRoom(C.props.username, C.state.room)
 	}
 
 	C.componentDidMount = function() {
@@ -34,10 +40,15 @@ function GameComponent(props) {
 		if (!verifyUrl(url)) C.props.history.push('/')
 		const { room, player } = parseUrl(url)
 		if (C.verifyConnection()) doneUser = C.handlePlayer(player)
-		if (C.verifyPlayerHandled()) doneRoom = C.handleRoom(room, player)
+		if (C.verifyPlayerHandled()) {
+			doneRoom = C.handleRoom(room, player)
+			C.props.setGameRoom(room)
+			// C.props.gameReady()
+		}
 	}
 
 	C.componentCleanup = function() {
+		C.props.unsetGameRoom(C.state.room)
 		C.props.removeUserFromRoom(C.props.username, C.state.room)
 		C.props.removeUser(C.props.username)
 	}
