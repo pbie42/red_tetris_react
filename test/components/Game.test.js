@@ -25,9 +25,14 @@ describe('Game', () => {
 	})
 
 	it('should render the game component', () => {
+		const unsetGameRoomSpy = sinon.spy()
+		const removeUserFromRoomSpy = sinon.spy()
 		const wrapper = mount(
 			<Provider store={store}>
-				<GameComponent />
+				<GameComponent
+					unsetGameRoom={unsetGameRoomSpy}
+					removeUserFromRoom={removeUserFromRoomSpy}
+				/>
 			</Provider>
 		)
 
