@@ -1,16 +1,21 @@
-import {
+const {
 	verifyMemberCount,
 	verifyMembers,
 	verifyRoomName,
 	verifyUrl,
 	verifyUsername
-} from './verify'
-import { parseUrl } from './parse_url'
-import { prependZero } from './prepend_zero'
+} = require('./verify')
+const { parseUrl } = require('./parse_url')
+const { prependZero } = require('./prepend_zero')
+const { pieceOrder } = require('./piece')
+const { addUserToRoom, removeUserFromRoom } = require('./rooms')
 
-export {
+module.exports = {
+	addUserToRoom,
 	parseUrl,
+	pieceOrder,
 	prependZero,
+	removeUserFromRoom,
 	verifyMemberCount,
 	verifyMembers,
 	verifyRoomName,

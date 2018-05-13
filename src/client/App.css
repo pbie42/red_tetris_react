@@ -1254,6 +1254,27 @@ p {
   width: 100%;
   border: solid #ccc 0.5px;
 }
+.container-game .container-boards .player-main #player-grid > div .orange {
+  background: #ffa500;
+}
+.container-game .container-boards .player-main #player-grid > div .cyan {
+  background: #0ff;
+}
+.container-game .container-boards .player-main #player-grid > div .blue {
+  background: #00f;
+}
+.container-game .container-boards .player-main #player-grid > div .yellow {
+  background: #ff0;
+}
+.container-game .container-boards .player-main #player-grid > div .green {
+  background: #008000;
+}
+.container-game .container-boards .player-main #player-grid > div .purple {
+  background: #800080;
+}
+.container-game .container-boards .player-main #player-grid > div .red {
+  background: #f00;
+}
 @-moz-keyframes gradientEaseIn {
   0% {
     opacity: 0;

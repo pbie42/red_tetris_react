@@ -1,4 +1,4 @@
-export function parseUrl(url) {
+function parseUrl(url) {
 	let room = ''
 	let player = ''
 	let x = -1
@@ -14,4 +14,8 @@ export function parseUrl(url) {
 	room = room.replace(/_/g, ' ')
 	player = player.replace(/_/g, ' ')
 	return { room, player }
+}
+
+module.exports = {
+	parseUrl
 }

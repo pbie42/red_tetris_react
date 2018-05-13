@@ -1,37 +1,5 @@
 import * as types from '../constants/ActionTypes'
-
-// const testRooms = [
-// 	{ roomName: 'test1', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test2', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test3', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test4', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test5', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test6', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test7', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test8', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test9', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test1', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test2', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test3', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test4', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test5', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test6', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test7', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test8', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test9', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test1', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test2', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test3', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test4', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test5', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test6', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test7', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test8', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test9', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test1', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test2', members: ['john', 'paul', 'george', 'ringo'] },
-// 	{ roomName: 'test3', members: ['john', 'paul', 'george', 'ringo'] }
-// ]
+import { addUserToRoom, removeUserFromRoom } from '../utils'
 
 const rooms = (state = [], action) => {
 	let rooms, index
@@ -49,28 +17,12 @@ const rooms = (state = [], action) => {
 			return action.rooms
 		case types.ADD_USER_TO_ROOM:
 			rooms = state
-			index = rooms.findIndex(room => room.roomName === action.roomName)
-			if (
-				index >= 0 &&
-				!rooms[index].members.find(member => member === action.username)
-			) {
-				rooms[index].members.push(action.username)
-				return rooms
-			}
-			return state
+			rooms = addUserToRoom(action.username, action.roomName, rooms)
+			return rooms
 		case types.REMOVE_USER_FROM_ROOM:
 			rooms = state
-			index = rooms.findIndex(room => room.roomName === action.roomName)
-			if (
-				index >= 0 &&
-				!rooms[index].members.find(member => member === action.username)
-			) {
-				rooms[index].members = rooms[index].members.filter(
-					member => member === action.username
-				)
-				return rooms
-			}
-			return state
+			rooms = removeUserFromRoom(action.username, action.roomName, rooms)
+			return rooms
 		default:
 			return state
 	}

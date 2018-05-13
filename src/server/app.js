@@ -1,8 +1,24 @@
 const io = require('socket.io')()
+const {
+	pieceOrder,
+	addUserToRoom,
+	removeUserFromRoom
+} = require('../client/utils')
 
 let users = []
 let rooms = [
-	{ roomName: 'Test Room', members: ['John', 'Paul', 'George', 'Ringo'] }
+	{
+		roomName: 'Test Room',
+		members: ['John', 'Paul', 'George', 'Ringo'],
+		inSession: false,
+		countDown: false
+	}
+]
+let pieces = [
+	{
+		roomName: 'Test Room',
+		pieces: pieceOrder()
+	}
 ]
 let index
 let roomIndex
@@ -79,15 +95,8 @@ io.on('connection', socket => {
 			case 'REMOVE_USER_FROM_ROOM':
 				console.log(`REMOVE_USER_FROM_ROOM`)
 				console.log(`data`, data)
-				roomIndex = rooms.findIndex(room => room.roomName === data.roomName)
-				if (
-					roomIndex >= 0 &&
-					rooms[roomIndex].members.find(member => member === data.username)
-				) {
-					rooms[roomIndex].members = rooms[roomIndex].members.filter(
-						member => member === data.username
-					)
-				}
+				rooms = removeUserFromRoom(data.username, data.roomName, rooms)
+				console.log(`rooms`, rooms)
 				socket.broadcast.emit(
 					'message',
 					JSON.stringify({
@@ -117,7 +126,13 @@ io.on('connection', socket => {
 			case 'ADD_ROOM':
 				console.log(`ADD_ROOM`)
 				console.log(`roomData`, data)
-				rooms.push({ roomName: data.roomName, members: data.members })
+				rooms.push({
+					roomName: data.roomName,
+					members: data.members,
+					inSession: false,
+					countDown: false
+				})
+				console.log(`rooms`, rooms)
 				socket.broadcast.emit(
 					'message',
 					JSON.stringify({
@@ -129,13 +144,8 @@ io.on('connection', socket => {
 			case 'ADD_USER_TO_ROOM':
 				console.log(`ADD_USER_TO_ROOM`)
 				console.log(`add to room data`, data)
-				roomIndex = rooms.findIndex(room => room.roomName === data.roomName)
-				if (
-					roomIndex >= 0 &&
-					!rooms[roomIndex].members.find(member => member === data.username)
-				) {
-					rooms[roomIndex].members.push(data.username)
-				}
+				rooms = addUserToRoom(data.username, data.roomName, rooms)
+				console.log(`rooms`, rooms)
 				socket.broadcast.emit(
 					'message',
 					JSON.stringify({
@@ -143,6 +153,31 @@ io.on('connection', socket => {
 						rooms
 					})
 				)
+				break
+			default:
+				break
+		}
+	})
+
+	socket.on('game', message => {
+		const data = JSON.parse(message)
+		const { roomName } = data
+		switch (data.type) {
+			case 'GAME_READY':
+				console.log(`GAME_READY`)
+				break
+			case 'GAME_STARTING':
+				console.log(`GAME_STARTING`)
+				break
+			case 'GAME_PIECE':
+				console.log(`GAME_PIECE`)
+				break
+			case 'GAME_EXIT`':
+				console.log(`GAME_EXIT`)
+				socket.leave(`${roomName}`)
+				break
+			case 'GAME_QUIT':
+				console.log(`GAME_QUIT`)
 				break
 			default:
 				break

@@ -38,8 +38,8 @@ function GameComponent(props) {
 	}
 
 	C.componentCleanup = function() {
-		// C.props.removeUserFromRoom(C.props.username, C.state.room)
-		// C.props.removeUser(C.props.username)
+		C.props.removeUserFromRoom(C.props.username, C.state.room)
+		C.props.removeUser(C.props.username)
 	}
 
 	C.verifyConnection = function() {

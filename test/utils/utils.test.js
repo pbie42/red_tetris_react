@@ -1,11 +1,13 @@
 import { expect } from 'chai'
 import {
+	addUserToRoom,
+	parseUrl,
+	removeUserFromRoom,
 	verifyMemberCount,
 	verifyMembers,
 	verifyRoomName,
-	verifyUsername,
 	verifyUrl,
-	parseUrl
+	verifyUsername
 } from '../../src/client/utils'
 
 describe('Utils', () => {
@@ -34,6 +36,78 @@ describe('Utils', () => {
 			parsed = parseUrl(url1)
 			expect(parsed.room).to.equal('Todd Room')
 			expect(parsed.player).to.equal('Todd Man')
+		})
+	})
+
+	describe('addUserToRoom', () => {
+		it('returns new rooms array after adding user to desired room', () => {
+			const username = 'pbie'
+			const roomName = 'Todd Room'
+			let rooms = [
+				{ roomName: 'Todd Room', members: ['toddster'] },
+				{ roomName: 'Danger Room', members: ['wolverine', 'cyclops'] }
+			]
+			rooms = addUserToRoom(username, roomName, rooms)
+			expect(rooms[0].members).to.eql(['toddster', 'pbie'])
+		})
+
+		it('returns unchanged rooms array if user already exists in specified room', () => {
+			const username = 'wolverine'
+			const roomName = 'Danger Room'
+			let rooms = [
+				{ roomName: 'Todd Room', members: ['pbie', 'toddster'] },
+				{ roomName: 'Danger Room', members: ['wolverine', 'cyclops'] }
+			]
+			rooms = addUserToRoom(username, roomName, rooms)
+			expect(rooms[1].members).to.eql(['wolverine', 'cyclops'])
+		})
+
+		it('returns unchanged rooms array if specified room does not exist', () => {
+			const username = 'mario'
+			const roomName = 'Mushroom Room'
+			let rooms = [
+				{ roomName: 'Todd Room', members: ['pbie', 'toddster'] },
+				{ roomName: 'Danger Room', members: ['wolverine', 'cyclops'] }
+			]
+			rooms = addUserToRoom(username, roomName, rooms)
+			expect(rooms[0].members).to.eql(['pbie', 'toddster'])
+			expect(rooms[1].members).to.eql(['wolverine', 'cyclops'])
+		})
+	})
+
+	describe('removeUserFromRoom', () => {
+		it('returns new rooms array after removing user from desired room', () => {
+			const username = 'pbie'
+			const roomName = 'Todd Room'
+			let rooms = [
+				{ roomName: 'Todd Room', members: ['pbie', 'toddster'] },
+				{ roomName: 'Danger Room', members: ['wolverine', 'cyclops'] }
+			]
+			rooms = removeUserFromRoom(username, roomName, rooms)
+			expect(rooms[0].members).to.eql(['toddster'])
+		})
+
+		it('returns unchanged rooms array if user does not exist in specified room', () => {
+			const username = 'storm'
+			const roomName = 'Danger Room'
+			let rooms = [
+				{ roomName: 'Todd Room', members: ['pbie', 'toddster'] },
+				{ roomName: 'Danger Room', members: ['wolverine', 'cyclops'] }
+			]
+			rooms = removeUserFromRoom(username, roomName, rooms)
+			expect(rooms[1].members).to.eql(['wolverine', 'cyclops'])
+		})
+
+		it('returns unchanged rooms array if specified room does not exist', () => {
+			const username = 'mario'
+			const roomName = 'Mushroom Room'
+			let rooms = [
+				{ roomName: 'Todd Room', members: ['pbie', 'toddster'] },
+				{ roomName: 'Danger Room', members: ['wolverine', 'cyclops'] }
+			]
+			rooms = removeUserFromRoom(username, roomName, rooms)
+			expect(rooms[0].members).to.eql(['pbie', 'toddster'])
+			expect(rooms[1].members).to.eql(['wolverine', 'cyclops'])
 		})
 	})
 	describe('verifyMemberCount', () => {
