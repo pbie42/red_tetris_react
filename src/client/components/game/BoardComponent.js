@@ -32,7 +32,6 @@ function BoardComponent(props) {
 	}
 
 	C.componentDidMount = function() {
-		console.log(`grid mounted`, grid)
 		C.setState({ pieces: pieceOrder() })
 		C.buildBoard()
 	}
@@ -48,7 +47,6 @@ function BoardComponent(props) {
 	}
 
 	C.buildBoard = function() {
-		console.log(`grid`, grid)
 		for (let i = 0; i < C.state.board.length; i++) {
 			const row = document.createElement('div')
 			row.setAttribute('id', `row-${i}`)

@@ -10,6 +10,7 @@ let rooms = [
 	{
 		roomName: 'Test Room',
 		members: ['John', 'Paul', 'George', 'Ringo'],
+		creator: 'John',
 		inSession: false,
 		countDown: false
 	}
@@ -27,6 +28,7 @@ let boards = [
 
 let index
 let roomIndex
+let pieceNumber = 0
 
 io.on('connection', socket => {
 	console.log(`a client is connected`)
@@ -124,6 +126,7 @@ io.on('connection', socket => {
 				rooms.push({
 					roomName: data.roomName,
 					members: data.members,
+					creator: data.members[0],
 					inSession: false,
 					countDown: false
 				})
@@ -178,6 +181,14 @@ io.on('connection', socket => {
 						rooms
 					})
 				)
+				const room = rooms.find(room => room.roomName === data.roomName)
+				io.to(data.roomName).emit(
+					'message',
+					JSON.stringify({
+						type: 'GAME_MEMBERS_UPDATE',
+						members: room ? room.members : []
+					})
+				)
 				// socket.emit(
 				// 	'message',
 				// 	JSON.stringify({
@@ -195,17 +206,44 @@ io.on('connection', socket => {
 	socket.on('game', message => {
 		const data = JSON.parse(message)
 		const { roomName } = data
+		let room
 		switch (data.type) {
 			case 'GAME_READY':
 				console.log(`GAME_READY`)
+				console.log(`data`, data)
+				console.log(`data.username`, data.username)
+				room = rooms.find(room => room.roomName === data.roomName)
+				if (!room) break
+				if (room && room.creator !== data.username) break
 				newGamePieces(data.roomName, pieces)
 				newBoards(data.members, data.roomName, boards)
+				console.log(`about to send game piece`)
+				console.log(`pieceNumber`, pieceNumber)
+				const piece = pieces.find(piece => piece.roomName === data.roomName)
+					.pieces[pieceNumber++]
+				console.log(`piece`, piece)
+				io.to(data.roomName).emit(
+					'message',
+					JSON.stringify({
+						type: 'GAME_PIECE',
+						piece
+					})
+				)
 				break
 			case 'GAME_STARTING':
 				console.log(`GAME_STARTING`)
 				break
-			case 'GAME_PIECE':
-				console.log(`GAME_PIECE`)
+			case 'NEXT_PIECE':
+				console.log(`NEXT_PIECE`)
+				socket.emit(
+					'message',
+					JSON.stringify({
+						type: 'GAME_PIECE',
+						piece: pieces.find(piece => piece.roomName === data.roomName)[
+							pieceNumber++
+						]
+					})
+				)
 				break
 			case 'GAME_EXIT`':
 				console.log(`GAME_EXIT`)
@@ -267,6 +305,6 @@ function newGamePieces(roomName, pieces) {
 
 function newBoards(members, roomName, boards) {
 	members.forEach(member => {
-		boards.push({ username, roomName, board: newUserBoard() })
+		boards.push({ username: member, roomName, board: newUserBoard() })
 	})
 }

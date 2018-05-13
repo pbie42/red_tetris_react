@@ -17,8 +17,7 @@ function GameComponent(props) {
 
 	C.state = {
 		connection: false,
-		room: '',
-		members: []
+		room: ''
 	}
 
 	C.componentWillMount = function() {
@@ -28,14 +27,17 @@ function GameComponent(props) {
 	C.componentWillUnmount = function() {
 		C.props.unsetGameRoom(C.state.room)
 		C.props.removeUserFromRoom(C.props.username, C.state.room)
+		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
 	}
 
 	C.componentDidMount = function() {
 		console.log(`NOT CONNECTED`)
 		window.addEventListener('beforeunload', C.componentCleanup)
+		window.addEventListener('keydown', e => C.handleSpaceBar(e))
 	}
 
 	C.componentDidUpdate = function() {
+		console.log(`C.props.members`, C.props.members)
 		const url = C.props.match.params.game
 		if (!verifyUrl(url)) C.props.history.push('/')
 		const { room, player } = parseUrl(url)
@@ -43,7 +45,14 @@ function GameComponent(props) {
 		if (C.verifyPlayerHandled()) {
 			doneRoom = C.handleRoom(room, player)
 			C.props.setGameRoom(room)
-			// C.props.gameReady()
+		}
+	}
+
+	C.handleSpaceBar = function(event) {
+		console.log(`KeyDown`)
+		if (event.keyCode === 32) {
+			console.log(`SPACE bar pressed`)
+			C.props.gameReady(C.props.roomName, C.props.members, C.props.username)
 		}
 	}
 
@@ -51,6 +60,7 @@ function GameComponent(props) {
 		C.props.unsetGameRoom(C.state.room)
 		C.props.removeUserFromRoom(C.props.username, C.state.room)
 		C.props.removeUser(C.props.username)
+		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
 	}
 
 	C.verifyConnection = function() {
@@ -79,6 +89,7 @@ function GameComponent(props) {
 	}
 
 	C.handlePlayer = function(player) {
+		console.log(`HANDLE PLAYERRRRRRR`)
 		if (!C.props.username) {
 			if (verifyUsername(player, C.props.users)) C.updateUser(player)
 			else C.errorUsername()
@@ -87,6 +98,7 @@ function GameComponent(props) {
 	}
 
 	C.handleRoom = function(room, player) {
+		console.log(`HANDLE ROOOOOMMMMMMMM`)
 		if (verifyRoomName(room, C.props.rooms)) C.updateRoom(room, player)
 		else {
 			C.setState({ room })
@@ -121,7 +133,7 @@ function GameComponent(props) {
 
 	C.render = () => {
 		return (
-			<div className="container-game">
+			<div className="container-game" onKeyDown={e => C.handleSpaceBar(e)}>
 				{!C.props.connection ? (
 					<i className="fas fa-spinner fa-pulse" />
 				) : (

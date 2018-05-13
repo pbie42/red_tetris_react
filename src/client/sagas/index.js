@@ -45,11 +45,11 @@ const handleGameReady = function* handleGameReady(params) {
 }
 
 export {
+	handleAddUserToRoom,
 	handleGameReady,
 	handleNewMessage,
-	handleNewUser,
 	handleNewRoom,
-	handleAddUserToRoom,
+	handleNewUser,
 	handleRemoveUser,
 	handleRemoveUserFromRoom
 }

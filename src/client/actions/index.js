@@ -10,7 +10,8 @@ import {
 	gameReady,
 	setGameRoom,
 	unsetGameRoom,
-	updateGameMembers
+	updateGameMembers,
+	updateGamePiece
 } from './games'
 
 import {
@@ -52,6 +53,7 @@ export {
 	setGameRoom,
 	setUsername,
 	updateGameMembers,
+	updateGamePiece,
 	unsetGameRoom,
 	unsetUsername,
 	usersListReceived,

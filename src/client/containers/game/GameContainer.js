@@ -40,8 +40,8 @@ export const mapDispatchToProps = dispatch => ({
 	errorTooManyMembers: username => {
 		dispatch(errorTooManyMembers(username))
 	},
-	gameReady: (roomName, members) => {
-		dispatch(gameReady(roomName, members))
+	gameReady: (roomName, members, username) => {
+		dispatch(gameReady(roomName, members, username))
 	},
 	setGameRoom: roomName => {
 		dispatch(setGameRoom(roomName))
@@ -59,7 +59,9 @@ export function mapStateToProps(state) {
 		username: state.user.username,
 		usernameIsSet: state.user.usernameSet,
 		users: state.users,
-		rooms: state.rooms
+		rooms: state.rooms,
+		members: state.games.members,
+		roomName: state.games.roomName
 	}
 }
 
