@@ -8,6 +8,8 @@ import {
 	parseUrl
 } from '../../utils/'
 
+import BoardComponent from './BoardComponent'
+
 function GameComponent(props) {
 	const C = new Component(props)
 	let doneUser = false
@@ -28,7 +30,6 @@ function GameComponent(props) {
 	}
 
 	C.componentDidUpdate = function() {
-		const { connection, usersReceived, roomsReceived, usernameIsSet } = C.props
 		const url = C.props.match.params.game
 		if (!verifyUrl(url)) C.props.history.push('/')
 		const { room, player } = parseUrl(url)
@@ -113,7 +114,8 @@ function GameComponent(props) {
 				{!C.props.connection ? (
 					<i className="fas fa-spinner fa-pulse" />
 				) : (
-					<h1>{C.props.connection ? 'CONNECTED' : 'NOT CONNECTED'}</h1>
+					// <h1>{C.props.connection ? 'CONNECTED' : 'NOT CONNECTED'}</h1>
+					<BoardComponent />
 				)}
 			</div>
 		)

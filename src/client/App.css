@@ -1193,6 +1193,26 @@ p {
 .container-game > i {
   font-size: 20rem;
 }
+.container-game .container-boards,
+.container-game #player-grid {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 70vh;
+  width: 36vh;
+}
+.container-game .container-boards > div,
+.container-game #player-grid > div {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+}
+.container-game .container-boards > div > div,
+.container-game #player-grid > div > div {
+  width: 100%;
+  border: solid #ccc 0.5px;
+}
 @-moz-keyframes gradientEaseIn {
   0% {
     opacity: 0;
