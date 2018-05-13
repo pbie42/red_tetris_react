@@ -92,26 +92,6 @@ io.on('connection', socket => {
 				// 	})
 				// )
 				break
-			case 'REMOVE_USER_FROM_ROOM':
-				console.log(`REMOVE_USER_FROM_ROOM`)
-				console.log(`data`, data)
-				rooms = removeUserFromRoom(data.username, data.roomName, rooms)
-				console.log(`rooms`, rooms)
-				socket.broadcast.emit(
-					'message',
-					JSON.stringify({
-						type: 'ROOMS_LIST',
-						rooms
-					})
-				)
-				// socket.emit(
-				// 	'message',
-				// 	JSON.stringify({
-				// 		type: 'USERS_LIST',
-				// 		users
-				// 	})
-				// )
-				break
 			case 'ADD_MESSAGE':
 				console.log(`ADD_MESSAGE`)
 				socket.broadcast.emit(
@@ -123,6 +103,15 @@ io.on('connection', socket => {
 					})
 				)
 				break
+			default:
+				break
+		}
+	})
+
+	socket.on('room', message => {
+		console.log(`new room message!!!`)
+		const data = JSON.parse(message)
+		switch (data.type) {
 			case 'ADD_ROOM':
 				console.log(`ADD_ROOM`)
 				console.log(`roomData`, data)
@@ -154,6 +143,27 @@ io.on('connection', socket => {
 					})
 				)
 				break
+			case 'REMOVE_USER_FROM_ROOM':
+				console.log(`REMOVE_USER_FROM_ROOM`)
+				console.log(`data`, data)
+				rooms = removeUserFromRoom(data.username, data.roomName, rooms)
+				console.log(`rooms`, rooms)
+				socket.broadcast.emit(
+					'message',
+					JSON.stringify({
+						type: 'ROOMS_LIST',
+						rooms
+					})
+				)
+				// socket.emit(
+				// 	'message',
+				// 	JSON.stringify({
+				// 		type: 'USERS_LIST',
+				// 		users
+				// 	})
+				// )
+				break
+
 			default:
 				break
 		}

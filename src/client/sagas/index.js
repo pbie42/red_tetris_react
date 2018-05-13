@@ -22,19 +22,19 @@ const handleRemoveUser = function* handleRemoveUser(params) {
 
 const handleRemoveUserFromRoom = function* handleRemoveUserFromRoom(params) {
 	yield takeEvery(types.REMOVE_USER_FROM_ROOM, action => {
-		params.socket.emit('message', JSON.stringify(action))
+		params.socket.emit('room', JSON.stringify(action))
 	})
 }
 
 const handleNewRoom = function* handleNewRoom(params) {
 	yield takeEvery(types.ADD_ROOM, action => {
-		params.socket.emit('message', JSON.stringify(action))
+		params.socket.emit('room', JSON.stringify(action))
 	})
 }
 
 const handleAddUserToRoom = function* handleAddUserToRoom(params) {
 	yield takeEvery(types.ADD_USER_TO_ROOM, action => {
-		params.socket.emit('message', JSON.stringify(action))
+		params.socket.emit('room', JSON.stringify(action))
 	})
 }
 
