@@ -19,18 +19,22 @@
 	},
 	"jest": {
 		"moduleNameMapper": {
-			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+				"<rootDir>/__mocks__/fileMock.js",
 			"\\.(css|sass)$": "<rootDir>/__mocks__/styleMock.js"
 		}
 	},
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --env=jsdom --require babel-register --require ignore-styles test/**/*.test.js --exit",
-		"oldtest": "./node_modules/.bin/istanbul cover react-scripts test -- --env=jsdom",
+		"test":
+			"./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --env=jsdom --require babel-register --require ignore-styles test/**/*.test.js --exit",
+		"oldtest":
+			"./node_modules/.bin/istanbul cover react-scripts test -- --env=jsdom",
 		"coverage": " npm test",
 		"eject": "react-scripts eject",
-		"style": "stylus src/client/styles --out ./src/client/App.css --watch"
+		"style": "stylus src/client/styles --out ./src/client/App.css --watch",
+		"server": "nodemon src/server/app.js"
 	},
 	"devDependencies": {
 		"babel": "^6.23.0",
