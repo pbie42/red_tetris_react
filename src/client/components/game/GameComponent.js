@@ -8,7 +8,8 @@ import {
 	parseUrl
 } from '../../utils/'
 
-import BoardComponent from './BoardComponent'
+// import BoardComponent from './BoardComponent'
+import { BoardContainer } from '../../containers/game/BoardContainer'
 
 function GameComponent(props) {
 	const C = new Component(props)
@@ -144,7 +145,7 @@ function GameComponent(props) {
 							<BoardComponent id="others-grid" /> */}
 						</div>
 						<div className="player-main">
-							<BoardComponent id="player-grid" />
+							<BoardContainer id="player-grid" />
 						</div>
 						<div className="players-others">
 							{/* <BoardComponent id="others-grid" />

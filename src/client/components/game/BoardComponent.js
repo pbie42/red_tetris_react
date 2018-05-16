@@ -84,7 +84,6 @@ function BoardComponent(props) {
 		if (piece.piece === 'z') position = getZ(piece)
 		C.state.piece.position = position.position
 		C.state.piece.shape = position.shape
-		console.log(`C.state`, JSON.stringify(C.state))
 		this.placePiece()
 	}
 
@@ -111,9 +110,7 @@ function BoardComponent(props) {
 				let boardX = location.x
 				let x = 0
 				while (x < 4) {
-					// console.log(`x`, x)
 					if (shape[y][x] === C.state.piece.piece) {
-						// console.log(`found a match!`)
 						board[boardY][boardX] = C.state.piece.piece
 					}
 					x++
@@ -124,7 +121,6 @@ function BoardComponent(props) {
 			}
 			C.state.board = board
 		}
-		// console.log(`this.board`, JSON.stringify(this.board))
 		C.buildBoard()
 	}
 
