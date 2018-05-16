@@ -60,7 +60,10 @@ export function mapStateToProps(state) {
 		users: state.users,
 		rooms: state.rooms,
 		members: state.games.members,
-		roomName: state.games.roomName
+		roomName: state.games.roomName,
+		boards: state.games.boards.filter(
+			board => board.username !== state.user.username
+		)
 	}
 }
 

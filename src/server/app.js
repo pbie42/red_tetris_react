@@ -261,6 +261,8 @@ io.on('connection', socket => {
 				console.log(`GAME_BOARD_UPDATE`)
 				console.log(`data`, data)
 				let user = getUser(data.username, users)
+				let members
+				let roomBoards
 				if (
 					user &&
 					(user.getId() !== data.id || user.getUsername()) !== data.username
@@ -269,19 +271,24 @@ io.on('connection', socket => {
 				if (user) user.board = data.board
 				// console.log(`rooms`, JSON.stringify(rooms))
 				// console.log(`users`, JSON.stringify(users))
-				console.log(`sending GAME_MEMBERS_UPDATE`)
-				io.to(data.roomName).emit(
-					'message',
-					JSON.stringify({
-						type: 'GAME_BOARDS_UPDATE',
-						boards: getRoom(data.roomName, rooms)
-							.getMembers()
-							.map(member => ({
-								board: member.getBoard(),
-								username: member.getUsername()
-							}))
-					})
-				)
+				console.log(`sending GAME_BOARDS_UPDATE`)
+				let room = getRoom(data.roomName, rooms)
+				if (room) members = room.getMembers()
+				console.log(`members`, members)
+				if (members)
+					roomBoards = members.map(member => ({
+						board: member.getBoard(),
+						username: member.getUsername()
+					}))
+				console.log(`roomBoards`, roomBoards)
+				if (roomBoards)
+					io.to(data.roomName).emit(
+						'message',
+						JSON.stringify({
+							type: 'GAME_BOARDS_UPDATE',
+							boards: roomBoards
+						})
+					)
 				break
 			case 'NEXT_PIECE':
 				console.log(`NEXT_PIECE`)

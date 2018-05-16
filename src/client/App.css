@@ -1254,25 +1254,25 @@ p {
   width: 100%;
   border: solid #ccc 0.5px;
 }
-.container-game .container-boards .player-main #player-grid > div .orange {
+.orange {
   background: #ffa500;
 }
-.container-game .container-boards .player-main #player-grid > div .cyan {
+.cyan {
   background: #0ff;
 }
-.container-game .container-boards .player-main #player-grid > div .blue {
+.blue {
   background: #00f;
 }
-.container-game .container-boards .player-main #player-grid > div .yellow {
+.yellow {
   background: #ff0;
 }
-.container-game .container-boards .player-main #player-grid > div .green {
+.green {
   background: #008000;
 }
-.container-game .container-boards .player-main #player-grid > div .purple {
+.purple {
   background: #800080;
 }
-.container-game .container-boards .player-main #player-grid > div .red {
+.red {
   background: #f00;
 }
 @-moz-keyframes gradientEaseIn {

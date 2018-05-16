@@ -10,6 +10,7 @@ import {
 
 // import BoardComponent from './BoardComponent'
 import { BoardContainer } from '../../containers/game/BoardContainer'
+import { ViewerBoardContainer } from '../../containers/game/ViewerBoardContainer'
 
 function GameComponent(props) {
 	const C = new Component(props)
@@ -141,8 +142,24 @@ function GameComponent(props) {
 					// <h1>{C.props.connection ? 'CONNECTED' : 'NOT CONNECTED'}</h1>
 					<div className="container-boards">
 						<div className="players-others">
-							{/* <BoardComponent id="others-grid" />
-							<BoardComponent id="others-grid" /> */}
+							{C.props.boards[0] ? (
+								<ViewerBoardContainer
+									board={C.props.boards[0].board}
+									username={C.props.boards[0].username}
+									id="others-grid"
+								/>
+							) : (
+								''
+							)}
+							{C.props.boards[2] ? (
+								<ViewerBoardContainer
+									id="others-grid"
+									board={C.props.boards[2].board}
+									username={C.props.boards[2].username}
+								/>
+							) : (
+								''
+							)}
 						</div>
 						<div className="player-main">
 							<BoardContainer
@@ -152,8 +169,24 @@ function GameComponent(props) {
 							/>
 						</div>
 						<div className="players-others">
-							{/* <BoardComponent id="others-grid" />
-							<BoardComponent id="others-grid" /> */}
+							{C.props.boards[1] ? (
+								<ViewerBoardContainer
+									id="others-grid"
+									board={C.props.boards[1].board}
+									username={C.props.boards[1].username}
+								/>
+							) : (
+								''
+							)}
+							{C.props.boards[3] ? (
+								<ViewerBoardContainer
+									id="others-grid"
+									board={C.props.boards[3].board}
+									username={C.props.boards[3].username}
+								/>
+							) : (
+								''
+							)}
 						</div>
 					</div>
 				)}
