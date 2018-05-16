@@ -1,5 +1,3 @@
-import * as types from '../constants/ActionTypes'
-
 import { addMessage, messageReceived } from './chat'
 
 import { connected, disconnected } from './connections'

@@ -2,7 +2,7 @@ import * as types from '../constants/ActionTypes'
 import { addUserToRoom, removeUserFromRoom } from '../utils'
 
 const rooms = (state = [], action) => {
-	let rooms, index
+	let rooms
 	switch (action.type) {
 		case types.ADD_ROOM:
 		case types.ROOM_ADDED:

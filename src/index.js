@@ -5,7 +5,7 @@ import App from './client/App'
 import registerServiceWorker from './client/registerServiceWorker'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
-import { BrowserRouter as Router, HashRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import createSagaMiddleware from 'redux-saga'
 
 import reducers from './client/reducers'

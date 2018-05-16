@@ -10,7 +10,6 @@ import {
 	removeUserFromRoom,
 	setGameRoom,
 	unsetGameRoom,
-	usernameSet,
 	errorUsernameTaken,
 	errorTooManyMembers
 } from '../../actions'

@@ -10,15 +10,7 @@ import {
 	getS,
 	getT,
 	getZ,
-	initializeI,
-	initializeJ,
-	initializeL,
-	initializeO,
-	initializeS,
-	initializeT,
-	initializeZ,
 	newBoard,
-	pieceOrder,
 	positionsI,
 	positionsJ,
 	positionsL,
@@ -26,7 +18,6 @@ import {
 	positionsS,
 	positionsT,
 	positionsZ,
-	prependZero,
 	randomPiece
 } from '../../utils'
 
@@ -70,7 +61,6 @@ function BoardComponent(props) {
 	C.nextPiece = function() {
 		let piece = C.state.piece
 		let nextPiece = piece.pieces[piece.current]
-		let current = piece.current
 		let position = {}
 		C.state.piece.piece = nextPiece
 		C.state.piece.current++
@@ -207,7 +197,7 @@ function BoardComponent(props) {
 	}
 
 	C.movePieceDown = function() {
-		let { shape, location, piece, set } = C.state.piece
+		let { shape, location, piece } = C.state.piece
 		let offset = calcPieceBottom(shape, piece)
 		if (location.y - offset <= 19 && !C.state.piece.set) {
 			if (C.verifyPlacement({ x: location.x, y: location.y + 1 }, shape))
