@@ -7,7 +7,9 @@ import { errorUsernameTaken, errorTooManyMembers } from './errors'
 import {
 	gameReady,
 	setGameRoom,
+	setGameId,
 	unsetGameRoom,
+	updateGameBoard,
 	updateGameMembers,
 	updateGamePiece
 } from './games'
@@ -18,8 +20,8 @@ import {
 	removeUser,
 	setUsername,
 	unsetUsername,
-	usersListReceived,
-	usernameSet
+	usernameSet,
+	usersListReceived
 } from './users'
 
 import {
@@ -49,7 +51,9 @@ export {
 	roomAdded,
 	roomsListReceived,
 	setGameRoom,
+	setGameId,
 	setUsername,
+	updateGameBoard,
 	updateGameMembers,
 	updateGamePiece,
 	unsetGameRoom,

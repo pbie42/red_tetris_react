@@ -123,20 +123,26 @@ io.on('connection', socket => {
 				console.log(`roomData`, data)
 				socket.join(data.roomName)
 				console.log(`users`, users)
-				rooms.push(
-					new Game(
-						socket.id,
-						data.roomName,
-						data.members[0],
-						data.members.map(member => getUser(member, users))
-					)
+				let game = new Game(
+					socket.id,
+					data.roomName,
+					data.members[0],
+					data.members.map(member => getUser(member, users))
 				)
+				rooms.push(game)
 				console.log(`rooms`, rooms)
 				socket.broadcast.emit(
 					'message',
 					JSON.stringify({
 						type: 'ROOMS_LIST',
 						rooms: rooms.map(room => room.getInfo())
+					})
+				)
+				socket.emit(
+					'message',
+					JSON.stringify({
+						type: 'GAME_ID_SET',
+						id: game.getId()
 					})
 				)
 				console.log(`sending GAME_MEMBERS_UPDATE`)
@@ -242,6 +248,10 @@ io.on('connection', socket => {
 				break
 			case 'GAME_STARTING':
 				console.log(`GAME_STARTING`)
+				break
+			case 'GAME_BOARD_UPDATE':
+				console.log(`GAME_STARTING`)
+				console.log(`data`, data)
 				break
 			case 'NEXT_PIECE':
 				console.log(`NEXT_PIECE`)

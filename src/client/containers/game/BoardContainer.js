@@ -1,27 +1,21 @@
 import { connect } from 'react-redux'
 import BoardComponent from '../../components/game/BoardComponent'
-// import {
-// 	setUsername,
-// 	addUser,
-// 	addRoom,
-// 	addUserToRoom,
-// 	gameReady,
-// 	removeUser,
-// 	removeUserFromRoom,
-// 	setGameRoom,
-// 	unsetGameRoom,
-// 	usernameSet,
-// 	errorUsernameTaken,
-// 	errorTooManyMembers
-// } from '../../actions'
+import { updateGameBoard } from '../../actions'
 
-export const mapDispatchToProps = dispatch => ({})
+export const mapDispatchToProps = dispatch => ({
+	updateGameBoard: (board, id, roomName, username) => {
+		dispatch(updateGameBoard(board, id, roomName, username))
+	}
+})
 
 export function mapStateToProps(state) {
 	return {
 		username: state.user.username,
-		roomName: state.games.roomName
+		roomName: state.games.roomName,
+		roomId: state.games.id
 	}
 }
 
-export const BoardContainer = connect(mapStateToProps)(BoardComponent)
+export const BoardContainer = connect(mapStateToProps, mapDispatchToProps)(
+	BoardComponent
+)

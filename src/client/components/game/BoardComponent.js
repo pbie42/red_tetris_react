@@ -111,6 +111,12 @@ function BoardComponent(props) {
 			}
 			C.state.board = board
 		}
+		// C.props.updateGameBoard(
+		// 	C.state.board,
+		// 	C.props.roomId,
+		// 	C.props.roomName,
+		// 	C.props.username
+		// )
 		C.buildBoard()
 	}
 
@@ -167,8 +173,7 @@ function BoardComponent(props) {
 		while (++y < 4) {
 			let x = -1
 			while (++x < 11) {
-				if (C.state.savedBoard[y][x] !== 0)
-					console.log(`GAME OVER MANNNNNNN`)
+				if (C.state.savedBoard[y][x] !== 0) console.log(`GAME OVER MANNNNNNN`)
 			}
 		}
 	}

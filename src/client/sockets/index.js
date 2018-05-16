@@ -8,6 +8,7 @@ import {
 	connected,
 	usersListReceived,
 	roomsListReceived,
+	setGameId,
 	updateGameMembers,
 	updateGamePiece,
 	usernameSet
@@ -67,6 +68,11 @@ const setupSocket = dispatch => {
 			case types.GAME_PIECE:
 				console.log(`GAME_PIECE`)
 				dispatch(updateGamePiece(data.piece))
+				break
+			case types.GAME_ID_SET:
+				console.log(`GAME_ID_SET`)
+				console.log(`data`, data)
+				dispatch(setGameId(data.id))
 				break
 			default:
 				break

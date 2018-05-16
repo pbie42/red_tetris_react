@@ -27,4 +27,15 @@ export const unsetGameRoom = roomName => ({
 	roomName
 })
 
-export const updateBoard = board => {}
+export const setGameId = id => ({
+	type: types.GAME_ID_SET,
+	id
+})
+
+export const updateGameBoard = (board, id, roomName, username) => ({
+	type: types.GAME_BOARD_UPDATE,
+	board,
+	id,
+	roomName,
+	username
+})

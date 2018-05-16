@@ -3,12 +3,12 @@ module.exports = class User {
 		this.id = id
 		this.username = username
 	}
-	// set id(id) {
-	// 	this.id = id
-	// }
-	// get id() {
-	// 	return this.id
-	// }
+	set board(board) {
+		this.board = board
+	}
+	get board() {
+		return this.board
+	}
 	// set username(username) {
 	// 	this.username = username
 	// }
