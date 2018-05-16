@@ -10,6 +10,7 @@ import {
 	setGameId,
 	unsetGameRoom,
 	updateGameBoard,
+	updateGameBoards,
 	updateGameMembers,
 	updateGamePiece
 } from './games'
@@ -54,6 +55,7 @@ export {
 	setGameId,
 	setUsername,
 	updateGameBoard,
+	updateGameBoards,
 	updateGameMembers,
 	updateGamePiece,
 	unsetGameRoom,

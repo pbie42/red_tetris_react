@@ -2,9 +2,7 @@ function addUserToRoom(username, roomName, rooms, users) {
 	const roomIndex = rooms.findIndex(room => room.getRoomName() === roomName)
 	if (
 		roomIndex >= 0 &&
-		!rooms[roomIndex].members.find(
-			member => member.getUsername() === username
-		)
+		!rooms[roomIndex].members.find(member => member.getUsername() === username)
 	)
 		rooms[roomIndex].members.push(getUser(username, users))
 	return rooms
@@ -29,8 +27,15 @@ function getUser(username, users) {
 	return user
 }
 
+function getRoom(roomName, rooms) {
+	const room = rooms.find(room => room.getRoomName() === roomName)
+	console.log(`getRoom`, rooms)
+	return room
+}
+
 module.exports = {
 	addUserToRoom,
+	getRoom,
 	getUser,
 	removeUserFromRoom
 }

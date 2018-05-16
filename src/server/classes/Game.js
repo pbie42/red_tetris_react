@@ -37,6 +37,6 @@ module.exports = class Game {
 		return this.countdown
 	}
 	getMembers() {
-		return this.members.map(member => member.getUsername())
+		return this.members
 	}
 }

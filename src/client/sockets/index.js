@@ -10,6 +10,7 @@ import {
 	roomsListReceived,
 	setGameId,
 	updateGameMembers,
+	updateGameBoards,
 	updateGamePiece,
 	usernameSet
 } from '../actions'
@@ -73,6 +74,11 @@ const setupSocket = dispatch => {
 				console.log(`GAME_ID_SET`)
 				console.log(`data`, data)
 				dispatch(setGameId(data.id))
+				break
+			case types.GAME_BOARDS_UPDATE:
+				console.log(`GAME_BOARDS_UPDATE`)
+				console.log(`data`, data)
+				dispatch(updateGameBoards(data.boards))
 				break
 			default:
 				break

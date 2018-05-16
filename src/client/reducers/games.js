@@ -27,6 +27,9 @@ const games = (state = initialGameState, action) => {
 		case types.GAME_ID_SET:
 			console.log(`action`, action)
 			return { ...state, id: action.id }
+		case types.GAME_BOARDS_UPDATE:
+			console.log(`action`, action)
+			return { ...state, boards: action.boards }
 
 		default:
 			return state

@@ -2,7 +2,12 @@ const io = require('socket.io')()
 const User = require('./classes/User')
 const Game = require('./classes/Game')
 const Piece = require('./classes/Piece')
-const { addUserToRoom, getUser, removeUserFromRoom } = require('./utils')
+const {
+	addUserToRoom,
+	getRoom,
+	getUser,
+	removeUserFromRoom
+} = require('./utils')
 const { pieceOrder } = require('../client/utils')
 
 let users = []
@@ -187,6 +192,9 @@ io.on('connection', socket => {
 				console.log(`REMOVE_USER_FROM_ROOM`)
 				console.log(`data`, data)
 				rooms = removeUserFromRoom(data.username, data.roomName, rooms, users)
+				let user = getUser(data.username, users)
+				if (user) user.setBoard(newUserBoard())
+				// console.log(`user`, user)
 				console.log(`rooms`, rooms)
 				socket.broadcast.emit(
 					'message',
@@ -261,6 +269,19 @@ io.on('connection', socket => {
 				if (user) user.board = data.board
 				// console.log(`rooms`, JSON.stringify(rooms))
 				// console.log(`users`, JSON.stringify(users))
+				console.log(`sending GAME_MEMBERS_UPDATE`)
+				io.to(data.roomName).emit(
+					'message',
+					JSON.stringify({
+						type: 'GAME_BOARDS_UPDATE',
+						boards: getRoom(data.roomName, rooms)
+							.getMembers()
+							.map(member => ({
+								board: member.getBoard(),
+								username: member.getUsername()
+							}))
+					})
+				)
 				break
 			case 'NEXT_PIECE':
 				console.log(`NEXT_PIECE`)
@@ -303,7 +324,7 @@ const port = 8000
 io.listen(port)
 console.log(`listening on port`, port)
 
-function newUserBoard(params) {
+function newUserBoard() {
 	return [
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
