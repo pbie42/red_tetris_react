@@ -37,17 +37,20 @@ function BoardComponent(props) {
 			pieces: [],
 			position: 0,
 			set: false
-		}
+		},
+		interval: ''
 	}
 
 	C.componentDidMount = function() {
 		// C.setState({ pieces: C.pieceOrder() })
 		C.pieceOrder()
 		C.buildBoard()
+		C.state.interval = setInterval(C.movePieceDown, 750)
 		window.addEventListener('keydown', e => C.handleKeydown(e))
 	}
 
 	C.componentWillUnmount = function() {
+		clearInterval(C.state.interval)
 		window.removeEventListener('keydown', e => this.handleKeydown(e))
 	}
 
@@ -122,20 +125,22 @@ function BoardComponent(props) {
 	}
 
 	C.buildBoard = function() {
-		grid.innerHTML = ''
-		for (let i = 0; i < C.state.board.length; i++) {
-			if (i < 4) continue
-			if (i > 23) continue
-			const row = document.createElement('div')
-			row.setAttribute('id', `row-${i - 4}`)
-			for (let x = 0; x < C.state.board[i].length; x++) {
-				if (x > 9) continue
-				const square = document.createElement('div')
-				square.setAttribute('id', `col-${x}`)
-				C.setColorClass(i, x, square)
-				row.appendChild(square)
+		if (grid) {
+			grid.innerHTML = ''
+			for (let i = 0; i < C.state.board.length; i++) {
+				if (i < 4) continue
+				if (i > 23) continue
+				const row = document.createElement('div')
+				row.setAttribute('id', `row-${i - 4}`)
+				for (let x = 0; x < C.state.board[i].length; x++) {
+					if (x > 9) continue
+					const square = document.createElement('div')
+					square.setAttribute('id', `col-${x}`)
+					C.setColorClass(i, x, square)
+					row.appendChild(square)
+				}
+				grid.appendChild(row)
 			}
-			grid.appendChild(row)
 		}
 	}
 
