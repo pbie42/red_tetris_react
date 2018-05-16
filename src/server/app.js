@@ -2,16 +2,16 @@ const io = require('socket.io')()
 const User = require('./classes/User')
 const Game = require('./classes/Game')
 const Piece = require('./classes/Piece')
-const { addUserToRoom, removeUserFromRoom } = require('./utils')
+const { addUserToRoom, getUser, removeUserFromRoom } = require('./utils')
 const { pieceOrder } = require('../client/utils')
 
 let users = []
 let rooms = [
 	new Game('238hkjhdaify', 'Test Room', 'John', [
-		'John',
-		'Paul',
-		'George',
-		'Ringo'
+		new User('lkdsajlfs', 'John'),
+		new User('lsadfads', 'Paul'),
+		new User('lkdyjhghgfs', 'George'),
+		new User('lkdsa43423', 'Ringo')
 	])
 ]
 let pieces = [
@@ -122,8 +122,14 @@ io.on('connection', socket => {
 				console.log(`ADD_ROOM`)
 				console.log(`roomData`, data)
 				socket.join(data.roomName)
+				console.log(`users`, users)
 				rooms.push(
-					new Game(socket.id, data.roomName, data.members[0], data.members)
+					new Game(
+						socket.id,
+						data.roomName,
+						data.members[0],
+						data.members.map(member => getUser(member, users))
+					)
 				)
 				console.log(`rooms`, rooms)
 				socket.broadcast.emit(
@@ -138,15 +144,17 @@ io.on('connection', socket => {
 					'message',
 					JSON.stringify({
 						type: 'GAME_MEMBERS_UPDATE',
-						members: rooms.find(room => room.roomName === data.roomName)
-							.members
+						members: rooms
+							.find(room => room.getRoomName() === data.roomName)
+							.members.map(member => member.getUsername())
 					})
 				)
 				break
 			case 'ADD_USER_TO_ROOM':
 				console.log(`ADD_USER_TO_ROOM`)
 				console.log(`add to room data`, data)
-				rooms = addUserToRoom(data.username, data.roomName, rooms)
+				rooms = addUserToRoom(data.username, data.roomName, rooms, users)
+
 				console.log(`rooms`, rooms)
 				socket.join(data.roomName)
 				socket.broadcast.emit(
@@ -163,16 +171,21 @@ io.on('connection', socket => {
 					'message',
 					JSON.stringify({
 						type: 'GAME_MEMBERS_UPDATE',
-						members: rooms.find(
-							room => room.getRoomName() === data.roomName
-						).members
+						members: rooms
+							.find(room => room.getRoomName() === data.roomName)
+							.members.map(member => member.getUsername())
 					})
 				)
 				break
 			case 'REMOVE_USER_FROM_ROOM':
 				console.log(`REMOVE_USER_FROM_ROOM`)
 				console.log(`data`, data)
-				rooms = removeUserFromRoom(data.username, data.roomName, rooms)
+				rooms = removeUserFromRoom(
+					data.username,
+					data.roomName,
+					rooms,
+					users
+				)
 				console.log(`rooms`, rooms)
 				socket.broadcast.emit(
 					'message',
@@ -188,7 +201,9 @@ io.on('connection', socket => {
 					'message',
 					JSON.stringify({
 						type: 'GAME_MEMBERS_UPDATE',
-						members: room ? room.members : []
+						members: room
+							? room.members.map(member => member.getUsername())
+							: []
 					})
 				)
 				// socket.emit(

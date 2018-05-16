@@ -12,7 +12,14 @@ module.exports = class Game {
 
 	getInfo() {
 		const { id, roomName, creator, inSession, countdown, members } = this
-		return { id, roomName, creator, inSession, countdown, members }
+		return {
+			id,
+			roomName,
+			creator,
+			inSession,
+			countdown,
+			members: members.map(member => member.getUsername())
+		}
 	}
 	getId() {
 		return this.id
@@ -30,6 +37,6 @@ module.exports = class Game {
 		return this.countdown
 	}
 	getMembers() {
-		return this.members
+		return this.members.map(member => member.getUsername())
 	}
 }
