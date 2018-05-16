@@ -42,7 +42,7 @@ io.on('connection', socket => {
 		'message',
 		JSON.stringify({
 			type: 'ROOMS_LIST',
-			rooms
+			rooms: rooms.map(room => room.getInfo())
 		})
 	)
 
@@ -180,12 +180,7 @@ io.on('connection', socket => {
 			case 'REMOVE_USER_FROM_ROOM':
 				console.log(`REMOVE_USER_FROM_ROOM`)
 				console.log(`data`, data)
-				rooms = removeUserFromRoom(
-					data.username,
-					data.roomName,
-					rooms,
-					users
-				)
+				rooms = removeUserFromRoom(data.username, data.roomName, rooms, users)
 				console.log(`rooms`, rooms)
 				socket.broadcast.emit(
 					'message',
@@ -194,9 +189,7 @@ io.on('connection', socket => {
 						rooms
 					})
 				)
-				const room = rooms.find(
-					room => room.getRoomName() === data.roomName
-				)
+				const room = rooms.find(room => room.getRoomName() === data.roomName)
 				io.to(data.roomName).emit(
 					'message',
 					JSON.stringify({
