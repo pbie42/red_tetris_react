@@ -27,17 +27,17 @@ function GameComponent(props) {
 	C.componentWillUnmount = function() {
 		C.props.unsetGameRoom(C.state.room)
 		C.props.removeUserFromRoom(C.props.username, C.state.room)
-		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
+		// window.removeEventListener('keydown', e => C.handleSpaceBar(e))
 	}
 
 	C.componentDidMount = function() {
-		console.log(`NOT CONNECTED`)
+		// console.log(`NOT CONNECTED`)
 		window.addEventListener('beforeunload', C.componentCleanup)
-		window.addEventListener('keydown', e => C.handleSpaceBar(e))
+		// window.addEventListener('keydown', e => C.handleSpaceBar(e))
 	}
 
 	C.componentDidUpdate = function() {
-		console.log(`C.props.members`, C.props.members)
+		// console.log(`C.props.members`, C.props.members)
 		const url = C.props.match.params.game
 		if (!verifyUrl(url)) C.props.history.push('/')
 		const { room, player } = parseUrl(url)
@@ -49,9 +49,9 @@ function GameComponent(props) {
 	}
 
 	C.handleSpaceBar = function(event) {
-		console.log(`KeyDown`)
+		// console.log(`KeyDown`)
 		if (event.keyCode === 32) {
-			console.log(`SPACE bar pressed`)
+			// console.log(`SPACE bar pressed`)
 			C.props.gameReady(C.props.roomName, C.props.members, C.props.username)
 		}
 	}
@@ -89,7 +89,7 @@ function GameComponent(props) {
 	}
 
 	C.handlePlayer = function(player) {
-		console.log(`HANDLE PLAYERRRRRRR`)
+		// console.log(`HANDLE PLAYERRRRRRR`)
 		if (!C.props.username) {
 			if (verifyUsername(player, C.props.users)) C.updateUser(player)
 			else C.errorUsername()
@@ -98,7 +98,7 @@ function GameComponent(props) {
 	}
 
 	C.handleRoom = function(room, player) {
-		console.log(`HANDLE ROOOOOMMMMMMMM`)
+		// console.log(`HANDLE ROOOOOMMMMMMMM`)
 		if (verifyRoomName(room, C.props.rooms)) C.updateRoom(room, player)
 		else {
 			C.setState({ room })
@@ -140,15 +140,15 @@ function GameComponent(props) {
 					// <h1>{C.props.connection ? 'CONNECTED' : 'NOT CONNECTED'}</h1>
 					<div className="container-boards">
 						<div className="players-others">
-							<BoardComponent id="others-grid" />
-							<BoardComponent id="others-grid" />
+							{/* <BoardComponent id="others-grid" />
+							<BoardComponent id="others-grid" /> */}
 						</div>
 						<div className="player-main">
 							<BoardComponent id="player-grid" />
 						</div>
 						<div className="players-others">
-							<BoardComponent id="others-grid" />
-							<BoardComponent id="others-grid" />
+							{/* <BoardComponent id="others-grid" />
+							<BoardComponent id="others-grid" /> */}
 						</div>
 					</div>
 				)}

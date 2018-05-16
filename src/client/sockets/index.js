@@ -25,8 +25,8 @@ const setupSocket = dispatch => {
 	})
 
 	socket.on('message', event => {
-		console.log(`message`)
-		console.log(`event`, event)
+		// console.log(`message`)
+		// console.log(`event`, event)
 		const data = JSON.parse(event)
 		console.log(`data`, data)
 		switch (data.type) {
@@ -49,19 +49,19 @@ const setupSocket = dispatch => {
 				break
 			case types.USERS_LIST:
 				console.log(`USERS_LIST`)
-				console.log(`data.users`, data.users)
+				// console.log(`data.users`, data.users)
 				dispatch(populateUsersList(data.users))
 				dispatch(usersListReceived())
 				break
 			case types.ROOMS_LIST:
 				console.log(`ROOMS_LIST`)
-				console.log(`data.rooms`, data.rooms)
+				// console.log(`data.rooms`, data.rooms)
 				dispatch(populateRoomsList(data.rooms))
 				dispatch(roomsListReceived())
 				break
 			case types.GAME_MEMBERS_UPDATE:
 				console.log(`GAME_MEMBERS_UPDATE`)
-				console.log(`data.members`, data.members)
+				// console.log(`data.members`, data.members)
 				dispatch(updateGameMembers(data.members))
 				break
 			case types.GAME_PIECE:
