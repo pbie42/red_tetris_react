@@ -18,7 +18,7 @@ module.exports = class Game {
 			creator,
 			inSession,
 			countdown,
-			members: members.map(member => member.getUsername())
+			members: members.map(member => member.getInfo())
 		}
 	}
 	getId() {

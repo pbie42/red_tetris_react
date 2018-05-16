@@ -122,6 +122,7 @@ io.on('connection', socket => {
 	socket.on('room', message => {
 		console.log(`new room message!!!`)
 		const data = JSON.parse(message)
+		let currentRooms
 		switch (data.type) {
 			case 'ADD_ROOM':
 				console.log(`ADD_ROOM`)
@@ -136,6 +137,8 @@ io.on('connection', socket => {
 				)
 				rooms.push(game)
 				console.log(`rooms`, rooms)
+				currentRooms = rooms.map(room => room.getInfo())
+				console.log(`currentRooms`, currentRooms)
 				socket.broadcast.emit(
 					'message',
 					JSON.stringify({
@@ -168,13 +171,13 @@ io.on('connection', socket => {
 
 				console.log(`rooms`, rooms)
 				socket.join(data.roomName)
+				currentRooms = rooms.map(room => room.getInfo())
+				console.log(`currentRooms`, currentRooms)
 				socket.broadcast.emit(
 					'message',
 					JSON.stringify({
 						type: 'ROOMS_LIST',
-						rooms: rooms.map(room => {
-							room.getInfo()
-						})
+						rooms: currentRooms
 					})
 				)
 				console.log(`sending GAME_MEMBERS_UPDATE`)

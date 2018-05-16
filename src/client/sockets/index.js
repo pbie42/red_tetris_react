@@ -63,7 +63,7 @@ const setupSocket = dispatch => {
 				break
 			case types.GAME_MEMBERS_UPDATE:
 				console.log(`GAME_MEMBERS_UPDATE`)
-				// console.log(`data.members`, data.members)
+				console.log(`data`, data)
 				dispatch(updateGameMembers(data.members))
 				break
 			case types.GAME_PIECE:

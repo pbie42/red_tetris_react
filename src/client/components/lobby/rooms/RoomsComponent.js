@@ -23,7 +23,7 @@ export function RoomsComponent(props) {
 
 	C.selectRoom = function(roomName) {
 		console.log(`room selected`)
-		// C.props.addUserToRoom(C.props.username, roomName)
+		C.props.addUserToRoom(C.props.username, roomName)
 		C.props.history.push(`/${roomName.replace(/ /g, '_')}[${C.props.username}]`)
 	}
 
@@ -82,11 +82,15 @@ export function RoomsComponent(props) {
 												onMouseOver={() => C.hideOthers(index)}
 												onClick={() => C.selectRoom(room.roomName)}
 											>
-												<h1>{room.roomName}</h1>
+												<h1>
+													{console.log(`room`, room)}
+													{room.roomName}
+												</h1>
 												<div>
-													{room.members.map((person, index) => (
-														<h2 key={index}>{person}</h2>
-													))}
+													{room.members.map((person, index) => {
+														console.log(`person`, person)
+														return <h2 key={index}>{person.username}</h2>
+													})}
 												</div>
 												<div>
 													<h2>
@@ -111,7 +115,7 @@ export function RoomsComponent(props) {
 												<h1>{room.roomName}</h1>
 												<div>
 													{room.members.map((person, index) => (
-														<h2 key={index}>{person}</h2>
+														<h2 key={index}>{person.username}</h2>
 													))}
 												</div>
 												<div>
