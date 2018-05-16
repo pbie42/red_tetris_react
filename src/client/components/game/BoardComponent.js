@@ -111,12 +111,13 @@ function BoardComponent(props) {
 			}
 			C.state.board = board
 		}
-		// C.props.updateGameBoard(
-		// 	C.state.board,
-		// 	C.props.roomId,
-		// 	C.props.roomName,
-		// 	C.props.username
-		// )
+		if (C.props.doneUser && C.props.doneRoom)
+			C.props.updateGameBoard(
+				C.state.board,
+				C.props.roomId,
+				C.props.roomName,
+				C.props.username
+			)
 		C.buildBoard()
 	}
 

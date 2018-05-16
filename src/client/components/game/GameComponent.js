@@ -145,7 +145,11 @@ function GameComponent(props) {
 							<BoardComponent id="others-grid" /> */}
 						</div>
 						<div className="player-main">
-							<BoardContainer id="player-grid" />
+							<BoardContainer
+								id="player-grid"
+								doneRoom={doneRoom}
+								doneUser={doneUser}
+							/>
 						</div>
 						<div className="players-others">
 							{/* <BoardComponent id="others-grid" />

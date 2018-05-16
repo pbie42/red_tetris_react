@@ -2,11 +2,12 @@ module.exports = class User {
 	constructor(id, username) {
 		this.id = id
 		this.username = username
+		this.board = []
 	}
-	set board(board) {
-		this.board = board
+	setBoard(newBoard) {
+		this.board = newBoard
 	}
-	get board() {
+	getBoard() {
 		return this.board
 	}
 	// set username(username) {

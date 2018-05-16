@@ -250,8 +250,17 @@ io.on('connection', socket => {
 				console.log(`GAME_STARTING`)
 				break
 			case 'GAME_BOARD_UPDATE':
-				console.log(`GAME_STARTING`)
+				console.log(`GAME_BOARD_UPDATE`)
 				console.log(`data`, data)
+				let user = getUser(data.username, users)
+				if (
+					user &&
+					(user.getId() !== data.id || user.getUsername()) !== data.username
+				)
+					console.log(`CHEATING!!!!!!!!!!!`)
+				if (user) user.board = data.board
+				// console.log(`rooms`, JSON.stringify(rooms))
+				// console.log(`users`, JSON.stringify(users))
 				break
 			case 'NEXT_PIECE':
 				console.log(`NEXT_PIECE`)
