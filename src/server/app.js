@@ -2,11 +2,8 @@ const io = require('socket.io')()
 const User = require('./classes/User')
 const Game = require('./classes/Game')
 const Piece = require('./classes/Piece')
-const {
-	pieceOrder,
-	addUserToRoom,
-	removeUserFromRoom
-} = require('../client/utils')
+const { addUserToRoom, removeUserFromRoom } = require('./utils')
+const { pieceOrder } = require('../client/utils')
 
 let users = []
 let rooms = [
@@ -149,15 +146,7 @@ io.on('connection', socket => {
 			case 'ADD_USER_TO_ROOM':
 				console.log(`ADD_USER_TO_ROOM`)
 				console.log(`add to room data`, data)
-				rooms = addUserToRoom(
-					data.username,
-					data.roomName,
-					rooms.map(room => room.getInfo())
-				)
-				rooms = rooms.map(
-					room =>
-						new Game(room.id, room.roomName, room.creator, room.members)
-				)
+				rooms = addUserToRoom(data.username, data.roomName, rooms)
 				console.log(`rooms`, rooms)
 				socket.join(data.roomName)
 				socket.broadcast.emit(
@@ -183,15 +172,7 @@ io.on('connection', socket => {
 			case 'REMOVE_USER_FROM_ROOM':
 				console.log(`REMOVE_USER_FROM_ROOM`)
 				console.log(`data`, data)
-				rooms = removeUserFromRoom(
-					data.username,
-					data.roomName,
-					rooms.map(room => room.getInfo())
-				)
-				rooms = rooms.map(
-					room =>
-						new Game(room.id, room.roomName, room.creator, room.members)
-				)
+				rooms = removeUserFromRoom(data.username, data.roomName, rooms)
 				console.log(`rooms`, rooms)
 				socket.broadcast.emit(
 					'message',

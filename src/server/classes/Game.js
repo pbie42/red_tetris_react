@@ -1,3 +1,5 @@
+const { pieceOrder } = require('../../client/utils')
+
 module.exports = class Game {
 	constructor(id, roomName, creator, members) {
 		this.id = id

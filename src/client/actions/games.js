@@ -26,3 +26,5 @@ export const unsetGameRoom = roomName => ({
 	type: types.GAME_ROOM_UNSET,
 	roomName
 })
+
+export const updateBoard = board => {}
