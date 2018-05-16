@@ -17,6 +17,7 @@ import {
 	handleNewRoom,
 	handleAddUserToRoom,
 	handleRemoveUserFromRoom,
+	handleGameJoined,
 	handleGameReady,
 	handleGameBoardUpdate
 } from './client/sagas'
@@ -63,6 +64,10 @@ sagaMiddleware.run(handleGameReady, {
 })
 
 sagaMiddleware.run(handleGameBoardUpdate, {
+	socket
+})
+
+sagaMiddleware.run(handleGameJoined, {
 	socket
 })
 

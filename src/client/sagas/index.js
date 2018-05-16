@@ -50,8 +50,15 @@ const handleGameBoardUpdate = function* handleGameBoardUpdate(params) {
 	})
 }
 
+const handleGameJoined = function* handleGameJoined(params) {
+	yield takeEvery(types.GAME_JOINED, action => {
+		params.socket.emit('game', JSON.stringify(action))
+	})
+}
+
 export {
 	handleAddUserToRoom,
+	handleGameJoined,
 	handleGameReady,
 	handleGameBoardUpdate,
 	handleNewMessage,

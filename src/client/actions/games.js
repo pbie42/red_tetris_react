@@ -40,6 +40,11 @@ export const updateGameBoard = (board, id, roomName, username) => ({
 	username
 })
 
+export const gameJoined = roomName => ({
+	type: types.GAME_JOINED,
+	roomName
+})
+
 export const updateGameBoards = boards => ({
 	type: types.GAME_BOARDS_UPDATE,
 	boards

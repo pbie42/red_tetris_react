@@ -11,7 +11,6 @@ function ViewerBoardComponent(props) {
 
 	C.componentDidMount = function() {
 		C.state.board = newBoard()
-		console.log(`C.props.board`, C.props.board)
 		C.buildBoard()
 	}
 
@@ -20,7 +19,6 @@ function ViewerBoardComponent(props) {
 	}
 
 	C.buildBoard = function() {
-		console.log(`C.props.board`, C.props.board)
 		grid.innerHTML = ''
 		for (let i = 0; i < C.props.board.length; i++) {
 			if (i < 4) continue

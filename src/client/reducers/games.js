@@ -14,6 +14,8 @@ const games = (state = initialGameState, action) => {
 	switch (action.type) {
 		case types.GAME_READY:
 			return { ...state, countDown: true }
+		case types.GAME_JOINED:
+			return state
 		case types.GAME_ROOM_SET:
 			return { ...state, roomName: action.roomName }
 		case types.GAME_ROOM_UNSET:

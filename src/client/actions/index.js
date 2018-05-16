@@ -5,6 +5,7 @@ import { connected, disconnected } from './connections'
 import { errorUsernameTaken, errorTooManyMembers } from './errors'
 
 import {
+	gameJoined,
 	gameReady,
 	setGameRoom,
 	setGameId,
@@ -43,6 +44,7 @@ export {
 	disconnected,
 	errorTooManyMembers,
 	errorUsernameTaken,
+	gameJoined,
 	gameReady,
 	messageReceived,
 	populateRoomsList,

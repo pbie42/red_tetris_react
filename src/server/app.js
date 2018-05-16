@@ -233,8 +233,27 @@ io.on('connection', socket => {
 	socket.on('game', message => {
 		const data = JSON.parse(message)
 		const { roomName } = data
-		let room
+		let room, members, roomBoards
 		switch (data.type) {
+			case 'GAME_JOINED':
+				console.log(`GAME_JOINED`)
+				room = getRoom(data.roomName, rooms)
+				if (room) members = room.getMembers()
+				console.log(`members`, members)
+				if (members)
+					roomBoards = members.map(member => ({
+						board: member.getBoard(),
+						username: member.getUsername()
+					}))
+				if (roomBoards)
+					io.to(data.roomName).emit(
+						'message',
+						JSON.stringify({
+							type: 'GAME_BOARDS_UPDATE',
+							boards: roomBoards
+						})
+					)
+				break
 			case 'GAME_READY':
 				console.log(`GAME_READY`)
 				console.log(`data`, data)
@@ -264,8 +283,6 @@ io.on('connection', socket => {
 				console.log(`GAME_BOARD_UPDATE`)
 				console.log(`data`, data)
 				let user = getUser(data.username, users)
-				let members
-				let roomBoards
 				if (
 					user &&
 					(user.getId() !== data.id || user.getUsername()) !== data.username
@@ -275,7 +292,7 @@ io.on('connection', socket => {
 				// console.log(`rooms`, JSON.stringify(rooms))
 				// console.log(`users`, JSON.stringify(users))
 				console.log(`sending GAME_BOARDS_UPDATE`)
-				let room = getRoom(data.roomName, rooms)
+				room = getRoom(data.roomName, rooms)
 				if (room) members = room.getMembers()
 				console.log(`members`, members)
 				if (members)
