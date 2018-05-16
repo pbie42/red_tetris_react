@@ -1,1 +1,1 @@
-class Piece {}
+module.exports = class Piece {}

@@ -28,6 +28,7 @@ export function ChatComponent(props) {
 					showNewRoom={C.props.showNewRoom}
 					hideNewRoom={C.props.hideNewRoom}
 					display={C.props.display}
+					history={C.props.history}
 				/>
 			</div>
 		)

@@ -1,4 +1,7 @@
 const io = require('socket.io')()
+const User = require('./classes/User')
+const Game = require('./classes/Game')
+const Piece = require('./classes/Piece')
 const {
 	pieceOrder,
 	addUserToRoom,
@@ -7,13 +10,12 @@ const {
 
 let users = []
 let rooms = [
-	{
-		roomName: 'Test Room',
-		members: ['John', 'Paul', 'George', 'Ringo'],
-		creator: 'John',
-		inSession: false,
-		countDown: false
-	}
+	new Game('238hkjhdaify', 'Test Room', 'John', [
+		'John',
+		'Paul',
+		'George',
+		'Ringo'
+	])
 ]
 let pieces = [
 	{
@@ -36,7 +38,7 @@ io.on('connection', socket => {
 		'message',
 		JSON.stringify({
 			type: 'USERS_LIST',
-			users
+			users: users.map(user => user.getInfo())
 		})
 	)
 	socket.emit(
@@ -56,20 +58,20 @@ io.on('connection', socket => {
 				console.log(`ADD_USER`)
 				console.log(`data`, data)
 				index = users.length
-				users.push({ username: data.username, id: index + 1 })
+				users.push(new User(socket.id, data.username))
 				console.log(`users`, users)
 				socket.broadcast.emit(
 					'message',
 					JSON.stringify({
 						type: 'USERS_LIST',
-						users
+						users: users.map(user => user.getInfo())
 					})
 				)
 				socket.emit(
 					'message',
 					JSON.stringify({
 						type: 'USERS_LIST',
-						users
+						users: users.map(user => user.getInfo())
 					})
 				)
 				socket.emit(
@@ -88,7 +90,7 @@ io.on('connection', socket => {
 					'message',
 					JSON.stringify({
 						type: 'USERS_LIST',
-						users
+						users: users.map(user => user.getInfo())
 					})
 				)
 				// socket.emit(
@@ -123,19 +125,15 @@ io.on('connection', socket => {
 				console.log(`ADD_ROOM`)
 				console.log(`roomData`, data)
 				socket.join(data.roomName)
-				rooms.push({
-					roomName: data.roomName,
-					members: data.members,
-					creator: data.members[0],
-					inSession: false,
-					countDown: false
-				})
+				rooms.push(
+					new Game(socket.id, data.roomName, data.members[0], data.members)
+				)
 				console.log(`rooms`, rooms)
 				socket.broadcast.emit(
 					'message',
 					JSON.stringify({
 						type: 'ROOMS_LIST',
-						rooms
+						rooms: rooms.map(room => room.getInfo())
 					})
 				)
 				console.log(`sending GAME_MEMBERS_UPDATE`)
@@ -151,14 +149,24 @@ io.on('connection', socket => {
 			case 'ADD_USER_TO_ROOM':
 				console.log(`ADD_USER_TO_ROOM`)
 				console.log(`add to room data`, data)
-				rooms = addUserToRoom(data.username, data.roomName, rooms)
+				rooms = addUserToRoom(
+					data.username,
+					data.roomName,
+					rooms.map(room => room.getInfo())
+				)
+				rooms = rooms.map(
+					room =>
+						new Game(room.id, room.roomName, room.creator, room.members)
+				)
 				console.log(`rooms`, rooms)
 				socket.join(data.roomName)
 				socket.broadcast.emit(
 					'message',
 					JSON.stringify({
 						type: 'ROOMS_LIST',
-						rooms
+						rooms: rooms.map(room => {
+							room.getInfo()
+						})
 					})
 				)
 				console.log(`sending GAME_MEMBERS_UPDATE`)
@@ -166,15 +174,24 @@ io.on('connection', socket => {
 					'message',
 					JSON.stringify({
 						type: 'GAME_MEMBERS_UPDATE',
-						members: rooms.find(room => room.roomName === data.roomName)
-							.members
+						members: rooms.find(
+							room => room.getRoomName() === data.roomName
+						).members
 					})
 				)
 				break
 			case 'REMOVE_USER_FROM_ROOM':
 				console.log(`REMOVE_USER_FROM_ROOM`)
 				console.log(`data`, data)
-				rooms = removeUserFromRoom(data.username, data.roomName, rooms)
+				rooms = removeUserFromRoom(
+					data.username,
+					data.roomName,
+					rooms.map(room => room.getInfo())
+				)
+				rooms = rooms.map(
+					room =>
+						new Game(room.id, room.roomName, room.creator, room.members)
+				)
 				console.log(`rooms`, rooms)
 				socket.broadcast.emit(
 					'message',
@@ -183,7 +200,9 @@ io.on('connection', socket => {
 						rooms
 					})
 				)
-				const room = rooms.find(room => room.roomName === data.roomName)
+				const room = rooms.find(
+					room => room.getRoomName() === data.roomName
+				)
 				io.to(data.roomName).emit(
 					'message',
 					JSON.stringify({

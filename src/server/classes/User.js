@@ -1,12 +1,28 @@
-class User {
+module.exports = class User {
 	constructor(id, username) {
 		this.id = id
 		this.username = username
 	}
-	get id() {
-		return this.id
+	// set id(id) {
+	// 	this.id = id
+	// }
+	// get id() {
+	// 	return this.id
+	// }
+	// set username(username) {
+	// 	this.username = username
+	// }
+	// get username() {
+	// 	return this.username
+	// }
+	getInfo() {
+		const { id, username } = this
+		return { id, username }
 	}
-	get username() {
+	getUsername() {
 		return this.username
+	}
+	getId() {
+		return this.id
 	}
 }

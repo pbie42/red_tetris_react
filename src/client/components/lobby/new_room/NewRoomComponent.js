@@ -13,12 +13,15 @@ export function NewRoomComponent(props) {
 			e.preventDefault()
 			if (value && C.verifyRoomName(value)) {
 				props.addRoom(value, [C.props.username])
-				// function test() {
-				// 	props.history.push('/lobby')
-				// }
+				function test() {
+					C.props.history.push(
+						`/${value.replace(/ /g, '_')}[${C.props.username}]`
+					)
+				}
 				// props.pageChange()
-				// setTimeout(test, 800)
-				C.props.hideNewRoom()
+				// setTimeout(test, 600)
+				// C.props.hideNewRoom()
+				test()
 			} else C.setSubmitError()
 			C.refs.input.value = ''
 		}
@@ -29,7 +32,16 @@ export function NewRoomComponent(props) {
 		if (value && C.verifyRoomName(value)) {
 			props.addRoom(value, [C.props.username])
 			// props.history.push('/lobby')
-			C.props.hideNewRoom()
+			// C.props.hideNewRoom()
+			function test() {
+				C.props.history.push(
+					`/${value.replace(/ /g, '_')}[${C.props.username}]`
+				)
+			}
+			// props.pageChange()
+			// setTimeout(test, 600)
+			// C.props.hideNewRoom()
+			test()
 		} else C.setSubmitError()
 		C.refs.input.value = ''
 	}

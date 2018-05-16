@@ -45,6 +45,7 @@ function LobbyComponent(props) {
 					showNewRoom={C.state.hide}
 					hideNewRoom={C.hideNewRoom}
 					display={C.state.display}
+					history={C.props.history}
 				/>
 			</div>
 		)

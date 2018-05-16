@@ -1,12 +1,33 @@
-class Game {
-	constructor(id, roomName) {
+module.exports = class Game {
+	constructor(id, roomName, creator, members) {
 		this.id = id
 		this.roomName = roomName
+		this.creator = creator
+		this.inSession = false
+		this.countdown = false
+		this.members = members
 	}
-	get id() {
+
+	getInfo() {
+		const { id, roomName, creator, inSession, countdown, members } = this
+		return { id, roomName, creator, inSession, countdown, members }
+	}
+	getId() {
 		return this.id
 	}
-	get roomName() {
+	getRoomName() {
 		return this.roomName
+	}
+	getCreator() {
+		return this.creator
+	}
+	getInSession() {
+		return this.inSession
+	}
+	getCountdown() {
+		return this.countdown
+	}
+	getMembers() {
+		return this.members
 	}
 }
