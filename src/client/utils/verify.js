@@ -28,7 +28,7 @@ function verifyRoomName(roomName, rooms) {
 }
 
 function verifyUsername(username, users) {
-	const index = users.findIndex(user => username === user.name)
+	const index = users.findIndex(user => username === user.username)
 	if (index >= 0) return false
 	return true
 }

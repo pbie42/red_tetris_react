@@ -112,7 +112,10 @@ describe('Utils', () => {
 	})
 	describe('verifyMemberCount', () => {
 		const rooms = [
-			{ roomName: 'Danger Room', members: ['john', 'paul', 'george', 'ringo'] },
+			{
+				roomName: 'Danger Room',
+				members: ['john', 'paul', 'george', 'ringo']
+			},
 			{
 				roomName: 'Mee Room',
 				members: ['Oliver', 'Jen', 'Alex', 'Juliana', 'Nick', 'Josie']
@@ -138,7 +141,10 @@ describe('Utils', () => {
 		const username1 = 'nick'
 		const username2 = 'paul'
 		const rooms = [
-			{ roomName: 'Danger Room', members: ['john', 'paul', 'george', 'ringo'] }
+			{
+				roomName: 'Danger Room',
+				members: ['john', 'paul', 'george', 'ringo']
+			}
 		]
 		it('returns true if there is no member with same name', () => {
 			const result = verifyMembers(username1, 'Danger Room', rooms)
@@ -152,7 +158,10 @@ describe('Utils', () => {
 
 	describe('verifyRoomName', () => {
 		const rooms = [
-			{ roomName: 'Danger Room', members: ['john', 'paul', 'george', 'ringo'] }
+			{
+				roomName: 'Danger Room',
+				members: ['john', 'paul', 'george', 'ringo']
+			}
 		]
 		it('returns true if there is no room with same name', () => {
 			const result = verifyRoomName('Cool Room', rooms)
@@ -165,7 +174,7 @@ describe('Utils', () => {
 	})
 
 	describe('verifyUsername', () => {
-		const users = [{ name: 'paul', id: 0 }, { name: 'jen', id: 1 }]
+		const users = [{ username: 'paul', id: 0 }, { username: 'jen', id: 1 }]
 		it('returns true if there is no user with same name', () => {
 			const result = verifyUsername('rick', users)
 			expect(result).to.be.true

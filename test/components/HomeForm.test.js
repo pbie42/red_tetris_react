@@ -199,7 +199,7 @@ describe('HomeForm', () => {
 			const pageChangeSpy = sinon.spy()
 			const wrapper = mount(
 				<HomeForm
-					users={[{ id: 0, name: 'Jen' }]}
+					users={[{ id: 0, username: 'Jen' }]}
 					store={store}
 					history={[]}
 					addUser={addUserSpy}
@@ -261,7 +261,7 @@ describe('HomeForm', () => {
 				const expectedAction = actions.addUser()
 				const spyLastCall = dispatchSpy.args[0][0]
 				expect(spyLastCall.type).to.eql(expectedAction.type)
-				expect(spyLastCall.name).to.equal('Dan')
+				expect(spyLastCall.username).to.equal('Dan')
 				expect(spyLastCall.id).to.equal(3)
 			})
 		})

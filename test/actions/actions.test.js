@@ -141,7 +141,7 @@ describe('Actions', () => {
 			expect(addUserAction).to.eql({
 				type: 'ADD_USER',
 				id: 0,
-				name: 'pbie'
+				username: 'pbie'
 			})
 		})
 

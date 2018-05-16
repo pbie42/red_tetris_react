@@ -64,7 +64,7 @@ function HomeForm(props) {
 	}
 
 	C.verifyUsername = function(value) {
-		const index = C.props.users.findIndex(user => value === user.name)
+		const index = C.props.users.findIndex(user => value === user.username)
 		if (index >= 0) return false
 		return true
 	}

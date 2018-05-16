@@ -66,7 +66,7 @@ describe('Game', () => {
 				const expectedAction = actions.addUser()
 				const spyLastCall = dispatchSpy.args[0][0]
 				expect(spyLastCall.type).to.eql(expectedAction.type)
-				expect(spyLastCall.name).to.equal(username)
+				expect(spyLastCall.username).to.equal(username)
 				expect(spyLastCall.id).to.equal(1)
 			})
 

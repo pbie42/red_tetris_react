@@ -56,7 +56,7 @@ io.on('connection', socket => {
 				console.log(`ADD_USER`)
 				console.log(`data`, data)
 				index = users.length
-				users.push({ name: data.name, id: index + 1 })
+				users.push({ username: data.username, id: index + 1 })
 				console.log(`users`, users)
 				socket.broadcast.emit(
 					'message',
@@ -82,7 +82,7 @@ io.on('connection', socket => {
 			case 'REMOVE_USER':
 				console.log(`REMOVE_USER`)
 				console.log(`data`, data)
-				users = users.filter(user => user.name === data.username)
+				users = users.filter(user => user.username === data.username)
 				console.log(`users`, users)
 				socket.broadcast.emit(
 					'message',
@@ -143,7 +143,8 @@ io.on('connection', socket => {
 					'message',
 					JSON.stringify({
 						type: 'GAME_MEMBERS_UPDATE',
-						members: rooms.find(room => room.roomName === data.roomName).members
+						members: rooms.find(room => room.roomName === data.roomName)
+							.members
 					})
 				)
 				break
@@ -165,7 +166,8 @@ io.on('connection', socket => {
 					'message',
 					JSON.stringify({
 						type: 'GAME_MEMBERS_UPDATE',
-						members: rooms.find(room => room.roomName === data.roomName).members
+						members: rooms.find(room => room.roomName === data.roomName)
+							.members
 					})
 				)
 				break

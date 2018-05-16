@@ -1,10 +1,10 @@
 import * as types from '../constants/ActionTypes'
 let nextUserId = 0
 
-export const addUser = name => ({
+export const addUser = username => ({
 	type: types.ADD_USER,
 	id: nextUserId++,
-	name
+	username
 })
 
 export const removeUser = username => ({
