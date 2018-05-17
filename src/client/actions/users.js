@@ -17,6 +17,11 @@ export const setUsername = username => ({
 	username
 })
 
+export const setId = id => ({
+	type: types.SET_ID,
+	id
+})
+
 export const unsetUsername = username => ({
 	type: types.UNSET_USERNAME,
 	username

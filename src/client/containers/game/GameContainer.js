@@ -5,7 +5,8 @@ import {
 	addUser,
 	addRoom,
 	addUserToRoom,
-	gameReady,
+	startGame,
+	gameJoined,
 	removeUser,
 	removeUserFromRoom,
 	setGameRoom,
@@ -39,14 +40,17 @@ export const mapDispatchToProps = dispatch => ({
 	errorTooManyMembers: username => {
 		dispatch(errorTooManyMembers(username))
 	},
-	gameReady: (roomName, members, username) => {
-		dispatch(gameReady(roomName, members, username))
+	startGame: (roomName, userId) => {
+		dispatch(startGame(roomName, userId))
 	},
 	setGameRoom: roomName => {
 		dispatch(setGameRoom(roomName))
 	},
 	unsetGameRoom: roomName => {
 		dispatch(unsetGameRoom(roomName))
+	},
+	gameJoined: roomName => {
+		dispatch(gameJoined(roomName))
 	}
 })
 
@@ -61,6 +65,8 @@ export function mapStateToProps(state) {
 		rooms: state.rooms,
 		members: state.games.members,
 		roomName: state.games.roomName,
+		roomId: state.games.id,
+		userId: state.user.id,
 		boards: state.games.boards.filter(
 			board => board.username !== state.user.username
 		)

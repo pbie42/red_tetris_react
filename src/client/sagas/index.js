@@ -38,11 +38,11 @@ const handleAddUserToRoom = function* handleAddUserToRoom(params) {
 	})
 }
 
-const handleGameReady = function* handleGameReady(params) {
-	yield takeEvery(types.GAME_READY, action => {
-		params.socket.emit('game', JSON.stringify(action))
-	})
-}
+// const handleGameReady = function* handleGameReady(params) {
+// 	yield takeEvery(types.GAME_READY, action => {
+// 		params.socket.emit('game', JSON.stringify(action))
+// 	})
+// }
 
 const handleGameBoardUpdate = function* handleGameBoardUpdate(params) {
 	yield takeEvery(types.GAME_BOARD_UPDATE, action => {
@@ -56,14 +56,35 @@ const handleGameJoined = function* handleGameJoined(params) {
 	})
 }
 
+const handleNewPieces = function* handleNewPieces(params) {
+	yield takeEvery(types.GAME_NEW_PIECES, action => {
+		params.socket.emit('game', JSON.stringify(action))
+	})
+}
+
+const handleNewPieceRequest = function* handleNewPieceRequest(params) {
+	yield takeEvery(types.GAME_NEW_PIECE, action => {
+		params.socket.emit('game', JSON.stringify(action))
+	})
+}
+
+const handleStartGame = function* handleStartGame(params) {
+	yield takeEvery(types.GAME_START, action => {
+		params.socket.emit('game', JSON.stringify(action))
+	})
+}
+
 export {
 	handleAddUserToRoom,
 	handleGameJoined,
-	handleGameReady,
+	// handleGameReady,
 	handleGameBoardUpdate,
 	handleNewMessage,
+	handleNewPieces,
+	handleNewPieceRequest,
 	handleNewRoom,
 	handleNewUser,
 	handleRemoveUser,
-	handleRemoveUserFromRoom
+	handleRemoveUserFromRoom,
+	handleStartGame
 }

@@ -29,13 +29,13 @@ function GameComponent(props) {
 	C.componentWillUnmount = function() {
 		C.props.unsetGameRoom(C.state.room)
 		C.props.removeUserFromRoom(C.props.username, C.state.room)
-		// window.removeEventListener('keydown', e => C.handleSpaceBar(e))
+		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
 	}
 
 	C.componentDidMount = function() {
 		// console.log(`NOT CONNECTED`)
 		window.addEventListener('beforeunload', C.componentCleanup)
-		// window.addEventListener('keydown', e => C.handleSpaceBar(e))
+		window.addEventListener('keydown', e => C.handleSpaceBar(e))
 	}
 
 	C.componentDidUpdate = function() {
@@ -47,14 +47,16 @@ function GameComponent(props) {
 		if (C.verifyPlayerHandled()) {
 			doneRoom = C.handleRoom(room, player)
 			C.props.setGameRoom(room)
+			C.props.gameJoined(room)
 		}
 	}
 
 	C.handleSpaceBar = function(event) {
 		// console.log(`KeyDown`)
-		if (event.keyCode === 32) {
+		if (doneUser && doneRoom && event.keyCode === 32) {
 			// console.log(`SPACE bar pressed`)
-			C.props.gameReady(C.props.roomName, C.props.members, C.props.username)
+			if (C.props.userId && C.props.roomName)
+				C.props.startGame(C.props.roomName, C.props.userId)
 		}
 	}
 

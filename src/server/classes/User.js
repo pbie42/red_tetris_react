@@ -3,6 +3,7 @@ module.exports = class User {
 		this.id = id
 		this.username = username
 		this.board = []
+		this.current = 0
 	}
 	setBoard(newBoard) {
 		this.board = newBoard
@@ -10,12 +11,12 @@ module.exports = class User {
 	getBoard() {
 		return this.board
 	}
-	// set username(username) {
-	// 	this.username = username
-	// }
-	// get username() {
-	// 	return this.username
-	// }
+	getCurrent() {
+		return this.current
+	}
+	updateCurrent() {
+		this.current++
+	}
 	getInfo() {
 		const { id, username } = this
 		return { id, username }

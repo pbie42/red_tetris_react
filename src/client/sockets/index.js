@@ -9,10 +9,13 @@ import {
 	usersListReceived,
 	roomsListReceived,
 	setGameId,
+	setId,
 	updateGameMembers,
 	updateGameBoards,
 	updateGamePiece,
-	usernameSet
+	updateGamePieces,
+	usernameSet,
+	gameStartCountdown
 } from '../actions'
 import { store } from '../../index'
 
@@ -63,22 +66,36 @@ const setupSocket = dispatch => {
 				break
 			case types.GAME_MEMBERS_UPDATE:
 				console.log(`GAME_MEMBERS_UPDATE`)
-				console.log(`data`, data)
+				// console.log(`data`, data)
 				dispatch(updateGameMembers(data.members))
 				break
-			case types.GAME_PIECE:
-				console.log(`GAME_PIECE`)
+			case types.GAME_PIECE_UPDATE:
+				console.log(`GAME_PIECE_UPDATE`)
 				dispatch(updateGamePiece(data.piece))
+				break
+			case types.GAME_PIECES:
+				console.log(`GAME_PIECES`)
+				dispatch(updateGamePieces(data.pieces))
 				break
 			case types.GAME_ID_SET:
 				console.log(`GAME_ID_SET`)
-				console.log(`data`, data)
+				// console.log(`data`, data)
 				dispatch(setGameId(data.id))
 				break
 			case types.GAME_BOARDS_UPDATE:
 				console.log(`GAME_BOARDS_UPDATE`)
-				console.log(`data`, data)
+				// console.log(`data`, data)
 				dispatch(updateGameBoards(data.boards))
+				break
+			case types.SET_ID:
+				console.log(`SET_ID`)
+				// console.log(`data`, data)
+				dispatch(setId(data.id))
+				break
+			case types.GAME_START_COUNTDOWN:
+				console.log(`GAME_START_COUNTDOWN`)
+				// console.log(`data`, data)
+				dispatch(gameStartCountdown())
 				break
 			default:
 				break

@@ -8,6 +8,7 @@ module.exports = class Game {
 		this.inSession = false
 		this.countdown = false
 		this.members = members
+		this.pieces = pieceOrder()
 	}
 
 	getInfo() {
@@ -36,7 +37,17 @@ module.exports = class Game {
 	getCountdown() {
 		return this.countdown
 	}
+	setCountdown() {
+		this.countdown = true
+	}
 	getMembers() {
 		return this.members
+	}
+	getPiece(current) {
+		return this.pieces[current]
+	}
+	getNewPieces() {
+		this.pieces = this.pieces.concat(pieceOrder())
+		return this.pieces
 	}
 }

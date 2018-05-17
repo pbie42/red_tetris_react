@@ -3,6 +3,7 @@ import * as types from '../constants/ActionTypes'
 const initialGameState = {
 	roomName: '',
 	piece: '',
+	pieces: [],
 	members: [],
 	boards: [],
 	id: '',
@@ -10,27 +11,47 @@ const initialGameState = {
 }
 
 const games = (state = initialGameState, action) => {
-	console.log(`action`, action)
+	// console.log(`action`, action)
 	switch (action.type) {
-		case types.GAME_READY:
+		case types.GAME_START:
+			return state
+
+		case types.GAME_START_COUNTDOWN:
 			return { ...state, countDown: true }
+
 		case types.GAME_JOINED:
 			return state
+
 		case types.GAME_ROOM_SET:
 			return { ...state, roomName: action.roomName }
+
 		case types.GAME_ROOM_UNSET:
 			return { ...state, roomName: '' }
-		case types.GAME_PIECE:
+
+		case types.GAME_PIECE_UPDATE:
 			return { ...state, piece: action.piece }
+
 		case types.GAME_MEMBERS_UPDATE:
 			return { ...state, members: action.members }
+
 		case types.GAME_BOARD_UPDATE:
 			return state
+
+		case types.GAME_PIECES_UPDATE:
+			return { ...state, pieces: action.pieces }
+
+		case types.GAME_NEW_PIECES:
+			return state
+
+		case types.GAME_NEW_PIECE:
+			return state
+
 		case types.GAME_ID_SET:
-			console.log(`action`, action)
+			// console.log(`action`, action)
 			return { ...state, id: action.id }
+
 		case types.GAME_BOARDS_UPDATE:
-			console.log(`action`, action)
+			// console.log(`action`, action)
 			return { ...state, boards: action.boards }
 
 		default:

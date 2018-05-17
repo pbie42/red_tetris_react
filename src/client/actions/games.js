@@ -1,10 +1,9 @@
 import * as types from '../constants/ActionTypes'
 
-export const gameReady = (roomName, members, username) => ({
-	type: types.GAME_READY,
+export const startGame = (roomName, userId) => ({
+	type: types.GAME_START,
 	roomName,
-	members,
-	username
+	userId
 })
 
 export const setGameRoom = roomName => ({
@@ -18,8 +17,13 @@ export const updateGameMembers = members => ({
 })
 
 export const updateGamePiece = piece => ({
-	type: types.GAME_PIECE,
+	type: types.GAME_PIECE_UPDATE,
 	piece
+})
+
+export const updateGamePieces = pieces => ({
+	type: types.GAME_PIECES_UPDATE,
+	pieces
 })
 
 export const unsetGameRoom = roomName => ({
@@ -48,4 +52,21 @@ export const gameJoined = roomName => ({
 export const updateGameBoards = boards => ({
 	type: types.GAME_BOARDS_UPDATE,
 	boards
+})
+
+export const newPieces = (id, roomName) => ({
+	type: types.GAME_NEW_PIECES,
+	id,
+	roomName
+})
+
+export const requestNextPiece = (id, roomName, username) => ({
+	type: types.GAME_NEW_PIECE,
+	id,
+	roomName,
+	username
+})
+
+export const gameStartCountdown = () => ({
+	type: types.GAME_START_COUNTDOWN
 })

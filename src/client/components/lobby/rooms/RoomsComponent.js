@@ -24,7 +24,7 @@ export function RoomsComponent(props) {
 	C.selectRoom = function(roomName) {
 		console.log(`room selected`)
 		C.props.addUserToRoom(C.props.username, roomName)
-		C.props.gameJoined(roomName)
+		// C.props.gameJoined(roomName)
 		C.props.history.push(`/${roomName.replace(/ /g, '_')}[${C.props.username}]`)
 	}
 

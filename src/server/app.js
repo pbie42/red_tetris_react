@@ -6,6 +6,7 @@ const {
 	addUserToRoom,
 	getRoom,
 	getUser,
+	getUserById,
 	removeUserFromRoom
 } = require('./utils')
 const { pieceOrder } = require('../client/utils')
@@ -56,6 +57,7 @@ io.on('connection', socket => {
 		const data = JSON.parse(message)
 		console.log(`data`, data)
 		switch (data.type) {
+			//---------------------------------------------------------------------ADD_USER
 			case 'ADD_USER':
 				console.log(`ADD_USER`)
 				console.log(`data`, data)
@@ -82,7 +84,15 @@ io.on('connection', socket => {
 						type: 'USERNAME_SET'
 					})
 				)
+				socket.emit(
+					'message',
+					JSON.stringify({
+						type: 'SET_ID',
+						id: socket.id
+					})
+				)
 				break
+			//---------------------------------------------------------------------REMOVE_USER
 			case 'REMOVE_USER':
 				console.log(`REMOVE_USER`)
 				console.log(`data`, data)
@@ -103,6 +113,7 @@ io.on('connection', socket => {
 				// 	})
 				// )
 				break
+			//---------------------------------------------------------------------ADD_MESSAGE
 			case 'ADD_MESSAGE':
 				console.log(`ADD_MESSAGE`)
 				socket.broadcast.emit(
@@ -124,6 +135,7 @@ io.on('connection', socket => {
 		const data = JSON.parse(message)
 		let currentRooms
 		switch (data.type) {
+			//---------------------------------------------------------------------ADD_ROOM
 			case 'ADD_ROOM':
 				console.log(`ADD_ROOM`)
 				console.log(`roomData`, data)
@@ -136,7 +148,7 @@ io.on('connection', socket => {
 					data.members.map(member => getUser(member, users))
 				)
 				rooms.push(game)
-				console.log(`rooms`, rooms)
+				// console.log(`rooms`, rooms)
 				currentRooms = rooms.map(room => room.getInfo())
 				console.log(`currentRooms`, currentRooms)
 				socket.broadcast.emit(
@@ -164,6 +176,7 @@ io.on('connection', socket => {
 					})
 				)
 				break
+			//---------------------------------------------------------------------ADD_USER_TO_ROOM
 			case 'ADD_USER_TO_ROOM':
 				console.log(`ADD_USER_TO_ROOM`)
 				console.log(`add to room data`, data)
@@ -191,6 +204,7 @@ io.on('connection', socket => {
 					})
 				)
 				break
+			//---------------------------------------------------------------------REMOVE_USER_FROM_ROOM
 			case 'REMOVE_USER_FROM_ROOM':
 				console.log(`REMOVE_USER_FROM_ROOM`)
 				console.log(`data`, data)
@@ -198,7 +212,8 @@ io.on('connection', socket => {
 				let user = getUser(data.username, users)
 				if (user) user.setBoard(newUserBoard())
 				// console.log(`user`, user)
-				console.log(`rooms`, rooms)
+				// console.log(`rooms`, rooms)
+				socket.leave(data.roomName)
 				socket.broadcast.emit(
 					'message',
 					JSON.stringify({
@@ -233,10 +248,12 @@ io.on('connection', socket => {
 	socket.on('game', message => {
 		const data = JSON.parse(message)
 		const { roomName } = data
-		let room, members, roomBoards
+		let room, members, roomBoards, nextPiece, user
 		switch (data.type) {
+			//---------------------------------------------------------------------GAME_JOINED
 			case 'GAME_JOINED':
 				console.log(`GAME_JOINED`)
+				console.log(`data`, data)
 				room = getRoom(data.roomName, rooms)
 				if (room) members = room.getMembers()
 				console.log(`members`, members)
@@ -254,35 +271,49 @@ io.on('connection', socket => {
 						})
 					)
 				break
-			case 'GAME_READY':
-				console.log(`GAME_READY`)
+			//---------------------------------------------------------------------GAME_START
+			case 'GAME_START':
+				// set countdown
+				console.log(`GAME_START`)
 				console.log(`data`, data)
-				console.log(`data.username`, data.username)
-				room = rooms.find(room => room.roomName === data.roomName)
-				if (!room) break
-				if (room && room.creator !== data.username) break
-				newGamePieces(data.roomName, pieces)
-				newBoards(data.members, data.roomName, boards)
-				console.log(`about to send game piece`)
-				console.log(`pieceNumber`, pieceNumber)
-				const piece = pieces.find(piece => piece.roomName === data.roomName)
-					.pieces[pieceNumber++]
-				console.log(`piece`, piece)
-				io.to(data.roomName).emit(
-					'message',
-					JSON.stringify({
-						type: 'GAME_PIECE',
-						piece
-					})
-				)
+				room = getRoom(data.roomName, rooms)
+				if (room) {
+					room.setCountdown()
+					user = getUserById(data.userId, users)
+					if (room && user) {
+						nextPiece = room.getPiece(user.getCurrent())
+						console.log(`nextPiece`, nextPiece)
+						user.updateCurrent()
+						io.to(data.roomName).emit(
+							'message',
+							JSON.stringify({
+								type: 'GAME_PIECE_UPDATE',
+								piece: nextPiece
+							})
+						)
+					}
+					io.to(data.roomName).emit(
+						'message',
+						JSON.stringify({
+							type: 'GAME_START_COUNTDOWN'
+						})
+					)
+					io.to(data.roomName).emit(
+						'message',
+						JSON.stringify({
+							type: 'GAME_PIECE_UPDATE',
+							piece: nextPiece
+						})
+					)
+				}
 				break
-			case 'GAME_STARTING':
-				console.log(`GAME_STARTING`)
-				break
+			//---------------------------------------------------------------------GAME_BOARD_UPDATE
 			case 'GAME_BOARD_UPDATE':
-				console.log(`GAME_BOARD_UPDATE`)
-				console.log(`data`, data)
-				let user = getUser(data.username, users)
+				// console.log(`GAME_BOARD_UPDATE`)
+				// console.log(`data`, data)
+				user = getUser(data.username, users)
+				// console.log(`data.username`, data.username)
+				// console.log(`data.id`, data.id)
 				if (
 					user &&
 					(user.getId() !== data.id || user.getUsername()) !== data.username
@@ -291,16 +322,16 @@ io.on('connection', socket => {
 				if (user) user.board = data.board
 				// console.log(`rooms`, JSON.stringify(rooms))
 				// console.log(`users`, JSON.stringify(users))
-				console.log(`sending GAME_BOARDS_UPDATE`)
+				// console.log(`sending GAME_BOARDS_UPDATE`)
 				room = getRoom(data.roomName, rooms)
 				if (room) members = room.getMembers()
-				console.log(`members`, members)
+				// console.log(`members`, members)
 				if (members)
 					roomBoards = members.map(member => ({
 						board: member.getBoard(),
 						username: member.getUsername()
 					}))
-				console.log(`roomBoards`, roomBoards)
+				// console.log(`roomBoards`, roomBoards)
 				if (roomBoards)
 					io.to(data.roomName).emit(
 						'message',
@@ -310,15 +341,52 @@ io.on('connection', socket => {
 						})
 					)
 				break
-			case 'NEXT_PIECE':
-				console.log(`NEXT_PIECE`)
-				socket.emit(
+			// case 'NEXT_PIECE':
+			// 	console.log(`NEXT_PIECE`)
+			// 	socket.emit(
+			// 		'message',
+			// 		JSON.stringify({
+			// 			type: 'GAME_PIECE',
+			// 			piece: pieces.find(piece => piece.roomName === data.roomName)[
+			// 				pieceNumber++
+			// 			]
+			// 		})
+			// 	)
+			// 	break
+			//---------------------------------------------------------------------GAME_NEW_PIECE
+			case 'GAME_NEW_PIECE':
+				console.log(`GAME_NEW_PIECE`)
+				console.log(`data`, data)
+				room = getRoom(data.roomName, rooms)
+				if (room) console.log(`room.getRoomName()`, room.getRoomName())
+				user = getUser(data.username, users)
+				if (user) console.log(`user.getUserName()`, user.getUsername())
+				if (!room) console.log(`Room error GAME_NEW_PIECE`)
+				if (room && user) {
+					nextPiece = room.getPiece(user.getCurrent())
+					console.log(`nextPiece`, nextPiece)
+					user.updateCurrent()
+					io.to(data.roomName).emit(
+						'message',
+						JSON.stringify({
+							type: 'GAME_PIECE_UPDATE',
+							piece: nextPiece
+						})
+					)
+				}
+				break
+			//---------------------------------------------------------------------GAME_NEW_PIECES
+			case 'GAME_NEW_PIECES':
+				console.log(`GAME_NEW_PIECES`)
+				room = getRoom(data.roomName, rooms)
+				if (room && room.getId() !== data.id) console.log(`Cheating`)
+				console.log(`room`, room)
+				let newPieces = room.getNewPieces()
+				io.to(data.roomName).emit(
 					'message',
 					JSON.stringify({
-						type: 'GAME_PIECE',
-						piece: pieces.find(piece => piece.roomName === data.roomName)[
-							pieceNumber++
-						]
+						type: 'GAME_PIECES',
+						pieces: newPieces
 					})
 				)
 				break

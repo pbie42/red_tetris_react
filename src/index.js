@@ -19,7 +19,10 @@ import {
 	handleRemoveUserFromRoom,
 	handleGameJoined,
 	handleGameReady,
-	handleGameBoardUpdate
+	handleGameBoardUpdate,
+	handleNewPieces,
+	handleNewPieceRequest,
+	handleStartGame
 } from './client/sagas'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -59,15 +62,27 @@ sagaMiddleware.run(handleAddUserToRoom, {
 	socket
 })
 
-sagaMiddleware.run(handleGameReady, {
-	socket
-})
+// sagaMiddleware.run(handleGameReady, {
+// 	socket
+// })
 
 sagaMiddleware.run(handleGameBoardUpdate, {
 	socket
 })
 
 sagaMiddleware.run(handleGameJoined, {
+	socket
+})
+
+sagaMiddleware.run(handleNewPieces, {
+	socket
+})
+
+sagaMiddleware.run(handleNewPieceRequest, {
+	socket
+})
+
+sagaMiddleware.run(handleStartGame, {
 	socket
 })
 

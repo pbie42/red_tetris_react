@@ -23,13 +23,19 @@ function removeUserFromRoom(username, roomName, rooms, users) {
 
 function getUser(username, users) {
 	const user = users.find(user => user.getUsername() === username)
-	console.log(`getUser`, user)
+	return user
+}
+
+function getUserById(userId, users) {
+	const user = users.find(user => user.getId() === userId)
 	return user
 }
 
 function getRoom(roomName, rooms) {
-	const room = rooms.find(room => room.getRoomName() === roomName)
-	console.log(`getRoom`, rooms)
+	const room = rooms.find(room => {
+		let realRoom = room.getRoomName()
+		return realRoom === roomName
+	})
 	return room
 }
 
@@ -37,5 +43,6 @@ module.exports = {
 	addUserToRoom,
 	getRoom,
 	getUser,
+	getUserById,
 	removeUserFromRoom
 }

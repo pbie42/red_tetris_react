@@ -26,8 +26,10 @@ function BoardComponent(props) {
 	let grid
 
 	C.state = {
-		board: [],
+		board: newBoard(),
 		savedBoard: [],
+		gameReady: false,
+		countDown: false,
 		test: '',
 		piece: {
 			location: { x: 0, y: 0 },
@@ -43,10 +45,19 @@ function BoardComponent(props) {
 
 	C.componentDidMount = function() {
 		// C.setState({ pieces: C.pieceOrder() })
-		C.pieceOrder()
+		// C.pieceOrder() //Need to get rid of this
 		C.buildBoard()
-		C.state.interval = setInterval(C.movePieceDown, 750)
 		window.addEventListener('keydown', e => C.handleKeydown(e))
+	}
+
+	C.componentDidUpdate = function() {
+		if (C.props.countDown && !C.state.countDown) {
+			setTimeout(() => {
+				C.state.interval = setInterval(C.movePieceDown, 750)
+				C.nextPiece()
+			}, 5000)
+			C.state.countDown = true
+		}
 	}
 
 	C.componentWillUnmount = function() {
@@ -63,11 +74,18 @@ function BoardComponent(props) {
 
 	C.nextPiece = function() {
 		let piece = C.state.piece
-		let nextPiece = piece.pieces[piece.current]
+		console.log(`piece.current`, piece.current)
+		if (piece.current === 90)
+			C.props.newPieces(C.props.roomId, C.props.roomName)
+		let nextPiece = C.props.piece
+		if (!nextPiece) {
+			console.log(`nextPiece does not exist`)
+			nextPiece = piece.pieces[piece.current]
+		}
 		let position = {}
 		C.state.piece.piece = nextPiece
 		C.state.piece.current++
-		C.state.piece.location = { x: 0, y: 0 }
+		C.state.piece.location = { x: 3, y: 3 }
 		if (piece.piece === 'i') position = getI(piece)
 		if (piece.piece === 'j') position = getJ(piece)
 		if (piece.piece === 'l') position = getL(piece)
@@ -117,7 +135,7 @@ function BoardComponent(props) {
 		if (C.props.doneUser && C.props.doneRoom)
 			C.props.updateGameBoard(
 				C.state.board,
-				C.props.roomId,
+				C.props.userId,
 				C.props.roomName,
 				C.props.username
 			)
@@ -224,6 +242,11 @@ function BoardComponent(props) {
 			C.state.savedBoard = C.state.board.slice(0)
 			if (C.state.savedBoard.length > 0) C.checkLines()
 			C.checkGame()
+			C.props.requestNextPiece(
+				C.props.roomId,
+				C.props.roomName,
+				C.props.username
+			)
 			C.nextPiece()
 		}
 		C.placePiece()
