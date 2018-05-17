@@ -51,9 +51,6 @@ body
 	z-index: 100
 	animation: gradientEaseIn 1.5s ease-out
 
-.container-fade
-	animation: gradientEaseOut 1.5s ease-out
-
 .container-lobby
 	background: linear-gradient(135deg, rgba(113,109,135,1) 0%, rgba(42,43,57,1) 72%, rgba(42,43,57,1) 100%);
 	background-repeat: no-repeat
@@ -102,25 +99,32 @@ body
 	animation: gradientEaseIn 2.5s ease-out
 	padding: 3rem
 
-// .container-home
-// 	background: black
-// 	background-repeat: no-repeat
-// 	background-size: cover
-// 	background-attachment:fixed
-// 	background-position:center
-// 	position: fixed
-// 	top: 0
-// 	left: 0
-// 	bottom: 0
-// 	right 0
-// 	width: 100%
-// 	overflow-y: scroll
-// 	overflow-x: hidden
-// 	margin: 0
-// 	display: flex
-// 	flex-flow: column
-// 	justify-content: flex-start
-// 	align-items: center
+.container-error
+	background: linear-gradient(135deg, rgba(113,109,135,1) 0%, rgba(42,43,57,1) 72%, rgba(42,43,57,1) 100%);
+	background-repeat: no-repeat
+	background-size: cover
+	background-attachment:fixed
+	background-position:center
+	position: fixed
+	top: 0
+	left: 0
+	bottom: 0
+	right 0
+	width: 100%
+	overflow-y: scroll
+	overflow-x: hidden
+	margin: 0
+	display: flex
+	flex-flow: column
+	justify-content: space-around
+	align-items: center
+	z-index: 100
+	overflow: hidden
+	animation: gradientEaseIn 2.5s ease-out
+	padding: 3rem
+
+.container-fade
+	animation: gradientEaseOut 1.5s ease-out
 
 
 h1, h2, h3, h4, h5, p
@@ -153,6 +157,7 @@ h1, h2, h3, h4, h5, p
 @import "./components/home"
 @import "./components/lobby/lobby"
 @import "./components/game/game"
+@import "./components/error/error"
 
 
 @keyframes gradientEaseIn {

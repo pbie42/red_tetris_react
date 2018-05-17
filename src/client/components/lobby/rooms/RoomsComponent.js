@@ -10,7 +10,8 @@ export function RoomsComponent(props) {
 	C.state = {
 		hideOthers: false,
 		index: 0,
-		display: ''
+		display: '',
+		change: false
 	}
 
 	C.componentDidMount = function() {
@@ -23,9 +24,16 @@ export function RoomsComponent(props) {
 
 	C.selectRoom = function(roomName) {
 		console.log(`room selected`)
+		C.setState({ change: true })
 		C.props.addUserToRoom(C.props.username, roomName)
 		// C.props.gameJoined(roomName)
-		C.props.history.push(`/${roomName.replace(/ /g, '_')}[${C.props.username}]`)
+		function delayRouteChange() {
+			C.props.history.push(
+				`/${roomName.replace(/ /g, '_')}[${C.props.username}]`
+			)
+		}
+		C.props.pageChange()
+		setTimeout(delayRouteChange, 800)
 	}
 
 	// C.scrollToLeft = function() {
@@ -61,7 +69,13 @@ export function RoomsComponent(props) {
 
 	C.render = () => {
 		return (
-			<div className="lobby-rooms">
+			<div
+				className={
+					!C.props.change
+						? 'lobby-rooms moveInDivLeft'
+						: 'lobby-rooms moveOutDivDown'
+				}
+			>
 				<div>
 					<div>
 						<div onClick={() => C.goLeft()}>

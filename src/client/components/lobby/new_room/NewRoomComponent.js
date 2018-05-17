@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 export function NewRoomComponent(props) {
-	const C = new Component()
+	const C = new Component(props)
 
 	C.state = {
 		error: false
@@ -13,15 +13,13 @@ export function NewRoomComponent(props) {
 			e.preventDefault()
 			if (value && C.verifyRoomName(value)) {
 				props.addRoom(value, [C.props.username])
-				function test() {
+				function delayRouteChange() {
 					C.props.history.push(
 						`/${value.replace(/ /g, '_')}[${C.props.username}]`
 					)
 				}
-				// props.pageChange()
-				// setTimeout(test, 600)
-				// C.props.hideNewRoom()
-				test()
+				C.props.pageChange()
+				setTimeout(delayRouteChange, 800)
 			} else C.setSubmitError()
 			C.refs.input.value = ''
 		}
@@ -33,15 +31,16 @@ export function NewRoomComponent(props) {
 			props.addRoom(value, [C.props.username])
 			// props.history.push('/lobby')
 			// C.props.hideNewRoom()
-			function test() {
+			function delayRouteChange() {
 				C.props.history.push(
 					`/${value.replace(/ /g, '_')}[${C.props.username}]`
 				)
 			}
+			C.props.pageChange()
+			setTimeout(delayRouteChange, 800)
 			// props.pageChange()
 			// setTimeout(test, 600)
 			// C.props.hideNewRoom()
-			test()
 		} else C.setSubmitError()
 		C.refs.input.value = ''
 	}

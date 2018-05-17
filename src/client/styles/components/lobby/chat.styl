@@ -18,7 +18,7 @@
 		&:nth-of-type(1)
 			flex-grow: 3
 			transform: translateY(-200rem)
-			animation: moveInRight 2s
+			// animation: moveInRight 2s
 			animation-delay: .5s
 			animation-fill-mode: forwards
 			padding: 1rem
@@ -57,7 +57,7 @@
 
 						> div
 							background: rgba(118, 71, 245, 1)
-							min-width 18rem
+							min-width 17rem
 							max-width 30rem
 							// border-radius: .5rem
 							padding: 1rem
@@ -202,6 +202,13 @@
 	.change-width
 		transition: all 2s linear
 
+.moveOutDivDown
+	animation: moveOutDown 2.5s ease-in-out
+	animation-fill-mode: forwards
+
+.moveInDivRight
+	animation: moveInRight 2s ease-in-out
+	animation-fill-mode: forwards
 
 @media (max-height: 840px)
 	.lobby-chat-new

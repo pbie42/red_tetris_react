@@ -8,7 +8,6 @@
 	display: flex
 	flex-flow: column
 	transform: translateY(-200rem)
-	animation: moveInUp 2s
 	animation-delay: .5s
 	animation-fill-mode: forwards
 	border-radius: .5rem
@@ -145,6 +144,14 @@
 
 							.hide-it
 								opacity: .5
+
+.moveInDivLeft
+	animation: moveInLeft 2s ease-in-out
+	animation-fill-mode: forwards
+
+.moveOutDivDown
+	animation: moveOutDown 2.5s ease-in-out
+	animation-fill-mode: forwards
 
 
 @media (max-height: 785px)

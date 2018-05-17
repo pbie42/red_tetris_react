@@ -8,8 +8,20 @@ export function ChatComponent(props) {
 
 	C.render = () => {
 		return (
-			<div className="lobby-chat-new">
-				<div className={C.props.showNewRoom ? 'move-in' : 'change-width'}>
+			<div
+				className={
+					!C.props.change
+						? 'lobby-chat-new moveInDivRight'
+						: 'lobby-chat-new moveOutDivDown'
+				}
+			>
+				<div
+					className={
+						C.props.showNewRoom
+							? 'moveInDivRight'
+							: ' moveInDivRight change-width'
+					}
+				>
 					<div>
 						<div>
 							<h1>Chat</h1>
@@ -29,6 +41,7 @@ export function ChatComponent(props) {
 					hideNewRoom={C.props.hideNewRoom}
 					display={C.props.display}
 					history={C.props.history}
+					pageChange={C.props.pageChange}
 				/>
 			</div>
 		)

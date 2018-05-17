@@ -46,9 +46,6 @@ body {
   z-index: 100;
   animation: gradientEaseIn 1.5s ease-out;
 }
-.container-fade {
-  animation: gradientEaseOut 1.5s ease-out;
-}
 .container-lobby {
   background: linear-gradient(135deg, #716d87 0%, #2a2b39 72%, #2a2b39 100%);
   background-repeat: no-repeat;
@@ -96,6 +93,33 @@ body {
   overflow: hidden;
   animation: gradientEaseIn 2.5s ease-out;
   padding: 3rem;
+}
+.container-error {
+  background: linear-gradient(135deg, #716d87 0%, #2a2b39 72%, #2a2b39 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin: 0;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 100;
+  overflow: hidden;
+  animation: gradientEaseIn 2.5s ease-out;
+  padding: 3rem;
+}
+.container-fade {
+  animation: gradientEaseOut 1.5s ease-out;
 }
 h1,
 h2,
@@ -602,7 +626,6 @@ p {
 .lobby-chat-new > div:nth-of-type(1) {
   flex-grow: 3;
   transform: translateY(-200rem);
-  animation: moveInRight 2s;
   animation-delay: 0.5s;
   animation-fill-mode: forwards;
   padding: 1rem;
@@ -643,7 +666,7 @@ p {
 }
 .lobby-chat-new > div > div:nth-of-type(2) > div.chat-room > div > div {
   background: #7647f5;
-  min-width: 18rem;
+  min-width: 17rem;
   max-width: 30rem;
   padding: 1rem;
   color: #fff;
@@ -778,6 +801,14 @@ p {
 .lobby-chat-new .change-width {
   transition: all 2s linear;
 }
+.moveOutDivDown {
+  animation: moveOutDown 2.5s ease-in-out;
+  animation-fill-mode: forwards;
+}
+.moveInDivRight {
+  animation: moveInRight 2s ease-in-out;
+  animation-fill-mode: forwards;
+}
 @media (max-height: 840px) {
   .lobby-chat-new > div > div:first-of-type {
     display: flex;
@@ -835,7 +866,6 @@ p {
   display: flex;
   flex-flow: column;
   transform: translateY(-200rem);
-  animation: moveInUp 2s;
   animation-delay: 0.5s;
   animation-fill-mode: forwards;
   border-radius: 0.5rem;
@@ -971,6 +1001,14 @@ p {
 }
 .lobby-rooms > div > div:nth-of-type(2) > div:last-of-type > div .hide-it {
   opacity: 0.5;
+}
+.moveInDivLeft {
+  animation: moveInLeft 2s ease-in-out;
+  animation-fill-mode: forwards;
+}
+.moveOutDivDown {
+  animation: moveOutDown 2.5s ease-in-out;
+  animation-fill-mode: forwards;
 }
 @media (max-height: 785px) {
   .lobby-rooms > div > div:nth-of-type(2) > div:last-of-type > div {
@@ -1286,6 +1324,30 @@ p {
 }
 .red {
   background: #fc1576;
+}
+.error-message-container {
+  background: rgba(34,34,44,0.5);
+  height: 40%;
+  width: 40%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+  align-items: center;
+  animation: moveInDown 2s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+}
+.error-message-container > h1 {
+  color: #c00000;
+  font-size: 9rem;
+}
+.error-message-container > h2 {
+  color: #fff;
+  font-size: 3rem;
+}
+.error-message-container > h3 {
+  color: #fff;
+  font-size: 2rem;
 }
 @-moz-keyframes gradientEaseIn {
   0% {
