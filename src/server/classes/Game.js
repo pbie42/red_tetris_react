@@ -46,6 +46,9 @@ module.exports = class Game {
 	getPiece(current) {
 		return this.pieces[current]
 	}
+	getPieces() {
+		return this.pieces
+	}
 	getNewPieces() {
 		this.pieces = this.pieces.concat(pieceOrder())
 		return this.pieces

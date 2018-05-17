@@ -283,7 +283,10 @@ io.on('connection', socket => {
 					if (room && user) {
 						nextPiece = room.getPiece(user.getCurrent())
 						console.log(`nextPiece`, nextPiece)
-						user.updateCurrent()
+						room.getMembers().forEach(member => member.updateCurrent())
+						room
+							.getMembers()
+							.forEach(member => console.log(member.getCurrent()))
 						io.to(data.roomName).emit(
 							'message',
 							JSON.stringify({
@@ -356,17 +359,21 @@ io.on('connection', socket => {
 			//---------------------------------------------------------------------GAME_NEW_PIECE
 			case 'GAME_NEW_PIECE':
 				console.log(`GAME_NEW_PIECE`)
-				console.log(`data`, data)
+				// console.log(`data`, data)
+				console.log(`\n`)
 				room = getRoom(data.roomName, rooms)
 				if (room) console.log(`room.getRoomName()`, room.getRoomName())
 				user = getUser(data.username, users)
+				console.log(`user.getCurrent()`, user.getCurrent())
 				if (user) console.log(`user.getUserName()`, user.getUsername())
 				if (!room) console.log(`Room error GAME_NEW_PIECE`)
 				if (room && user) {
+					console.log(`room.getPieces()`, room.getPieces())
 					nextPiece = room.getPiece(user.getCurrent())
 					console.log(`nextPiece`, nextPiece)
 					user.updateCurrent()
-					io.to(data.roomName).emit(
+					// console.log(`user.getCurrent()`, user.getCurrent())
+					socket.emit(
 						'message',
 						JSON.stringify({
 							type: 'GAME_PIECE_UPDATE',

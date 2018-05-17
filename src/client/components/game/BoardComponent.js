@@ -55,6 +55,11 @@ function BoardComponent(props) {
 			setTimeout(() => {
 				C.state.interval = setInterval(C.movePieceDown, 750)
 				C.nextPiece()
+				C.props.requestNextPiece(
+					C.props.roomId,
+					C.props.roomName,
+					C.props.username
+				)
 			}, 5000)
 			C.state.countDown = true
 		}
