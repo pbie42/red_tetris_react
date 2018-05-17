@@ -81,12 +81,12 @@ function BoardComponent(props) {
 
 	C.nextPiece = function() {
 		let piece = C.state.piece
-		console.log(`piece.current`, piece.current)
+		// console.log(`piece.current`, piece.current)
 		if (piece.current === 90)
 			C.props.newPieces(C.props.roomId, C.props.roomName)
 		let nextPiece = C.props.piece
 		if (!nextPiece) {
-			console.log(`nextPiece does not exist`)
+			// console.log(`nextPiece does not exist`)
 			nextPiece = piece.pieces[piece.current]
 		}
 		let position = {}
@@ -209,10 +209,10 @@ function BoardComponent(props) {
 			while (++x < 11) {
 				if (C.state.savedBoard[y][x] !== 0) {
 					clearInterval(C.state.interval)
-					console.log(`GAME OVER MANNNNNNN`)
+					// console.log(`GAME OVER MANNNNNNN`)
 					gameOver = true
 					C.state.board = newBoard()
-					console.log(`gameOver`, gameOver)
+					// console.log(`gameOver`, gameOver)
 				}
 			}
 		}
@@ -247,19 +247,19 @@ function BoardComponent(props) {
 		let offset = calcPieceBottom(shape, piece)
 		if (location.y - offset <= 19 && !C.state.piece.set) {
 			if (C.verifyPlacement({ x: location.x, y: location.y + 1 }, shape)) {
-				console.log(`verified placement`)
+				// console.log(`verified placement`)
 				location = { ...location, y: (location.y += 1) }
-				console.log(`C.state.board`, JSON.stringify(C.state.board))
+				// console.log(`C.state.board`, JSON.stringify(C.state.board))
 			} else {
-				console.log(`NOT verified placement`)
+				// console.log(`NOT verified placement`)
 				C.state.piece.set = true
 				C.state.savedBoard = C.state.board.slice(0)
-				console.log(`C.state.savedBoard`, JSON.stringify(C.state.savedBoard))
+				// console.log(`C.state.savedBoard`, JSON.stringify(C.state.savedBoard))
 				if (C.state.savedBoard.length > 0) C.checkLines()
 				C.checkGame()
 			}
 		} else {
-			console.log(`piece is set!!!!`)
+			// console.log(`piece is set!!!!`)
 			C.state.piece.set = false
 			C.state.savedBoard = C.state.board.slice(0)
 			if (C.state.savedBoard.length > 0) C.checkLines()

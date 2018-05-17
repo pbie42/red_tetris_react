@@ -19,7 +19,9 @@ function GameComponent(props) {
 
 	C.state = {
 		connection: false,
-		room: ''
+		room: '',
+		interval: '',
+		creatorMessage: 'Press Space to Start'
 	}
 
 	C.componentWillMount = function() {
@@ -29,11 +31,13 @@ function GameComponent(props) {
 	C.componentWillUnmount = function() {
 		C.props.unsetGameRoom(C.state.room)
 		C.props.removeUserFromRoom(C.props.username, C.state.room)
+		clearInterval(C.state.interval)
 		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
 	}
 
 	C.componentDidMount = function() {
 		// console.log(`NOT CONNECTED`)
+		C.state.interval = setInterval(C.flashMessage, 1000)
 		window.addEventListener('beforeunload', C.componentCleanup)
 		window.addEventListener('keydown', e => C.handleSpaceBar(e))
 	}
@@ -49,6 +53,14 @@ function GameComponent(props) {
 			C.props.setGameRoom(room)
 			C.props.gameJoined(room)
 		}
+	}
+
+	C.flashMessage = function() {
+		// console.log(`flashing message`)
+		// console.log(`C.state.creatorMessage`, C.state.creatorMessage)
+		if (C.state.creatorMessage === 'Press Space to Start')
+			C.setState({ creatorMessage: 'Or wait for more players' })
+		else C.setState({ creatorMessage: 'Press Space to Start' })
 	}
 
 	C.handleSpaceBar = function(event) {
@@ -165,8 +177,13 @@ function GameComponent(props) {
 						</div>
 						<div className="player-main">
 							<div>
-								{!C.props.countDown ? (
-									<h1>Waiting for other players</h1>
+								{!C.props.countDown && C.props.userId === C.props.roomId ? (
+									<h1>{C.state.creatorMessage}</h1>
+								) : (
+									<h1 />
+								)}
+								{!C.props.countDown && C.props.userId !== C.props.roomId ? (
+									<h1>Waiting for creator to start game</h1>
 								) : (
 									<h1 />
 								)}

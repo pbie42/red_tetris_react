@@ -587,6 +587,7 @@ p {
   background-position: center;
   height: 45vh;
   width: 80vw;
+  min-height: 32.6rem;
   display: flex;
   flex-flow: row;
 }
@@ -630,8 +631,7 @@ p {
   width: 90%;
   border-top: #808080 1px solid;
   overflow-y: scroll;
-  padding: 10rem;
-  height: 32rem;
+  padding: 1rem;
 }
 .lobby-chat-new > div > div:nth-of-type(2) > div.chat-room::-webkit-scrollbar {
   background-color: transparent !important;
@@ -642,8 +642,8 @@ p {
   margin: 0.5rem 0;
 }
 .lobby-chat-new > div > div:nth-of-type(2) > div.chat-room > div > div {
-  background: rgba(118,71,245,0.8);
-  min-width: 30rem;
+  background: #7647f5;
+  min-width: 18rem;
   max-width: 30rem;
   padding: 1rem;
   color: #fff;
@@ -658,7 +658,6 @@ p {
   max-height: 6rem;
   padding: 0;
   clip-path: polygon(100% 0, 0 0, 100% 36%);
-  box-shadow: 0px 0px 40px -8px rgba(0,0,0,0.75);
   transform: translateX(0.1rem);
 }
 .lobby-chat-new > div > div:nth-of-type(2) > div.chat-room > div .own-message {
@@ -669,18 +668,15 @@ p {
   padding: 0;
   transform: translateX(-0.1rem);
   clip-path: polygon(100% 0, 0 0, 0 36%);
-  box-shadow: 0px 0px 40px -8px rgba(0,0,0,0.75);
 }
 .lobby-chat-new > div > div:nth-of-type(2) > div.chat-room > div .message-right {
   border-radius: 0.8rem 0 0.8rem 0.8rem;
-  box-shadow: 0px 0px 40px -8px rgba(0,0,0,0.75);
 }
 .lobby-chat-new > div > div:nth-of-type(2) > div.chat-room > div .message-left {
   border-radius: 0 0.8rem 0.8rem 0.8rem;
   border-top-right-radius: 0.8rem;
   border-bottom-left-radius: 0.8rem;
   border-bottom-right-radius: 0.8rem;
-  box-shadow: 0px 0px 40px -8px rgba(0,0,0,0.75);
 }
 .lobby-chat-new > div > div:nth-of-type(2) > div.chat-room .my-message {
   justify-content: flex-end;
@@ -835,6 +831,7 @@ p {
   background-position: center;
   height: 45vh;
   width: 80vw;
+  min-height: 30.7rem;
   display: flex;
   flex-flow: column;
   transform: translateY(-200rem);
@@ -885,7 +882,6 @@ p {
   align-items: center;
   border-radius: 0 0.5rem 0 0.5rem;
   cursor: pointer;
-  box-shadow: -4px 4px 25px -1px rgba(0,0,0,0.75);
 }
 .lobby-rooms > div > div:last-of-type > div:last-of-type {
   flex-grow: 135;
