@@ -33,7 +33,7 @@ const setupSocket = dispatch => {
 		// console.log(`message`)
 		// console.log(`event`, event)
 		const data = JSON.parse(event)
-		console.log(`data`, data)
+		// console.log(`data`, data)
 		switch (data.type) {
 			case types.ADD_MESSAGE:
 				console.log(`ADD_MESSAGE`)
@@ -83,7 +83,7 @@ const setupSocket = dispatch => {
 				dispatch(setGameId(data.id))
 				break
 			case types.GAME_BOARDS_UPDATE:
-				console.log(`GAME_BOARDS_UPDATE`)
+				// console.log(`GAME_BOARDS_UPDATE`)
 				// console.log(`data`, data)
 				dispatch(updateGameBoards(data.boards))
 				break

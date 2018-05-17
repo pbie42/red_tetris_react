@@ -24,6 +24,7 @@ import {
 function BoardComponent(props) {
 	const C = new Component(props)
 	let grid
+	let gameOver = false
 
 	C.state = {
 		board: newBoard(),
@@ -35,6 +36,7 @@ function BoardComponent(props) {
 			location: { x: 0, y: 0 },
 			shape: [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
 			piece: '',
+			prevPiece: '',
 			current: 0,
 			pieces: [],
 			position: 0,
@@ -88,9 +90,10 @@ function BoardComponent(props) {
 			nextPiece = piece.pieces[piece.current]
 		}
 		let position = {}
+		C.state.piece.prevPiece = C.state.piece.piece
 		C.state.piece.piece = nextPiece
 		C.state.piece.current++
-		C.state.piece.location = { x: 3, y: 3 }
+		C.state.piece.location = { x: 3, y: 0 }
 		if (piece.piece === 'i') position = getI(piece)
 		if (piece.piece === 'j') position = getJ(piece)
 		if (piece.piece === 'l') position = getL(piece)
@@ -114,37 +117,39 @@ function BoardComponent(props) {
 	}
 
 	C.placePiece = function() {
-		const prevBoard = C.state.board
-		let { location, shape } = C.state.piece
-		let board = newBoard()
-		let boardY = location.y
-		if (C.state.savedBoard.length > 0) C.placePieces(board)
-		if (boardY + 4 > 26) C.state.board = prevBoard
-		else {
-			let y = 0
-			while (shape[y] && board[y]) {
-				let boardX = location.x
-				let x = 0
-				while (x < 4) {
-					if (shape[y][x] === C.state.piece.piece) {
-						board[boardY][boardX] = C.state.piece.piece
+		if (!gameOver) {
+			const prevBoard = C.state.board
+			let { location, shape } = C.state.piece
+			let board = newBoard()
+			let boardY = location.y
+			if (C.state.savedBoard.length > 0) C.placePieces(board)
+			if (boardY + 4 > 26) C.state.board = prevBoard
+			else {
+				let y = 0
+				while (shape[y] && board[y]) {
+					let boardX = location.x
+					let x = 0
+					while (x < 4) {
+						if (shape[y][x] === C.state.piece.piece) {
+							board[boardY][boardX] = C.state.piece.piece
+						}
+						x++
+						boardX++
 					}
-					x++
-					boardX++
+					y++
+					boardY++
 				}
-				y++
-				boardY++
+				C.state.board = board
 			}
-			C.state.board = board
+			if (C.props.doneUser && C.props.doneRoom)
+				C.props.updateGameBoard(
+					C.state.board,
+					C.props.userId,
+					C.props.roomName,
+					C.props.username
+				)
+			C.buildBoard()
 		}
-		if (C.props.doneUser && C.props.doneRoom)
-			C.props.updateGameBoard(
-				C.state.board,
-				C.props.userId,
-				C.props.roomName,
-				C.props.username
-			)
-		C.buildBoard()
 	}
 
 	C.buildBoard = function() {
@@ -202,7 +207,13 @@ function BoardComponent(props) {
 		while (++y < 4) {
 			let x = -1
 			while (++x < 11) {
-				if (C.state.savedBoard[y][x] !== 0) console.log(`GAME OVER MANNNNNNN`)
+				if (C.state.savedBoard[y][x] !== 0) {
+					clearInterval(C.state.interval)
+					console.log(`GAME OVER MANNNNNNN`)
+					gameOver = true
+					C.state.board = newBoard()
+					console.log(`gameOver`, gameOver)
+				}
 			}
 		}
 	}
@@ -216,7 +227,8 @@ function BoardComponent(props) {
 			let boardX = location.x
 			while (x < 4) {
 				if (
-					shape[y][x] === C.state.piece.piece &&
+					(shape[y][x] === C.state.piece.piece ||
+						shape[y][x] === C.state.piece.prevPiece) &&
 					C.state.savedBoard[boardY][boardX] !== 0
 				) {
 					return false
@@ -234,15 +246,20 @@ function BoardComponent(props) {
 		let { shape, location, piece } = C.state.piece
 		let offset = calcPieceBottom(shape, piece)
 		if (location.y - offset <= 19 && !C.state.piece.set) {
-			if (C.verifyPlacement({ x: location.x, y: location.y + 1 }, shape))
+			if (C.verifyPlacement({ x: location.x, y: location.y + 1 }, shape)) {
+				console.log(`verified placement`)
 				location = { ...location, y: (location.y += 1) }
-			else {
+				console.log(`C.state.board`, JSON.stringify(C.state.board))
+			} else {
+				console.log(`NOT verified placement`)
 				C.state.piece.set = true
 				C.state.savedBoard = C.state.board.slice(0)
+				console.log(`C.state.savedBoard`, JSON.stringify(C.state.savedBoard))
 				if (C.state.savedBoard.length > 0) C.checkLines()
 				C.checkGame()
 			}
 		} else {
+			console.log(`piece is set!!!!`)
 			C.state.piece.set = false
 			C.state.savedBoard = C.state.board.slice(0)
 			if (C.state.savedBoard.length > 0) C.checkLines()
@@ -254,7 +271,8 @@ function BoardComponent(props) {
 			)
 			C.nextPiece()
 		}
-		C.placePiece()
+		// if (C.state.savedBoard.length > 0) C.checkGame()
+		if (!gameOver) C.placePiece()
 	}
 
 	C.movePieceRight = function() {
@@ -363,10 +381,12 @@ function BoardComponent(props) {
 	}
 
 	C.handleKeydown = function(event) {
-		if (event.keyCode === 37) C.movePieceLeft()
-		if (event.keyCode === 38) C.rotatePieces()
-		if (event.keyCode === 39) C.movePieceRight()
-		if (event.keyCode === 40) C.movePieceDown()
+		if (!gameOver) {
+			if (event.keyCode === 37) C.movePieceLeft()
+			if (event.keyCode === 38) C.rotatePieces()
+			if (event.keyCode === 39) C.movePieceRight()
+			if (event.keyCode === 40) C.movePieceDown()
+		}
 	}
 
 	C.render = () => {
