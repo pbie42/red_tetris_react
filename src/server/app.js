@@ -334,8 +334,8 @@ io.on('connection', socket => {
 						board: member.getBoard(),
 						username: member.getUsername()
 					}))
-				// console.log(`roomBoards`, roomBoards)
-				if (roomBoards)
+				if (roomBoards) {
+					// console.log(`roomBoards`, JSON.stringify(roomBoards))
 					io.to(data.roomName).emit(
 						'message',
 						JSON.stringify({
@@ -343,6 +343,7 @@ io.on('connection', socket => {
 							boards: roomBoards
 						})
 					)
+				}
 				break
 			// case 'NEXT_PIECE':
 			// 	console.log(`NEXT_PIECE`)
@@ -362,13 +363,13 @@ io.on('connection', socket => {
 				// console.log(`data`, data)
 				console.log(`\n`)
 				room = getRoom(data.roomName, rooms)
-				if (room) console.log(`room.getRoomName()`, room.getRoomName())
+				// if (room) console.log(`room.getRoomName()`, room.getRoomName())
 				user = getUser(data.username, users)
 				console.log(`user.getCurrent()`, user.getCurrent())
 				if (user) console.log(`user.getUserName()`, user.getUsername())
 				if (!room) console.log(`Room error GAME_NEW_PIECE`)
 				if (room && user) {
-					console.log(`room.getPieces()`, room.getPieces())
+					// console.log(`room.getPieces()`, room.getPieces())
 					nextPiece = room.getPiece(user.getCurrent())
 					console.log(`nextPiece`, nextPiece)
 					user.updateCurrent()

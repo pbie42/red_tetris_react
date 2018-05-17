@@ -1203,7 +1203,7 @@ p {
 }
 .container-game .container-boards .players-others {
   width: 30vh;
-  height: 90vh;
+  padding: 5rem 0;
   display: flex;
   flex-flow: column;
   justify-content: space-evenly;
@@ -1212,7 +1212,7 @@ p {
   border-radius: 1.5rem;
 }
 .container-game .container-boards .players-others #others-grid {
-  margin: 0;
+  margin: 2rem 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -1258,22 +1258,22 @@ p {
   background: #ffa500;
 }
 .cyan {
-  background: #0ff;
+  background: #00ddef;
 }
 .blue {
-  background: #00f;
+  background: #0084ff;
 }
 .yellow {
-  background: #ff0;
+  background: #fee800;
 }
 .green {
-  background: #008000;
+  background: #23d6c0;
 }
 .purple {
-  background: #800080;
+  background: #7647f5;
 }
 .red {
-  background: #f00;
+  background: #fc1576;
 }
 @-moz-keyframes gradientEaseIn {
   0% {

@@ -1,3 +1,10 @@
+$tetris-purple = rgba(118, 71, 245, 1)
+$tetris-green = rgba(35, 214, 192, 1)
+$tetris-red = #fc1576
+$tetris-blue = #0084FF
+$tetris-cyan = #00DDEF
+$tetris-yellow = #FEE800
+
 .container-game
 	> i
 		font-size: 20rem
@@ -12,7 +19,8 @@
 
 		.players-others
 			width: 30vh
-			height: 90vh
+			// height: 90vh
+			padding: 5rem 0
 			display: flex
 			flex-flow: column
 			justify-content: space-evenly
@@ -21,7 +29,7 @@
 			border-radius: 1.5rem
 
 			#others-grid
-				margin 0
+				margin 2rem 0
 				display flex
 				flex-wrap wrap
 				justify-content center
@@ -72,14 +80,14 @@
 .orange
 	background: orange
 .cyan
-	background: cyan
+	background: $tetris-cyan
 .blue
-	background: blue
+	background: $tetris-blue
 .yellow
-	background: yellow
+	background: $tetris-yellow
 .green
-	background: green
+	background: $tetris-green
 .purple
-	background: purple
+	background: $tetris-purple
 .red
-	background: red
+	background: $tetris-red
