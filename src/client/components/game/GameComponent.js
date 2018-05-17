@@ -155,7 +155,13 @@ function GameComponent(props) {
 				) : (
 					// <h1>{C.props.connection ? 'CONNECTED' : 'NOT CONNECTED'}</h1>
 					<div className="container-boards">
-						<div className="players-others">
+						<div
+							className={
+								C.props.boards[0] || C.props.boards[2]
+									? 'players-others moveInDivRight showBackground'
+									: 'players-others moveInDivRight'
+							}
+						>
 							{C.props.boards[0] ? (
 								<ViewerBoardContainer
 									board={C.props.boards[0].board}
@@ -175,17 +181,17 @@ function GameComponent(props) {
 								''
 							)}
 						</div>
-						<div className="player-main">
+						<div className="player-main moveInDivTop">
 							<div>
 								{!C.props.countDown && C.props.userId === C.props.roomId ? (
 									<h1>{C.state.creatorMessage}</h1>
 								) : (
-									<h1 />
+									<h1> </h1>
 								)}
 								{!C.props.countDown && C.props.userId !== C.props.roomId ? (
 									<h1>Waiting for creator to start game</h1>
 								) : (
-									<h1 />
+									<h1> </h1>
 								)}
 							</div>
 							<BoardContainer
@@ -194,7 +200,13 @@ function GameComponent(props) {
 								doneUser={doneUser}
 							/>
 						</div>
-						<div className="players-others">
+						<div
+							className={
+								C.props.boards[1] || C.props.boards[3]
+									? 'players-others moveInDivLeft showBackground'
+									: 'players-others moveInDivLeft'
+							}
+						>
 							{C.props.boards[1] ? (
 								<ViewerBoardContainer
 									id="others-grid"

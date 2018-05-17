@@ -18,7 +18,6 @@ import {
 	handleAddUserToRoom,
 	handleRemoveUserFromRoom,
 	handleGameJoined,
-	handleGameReady,
 	handleGameBoardUpdate,
 	handleNewPieces,
 	handleNewPieceRequest,
