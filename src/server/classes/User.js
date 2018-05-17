@@ -1,8 +1,10 @@
+const { newBoard } = require('../../client/utils')
+
 module.exports = class User {
 	constructor(id, username) {
 		this.id = id
 		this.username = username
-		this.board = []
+		this.board = newBoard()
 		this.current = 0
 	}
 	setBoard(newBoard) {

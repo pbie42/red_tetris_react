@@ -50,12 +50,13 @@ $tetris-yellow = #FEE800
 
 		.player-main
 			background: rgba(34,34,44,0.5);
-			height: 78vh;
+			height: 86vh;
 			width: 26vw;
 			border-radius: 1.5rem;
 			display: flex;
-			justify-content: center;
+			justify-content: space-between;
 			align-items: center;
+			flex-flow: column
 
 			#player-grid
 				margin 0
@@ -64,6 +65,7 @@ $tetris-yellow = #FEE800
 				justify-content center
 				height: 70vh
 				width: 36vh
+				margin-bottom: 6rem
 
 				> div
 					width 100%
@@ -76,6 +78,20 @@ $tetris-yellow = #FEE800
 					> div
 						width: 100%
 						border solid #ccc 0.5px
+			
+			> div:first-of-type
+				background: $menu-background
+				display: flex
+				justify-content: center
+				align-items: center
+				color white
+				padding: .5rem
+				max-width: 100%
+				width: 100%
+				font-size: 1.5rem
+				height 8rem
+				margin-top: 2.6rem
+				font-family: 'Rajdhani', sans-serif;
 
 .orange
 	background: orange

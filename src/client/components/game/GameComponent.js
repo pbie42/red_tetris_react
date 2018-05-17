@@ -164,6 +164,13 @@ function GameComponent(props) {
 							)}
 						</div>
 						<div className="player-main">
+							<div>
+								{!C.props.countDown ? (
+									<h1>Waiting for other players</h1>
+								) : (
+									<h1 />
+								)}
+							</div>
 							<BoardContainer
 								id="player-grid"
 								doneRoom={doneRoom}

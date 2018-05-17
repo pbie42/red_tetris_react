@@ -1230,12 +1230,13 @@ p {
 }
 .container-game .container-boards .player-main {
   background: rgba(34,34,44,0.5);
-  height: 78vh;
+  height: 86vh;
   width: 26vw;
   border-radius: 1.5rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  flex-flow: column;
 }
 .container-game .container-boards .player-main #player-grid {
   margin: 0;
@@ -1244,6 +1245,7 @@ p {
   justify-content: center;
   height: 70vh;
   width: 36vh;
+  margin-bottom: 6rem;
 }
 .container-game .container-boards .player-main #player-grid > div {
   width: 100%;
@@ -1253,6 +1255,20 @@ p {
 .container-game .container-boards .player-main #player-grid > div > div {
   width: 100%;
   border: solid #ccc 0.5px;
+}
+.container-game .container-boards .player-main > div:first-of-type {
+  background: rgba(34,34,44,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  padding: 0.5rem;
+  max-width: 100%;
+  width: 100%;
+  font-size: 1.5rem;
+  height: 8rem;
+  margin-top: 2.6rem;
+  font-family: 'Rajdhani', sans-serif;
 }
 .orange {
   background: #ffa500;

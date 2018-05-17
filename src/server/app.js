@@ -12,14 +12,7 @@ const {
 const { pieceOrder } = require('../client/utils')
 
 let users = []
-let rooms = [
-	new Game('238hkjhdaify', 'Test Room', 'John', [
-		new User('lkdsajlfs', 'John'),
-		new User('lsadfads', 'Paul'),
-		new User('lkdyjhghgfs', 'George'),
-		new User('lkdsa43423', 'Ringo')
-	])
-]
+let rooms = []
 let pieces = [
 	{
 		roomName: 'Test Room',

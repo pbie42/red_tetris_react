@@ -65,6 +65,7 @@ export function mapStateToProps(state) {
 		rooms: state.rooms,
 		members: state.games.members,
 		roomName: state.games.roomName,
+		countDown: state.games.countDown,
 		roomId: state.games.id,
 		userId: state.user.id,
 		boards: state.games.boards.filter(
