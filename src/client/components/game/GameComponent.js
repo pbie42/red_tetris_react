@@ -21,7 +21,8 @@ function GameComponent(props) {
 		connection: false,
 		room: '',
 		interval: '',
-		creatorMessage: 'Press Space to Start'
+		creatorMessage: 'Press Space to Start',
+		exitText: ''
 	}
 
 	C.componentWillMount = function() {
@@ -147,9 +148,28 @@ function GameComponent(props) {
 		C.props.history.push('/error')
 	}
 
+	C.showExitText = function() {
+		C.setState({ exitText: 'Exit/Quit Game to Lobby?' })
+	}
+
+	C.hideExitText = function() {
+		C.setState({ exitText: '' })
+	}
+
 	C.render = () => {
 		return (
 			<div className="container-game" onKeyDown={e => C.handleSpaceBar(e)}>
+				<div>
+					<div
+						onMouseEnter={() => C.showExitText()}
+						onMouseLeave={() => C.hideExitText()}
+					>
+						<i class="fas fa-long-arrow-alt-left" />
+					</div>
+					<div>
+						<h1>{C.state.exitText}</h1>
+					</div>
+				</div>
 				{!C.props.connection ? (
 					<i className="fas fa-spinner fa-pulse" />
 				) : (
