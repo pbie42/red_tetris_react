@@ -7,6 +7,8 @@ import {
 	addUserToRoom,
 	startGame,
 	gameJoined,
+	removeBoards,
+	removeId,
 	removeUser,
 	removeUserFromRoom,
 	setGameRoom,
@@ -51,6 +53,12 @@ export const mapDispatchToProps = dispatch => ({
 	},
 	gameJoined: roomName => {
 		dispatch(gameJoined(roomName))
+	},
+	removeBoards: roomName => {
+		dispatch(removeBoards(roomName))
+	},
+	removeId: roomName => {
+		dispatch(removeId(roomName))
 	}
 })
 

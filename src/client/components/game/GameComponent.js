@@ -22,7 +22,8 @@ function GameComponent(props) {
 		room: '',
 		interval: '',
 		creatorMessage: 'Press Space to Start',
-		exitText: ''
+		exitText: '',
+		change: false
 	}
 
 	C.componentWillMount = function() {
@@ -32,6 +33,9 @@ function GameComponent(props) {
 	C.componentWillUnmount = function() {
 		C.props.unsetGameRoom(C.state.room)
 		C.props.removeUserFromRoom(C.props.username, C.state.room)
+		C.props.removeBoards()
+		C.props.removeId()
+		console.log(`removing user from room`)
 		clearInterval(C.state.interval)
 		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
 	}
@@ -156,13 +160,29 @@ function GameComponent(props) {
 		C.setState({ exitText: '' })
 	}
 
+	C.quitToLobby = function() {
+		console.log(`quitting to lobby`)
+		C.setState({ change: true })
+		function delayRouteChange() {
+			C.props.history.push(`/lobby`)
+		}
+		// C.props.pageChange()
+		setTimeout(delayRouteChange, 800)
+	}
+
 	C.render = () => {
 		return (
-			<div className="container-game" onKeyDown={e => C.handleSpaceBar(e)}>
+			<div
+				className={
+					!C.state.change ? 'container-game' : 'container-game container-fade'
+				}
+				onKeyDown={e => C.handleSpaceBar(e)}
+			>
 				<div>
 					<div
 						onMouseEnter={() => C.showExitText()}
 						onMouseLeave={() => C.hideExitText()}
+						onClick={() => C.quitToLobby()}
 					>
 						<i class="fas fa-long-arrow-alt-left" />
 					</div>
@@ -201,7 +221,13 @@ function GameComponent(props) {
 								''
 							)}
 						</div>
-						<div className="player-main moveInDivTop">
+						<div
+							className={
+								!C.state.change
+									? 'player-main moveInDivTop'
+									: 'player-main moveOutDivDown'
+							}
+						>
 							<div>
 								{!C.props.countDown && C.props.userId === C.props.roomId ? (
 									<h1>{C.state.creatorMessage}</h1>

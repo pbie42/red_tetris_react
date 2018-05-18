@@ -81,7 +81,7 @@ function BoardComponent(props) {
 
 	C.nextPiece = function() {
 		let piece = C.state.piece
-		// console.log(`piece.current`, piece.current)
+		console.log(`piece.current`, piece.current)
 		if (piece.current === 90)
 			C.props.newPieces(C.props.roomId, C.props.roomName)
 		let nextPiece = C.props.piece

@@ -70,3 +70,15 @@ export const requestNextPiece = (id, roomName, username) => ({
 export const gameStartCountdown = () => ({
 	type: types.GAME_START_COUNTDOWN
 })
+
+export const removeBoards = () => ({
+	type: types.GAME_REMOVE_BOARDS
+})
+
+export const removeId = () => ({
+	type: types.GAME_REMOVE_ID
+})
+
+export const removeCountdown = () => ({
+	type: types.GAME_REMOVE_COUNTDOWN
+})

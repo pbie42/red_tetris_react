@@ -7,7 +7,8 @@ const {
 	getRoom,
 	getUser,
 	getUserById,
-	removeUserFromRoom
+	removeUserFromRoom,
+	removeRoom
 } = require('./utils')
 const { pieceOrder } = require('../client/utils')
 
@@ -126,7 +127,7 @@ io.on('connection', socket => {
 	socket.on('room', message => {
 		console.log(`new room message!!!`)
 		const data = JSON.parse(message)
-		let currentRooms
+		let currentRooms, room
 		switch (data.type) {
 			//---------------------------------------------------------------------ADD_ROOM
 			case 'ADD_ROOM':
@@ -206,6 +207,13 @@ io.on('connection', socket => {
 				if (user) user.setBoard(newUserBoard())
 				// console.log(`user`, user)
 				// console.log(`rooms`, rooms)
+				room = getRoom(data.roomName, rooms)
+				if (room && room.getMembers().length === 0) {
+					rooms = removeRoom(data.roomName, rooms)
+					console.log(`rooms`, rooms)
+					console.log(`should have removed room`)
+				}
+				if (room) console.log(`room.getMembers()`, room.getMembers())
 				socket.leave(data.roomName)
 				socket.broadcast.emit(
 					'message',
@@ -214,7 +222,14 @@ io.on('connection', socket => {
 						rooms
 					})
 				)
-				const room = rooms.find(room => room.getRoomName() === data.roomName)
+				socket.emit(
+					'message',
+					JSON.stringify({
+						type: 'ROOMS_LIST',
+						rooms
+					})
+				)
+				room = rooms.find(room => room.getRoomName() === data.roomName)
 				io.to(data.roomName).emit(
 					'message',
 					JSON.stringify({

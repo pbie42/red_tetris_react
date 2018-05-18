@@ -47,12 +47,19 @@ const games = (state = initialGameState, action) => {
 			return state
 
 		case types.GAME_ID_SET:
-			// console.log(`action`, action)
 			return { ...state, id: action.id }
 
 		case types.GAME_BOARDS_UPDATE:
-			// console.log(`action`, action)
 			return { ...state, boards: action.boards }
+
+		case types.GAME_REMOVE_BOARDS:
+			return { ...state, boards: [] }
+
+		case types.GAME_REMOVE_ID:
+			return { ...state, id: '' }
+
+		case types.GAME_REMOVE_COUNTDOWN:
+			return { ...state, countDown: false }
 
 		default:
 			return state

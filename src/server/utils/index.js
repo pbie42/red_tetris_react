@@ -21,6 +21,10 @@ function removeUserFromRoom(username, roomName, rooms, users) {
 	return rooms
 }
 
+function removeRoom(roomName, rooms) {
+	return rooms.filter(room => room.getRoomName() !== roomName)
+}
+
 function getUser(username, users) {
 	const user = users.find(user => user.getUsername() === username)
 	return user
@@ -44,5 +48,6 @@ module.exports = {
 	getRoom,
 	getUser,
 	getUserById,
-	removeUserFromRoom
+	removeUserFromRoom,
+	removeRoom
 }
