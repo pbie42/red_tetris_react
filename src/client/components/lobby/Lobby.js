@@ -37,7 +37,6 @@ function LobbyComponent(props) {
 	}
 
 	C.pageChange = function() {
-		console.log(`happening homie`)
 		C.setState({ change: true })
 	}
 

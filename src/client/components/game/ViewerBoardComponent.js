@@ -35,7 +35,8 @@ function ViewerBoardComponent(props) {
 				}
 				grid.appendChild(row)
 			}
-		} else console.log(`grid`, grid)
+		}
+		// console.log(`grid`, grid)
 	}
 
 	C.setColorClass = function(i, x, square) {

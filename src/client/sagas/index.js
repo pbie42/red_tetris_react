@@ -3,7 +3,6 @@ import * as types from '../constants/ActionTypes'
 
 const handleNewMessage = function* handleNewMessage(params) {
 	yield takeEvery(types.ADD_MESSAGE, action => {
-		console.log(`action`, action)
 		params.socket.emit('message', JSON.stringify(action))
 	})
 }
@@ -38,12 +37,6 @@ const handleAddUserToRoom = function* handleAddUserToRoom(params) {
 	})
 }
 
-// const handleGameReady = function* handleGameReady(params) {
-// 	yield takeEvery(types.GAME_READY, action => {
-// 		params.socket.emit('game', JSON.stringify(action))
-// 	})
-// }
-
 const handleGameBoardUpdate = function* handleGameBoardUpdate(params) {
 	yield takeEvery(types.GAME_BOARD_UPDATE, action => {
 		params.socket.emit('game', JSON.stringify(action))
@@ -77,7 +70,6 @@ const handleStartGame = function* handleStartGame(params) {
 export {
 	handleAddUserToRoom,
 	handleGameJoined,
-	// handleGameReady,
 	handleGameBoardUpdate,
 	handleNewMessage,
 	handleNewPieces,

@@ -37,7 +37,7 @@ function GameComponent(props) {
 		C.props.removeUserFromRoom(C.props.username, C.state.room)
 		C.props.removeBoards()
 		C.props.removeId()
-		console.log(`removing user from room`)
+		// console.log(`removing user from room`)
 		clearInterval(C.state.interval)
 		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
 	}
@@ -92,15 +92,15 @@ function GameComponent(props) {
 			C.setState({ creatorMessage: '' })
 		}
 		if (C.props.countDown) {
-			console.log(`countdown started`)
-			console.log(`C.state.creatorMessage`, C.state.creatorMessage)
+			// console.log(`countdown started`)
+			// console.log(`C.state.creatorMessage`, C.state.creatorMessage)
 			if (
 				C.state.creatorMessage === 'Press Space to Start' ||
 				C.state.creatorMessage === 'Or wait for more players' ||
 				C.state.creatorMessage === 'Waiting for creator to start game' ||
 				C.state.creatorMessage === ''
 			) {
-				console.log(`setting game started`)
+				// console.log(`setting game started`)
 				C.setState({ creatorMessage: 'Game starting in 5...' })
 			} else if (C.state.creatorMessage === 'Game starting in 5...')
 				C.setState({ creatorMessage: '4' })
@@ -178,7 +178,7 @@ function GameComponent(props) {
 			if (verifyMemberCount(C.props.rooms, room)) {
 				if (verifyMembers(player, room, C.props.rooms))
 					C.props.addUserToRoom(C.props.username, room)
-				else console.log(`already room member member`)
+				// else console.log(`already room member member`)
 			} else C.errorTooManyMembers()
 		}
 		return true
@@ -213,7 +213,7 @@ function GameComponent(props) {
 	}
 
 	C.quitToLobby = function() {
-		console.log(`quitting to lobby`)
+		// console.log(`quitting to lobby`)
 		C.setState({ change: true })
 		function delayRouteChange() {
 			C.props.history.push(`/lobby`)
@@ -240,7 +240,7 @@ function GameComponent(props) {
 						onMouseLeave={() => C.hideExitText()}
 						onClick={() => C.quitToLobby()}
 					>
-						<i class="fas fa-long-arrow-alt-left" />
+						<i className="fas fa-long-arrow-alt-left" />
 					</div>
 					<div>
 						<h1>{C.state.exitText}</h1>

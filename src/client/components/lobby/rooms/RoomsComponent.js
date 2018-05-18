@@ -23,7 +23,6 @@ export function RoomsComponent(props) {
 	}
 
 	C.selectRoom = function(roomName) {
-		console.log(`room selected`)
 		C.setState({ change: true })
 		C.props.addUserToRoom(C.props.username, roomName)
 		// C.props.gameJoined(roomName)
@@ -97,13 +96,9 @@ export function RoomsComponent(props) {
 												onMouseOver={() => C.hideOthers(index)}
 												onClick={() => C.selectRoom(room.roomName)}
 											>
-												<h1>
-													{console.log(`room`, room)}
-													{room.roomName}
-												</h1>
+												<h1>{room.roomName}</h1>
 												<div>
 													{room.members.map((person, index) => {
-														console.log(`person`, person)
 														return <h2 key={index}>{person.username}</h2>
 													})}
 												</div>

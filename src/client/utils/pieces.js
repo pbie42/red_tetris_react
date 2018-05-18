@@ -134,49 +134,49 @@ function getI(piece) {
 	const i = initializeI()
 	piece.shape = i.shape
 	piece.position = i.position
-	console.log(`piece`, piece)
+	// console.log(`piece`, piece)
 	return piece
 }
 function getJ(piece) {
 	const j = initializeJ()
 	piece.shape = j.shape
 	piece.position = j.position
-	console.log(`piece`, piece)
+	// console.log(`piece`, piece)
 	return piece
 }
 function getL(piece) {
 	const l = initializeL()
 	piece.shape = l.shape
 	piece.position = l.position
-	console.log(`piece`, piece)
+	// console.log(`piece`, piece)
 	return piece
 }
 function getO(piece) {
 	const o = initializeO()
 	piece.shape = o.shape
 	piece.position = o.position
-	console.log(`piece`, piece)
+	// console.log(`piece`, piece)
 	return piece
 }
 function getS(piece) {
 	const s = initializeS()
 	piece.shape = s.shape
 	piece.position = s.position
-	console.log(`piece`, piece)
+	// console.log(`piece`, piece)
 	return piece
 }
 function getT(piece) {
 	const t = initializeT()
 	piece.shape = t.shape
 	piece.position = t.position
-	console.log(`piece`, piece)
+	// console.log(`piece`, piece)
 	return piece
 }
 function getZ(piece) {
 	const z = initializeZ()
 	piece.shape = z.shape
 	piece.position = z.position
-	console.log(`piece`, piece)
+	// console.log(`piece`, piece)
 	return piece
 }
 

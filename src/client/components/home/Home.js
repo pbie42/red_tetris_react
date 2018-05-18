@@ -10,15 +10,14 @@ function HomeComponent(props) {
 	}
 
 	C.componentWillMount = function() {
-		console.log(`Home will mount`)
+		// console.log(`Home will mount`)
 	}
 
 	C.componentDidMount = function() {
-		console.log(`Home Mounted`)
+		// console.log(`Home Mounted`)
 	}
 
 	C.pageChange = function() {
-		console.log(`happening homie`)
 		C.setState({ change: true })
 	}
 

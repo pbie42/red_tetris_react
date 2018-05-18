@@ -4,8 +4,6 @@ export function ChatConversationComponent(props) {
 	const C = new Component()
 	let div
 
-	console.log(`props`, props)
-
 	C.componentDidMount = function() {
 		C.scrollToBottom()
 	}
