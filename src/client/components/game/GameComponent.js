@@ -24,7 +24,8 @@ function GameComponent(props) {
 		countdownInterval: '',
 		creatorMessage: '',
 		exitText: '',
-		change: false
+		change: false,
+		gameStarted: false
 	}
 
 	C.componentWillMount = function() {
@@ -110,6 +111,7 @@ function GameComponent(props) {
 			else if (C.state.creatorMessage === '2')
 				C.setState({ creatorMessage: '1' })
 			else if (C.state.creatorMessage === '1') {
+				C.setState({ gameStarted: true })
 				C.setState({ creatorMessage: 'GO!' })
 				clearInterval(C.state.interval)
 			}
@@ -220,6 +222,10 @@ function GameComponent(props) {
 		setTimeout(delayRouteChange, 800)
 	}
 
+	C.gameOver = function() {
+		C.setState({ creatorMessage: 'Game Over!' })
+	}
+
 	C.render = () => {
 		return (
 			<div
@@ -294,6 +300,8 @@ function GameComponent(props) {
 								id="player-grid"
 								doneRoom={doneRoom}
 								doneUser={doneUser}
+								gameOver={C.gameOver}
+								gameStarted={C.state.gameStarted}
 							/>
 						</div>
 						<div

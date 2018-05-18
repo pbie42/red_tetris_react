@@ -37,12 +37,12 @@ function BoardComponent(props) {
 			shape: [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
 			piece: '',
 			prevPiece: '',
-			current: 0,
 			pieces: [],
 			position: 0,
 			set: false
 		},
-		interval: ''
+		interval: '',
+		current: 0
 	}
 
 	C.componentDidMount = function() {
@@ -81,18 +81,19 @@ function BoardComponent(props) {
 
 	C.nextPiece = function() {
 		let piece = C.state.piece
-		console.log(`piece.current`, piece.current)
-		if (piece.current === 90)
+		console.log(`C.state.current`, C.state.current)
+		if (C.state.current === 90)
 			C.props.newPieces(C.props.roomId, C.props.roomName)
 		let nextPiece = C.props.piece
 		if (!nextPiece) {
 			console.log(`nextPiece does not exist`)
-			nextPiece = piece.pieces[piece.current]
+			nextPiece = piece.pieces[C.state.current]
 		}
 		let position = {}
 		C.state.piece.prevPiece = C.state.piece.piece
 		C.state.piece.piece = nextPiece
-		C.state.piece.current += 1
+		// C.state.C.state.current += 1
+		C.setState({ current: ++C.state.current })
 		C.state.piece.location = { x: 3, y: 0 }
 		if (piece.piece === 'i') position = getI(piece)
 		if (piece.piece === 'j') position = getJ(piece)
@@ -214,6 +215,7 @@ function BoardComponent(props) {
 					clearInterval(C.state.interval)
 					// console.log(`GAME OVER MANNNNNNN`)
 					gameOver = true
+					C.props.gameOver()
 					C.state.board = newBoard()
 					// console.log(`gameOver`, gameOver)
 				}
@@ -382,7 +384,7 @@ function BoardComponent(props) {
 	}
 
 	C.handleKeydown = function(event) {
-		if (!gameOver) {
+		if (!gameOver && C.props.gameStarted) {
 			if (event.keyCode === 37) C.movePieceLeft()
 			if (event.keyCode === 38) C.rotatePieces()
 			if (event.keyCode === 39) C.movePieceRight()
