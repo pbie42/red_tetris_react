@@ -126,6 +126,8 @@ function BoardComponent(props) {
 			if (boardY + 4 > 26) C.state.board = prevBoard
 			else {
 				let y = 0
+				if (!shape) console.log(`NO SHAPE!!!!`)
+				if (!board) console.log(`NO BOARD!!!!`)
 				while (shape[y] && board[y]) {
 					let boardX = location.x
 					let x = 0

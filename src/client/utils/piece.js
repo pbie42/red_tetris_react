@@ -5,7 +5,7 @@ function randomPiece() {
 
 function pieceOrder() {
 	const pieces = []
-	for (let i = 0; i < 50; i++) pieces.push(randomPiece())
+	for (let i = 0; i < 100; i++) pieces.push(randomPiece())
 	return pieces
 }
 
