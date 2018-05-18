@@ -15,7 +15,8 @@ import {
 	updateGamePiece,
 	updateGamePieces,
 	usernameSet,
-	gameStartCountdown
+	gameStartCountdown,
+	gameStopCountdown
 } from '../actions'
 import { store } from '../../index'
 
@@ -96,6 +97,11 @@ const setupSocket = dispatch => {
 				console.log(`GAME_START_COUNTDOWN`)
 				// console.log(`data`, data)
 				dispatch(gameStartCountdown())
+				break
+			case types.GAME_STOP_COUNTDOWN:
+				console.log(`GAME_STOP_COUNTDOWN`)
+				// console.log(`data`, data)
+				dispatch(gameStopCountdown())
 				break
 			default:
 				break

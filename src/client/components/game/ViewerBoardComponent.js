@@ -19,22 +19,23 @@ function ViewerBoardComponent(props) {
 	}
 
 	C.buildBoard = function() {
-		grid.innerHTML = ''
-		for (let i = 0; i < C.props.board.length; i++) {
-			if (i < 4) continue
-			if (i > 23) continue
-			const row = document.createElement('div')
-			row.setAttribute('id', `row-${i - 4}`)
-			for (let x = 0; x < C.props.board[i].length; x++) {
-				if (x > 9) continue
-				const square = document.createElement('div')
-				square.setAttribute('id', `col-${x}`)
-				C.setColorClass(i, x, square)
-				row.appendChild(square)
+		if (grid) {
+			grid.innerHTML = ''
+			for (let i = 0; i < C.props.board.length; i++) {
+				if (i < 4) continue
+				if (i > 23) continue
+				const row = document.createElement('div')
+				row.setAttribute('id', `row-${i - 4}`)
+				for (let x = 0; x < C.props.board[i].length; x++) {
+					if (x > 9) continue
+					const square = document.createElement('div')
+					square.setAttribute('id', `col-${x}`)
+					C.setColorClass(i, x, square)
+					row.appendChild(square)
+				}
+				grid.appendChild(row)
 			}
-			grid.appendChild(row)
-		}
-		console.log(`grid`, grid)
+		} else console.log(`grid`, grid)
 	}
 
 	C.setColorClass = function(i, x, square) {

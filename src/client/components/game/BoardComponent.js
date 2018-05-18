@@ -86,13 +86,13 @@ function BoardComponent(props) {
 			C.props.newPieces(C.props.roomId, C.props.roomName)
 		let nextPiece = C.props.piece
 		if (!nextPiece) {
-			// console.log(`nextPiece does not exist`)
+			console.log(`nextPiece does not exist`)
 			nextPiece = piece.pieces[piece.current]
 		}
 		let position = {}
 		C.state.piece.prevPiece = C.state.piece.piece
 		C.state.piece.piece = nextPiece
-		C.state.piece.current++
+		C.state.piece.current += 1
 		C.state.piece.location = { x: 3, y: 0 }
 		if (piece.piece === 'i') position = getI(piece)
 		if (piece.piece === 'j') position = getJ(piece)
@@ -143,6 +143,7 @@ function BoardComponent(props) {
 				}
 				C.state.board = board
 			}
+			if (C.state.savedBoard.length > 0) C.checkLines()
 			if (C.props.doneUser && C.props.doneRoom)
 				C.props.updateGameBoard(
 					C.state.board,
@@ -257,14 +258,12 @@ function BoardComponent(props) {
 				C.state.piece.set = true
 				C.state.savedBoard = C.state.board.slice(0)
 				// console.log(`C.state.savedBoard`, JSON.stringify(C.state.savedBoard))
-				if (C.state.savedBoard.length > 0) C.checkLines()
 				C.checkGame()
 			}
 		} else {
 			// console.log(`piece is set!!!!`)
 			C.state.piece.set = false
 			C.state.savedBoard = C.state.board.slice(0)
-			if (C.state.savedBoard.length > 0) C.checkLines()
 			C.checkGame()
 			C.props.requestNextPiece(
 				C.props.roomId,

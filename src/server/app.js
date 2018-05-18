@@ -203,6 +203,7 @@ io.on('connection', socket => {
 				console.log(`REMOVE_USER_FROM_ROOM`)
 				console.log(`data`, data)
 				rooms = removeUserFromRoom(data.username, data.roomName, rooms, users)
+				console.log(`rooms`, rooms)
 				let user = getUser(data.username, users)
 				if (user) user.setBoard(newUserBoard())
 				// console.log(`user`, user)
@@ -214,6 +215,12 @@ io.on('connection', socket => {
 					console.log(`should have removed room`)
 				}
 				if (room) console.log(`room.getMembers()`, room.getMembers())
+				socket.emit(
+					'message',
+					JSON.stringify({
+						type: 'GAME_STOP_COUNTDOWN'
+					})
+				)
 				socket.leave(data.roomName)
 				socket.broadcast.emit(
 					'message',
@@ -328,8 +335,10 @@ io.on('connection', socket => {
 				if (
 					user &&
 					(user.getId() !== data.id || user.getUsername()) !== data.username
-				)
+				) {
 					console.log(`CHEATING!!!!!!!!!!!`)
+					console.log(`data`, data)
+				}
 				if (user) user.board = data.board
 				// console.log(`rooms`, JSON.stringify(rooms))
 				// console.log(`users`, JSON.stringify(users))
@@ -373,7 +382,7 @@ io.on('connection', socket => {
 				room = getRoom(data.roomName, rooms)
 				// if (room) console.log(`room.getRoomName()`, room.getRoomName())
 				user = getUser(data.username, users)
-				console.log(`user.getCurrent()`, user.getCurrent())
+				if (user) console.log(`user.getCurrent()`, user.getCurrent())
 				if (user) console.log(`user.getUserName()`, user.getUsername())
 				if (!room) console.log(`Room error GAME_NEW_PIECE`)
 				if (room && user) {

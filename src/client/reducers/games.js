@@ -19,6 +19,9 @@ const games = (state = initialGameState, action) => {
 		case types.GAME_START_COUNTDOWN:
 			return { ...state, countDown: true }
 
+		case types.GAME_STOP_COUNTDOWN:
+			return { ...state, countDown: false }
+
 		case types.GAME_JOINED:
 			return state
 

@@ -7,6 +7,7 @@ import { errorUsernameTaken, errorTooManyMembers } from './errors'
 import {
 	gameJoined,
 	gameStartCountdown,
+	gameStopCountdown,
 	startGame,
 	newPieces,
 	requestNextPiece,
@@ -54,6 +55,7 @@ export {
 	errorUsernameTaken,
 	gameJoined,
 	gameStartCountdown,
+	gameStopCountdown,
 	startGame,
 	messageReceived,
 	newPieces,

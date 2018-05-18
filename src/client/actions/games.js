@@ -71,6 +71,10 @@ export const gameStartCountdown = () => ({
 	type: types.GAME_START_COUNTDOWN
 })
 
+export const gameStopCountdown = () => ({
+	type: types.GAME_STOP_COUNTDOWN
+})
+
 export const removeBoards = () => ({
 	type: types.GAME_REMOVE_BOARDS
 })

@@ -21,7 +21,8 @@ function GameComponent(props) {
 		connection: false,
 		room: '',
 		interval: '',
-		creatorMessage: 'Press Space to Start',
+		countdownInterval: '',
+		creatorMessage: '',
 		exitText: '',
 		change: false
 	}
@@ -61,19 +62,68 @@ function GameComponent(props) {
 	}
 
 	C.flashMessage = function() {
-		// console.log(`flashing message`)
-		// console.log(`C.state.creatorMessage`, C.state.creatorMessage)
-		if (C.state.creatorMessage === 'Press Space to Start')
+		if (
+			!C.props.countDown &&
+			C.props.userId === C.props.roomId &&
+			(C.state.creatorMessage === 'Press Space to Start' ||
+				C.state.creatorMessage === '')
+		) {
 			C.setState({ creatorMessage: 'Or wait for more players' })
-		else C.setState({ creatorMessage: 'Press Space to Start' })
+		} else if (
+			!C.props.countDown &&
+			C.props.userId === C.props.roomId &&
+			C.state.creatorMessage === 'Or wait for more players'
+		) {
+			C.setState({ creatorMessage: 'Press Space to Start' })
+		}
+		if (
+			!C.props.countDown &&
+			C.props.userId !== C.props.roomId &&
+			(C.state.creatorMessage === 'Press Space to Start' ||
+				C.state.creatorMessage === '')
+		) {
+			C.setState({ creatorMessage: 'Waiting for creator to start game' })
+		} else if (
+			!C.props.countDown &&
+			C.props.userId !== C.props.roomId &&
+			C.state.creatorMessage === 'Waiting for creator to start game'
+		) {
+			C.setState({ creatorMessage: '' })
+		}
+		if (C.props.countDown) {
+			console.log(`countdown started`)
+			console.log(`C.state.creatorMessage`, C.state.creatorMessage)
+			if (
+				C.state.creatorMessage === 'Press Space to Start' ||
+				C.state.creatorMessage === 'Or wait for more players' ||
+				C.state.creatorMessage === 'Waiting for creator to start game' ||
+				C.state.creatorMessage === ''
+			) {
+				console.log(`setting game started`)
+				C.setState({ creatorMessage: 'Game starting in 5...' })
+			} else if (C.state.creatorMessage === 'Game starting in 5...')
+				C.setState({ creatorMessage: '4' })
+			else if (C.state.creatorMessage === '4')
+				C.setState({ creatorMessage: '3' })
+			else if (C.state.creatorMessage === '3')
+				C.setState({ creatorMessage: '2' })
+			else if (C.state.creatorMessage === '2')
+				C.setState({ creatorMessage: '1' })
+			else if (C.state.creatorMessage === '1') {
+				C.setState({ creatorMessage: 'GO!' })
+				clearInterval(C.state.interval)
+			}
+		}
 	}
 
 	C.handleSpaceBar = function(event) {
 		// console.log(`KeyDown`)
 		if (doneUser && doneRoom && event.keyCode === 32) {
 			// console.log(`SPACE bar pressed`)
-			if (C.props.userId && C.props.roomName)
+			if (C.props.userId && C.props.roomName) {
+				// C.setState({ countDown: true })
 				C.props.startGame(C.props.roomName, C.props.userId)
+			}
 		}
 	}
 
@@ -229,13 +279,13 @@ function GameComponent(props) {
 							}
 						>
 							<div>
-								{!C.props.countDown && C.props.userId === C.props.roomId ? (
+								{C.props.userId === C.props.roomId ? (
 									<h1>{C.state.creatorMessage}</h1>
 								) : (
 									<h1> </h1>
 								)}
-								{!C.props.countDown && C.props.userId !== C.props.roomId ? (
-									<h1>Waiting for creator to start game</h1>
+								{C.props.userId !== C.props.roomId ? (
+									<h1>{C.state.creatorMessage}</h1>
 								) : (
 									<h1> </h1>
 								)}
