@@ -120,6 +120,7 @@ body {
 }
 .container-fade {
   animation: gradientEaseOut 1.5s ease-out;
+  animation-fill-mode: forwards;
 }
 h1,
 h2,
@@ -1379,7 +1380,6 @@ p {
   justify-content: space-evenly;
   align-items: center;
   animation: moveInDown 2s;
-  animation-delay: 0.5s;
   animation-fill-mode: forwards;
 }
 .error-message-container > h1 {
@@ -1393,6 +1393,10 @@ p {
 .error-message-container > h3 {
   color: #fff;
   font-size: 2rem;
+}
+.moveOutDivDown {
+  animation: moveOutDown 2.5s ease-in-out;
+  animation-fill-mode: forwards;
 }
 @-moz-keyframes gradientEaseIn {
   0% {
