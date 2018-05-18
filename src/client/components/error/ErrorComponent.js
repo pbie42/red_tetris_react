@@ -3,6 +3,13 @@ import React, { Component } from 'react'
 function ErrorComponent(props) {
 	const C = new Component(props)
 
+	C.componentDidMount = function() {
+		function delayRouteChange() {
+			props.history.push('/')
+		}
+		setTimeout(delayRouteChange, 5000)
+	}
+
 	C.render = () => {
 		return (
 			<div className="container-error">
