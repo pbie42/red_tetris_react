@@ -108,12 +108,12 @@ io.on('connection', socket => {
 				// )
 				break
 			//---------------------------------------------------------------------ADD_MESSAGE
-			case 'ADD_MESSAGE':
-				// console.log(`ADD_MESSAGE`)
+			case 'MESSAGE_ADD':
+				// console.log(`MESSAGE_ADD`)
 				socket.broadcast.emit(
 					'message',
 					JSON.stringify({
-						type: 'ADD_MESSAGE',
+						type: 'MESSAGE_ADD',
 						message: data.message,
 						author: data.author
 					})

@@ -2,7 +2,7 @@
 export const CONNECTED = 'CONNECTED'
 export const DISCONNECTED = 'DISCONNECTED'
 //------------------------------------------------------------------------------Messages
-export const ADD_MESSAGE = 'ADD_MESSAGE'
+export const MESSAGE_ADD = 'MESSAGE_ADD'
 export const MESSAGE_RECEIVED = 'MESSAGE_RECEIVED'
 //------------------------------------------------------------------------------Game
 export const GAME_START = 'GAME_START'

@@ -36,7 +36,7 @@ const setupSocket = dispatch => {
 		const data = JSON.parse(event)
 		// console.log(`data`, data)
 		switch (data.type) {
-			case types.ADD_MESSAGE:
+			case types.MESSAGE_ADD:
 				// console.log(`ADD_MESSAGE`)
 				if (data.author !== store.getState().user.username)
 					dispatch(messageReceived(data.message, data.author))

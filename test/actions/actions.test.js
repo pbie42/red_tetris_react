@@ -35,7 +35,7 @@ describe('Actions', () => {
 			const message = 'hello'
 			const addMessageAction = addMessage(message, username)
 			expect(addMessageAction).to.eql({
-				type: 'ADD_MESSAGE',
+				type: 'MESSAGE_ADD',
 				id: 0,
 				author: 'pbie',
 				message: 'hello'
