@@ -124,7 +124,7 @@ function GameComponent(props) {
 			// console.log(`SPACE bar pressed`)
 			if (C.props.userId && C.props.roomName) {
 				// C.setState({ countDown: true })
-				C.props.startGame(C.props.roomName, C.props.userId)
+				C.props.gameStart(C.props.roomName, C.props.userId)
 			}
 		}
 	}

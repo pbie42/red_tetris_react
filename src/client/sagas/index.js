@@ -61,7 +61,7 @@ const handleNewPieceRequest = function* handleNewPieceRequest(params) {
 	})
 }
 
-const handleStartGame = function* handleStartGame(params) {
+const handleGameStart = function* handleGameStart(params) {
 	yield takeEvery(types.GAME_START, action => {
 		params.socket.emit('game', JSON.stringify(action))
 	})
@@ -78,5 +78,5 @@ export {
 	handleNewUser,
 	handleRemoveUser,
 	handleRemoveUserFromRoom,
-	handleStartGame
+	handleGameStart
 }

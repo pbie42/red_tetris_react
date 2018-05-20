@@ -1,6 +1,6 @@
 import * as types from '../constants/ActionTypes'
 
-export const startGame = (roomName, userId) => ({
+export const gameStart = (roomName, userId) => ({
 	type: types.GAME_START,
 	roomName,
 	userId

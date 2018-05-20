@@ -21,7 +21,7 @@ import {
 	handleGameBoardUpdate,
 	handleNewPieces,
 	handleNewPieceRequest,
-	handleStartGame
+	handleGameStart
 } from './client/sagas'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -81,7 +81,7 @@ sagaMiddleware.run(handleNewPieceRequest, {
 	socket
 })
 
-sagaMiddleware.run(handleStartGame, {
+sagaMiddleware.run(handleGameStart, {
 	socket
 })
 
