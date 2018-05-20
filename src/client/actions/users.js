@@ -8,7 +8,7 @@ export const addUser = username => ({
 })
 
 export const removeUser = username => ({
-	type: types.REMOVE_USER,
+	type: types.USER_REMOVE_USER,
 	username
 })
 

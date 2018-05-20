@@ -156,7 +156,7 @@ describe('Actions', () => {
 		it('removeUser returns object to remove a user', () => {
 			const removeUserAction = removeUser(username)
 			expect(removeUserAction).to.eql({
-				type: 'REMOVE_USER',
+				type: 'USER_REMOVE_USER',
 				username: 'pbie'
 			})
 		})

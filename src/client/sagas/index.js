@@ -14,7 +14,7 @@ const handleNewUser = function* handleNewUser(params) {
 }
 
 const handleRemoveUser = function* handleRemoveUser(params) {
-	yield takeEvery(types.REMOVE_USER, action => {
+	yield takeEvery(types.USER_REMOVE_USER, action => {
 		params.socket.emit('message', JSON.stringify(action))
 	})
 }

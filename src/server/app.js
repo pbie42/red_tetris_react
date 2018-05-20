@@ -87,8 +87,8 @@ io.on('connection', socket => {
 				)
 				break
 			//---------------------------------------------------------------------REMOVE_USER
-			case 'REMOVE_USER':
-				// console.log(`REMOVE_USER`)
+			case 'USER_REMOVE_USER':
+				// console.log(`USER_REMOVE_USER`)
 				// console.log(`data`, data)
 				users = users.filter(user => user.username === data.username)
 				// console.log(`users`, users)
