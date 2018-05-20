@@ -11,7 +11,7 @@ export const gameRoomSet = roomName => ({
 	roomName
 })
 
-export const updateGameMembers = members => ({
+export const gameMembersUpdate = members => ({
 	type: types.GAME_MEMBERS_UPDATE,
 	members
 })

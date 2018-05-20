@@ -10,7 +10,7 @@ import {
 	roomsListReceived,
 	setGameId,
 	setId,
-	updateGameMembers,
+	gameMembersUpdate,
 	updateGameBoards,
 	updateGamePiece,
 	updateGamePieces,
@@ -68,7 +68,7 @@ const setupSocket = dispatch => {
 			case types.GAME_MEMBERS_UPDATE:
 				// console.log(`GAME_MEMBERS_UPDATE`)
 				// console.log(`data`, data)
-				dispatch(updateGameMembers(data.members))
+				dispatch(gameMembersUpdate(data.members))
 				break
 			case types.GAME_PIECE_UPDATE:
 				// console.log(`GAME_PIECE_UPDATE`)

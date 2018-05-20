@@ -19,7 +19,7 @@ import {
 	gameRoomUnset,
 	updateGameBoard,
 	updateGameBoards,
-	updateGameMembers,
+	gameMembersUpdate,
 	updateGamePiece,
 	updateGamePieces
 } from './games'
@@ -75,7 +75,7 @@ export {
 	setUsername,
 	updateGameBoard,
 	updateGameBoards,
-	updateGameMembers,
+	gameMembersUpdate,
 	updateGamePiece,
 	updateGamePieces,
 	gameRoomUnset,
