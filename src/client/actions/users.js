@@ -38,6 +38,6 @@ export const usersListReceived = () => ({
 })
 
 export const usernameSet = () => ({
-	type: types.USERNAME_SET,
+	type: types.USER_USERNAME_SET,
 	usernameSet: true
 })

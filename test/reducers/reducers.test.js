@@ -13,7 +13,7 @@ describe('User Reducers', () => {
 	it('makes usernameSet equal true', () => {
 		const state = { usernameSet: false }
 		const updatedState = user(state, {
-			type: 'USERNAME_SET',
+			type: 'USER_USERNAME_SET',
 			usernameSet: true
 		})
 		expect(updatedState).to.eql({ usernameSet: true })

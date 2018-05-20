@@ -18,7 +18,7 @@ const user = (state = initialUserState, action = { type: null }) => {
 				...state,
 				username: ''
 			}
-		case types.USERNAME_SET:
+		case types.USER_USERNAME_SET:
 			return {
 				...state,
 				usernameSet: true

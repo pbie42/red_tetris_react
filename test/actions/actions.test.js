@@ -180,7 +180,7 @@ describe('Actions', () => {
 		it('usernameSet returns an object for the updating username set connection action', () => {
 			const usernameSetAction = usernameSet()
 			expect(usernameSetAction).to.eql({
-				type: 'USERNAME_SET',
+				type: 'USER_USERNAME_SET',
 				usernameSet: true
 			})
 		})

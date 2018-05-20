@@ -75,7 +75,7 @@ io.on('connection', socket => {
 				socket.emit(
 					'message',
 					JSON.stringify({
-						type: 'USERNAME_SET'
+						type: 'USER_USERNAME_SET'
 					})
 				)
 				socket.emit(
