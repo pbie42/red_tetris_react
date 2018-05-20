@@ -8,7 +8,7 @@ const initialUserState = {
 
 const user = (state = initialUserState, action = { type: null }) => {
 	switch (action.type) {
-		case types.SET_USERNAME:
+		case types.USER_SET_USERNAME:
 			return {
 				...state,
 				username: action.username

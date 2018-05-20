@@ -164,7 +164,7 @@ describe('Actions', () => {
 		it('setUsername returns an object for the set username action', () => {
 			const setUsernameAction = setUsername(username)
 			expect(setUsernameAction).to.eql({
-				type: 'SET_USERNAME',
+				type: 'USER_SET_USERNAME',
 				username: 'pbie'
 			})
 		})

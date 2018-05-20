@@ -13,7 +13,7 @@ export const removeUser = username => ({
 })
 
 export const setUsername = username => ({
-	type: types.SET_USERNAME,
+	type: types.USER_SET_USERNAME,
 	username
 })
 

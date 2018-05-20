@@ -4,7 +4,10 @@ import user from '../../src/client/reducers/user'
 describe('User Reducers', () => {
 	it('sets username', () => {
 		const state = { username: '' }
-		const updatedState = user(state, { type: 'SET_USERNAME', username: 'pbie' })
+		const updatedState = user(state, {
+			type: 'USER_SET_USERNAME',
+			username: 'pbie'
+		})
 		expect(updatedState.username).to.equal('pbie')
 	})
 	it('makes usernameSet equal true', () => {
