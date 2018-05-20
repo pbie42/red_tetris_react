@@ -11,8 +11,8 @@ import {
 	removeId,
 	removeUser,
 	removeUserFromRoom,
-	setGameRoom,
-	unsetGameRoom,
+	gameRoomSet,
+	gameRoomUnset,
 	errorUsernameTaken,
 	errorTooManyMembers
 } from '../../actions'
@@ -45,11 +45,11 @@ export const mapDispatchToProps = dispatch => ({
 	gameStart: (roomName, userId) => {
 		dispatch(gameStart(roomName, userId))
 	},
-	setGameRoom: roomName => {
-		dispatch(setGameRoom(roomName))
+	gameRoomSet: roomName => {
+		dispatch(gameRoomSet(roomName))
 	},
-	unsetGameRoom: roomName => {
-		dispatch(unsetGameRoom(roomName))
+	gameRoomUnset: roomName => {
+		dispatch(gameRoomUnset(roomName))
 	},
 	gameJoined: roomName => {
 		dispatch(gameJoined(roomName))

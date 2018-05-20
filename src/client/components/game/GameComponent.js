@@ -33,7 +33,7 @@ function GameComponent(props) {
 	}
 
 	C.componentWillUnmount = function() {
-		C.props.unsetGameRoom(C.state.room)
+		C.props.gameRoomUnset(C.state.room)
 		C.props.removeUserFromRoom(C.props.username, C.state.room)
 		C.props.removeBoards()
 		C.props.removeId()
@@ -57,7 +57,7 @@ function GameComponent(props) {
 		if (C.verifyConnection()) doneUser = C.handlePlayer(player)
 		if (C.verifyPlayerHandled()) {
 			doneRoom = C.handleRoom(room, player)
-			C.props.setGameRoom(room)
+			C.props.gameRoomSet(room)
 			C.props.gameJoined(room)
 		}
 	}
@@ -130,7 +130,7 @@ function GameComponent(props) {
 	}
 
 	C.componentCleanup = function() {
-		C.props.unsetGameRoom(C.state.room)
+		C.props.gameRoomUnset(C.state.room)
 		C.props.removeUserFromRoom(C.props.username, C.state.room)
 		// C.props.removeUser(C.props.username)
 		window.removeEventListener('keydown', e => C.handleSpaceBar(e))

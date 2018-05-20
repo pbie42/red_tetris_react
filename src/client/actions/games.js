@@ -6,7 +6,7 @@ export const gameStart = (roomName, userId) => ({
 	userId
 })
 
-export const setGameRoom = roomName => ({
+export const gameRoomSet = roomName => ({
 	type: types.GAME_ROOM_SET,
 	roomName
 })
@@ -26,7 +26,7 @@ export const updateGamePieces = pieces => ({
 	pieces
 })
 
-export const unsetGameRoom = roomName => ({
+export const gameRoomUnset = roomName => ({
 	type: types.GAME_ROOM_UNSET,
 	roomName
 })
