@@ -127,7 +127,7 @@ io.on('connection', socket => {
 	socket.on('room', message => {
 		// console.log(`new room message!!!`)
 		const data = JSON.parse(message)
-		let currentRooms, room
+		let currentRooms, room, members, roomBoards
 		switch (data.type) {
 			//---------------------------------------------------------------------ADD_ROOM
 			case 'ROOM_ADD_ROOM':
@@ -246,6 +246,21 @@ io.on('connection', socket => {
 							: []
 					})
 				)
+				if (room) members = room.getMembers()
+				// console.log(`members`, members)
+				if (members)
+					roomBoards = members.map(member => ({
+						board: member.getBoard(),
+						username: member.getUsername()
+					}))
+				if (roomBoards)
+					io.to(data.roomName).emit(
+						'message',
+						JSON.stringify({
+							type: 'GAME_BOARDS_UPDATE',
+							boards: roomBoards
+						})
+					)
 				// socket.emit(
 				// 	'message',
 				// 	JSON.stringify({
