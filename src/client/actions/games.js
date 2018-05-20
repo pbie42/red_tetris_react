@@ -36,7 +36,7 @@ export const gameSetId = id => ({
 	id
 })
 
-export const updateGameBoard = (board, id, roomName, username) => ({
+export const gameBoardUpdate = (board, id, roomName, username) => ({
 	type: types.GAME_BOARD_UPDATE,
 	board,
 	id,

@@ -146,7 +146,7 @@ function BoardComponent(props) {
 			}
 			if (C.state.savedBoard.length > 0) C.checkLines()
 			if (C.props.doneUser && C.props.doneRoom)
-				C.props.updateGameBoard(
+				C.props.gameBoardUpdate(
 					C.state.board,
 					C.props.userId,
 					C.props.roomName,
