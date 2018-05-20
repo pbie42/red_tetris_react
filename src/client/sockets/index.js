@@ -41,8 +41,8 @@ const setupSocket = dispatch => {
 				if (data.author !== store.getState().user.username)
 					dispatch(messageReceived(data.message, data.author))
 				break
-			case types.ADD_USER:
-				// console.log(`ADD_USER`)
+			case types.USER_ADD_USER:
+				console.log(`USER_ADD_USER`)
 				dispatch(addUser(data.username))
 				break
 			case types.ADD_ROOM:
@@ -88,7 +88,7 @@ const setupSocket = dispatch => {
 				// console.log(`data`, data)
 				dispatch(updateGameBoards(data.boards))
 				break
-			case types.SET_ID:
+			case types.USER_SET_ID:
 				// console.log(`SET_ID`)
 				// console.log(`data`, data)
 				dispatch(setId(data.id))

@@ -2,7 +2,7 @@ import * as types from '../constants/ActionTypes'
 
 const users = (state = [], action) => {
 	switch (action.type) {
-		case types.ADD_USER:
+		case types.USER_ADD_USER:
 			return state.concat([
 				{
 					name: action.username,

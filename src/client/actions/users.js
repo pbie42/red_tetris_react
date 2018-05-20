@@ -2,7 +2,7 @@ import * as types from '../constants/ActionTypes'
 let nextUserId = 0
 
 export const addUser = username => ({
-	type: types.ADD_USER,
+	type: types.USER_ADD_USER,
 	id: nextUserId++,
 	username
 })
@@ -18,7 +18,7 @@ export const setUsername = username => ({
 })
 
 export const setId = id => ({
-	type: types.SET_ID,
+	type: types.USER_SET_ID,
 	id
 })
 

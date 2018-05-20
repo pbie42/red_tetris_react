@@ -52,8 +52,8 @@ io.on('connection', socket => {
 		// console.log(`data`, data)
 		switch (data.type) {
 			//---------------------------------------------------------------------ADD_USER
-			case 'ADD_USER':
-				// console.log(`ADD_USER`)
+			case 'USER_ADD_USER':
+				console.log(`USER_ADD_USER`)
 				// console.log(`data`, data)
 				index = users.length
 				users.push(new User(socket.id, data.username))
@@ -81,7 +81,7 @@ io.on('connection', socket => {
 				socket.emit(
 					'message',
 					JSON.stringify({
-						type: 'SET_ID',
+						type: 'USER_SET_ID',
 						id: socket.id
 					})
 				)

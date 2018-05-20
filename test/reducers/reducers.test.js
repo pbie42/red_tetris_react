@@ -24,7 +24,11 @@ describe('User Reducers', () => {
 		expect(updatedState.username).to.equal('pbie')
 	})
 	it('returns initial state if no state is given', () => {
-		const initialState = { usernameSet: false }
+		const initialState = {
+			usernameSet: false,
+			username: '',
+			id: ''
+		}
 		const action = {
 			type: 'TEST_ACTION',
 			username: 'jennzmee'

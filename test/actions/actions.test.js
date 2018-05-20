@@ -139,7 +139,7 @@ describe('Actions', () => {
 		it('addUser returns an object for the add user action', () => {
 			const addUserAction = addUser(username)
 			expect(addUserAction).to.eql({
-				type: 'ADD_USER',
+				type: 'USER_ADD_USER',
 				id: 0,
 				username: 'pbie'
 			})

@@ -8,7 +8,7 @@ const handleNewMessage = function* handleNewMessage(params) {
 }
 
 const handleNewUser = function* handleNewUser(params) {
-	yield takeEvery(types.ADD_USER, action => {
+	yield takeEvery(types.USER_ADD_USER, action => {
 		params.socket.emit('message', JSON.stringify(action))
 	})
 }

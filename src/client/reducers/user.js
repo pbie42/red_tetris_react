@@ -23,7 +23,7 @@ const user = (state = initialUserState, action = { type: null }) => {
 				...state,
 				usernameSet: true
 			}
-		case types.SET_ID:
+		case types.USER_SET_ID:
 			return {
 				...state,
 				id: action.id
