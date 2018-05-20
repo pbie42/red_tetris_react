@@ -60,7 +60,7 @@ export const gameNewPieces = (id, roomName) => ({
 	roomName
 })
 
-export const requestNextPiece = (id, roomName, username) => ({
+export const gameNewPiece = (id, roomName, username) => ({
 	type: types.GAME_NEW_PIECE,
 	id,
 	roomName,
