@@ -130,8 +130,8 @@ io.on('connection', socket => {
 		let currentRooms, room
 		switch (data.type) {
 			//---------------------------------------------------------------------ADD_ROOM
-			case 'ADD_ROOM':
-				// console.log(`ADD_ROOM`)
+			case 'ROOM_ADD_ROOM':
+				// console.log(`ROOM_ADD_ROOM`)
 				// console.log(`roomData`, data)
 				socket.join(data.roomName)
 				// console.log(`users`, users)

@@ -4,7 +4,7 @@ import { addUserToRoom, removeUserFromRoom } from '../utils'
 const rooms = (state = [], action) => {
 	let rooms
 	switch (action.type) {
-		case types.ADD_ROOM:
+		case types.ROOM_ADD_ROOM:
 		case types.ROOM_ADDED:
 			return state.concat([
 				{

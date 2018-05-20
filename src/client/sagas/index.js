@@ -26,7 +26,7 @@ const handleRemoveUserFromRoom = function* handleRemoveUserFromRoom(params) {
 }
 
 const handleNewRoom = function* handleNewRoom(params) {
-	yield takeEvery(types.ADD_ROOM, action => {
+	yield takeEvery(types.ROOM_ADD_ROOM, action => {
 		params.socket.emit('room', JSON.stringify(action))
 	})
 }

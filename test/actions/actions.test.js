@@ -106,7 +106,7 @@ describe('Actions', () => {
 		it('addRoom returns an object for the add a room to rooms array action', () => {
 			const addRoomAction = addRoom(roomName, members)
 			expect(addRoomAction).to.eql({
-				type: 'ADD_ROOM',
+				type: 'ROOM_ADD_ROOM',
 				roomName,
 				members
 			})

@@ -45,8 +45,8 @@ const setupSocket = dispatch => {
 				console.log(`USER_ADD_USER`)
 				dispatch(addUser(data.username))
 				break
-			case types.ADD_ROOM:
-				// console.log(`ADD_ROOM`)
+			case types.ROOM_ADD_ROOM:
+				// console.log(`ROOM_ADD_ROOM`)
 				dispatch(addRoom(data.roomName, data.members))
 				break
 			case types.USER_USERNAME_SET:
