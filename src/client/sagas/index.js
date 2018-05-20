@@ -20,7 +20,7 @@ const handleRemoveUser = function* handleRemoveUser(params) {
 }
 
 const handleRemoveUserFromRoom = function* handleRemoveUserFromRoom(params) {
-	yield takeEvery(types.REMOVE_USER_FROM_ROOM, action => {
+	yield takeEvery(types.ROOM_REMOVE_USER, action => {
 		params.socket.emit('room', JSON.stringify(action))
 	})
 }

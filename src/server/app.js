@@ -199,8 +199,8 @@ io.on('connection', socket => {
 				)
 				break
 			//---------------------------------------------------------------------REMOVE_USER_FROM_ROOM
-			case 'REMOVE_USER_FROM_ROOM':
-				// console.log(`REMOVE_USER_FROM_ROOM`)
+			case 'ROOM_REMOVE_USER':
+				// console.log(`ROOM_REMOVE_USER`)
 				// console.log(`data`, data)
 				rooms = removeUserFromRoom(data.username, data.roomName, rooms, users)
 				// console.log(`rooms`, rooms)

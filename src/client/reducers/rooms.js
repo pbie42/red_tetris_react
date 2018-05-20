@@ -19,7 +19,7 @@ const rooms = (state = [], action) => {
 			rooms = state
 			rooms = addUserToRoom(action.username, action.roomName, rooms)
 			return rooms
-		case types.REMOVE_USER_FROM_ROOM:
+		case types.ROOM_REMOVE_USER:
 			rooms = state
 			rooms = removeUserFromRoom(action.username, action.roomName, rooms)
 			return rooms

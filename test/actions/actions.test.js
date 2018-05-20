@@ -98,7 +98,7 @@ describe('Actions', () => {
 		it('removeUserFromRoom returns an object for the remove user from a room action', () => {
 			const removeUserFromRoomAction = removeUserFromRoom(username, roomName)
 			expect(removeUserFromRoomAction).to.eql({
-				type: 'REMOVE_USER_FROM_ROOM',
+				type: 'ROOM_REMOVE_USER',
 				roomName,
 				username
 			})
