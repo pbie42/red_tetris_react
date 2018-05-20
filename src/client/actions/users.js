@@ -23,7 +23,7 @@ export const setId = id => ({
 })
 
 export const unsetUsername = username => ({
-	type: types.UNSET_USERNAME,
+	type: types.USER_UNSET_USERNAME,
 	username
 })
 

@@ -13,7 +13,7 @@ const user = (state = initialUserState, action = { type: null }) => {
 				...state,
 				username: action.username
 			}
-		case types.UNSET_USERNAME:
+		case types.USER_UNSET_USERNAME:
 			return {
 				...state,
 				username: ''

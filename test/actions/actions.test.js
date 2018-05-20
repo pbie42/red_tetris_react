@@ -172,7 +172,7 @@ describe('Actions', () => {
 		it('unsetUsername returns an object for the unsetting username action', () => {
 			const unsetUsernameAction = unsetUsername(username)
 			expect(unsetUsernameAction).to.eql({
-				type: 'UNSET_USERNAME',
+				type: 'USER_UNSET_USERNAME',
 				username: 'pbie'
 			})
 		})

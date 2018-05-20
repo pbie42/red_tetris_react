@@ -47,7 +47,7 @@ describe('User Reducers', () => {
 	it('unsets username', () => {
 		const state = { username: 'pbie' }
 		const updatedState = user(state, {
-			type: 'UNSET_USERNAME',
+			type: 'USER_UNSET_USERNAME',
 			username: 'pbie'
 		})
 		expect(updatedState.username).to.equal('')
