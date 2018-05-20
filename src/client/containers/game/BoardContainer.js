@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 import BoardComponent from '../../components/game/BoardComponent'
-import { updateGameBoard, newPieces, requestNextPiece } from '../../actions'
+import { updateGameBoard, gameNewPieces, requestNextPiece } from '../../actions'
 
 export const mapDispatchToProps = dispatch => ({
 	updateGameBoard: (board, id, roomName, username) => {
 		dispatch(updateGameBoard(board, id, roomName, username))
 	},
-	newPieces: (id, roomName) => {
-		dispatch(newPieces(id, roomName))
+	gameNewPieces: (id, roomName) => {
+		dispatch(gameNewPieces(id, roomName))
 	},
 	requestNextPiece: (id, roomName, username) => {
 		dispatch(requestNextPiece(id, roomName, username))

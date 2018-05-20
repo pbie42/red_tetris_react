@@ -9,7 +9,7 @@ import {
 	gameStartCountdown,
 	gameStopCountdown,
 	gameStart,
-	newPieces,
+	gameNewPieces,
 	requestNextPiece,
 	removeBoards,
 	removeCountdown,
@@ -20,8 +20,8 @@ import {
 	updateGameBoard,
 	updateGameBoards,
 	gameMembersUpdate,
-	updateGamePiece,
-	updateGamePieces
+	gamePieceUpdate,
+	gamePiecesUpdate
 } from './games'
 
 import {
@@ -58,7 +58,7 @@ export {
 	gameStopCountdown,
 	gameStart,
 	messageReceived,
-	newPieces,
+	gameNewPieces,
 	populateRoomsList,
 	populateUsersList,
 	removeBoards,
@@ -76,8 +76,8 @@ export {
 	updateGameBoard,
 	updateGameBoards,
 	gameMembersUpdate,
-	updateGamePiece,
-	updateGamePieces,
+	gamePieceUpdate,
+	gamePiecesUpdate,
 	gameRoomUnset,
 	unsetUsername,
 	usersListReceived,

@@ -16,12 +16,12 @@ export const gameMembersUpdate = members => ({
 	members
 })
 
-export const updateGamePiece = piece => ({
+export const gamePieceUpdate = piece => ({
 	type: types.GAME_PIECE_UPDATE,
 	piece
 })
 
-export const updateGamePieces = pieces => ({
+export const gamePiecesUpdate = pieces => ({
 	type: types.GAME_PIECES_UPDATE,
 	pieces
 })
@@ -54,7 +54,7 @@ export const updateGameBoards = boards => ({
 	boards
 })
 
-export const newPieces = (id, roomName) => ({
+export const gameNewPieces = (id, roomName) => ({
 	type: types.GAME_NEW_PIECES,
 	id,
 	roomName

@@ -83,7 +83,7 @@ function BoardComponent(props) {
 		let piece = C.state.piece
 		// console.log(`C.state.current`, C.state.current)
 		if (C.state.current === 90)
-			C.props.newPieces(C.props.roomId, C.props.roomName)
+			C.props.gameNewPieces(C.props.roomId, C.props.roomName)
 		let nextPiece = C.props.piece
 		if (!nextPiece) {
 			// console.log(`nextPiece does not exist`)
