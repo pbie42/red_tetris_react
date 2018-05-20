@@ -18,7 +18,7 @@ import {
 	gameSetId,
 	gameRoomUnset,
 	gameBoardUpdate,
-	updateGameBoards,
+	gameBoardsUpdate,
 	gameMembersUpdate,
 	gamePieceUpdate,
 	gamePiecesUpdate
@@ -74,7 +74,7 @@ export {
 	setId,
 	setUsername,
 	gameBoardUpdate,
-	updateGameBoards,
+	gameBoardsUpdate,
 	gameMembersUpdate,
 	gamePieceUpdate,
 	gamePiecesUpdate,

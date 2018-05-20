@@ -11,7 +11,7 @@ import {
 	gameSetId,
 	setId,
 	gameMembersUpdate,
-	updateGameBoards,
+	gameBoardsUpdate,
 	gamePieceUpdate,
 	gamePiecesUpdate,
 	usernameSet,
@@ -86,7 +86,7 @@ const setupSocket = dispatch => {
 			case types.GAME_BOARDS_UPDATE:
 				// console.log(`GAME_BOARDS_UPDATE`)
 				// console.log(`data`, data)
-				dispatch(updateGameBoards(data.boards))
+				dispatch(gameBoardsUpdate(data.boards))
 				break
 			case types.USER_SET_ID:
 				// console.log(`SET_ID`)

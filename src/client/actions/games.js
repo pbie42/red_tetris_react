@@ -49,7 +49,7 @@ export const gameJoined = roomName => ({
 	roomName
 })
 
-export const updateGameBoards = boards => ({
+export const gameBoardsUpdate = boards => ({
 	type: types.GAME_BOARDS_UPDATE,
 	boards
 })
