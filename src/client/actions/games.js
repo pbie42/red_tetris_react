@@ -79,7 +79,7 @@ export const gameRemoveBoards = () => ({
 	type: types.GAME_REMOVE_BOARDS
 })
 
-export const removeId = () => ({
+export const gameRemoveId = () => ({
 	type: types.GAME_REMOVE_ID
 })
 

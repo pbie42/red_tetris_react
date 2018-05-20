@@ -36,7 +36,7 @@ function GameComponent(props) {
 		C.props.gameRoomUnset(C.state.room)
 		C.props.removeUserFromRoom(C.props.username, C.state.room)
 		C.props.gameRemoveBoards()
-		C.props.removeId()
+		C.props.gameRemoveId()
 		// console.log(`removing user from room`)
 		clearInterval(C.state.interval)
 		window.removeEventListener('keydown', e => C.handleSpaceBar(e))

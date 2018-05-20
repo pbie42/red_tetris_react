@@ -28,14 +28,14 @@ describe('Game', () => {
 		const gameRoomUnsetSpy = sinon.spy()
 		const removeUserFromRoomSpy = sinon.spy()
 		const gameRemoveBoardsSpy = sinon.spy()
-		const removeIdSpy = sinon.spy()
+		const gameRemoveIdSpy = sinon.spy()
 		const wrapper = mount(
 			<Provider store={store}>
 				<GameComponent
 					gameRoomUnset={gameRoomUnsetSpy}
 					removeUserFromRoom={removeUserFromRoomSpy}
 					gameRemoveBoards={gameRemoveBoardsSpy}
-					removeId={removeIdSpy}
+					gameRemoveId={gameRemoveIdSpy}
 				/>
 			</Provider>
 		)
