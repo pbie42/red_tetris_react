@@ -35,7 +35,7 @@ function GameComponent(props) {
 	C.componentWillUnmount = function() {
 		C.props.gameRoomUnset(C.state.room)
 		C.props.removeUserFromRoom(C.props.username, C.state.room)
-		C.props.removeBoards()
+		C.props.gameRemoveBoards()
 		C.props.removeId()
 		// console.log(`removing user from room`)
 		clearInterval(C.state.interval)

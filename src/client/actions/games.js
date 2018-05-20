@@ -75,7 +75,7 @@ export const gameStopCountdown = () => ({
 	type: types.GAME_STOP_COUNTDOWN
 })
 
-export const removeBoards = () => ({
+export const gameRemoveBoards = () => ({
 	type: types.GAME_REMOVE_BOARDS
 })
 
