@@ -82,7 +82,3 @@ export const gameRemoveBoards = () => ({
 export const gameRemoveId = () => ({
 	type: types.GAME_REMOVE_ID
 })
-
-export const removeCountdown = () => ({
-	type: types.GAME_REMOVE_COUNTDOWN
-})
