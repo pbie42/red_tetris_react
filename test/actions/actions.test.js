@@ -90,7 +90,7 @@ describe('Actions', () => {
 		it('addUserToRoom returns an object for the add user to room action', () => {
 			const addUserToRoomAction = addUserToRoom(username, roomName)
 			expect(addUserToRoomAction).to.eql({
-				type: 'ADD_USER_TO_ROOM',
+				type: 'ROOM_ADD_USER',
 				roomName,
 				username
 			})

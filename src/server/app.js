@@ -171,8 +171,8 @@ io.on('connection', socket => {
 				)
 				break
 			//---------------------------------------------------------------------ADD_USER_TO_ROOM
-			case 'ADD_USER_TO_ROOM':
-				// console.log(`ADD_USER_TO_ROOM`)
+			case 'ROOM_ADD_USER':
+				// console.log(`ROOM_ADD_USER`)
 				// console.log(`add to room data`, data)
 				rooms = addUserToRoom(data.username, data.roomName, rooms, users)
 

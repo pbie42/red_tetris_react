@@ -1,7 +1,7 @@
 import * as types from '../constants/ActionTypes'
 
 export const addUserToRoom = (username, roomName) => ({
-	type: types.ADD_USER_TO_ROOM,
+	type: types.ROOM_ADD_USER,
 	roomName,
 	username
 })

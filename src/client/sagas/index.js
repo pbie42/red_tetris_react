@@ -32,7 +32,7 @@ const handleNewRoom = function* handleNewRoom(params) {
 }
 
 const handleAddUserToRoom = function* handleAddUserToRoom(params) {
-	yield takeEvery(types.ADD_USER_TO_ROOM, action => {
+	yield takeEvery(types.ROOM_ADD_USER, action => {
 		params.socket.emit('room', JSON.stringify(action))
 	})
 }
