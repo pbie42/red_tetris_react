@@ -31,7 +31,7 @@ export const gameRoomUnset = roomName => ({
 	roomName
 })
 
-export const setGameId = id => ({
+export const gameSetId = id => ({
 	type: types.GAME_ID_SET,
 	id
 })
