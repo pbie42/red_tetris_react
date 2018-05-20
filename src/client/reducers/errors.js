@@ -9,11 +9,11 @@ const initialErrorState = {
 
 const errors = (state = initialErrorState, action) => {
 	switch (action.type) {
-		case types.USERNAME_TAKEN:
+		case types.ERROR_USERNAME_TAKEN:
 			return { ...state, errorName: true }
 		case types.ROOMNAME_TAKEN:
 			return { ...state, errorRoom: true }
-		case types.TOO_MANY_MEMBERS:
+		case types.ERROR_TOO_MANY_MEMBERS:
 			return { ...state, errorTooManyMembers: true }
 
 		default:

@@ -74,13 +74,13 @@ describe('Actions', () => {
 		it('errorTooManyMembers returns an object for the too many members error action', () => {
 			const errorTooManyMembersAction = errorTooManyMembers()
 			expect(errorTooManyMembersAction).to.eql({
-				type: 'TOO_MANY_MEMBERS'
+				type: 'ERROR_TOO_MANY_MEMBERS'
 			})
 		})
 		it('errorUsernameTaken returns an object for the username taken error action', () => {
 			const errorUsernameTakenAction = errorUsernameTaken(username)
 			expect(errorUsernameTakenAction).to.eql({
-				type: 'USERNAME_TAKEN',
+				type: 'ERROR_USERNAME_TAKEN',
 				username
 			})
 		})
