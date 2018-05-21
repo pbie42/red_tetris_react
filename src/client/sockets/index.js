@@ -1,22 +1,20 @@
 import * as types from '../constants/ActionTypes'
 import {
-	userAdd,
-	roomAdd,
-	messageReceived,
-	usersPopulateList,
-	roomsPopulateList,
 	connected,
-	usersListReceived,
-	roomsListReceived,
-	gameSetId,
-	userSetId,
-	gameMembersUpdate,
 	gameBoardsUpdate,
+	gameMembersUpdate,
 	gamePieceUpdate,
 	gamePiecesUpdate,
-	userUsernameSet,
+	gameSetId,
 	gameStartCountdown,
-	gameStopCountdown
+	gameStopCountdown,
+	messageReceived,
+	roomsListReceived,
+	roomsPopulateList,
+	userSetId,
+	userUsernameSet,
+	usersListReceived,
+	usersPopulateList
 } from '../actions'
 import { store } from '../../index'
 

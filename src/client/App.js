@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import './App.css'
-import { HomeContainer } from './containers/home/Home'
+import { HomeContainer } from './containers/home/HomeContainer'
 import { LobbyContainer } from './containers/lobby/LobbyContainer'
 import { GameContainer } from './containers/game/GameContainer'
 import { ErrorContainer } from './containers/error/ErrorContainer'

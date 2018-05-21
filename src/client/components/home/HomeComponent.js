@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { HomeFormContainer } from '../../containers/home/HomeForm'
+import { HomeFormContainer } from '../../containers/home/HomeFormContainer'
 import logo from '../../static/tetris_logo.png'
 
 function HomeComponent(props) {

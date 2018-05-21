@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import HomeFormComponent from '../../components/home/HomeForm'
+import HomeFormComponent from '../../components/home/HomeFormComponent'
 import { userSetUsername, userAdd } from '../../actions'
 
 export const mapDispatchToProps = dispatch => ({
