@@ -13,12 +13,8 @@ function HomeForm(props) {
 	}
 
 	C.componentDidMount = function() {
-		const interval = setInterval(C.placeHolder, 750)
-		C.setState({ interval })
-		function focus() {
-			C.refs.input.focus()
-		}
-		setTimeout(focus, 2000)
+		C.setState({ interval: setInterval(C.placeHolder, 750) })
+		setTimeout(C.focus, 2000)
 	}
 
 	C.componentWillUnmount = function() {
@@ -26,9 +22,8 @@ function HomeForm(props) {
 	}
 
 	C.placeHolder = function() {
-		if (C.state.error) {
-			C.setState({ placeholder: 'Username already taken' })
-		} else if (!C.state.placeholder)
+		if (C.state.error) C.setState({ placeholder: 'Username already taken' })
+		else if (!C.state.placeholder)
 			C.setState({ placeholder: 'Choose a username to begin' })
 		else C.setState({ placeholder: '' })
 	}
@@ -39,33 +34,23 @@ function HomeForm(props) {
 			C.props.userAdd(username)
 			C.props.pageChange()
 			setTimeout(C.changeRoute, 800)
-		} else C.setSubmitError()
+		} else C.setState({ error: true })
 		C.refs.input.value = ''
 	}
 
 	C.enterUsername = function(e) {
-		let username = C.refs.input.value
 		if (e.key === 'Enter') {
 			e.preventDefault()
-			C.handleUsername(username)
+			C.handleUsername(C.refs.input.value)
 		}
-	}
-
-	C.submitUsername = function() {
-		let username = C.refs.input.value
-		C.handleUsername(username)
 	}
 
 	C.changeRoute = function() {
 		C.props.history.push('/lobby')
 	}
 
-	C.setSubmitError = function() {
-		C.setState({ error: true })
-	}
-
-	C.noError = function() {
-		C.setState({ error: false })
+	C.focus = function() {
+		C.refs.input.focus()
 	}
 
 	C.render = () => {
@@ -76,10 +61,8 @@ function HomeForm(props) {
 						autoComplete="off"
 						className="usernameinput"
 						name="username"
-						onChange={() => C.noError()}
-						onKeyPress={e => {
-							C.enterUsername(e)
-						}}
+						onChange={() => C.setState({ error: false })}
+						onKeyPress={e => C.enterUsername(e)}
 						placeholder={C.state.placeholder}
 						ref="input"
 						type="text"
@@ -87,7 +70,7 @@ function HomeForm(props) {
 					<div>
 						<div
 							className="username-button"
-							onClick={() => C.submitUsername(input)}
+							onClick={() => C.handleUsername(C.refs.input.value)}
 						>
 							Start →
 						</div>
