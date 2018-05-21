@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import GameComponent from '../../components/game/GameComponent'
 import {
-	setUsername,
+	userSetUsername,
 	userAdd,
 	addRoom,
 	addUserToRoom,
@@ -18,8 +18,8 @@ import {
 } from '../../actions'
 
 export const mapDispatchToProps = dispatch => ({
-	setUsername: username => {
-		dispatch(setUsername(username))
+	userSetUsername: username => {
+		dispatch(userSetUsername(username))
 	},
 	userAdd: username => {
 		dispatch(userAdd(username))

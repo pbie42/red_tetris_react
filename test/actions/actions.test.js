@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import {
-	setUsername,
+	userSetUsername,
 	userAdd,
 	addRoom,
 	roomAdded,
@@ -161,8 +161,8 @@ describe('Actions', () => {
 			})
 		})
 
-		it('setUsername returns an object for the set username action', () => {
-			const setUsernameAction = setUsername(username)
+		it('userSetUsername returns an object for the set username action', () => {
+			const setUsernameAction = userSetUsername(username)
 			expect(setUsernameAction).to.eql({
 				type: 'USER_SET_USERNAME',
 				username: 'pbie'

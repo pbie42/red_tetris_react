@@ -29,7 +29,7 @@ function HomeForm(props) {
 		if (e.key === 'Enter') {
 			e.preventDefault()
 			if (value && C.verifyUsername(value)) {
-				props.setUsername(value)
+				props.userSetUsername(value)
 				props.userAdd(value)
 				function delayRouteChange() {
 					props.history.push('/lobby')
@@ -52,7 +52,7 @@ function HomeForm(props) {
 	C.submitUsername = function() {
 		let value = C.refs.input.value
 		if (value && C.verifyUsername(value)) {
-			props.setUsername(value)
+			props.userSetUsername(value)
 			props.userAdd(value)
 			function delayRouteChange() {
 				props.history.push('/lobby')

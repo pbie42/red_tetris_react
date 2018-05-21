@@ -24,7 +24,7 @@ describe('HomeForm', () => {
 	})
 
 	it('should render the container component', () => {
-		const setUsernameSpy = sinon.spy()
+		const userSetUsernameSpy = sinon.spy()
 		const userAddSpy = sinon.spy()
 		const preventSpy = sinon.spy()
 		const pageChangeSpy = sinon.spy()
@@ -35,7 +35,7 @@ describe('HomeForm', () => {
 					store={store}
 					history={[]}
 					userAdd={userAddSpy}
-					setUsername={setUsernameSpy}
+					userSetUsername={userSetUsernameSpy}
 					pageChange={pageChangeSpy}
 				/>
 			</Provider>
@@ -49,7 +49,7 @@ describe('HomeForm', () => {
 
 	describe('Methods', () => {
 		describe('enterUsername', () => {
-			const setUsernameSpy = sinon.spy()
+			const userSetUsernameSpy = sinon.spy()
 			const userAddSpy = sinon.spy()
 			const preventSpy = sinon.spy()
 			const pageChangeSpy = sinon.spy()
@@ -59,17 +59,17 @@ describe('HomeForm', () => {
 					store={store}
 					history={[]}
 					userAdd={userAddSpy}
-					setUsername={setUsernameSpy}
+					userSetUsername={userSetUsernameSpy}
 					pageChange={pageChangeSpy}
 				/>
 			)
-			it('calls setUsername dispatch', () => {
+			it('calls userSetUsername dispatch', () => {
 				wrapper.update()
 				wrapper.ref('input').value = 'test'
 				wrapper
 					.instance()
 					.enterUsername({ key: 'Enter', preventDefault: preventSpy })
-				expect(setUsernameSpy.called).to.be.true
+				expect(userSetUsernameSpy.called).to.be.true
 				expect(preventSpy.called).to.be.true
 			})
 			it('calls userAdd dispatch', () => {
@@ -94,7 +94,7 @@ describe('HomeForm', () => {
 		})
 
 		describe('noError', () => {
-			const setUsernameSpy = sinon.spy()
+			const userSetUsernameSpy = sinon.spy()
 			const userAddSpy = sinon.spy()
 			const preventSpy = sinon.spy()
 			const pageChangeSpy = sinon.spy()
@@ -104,7 +104,7 @@ describe('HomeForm', () => {
 					store={store}
 					history={[]}
 					userAdd={userAddSpy}
-					setUsername={setUsernameSpy}
+					userSetUsername={userSetUsernameSpy}
 					pageChange={pageChangeSpy}
 				/>
 			)
@@ -117,7 +117,7 @@ describe('HomeForm', () => {
 		})
 
 		describe('placeHolder', () => {
-			const setUsernameSpy = sinon.spy()
+			const userSetUsernameSpy = sinon.spy()
 			const userAddSpy = sinon.spy()
 			const preventSpy = sinon.spy()
 			const pageChangeSpy = sinon.spy()
@@ -127,7 +127,7 @@ describe('HomeForm', () => {
 					store={store}
 					history={[]}
 					userAdd={userAddSpy}
-					setUsername={setUsernameSpy}
+					userSetUsername={userSetUsernameSpy}
 					pageChange={pageChangeSpy}
 				/>
 			)
@@ -159,7 +159,7 @@ describe('HomeForm', () => {
 		})
 
 		describe('submitUsername', () => {
-			const setUsernameSpy = sinon.spy()
+			const userSetUsernameSpy = sinon.spy()
 			const userAddSpy = sinon.spy()
 			const preventSpy = sinon.spy()
 			const pageChangeSpy = sinon.spy()
@@ -169,7 +169,7 @@ describe('HomeForm', () => {
 					store={store}
 					history={[]}
 					userAdd={userAddSpy}
-					setUsername={setUsernameSpy}
+					userSetUsername={userSetUsernameSpy}
 					verifyUsername={verifyUsernameSpy}
 					users={[{ id: 0, name: 'Jen' }]}
 					pageChange={pageChangeSpy}
@@ -178,8 +178,8 @@ describe('HomeForm', () => {
 			wrapper.update()
 			wrapper.ref('input').value = 'test'
 			wrapper.instance().submitUsername({ value: 'test' })
-			it('calls setUsername dispatch', () => {
-				expect(setUsernameSpy.called).to.be.true
+			it('calls userSetUsername dispatch', () => {
+				expect(userSetUsernameSpy.called).to.be.true
 			})
 			it('calls userAdd dispatch', () => {
 				expect(userAddSpy.called).to.be.true
@@ -193,7 +193,7 @@ describe('HomeForm', () => {
 		})
 
 		describe('verifyUsername', () => {
-			const setUsernameSpy = sinon.spy()
+			const userSetUsernameSpy = sinon.spy()
 			const userAddSpy = sinon.spy()
 			const preventSpy = sinon.spy()
 			const pageChangeSpy = sinon.spy()
@@ -203,7 +203,7 @@ describe('HomeForm', () => {
 					store={store}
 					history={[]}
 					userAdd={userAddSpy}
-					setUsername={setUsernameSpy}
+					userSetUsername={userSetUsernameSpy}
 					pageChange={pageChangeSpy}
 				/>
 			)
@@ -221,7 +221,7 @@ describe('HomeForm', () => {
 
 	describe('Store', () => {
 		it('should show user value as empty object in state', () => {
-			const setUsernameSpy = sinon.spy()
+			const userSetUsernameSpy = sinon.spy()
 			const userAddSpy = sinon.spy()
 			const preventSpy = sinon.spy()
 			const pageChangeSpy = sinon.spy()
@@ -232,7 +232,7 @@ describe('HomeForm', () => {
 						store={store}
 						history={[]}
 						userAdd={userAddSpy}
-						setUsername={setUsernameSpy}
+						userSetUsername={userSetUsernameSpy}
 						pageChange={pageChangeSpy}
 					/>
 				</Provider>
@@ -244,11 +244,11 @@ describe('HomeForm', () => {
 		})
 
 		describe('Dispatch', () => {
-			it('should call dispatch setUsername with property username', () => {
+			it('should call dispatch userSetUsername with property username', () => {
 				const dispatchSpy = sinon.spy()
-				const { setUsername } = mapDispatchToProps(dispatchSpy)
-				setUsername('Paul')
-				const expectedAction = actions.setUsername()
+				const { userSetUsername } = mapDispatchToProps(dispatchSpy)
+				userSetUsername('Paul')
+				const expectedAction = actions.userSetUsername()
 				const spyLastCall = dispatchSpy.args[0][0]
 				expect(spyLastCall.type).to.eql(expectedAction.type)
 				expect(spyLastCall.username).to.equal('Paul')
@@ -269,7 +269,7 @@ describe('HomeForm', () => {
 
 	describe('User Events', () => {
 		it('should call submitUsername onClick', () => {
-			const setUsernameSpy = sinon.spy()
+			const userSetUsernameSpy = sinon.spy()
 			const userAddSpy = sinon.spy()
 			const preventSpy = sinon.spy()
 			const pageChangeSpy = sinon.spy()
@@ -279,7 +279,7 @@ describe('HomeForm', () => {
 					store={store}
 					history={[]}
 					userAdd={userAddSpy}
-					setUsername={setUsernameSpy}
+					userSetUsername={userSetUsernameSpy}
 					pageChange={pageChangeSpy}
 					submitUsername={() => {}}
 				/>
@@ -292,7 +292,7 @@ describe('HomeForm', () => {
 		})
 
 		it('should call enterUsername onKeyPress', () => {
-			const setUsernameSpy = sinon.spy()
+			const userSetUsernameSpy = sinon.spy()
 			const userAddSpy = sinon.spy()
 			const preventSpy = sinon.spy()
 			const pageChangeSpy = sinon.spy()
@@ -302,7 +302,7 @@ describe('HomeForm', () => {
 					store={store}
 					history={[]}
 					userAdd={userAddSpy}
-					setUsername={setUsernameSpy}
+					userSetUsername={userSetUsernameSpy}
 					pageChange={pageChangeSpy}
 					enterUsername={e => {}}
 				/>
@@ -315,7 +315,7 @@ describe('HomeForm', () => {
 		})
 
 		it('should call noError method onChange', () => {
-			const setUsernameSpy = sinon.spy()
+			const userSetUsernameSpy = sinon.spy()
 			const userAddSpy = sinon.spy()
 			const preventSpy = sinon.spy()
 			const pageChangeSpy = sinon.spy()
@@ -326,7 +326,7 @@ describe('HomeForm', () => {
 					store={store}
 					history={[]}
 					userAdd={userAddSpy}
-					setUsername={setUsernameSpy}
+					userSetUsername={userSetUsernameSpy}
 					pageChange={pageChangeSpy}
 					enterUsername={e => {}}
 				/>

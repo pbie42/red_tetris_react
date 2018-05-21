@@ -9,7 +9,7 @@ import {
 	usersListReceived,
 	roomsListReceived,
 	gameSetId,
-	setId,
+	userSetId,
 	gameMembersUpdate,
 	gameBoardsUpdate,
 	gamePieceUpdate,
@@ -91,7 +91,7 @@ const setupSocket = dispatch => {
 			case types.USER_SET_ID:
 				// console.log(`SET_ID`)
 				// console.log(`data`, data)
-				dispatch(setId(data.id))
+				dispatch(userSetId(data.id))
 				break
 			case types.GAME_START_COUNTDOWN:
 				// console.log(`GAME_START_COUNTDOWN`)

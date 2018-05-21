@@ -12,12 +12,12 @@ export const userRemove = username => ({
 	username
 })
 
-export const setUsername = username => ({
+export const userSetUsername = username => ({
 	type: types.USER_SET_USERNAME,
 	username
 })
 
-export const setId = id => ({
+export const userSetId = id => ({
 	type: types.USER_SET_ID,
 	id
 })
