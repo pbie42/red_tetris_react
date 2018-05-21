@@ -3,7 +3,7 @@ import {
 	userAdd,
 	addRoom,
 	messageReceived,
-	populateUsersList,
+	usersPopulateList,
 	populateRoomsList,
 	connected,
 	usersListReceived,
@@ -56,7 +56,7 @@ const setupSocket = dispatch => {
 			case types.USERS_LIST:
 				// console.log(`USERS_LIST`)
 				// console.log(`data.users`, data.users)
-				dispatch(populateUsersList(data.users))
+				dispatch(usersPopulateList(data.users))
 				dispatch(usersListReceived())
 				break
 			case types.ROOMS_LIST:

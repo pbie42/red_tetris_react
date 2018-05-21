@@ -9,7 +9,7 @@ import {
 	userRemove,
 	addMessage,
 	userUnsetUsername,
-	populateUsersList,
+	usersPopulateList,
 	usersListReceived,
 	userUsernameSet,
 	connected,
@@ -145,8 +145,8 @@ describe('Actions', () => {
 			})
 		})
 
-		it('populateUsersList returns an object for updating users list action', () => {
-			const populateUsersListAction = populateUsersList(users)
+		it('usersPopulateList returns an object for updating users list action', () => {
+			const populateUsersListAction = usersPopulateList(users)
 			expect(populateUsersListAction).to.eql({
 				type: 'USERS_LIST',
 				users: ['paul', 'jen']

@@ -32,7 +32,7 @@ export const userUnsetUsername = username => ({
 	username
 })
 
-export const populateUsersList = users => ({
+export const usersPopulateList = users => ({
 	type: types.USERS_LIST,
 	users
 })

@@ -25,7 +25,7 @@ import {
 
 import {
 	userAdd,
-	populateUsersList,
+	usersPopulateList,
 	userRemove,
 	userSetId,
 	userSetUsername,
@@ -70,7 +70,7 @@ export {
 	gameStopCountdown,
 	messageReceived,
 	populateRoomsList,
-	populateUsersList,
+	usersPopulateList,
 	userRemove,
 	removeUserFromRoom,
 	roomAdded,
