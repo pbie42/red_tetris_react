@@ -3,7 +3,7 @@ import GameComponent from '../../components/game/GameComponent'
 import {
 	userSetUsername,
 	userAdd,
-	addRoom,
+	roomAdd,
 	roomAddUser,
 	gameStart,
 	gameJoined,
@@ -30,8 +30,8 @@ export const mapDispatchToProps = dispatch => ({
 	roomRemoveUser: (username, roomName) => {
 		dispatch(roomRemoveUser(username, roomName))
 	},
-	addRoom: (roomName, members) => {
-		dispatch(addRoom(roomName, members))
+	roomAdd: (roomName, members) => {
+		dispatch(roomAdd(roomName, members))
 	},
 	roomAddUser: (username, roomName) => {
 		dispatch(roomAddUser(username, roomName))

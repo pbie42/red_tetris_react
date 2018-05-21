@@ -35,7 +35,7 @@ import {
 } from './users'
 
 import {
-	addRoom,
+	roomAdd,
 	roomAddUser,
 	populateRoomsList,
 	roomRemoveUser,
@@ -45,7 +45,7 @@ import {
 
 export {
 	addMessage,
-	addRoom,
+	roomAdd,
 	userAdd,
 	roomAddUser,
 	connected,

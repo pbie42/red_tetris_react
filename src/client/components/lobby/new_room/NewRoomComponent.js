@@ -12,7 +12,7 @@ export function NewRoomComponent(props) {
 		if (e.key === 'Enter') {
 			e.preventDefault()
 			if (value && C.verifyRoomName(value)) {
-				props.addRoom(value, [C.props.username])
+				props.roomAdd(value, [C.props.username])
 				function delayRouteChange() {
 					C.props.history.push(
 						`/${value.replace(/ /g, '_')}[${C.props.username}]`
@@ -28,7 +28,7 @@ export function NewRoomComponent(props) {
 	C.submitRoomName = function() {
 		let value = C.refs.input.value
 		if (value && C.verifyRoomName(value)) {
-			props.addRoom(value, [C.props.username])
+			props.roomAdd(value, [C.props.username])
 			// props.history.push('/lobby')
 			// C.props.hideNewRoom()
 			function delayRouteChange() {

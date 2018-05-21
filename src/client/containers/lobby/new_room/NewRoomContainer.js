@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import { NewRoomComponent } from '../../../components/lobby/new_room/NewRoomComponent'
-import { addRoom } from '../../../actions'
+import { roomAdd } from '../../../actions'
 
 const mapDispatchToProps = dispatch => ({
-	addRoom: (roomName, members) => {
-		dispatch(addRoom(roomName, members))
+	roomAdd: (roomName, members) => {
+		dispatch(roomAdd(roomName, members))
 	}
 })
 

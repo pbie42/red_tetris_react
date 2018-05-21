@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import {
 	userSetUsername,
 	userAdd,
-	addRoom,
+	roomAdd,
 	roomAdded,
 	roomAddUser,
 	roomRemoveUser,
@@ -103,8 +103,8 @@ describe('Actions', () => {
 				username
 			})
 		})
-		it('addRoom returns an object for the add a room to rooms array action', () => {
-			const addRoomAction = addRoom(roomName, members)
+		it('roomAdd returns an object for the add a room to rooms array action', () => {
+			const addRoomAction = roomAdd(roomName, members)
 			expect(addRoomAction).to.eql({
 				type: 'ROOM_ADD_ROOM',
 				roomName,

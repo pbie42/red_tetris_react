@@ -190,7 +190,7 @@ function GameComponent(props) {
 	}
 
 	C.updateRoom = function(room, player) {
-		C.props.addRoom(room, [player])
+		C.props.roomAdd(room, [player])
 		C.setState({ room })
 	}
 

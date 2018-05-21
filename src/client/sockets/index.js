@@ -1,7 +1,7 @@
 import * as types from '../constants/ActionTypes'
 import {
 	userAdd,
-	addRoom,
+	roomAdd,
 	messageReceived,
 	usersPopulateList,
 	populateRoomsList,
@@ -47,7 +47,7 @@ const setupSocket = dispatch => {
 				break
 			case types.ROOM_ADD_ROOM:
 				// console.log(`ROOM_ADD_ROOM`)
-				dispatch(addRoom(data.roomName, data.members))
+				dispatch(roomAdd(data.roomName, data.members))
 				break
 			case types.USER_USERNAME_SET:
 				// console.log(`USER_USERNAME_SET`)

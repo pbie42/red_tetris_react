@@ -52,11 +52,11 @@ describe('Game', () => {
 		const members = ['john', 'paul', 'george', 'ringo']
 
 		describe('Dispatch', () => {
-			it('addRoom called with properties roomName and members', () => {
+			it('roomAdd called with properties roomName and members', () => {
 				const dispatchSpy = sinon.spy()
-				const { addRoom } = mapDispatchToProps(dispatchSpy)
-				addRoom(roomName, members)
-				const expectedAction = actions.addRoom()
+				const { roomAdd } = mapDispatchToProps(dispatchSpy)
+				roomAdd(roomName, members)
+				const expectedAction = actions.roomAdd()
 				const spyLastCall = dispatchSpy.args[0][0]
 				expect(spyLastCall.type).to.eql(expectedAction.type)
 				expect(spyLastCall.roomName).to.equal(roomName)
