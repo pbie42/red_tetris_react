@@ -24,7 +24,7 @@ import {
 } from './games'
 
 import {
-	addUser,
+	userAdd,
 	populateUsersList,
 	removeUser,
 	setId,
@@ -46,7 +46,7 @@ import {
 export {
 	addMessage,
 	addRoom,
-	addUser,
+	userAdd,
 	addUserToRoom,
 	connected,
 	disconnected,

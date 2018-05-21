@@ -186,7 +186,7 @@ function GameComponent(props) {
 
 	C.updateUser = function(player) {
 		C.props.setUsername(player)
-		C.props.addUser(player)
+		C.props.userAdd(player)
 	}
 
 	C.updateRoom = function(room, player) {

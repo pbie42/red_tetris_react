@@ -63,11 +63,11 @@ describe('Game', () => {
 				expect(spyLastCall.members).to.eql(members)
 			})
 
-			it('addUser called with property username', () => {
+			it('userAdd called with property username', () => {
 				const dispatchSpy = sinon.spy()
-				const { addUser } = mapDispatchToProps(dispatchSpy)
-				addUser(username)
-				const expectedAction = actions.addUser()
+				const { userAdd } = mapDispatchToProps(dispatchSpy)
+				userAdd(username)
+				const expectedAction = actions.userAdd()
 				const spyLastCall = dispatchSpy.args[0][0]
 				expect(spyLastCall.type).to.eql(expectedAction.type)
 				expect(spyLastCall.username).to.equal(username)
