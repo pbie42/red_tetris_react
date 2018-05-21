@@ -13,7 +13,6 @@ import {
 	roomAddUser,
 	roomRemoveUser,
 	userAdd,
-	userRemove,
 	userSetUsername
 } from '../../actions'
 
