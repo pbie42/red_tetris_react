@@ -93,29 +93,6 @@ describe('HomeForm', () => {
 			})
 		})
 
-		describe('noError', () => {
-			const userSetUsernameSpy = sinon.spy()
-			const userAddSpy = sinon.spy()
-			const preventSpy = sinon.spy()
-			const pageChangeSpy = sinon.spy()
-			const wrapper = mount(
-				<HomeForm
-					users={[{ id: 0, name: 'Jen' }]}
-					store={store}
-					history={[]}
-					userAdd={userAddSpy}
-					userSetUsername={userSetUsernameSpy}
-					pageChange={pageChangeSpy}
-				/>
-			)
-			it('sets state.error to false', () => {
-				wrapper.update()
-				wrapper.instance().setState({ error: true })
-				wrapper.instance().noError()
-				expect(wrapper.instance().state.error).to.be.false
-			})
-		})
-
 		describe('placeHolder', () => {
 			const userSetUsernameSpy = sinon.spy()
 			const userAddSpy = sinon.spy()
@@ -155,40 +132,6 @@ describe('HomeForm', () => {
 				expect(wrapper.instance().state.placeholder).to.equal(
 					'Username already taken'
 				)
-			})
-		})
-
-		describe('submitUsername', () => {
-			const userSetUsernameSpy = sinon.spy()
-			const userAddSpy = sinon.spy()
-			const preventSpy = sinon.spy()
-			const pageChangeSpy = sinon.spy()
-			const verifyUsernameSpy = sinon.spy()
-			const wrapper = mount(
-				<HomeForm
-					store={store}
-					history={[]}
-					userAdd={userAddSpy}
-					userSetUsername={userSetUsernameSpy}
-					verifyUsername={verifyUsernameSpy}
-					users={[{ id: 0, name: 'Jen' }]}
-					pageChange={pageChangeSpy}
-				/>
-			)
-			wrapper.update()
-			wrapper.ref('input').value = 'test'
-			wrapper.instance().submitUsername({ value: 'test' })
-			it('calls userSetUsername dispatch', () => {
-				expect(userSetUsernameSpy.called).to.be.true
-			})
-			it('calls userAdd dispatch', () => {
-				expect(userAddSpy.called).to.be.true
-			})
-			it('pushes new page route "/lobby" into history', () => {
-				expect(wrapper.instance().props.history[0]).to.equal('/lobby')
-			})
-			it('resets input value to ""', () => {
-				expect(wrapper.ref('input').value).to.equal('')
 			})
 		})
 	})
@@ -242,29 +185,6 @@ describe('HomeForm', () => {
 	})
 
 	describe('User Events', () => {
-		it('should call submitUsername onClick', () => {
-			const userSetUsernameSpy = sinon.spy()
-			const userAddSpy = sinon.spy()
-			const preventSpy = sinon.spy()
-			const pageChangeSpy = sinon.spy()
-			const wrapper = mount(
-				<HomeForm
-					users={[{ id: 0, name: 'Jen' }]}
-					store={store}
-					history={[]}
-					userAdd={userAddSpy}
-					userSetUsername={userSetUsernameSpy}
-					pageChange={pageChangeSpy}
-					submitUsername={() => {}}
-				/>
-			)
-			const submitUsername = sinon.spy(wrapper.instance(), 'submitUsername')
-			wrapper.update()
-			wrapper.find('.username-button').simulate('click')
-			expect(submitUsername.calledOnce).to.be.true
-			wrapper.unmount()
-		})
-
 		it('should call enterUsername onKeyPress', () => {
 			const userSetUsernameSpy = sinon.spy()
 			const userAddSpy = sinon.spy()
@@ -285,31 +205,6 @@ describe('HomeForm', () => {
 			wrapper.update()
 			wrapper.find('.usernameinput').simulate('keypress', { key: 'Enter' })
 			expect(enterUsername.calledOnce).to.be.true
-			wrapper.unmount()
-		})
-
-		it('should call noError method onChange', () => {
-			const userSetUsernameSpy = sinon.spy()
-			const userAddSpy = sinon.spy()
-			const preventSpy = sinon.spy()
-			const pageChangeSpy = sinon.spy()
-			const wrapper = mount(
-				<HomeForm
-					noError={() => {}}
-					users={[{ id: 0, name: 'Jen' }]}
-					store={store}
-					history={[]}
-					userAdd={userAddSpy}
-					userSetUsername={userSetUsernameSpy}
-					pageChange={pageChangeSpy}
-					enterUsername={e => {}}
-				/>
-			)
-			// expect(userAddSpy.called).to.be.true
-			const noError = sinon.spy(wrapper.instance(), 'noError')
-			wrapper.update()
-			wrapper.find('input').simulate('change')
-			expect(noError.calledOnce).to.be.true
 			wrapper.unmount()
 		})
 	})
