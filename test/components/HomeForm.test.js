@@ -93,6 +93,14 @@ describe('HomeForm', () => {
 			})
 		})
 
+		describe('focus', () => {
+			const wrapper = mount(<HomeForm />)
+			const focus = sinon.spy(wrapper.instance(), 'focus')
+			wrapper.update()
+			wrapper.instance().focus()
+			expect(focus.calledOnce).to.be.true
+		})
+
 		describe('placeHolder', () => {
 			const userSetUsernameSpy = sinon.spy()
 			const userAddSpy = sinon.spy()
@@ -205,6 +213,55 @@ describe('HomeForm', () => {
 			wrapper.update()
 			wrapper.find('.usernameinput').simulate('keypress', { key: 'Enter' })
 			expect(enterUsername.calledOnce).to.be.true
+			wrapper.unmount()
+		})
+
+		it('should call handleUsername onClick', () => {
+			const setUsernameSpy = sinon.spy()
+			const addUserSpy = sinon.spy()
+			const preventSpy = sinon.spy()
+			const pageChangeSpy = sinon.spy()
+			const wrapper = mount(
+				<HomeForm
+					users={[{ id: 0, name: 'Jen' }]}
+					store={store}
+					history={[]}
+					addUser={addUserSpy}
+					setUsername={setUsernameSpy}
+					pageChange={pageChangeSpy}
+					handleUsername={() => {}}
+				/>
+			)
+			const handleUsername = sinon.spy(wrapper.instance(), 'handleUsername')
+			wrapper.update()
+			wrapper.find('.username-button').simulate('click')
+			expect(handleUsername.calledOnce).to.be.true
+			wrapper.unmount()
+		})
+
+		it('should setState error to false onChange', () => {
+			const setUsernameSpy = sinon.spy()
+			const addUserSpy = sinon.spy()
+			const preventSpy = sinon.spy()
+			const pageChangeSpy = sinon.spy()
+			const wrapper = mount(
+				<HomeForm
+					noError={() => {}}
+					users={[{ id: 0, name: 'Jen' }]}
+					store={store}
+					history={[]}
+					addUser={addUserSpy}
+					setUsername={setUsernameSpy}
+					pageChange={pageChangeSpy}
+					enterUsername={e => {}}
+				/>
+			)
+			// expect(addUserSpy.called).to.be.true
+			wrapper.update()
+			wrapper.setState({ error: true })
+			expect(wrapper.state().error).to.be.true
+			wrapper.find('input').simulate('change')
+			expect(wrapper.state().error).to.be.false
 			wrapper.unmount()
 		})
 	})
