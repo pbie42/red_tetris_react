@@ -12,9 +12,9 @@ const mockStore = configureMockStore()
 
 // global.window = dom.window
 // global.document = dom.window.document
-import Home from '../../src/client/components/home/Home'
-import { HomeFormContainer } from '../../src/client/containers/home/HomeForm'
-import HomeForm from '../../src/client/components/home/HomeForm'
+import Home from '../../src/client/components/home/HomeComponent'
+import { HomeFormContainer } from '../../src/client/containers/home/HomeFormContainer'
+import HomeForm from '../../src/client/components/home/HomeFormComponent'
 
 describe('Home', () => {
 	let mountedHome, store

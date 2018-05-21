@@ -8,8 +8,8 @@ import { mount, shallow } from 'enzyme'
 import {
 	HomeFormContainer,
 	mapDispatchToProps
-} from '../../src/client/containers/home/HomeForm'
-import HomeForm from '../../src/client/components/home/HomeForm'
+} from '../../src/client/containers/home/HomeFormContainer'
+import HomeForm from '../../src/client/components/home/HomeFormComponent'
 import * as actions from '../../src/client/actions'
 
 const mockStore = configureMockStore()
