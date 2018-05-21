@@ -9,12 +9,12 @@ import user from './user'
 
 const chat = combineReducers({
 	connection,
-	messages,
 	errors,
 	games,
+	messages,
 	rooms,
-	users,
-	user
+	user,
+	users
 })
 
 export default chat

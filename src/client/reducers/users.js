@@ -9,10 +9,13 @@ const users = (state = [], action) => {
 					id: action.id
 				}
 			])
+
 		case types.USER_REMOVE_USER:
 			return state.filter(user => user.username === action.username)
+
 		case types.USERS_LIST:
 			return action.users
+
 		default:
 			return state
 	}
