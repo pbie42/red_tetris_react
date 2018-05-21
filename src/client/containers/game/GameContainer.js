@@ -1,20 +1,20 @@
 import { connect } from 'react-redux'
 import GameComponent from '../../components/game/GameComponent'
 import {
-	userSetUsername,
-	userAdd,
-	roomAdd,
-	roomAddUser,
-	gameStart,
+	errorTooManyMembers,
+	errorUsernameTaken,
 	gameJoined,
 	gameRemoveBoards,
 	gameRemoveId,
-	userRemove,
-	roomRemoveUser,
 	gameRoomSet,
 	gameRoomUnset,
-	errorUsernameTaken,
-	errorTooManyMembers
+	gameStart,
+	roomAdd,
+	roomAddUser,
+	roomRemoveUser,
+	userAdd,
+	userRemove,
+	userSetUsername
 } from '../../actions'
 
 export const mapDispatchToProps = dispatch => ({
@@ -23,9 +23,6 @@ export const mapDispatchToProps = dispatch => ({
 	},
 	userAdd: username => {
 		dispatch(userAdd(username))
-	},
-	userRemove: username => {
-		dispatch(userRemove(username))
 	},
 	roomRemoveUser: (username, roomName) => {
 		dispatch(roomRemoveUser(username, roomName))
