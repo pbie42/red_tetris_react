@@ -24,20 +24,9 @@ describe('HomeForm', () => {
 	})
 
 	it('should render the container component', () => {
-		const userSetUsernameSpy = sinon.spy()
-		const userAddSpy = sinon.spy()
-		const preventSpy = sinon.spy()
-		const pageChangeSpy = sinon.spy()
 		const wrapper = mount(
 			<Provider store={store}>
-				<HomeFormContainer
-					users={[{ id: 0, name: 'Jen' }]}
-					store={store}
-					history={[]}
-					userAdd={userAddSpy}
-					userSetUsername={userSetUsernameSpy}
-					pageChange={pageChangeSpy}
-				/>
+				<HomeFormContainer />
 			</Provider>
 		)
 
@@ -102,20 +91,7 @@ describe('HomeForm', () => {
 		})
 
 		describe('placeHolder', () => {
-			const userSetUsernameSpy = sinon.spy()
-			const userAddSpy = sinon.spy()
-			const preventSpy = sinon.spy()
-			const pageChangeSpy = sinon.spy()
-			const wrapper = mount(
-				<HomeForm
-					users={[{ id: 0, name: 'Jen' }]}
-					store={store}
-					history={[]}
-					userAdd={userAddSpy}
-					userSetUsername={userSetUsernameSpy}
-					pageChange={pageChangeSpy}
-				/>
-			)
+			const wrapper = mount(<HomeForm />)
 			it('sets state.placeholder to "Choose a username to begin" if placeholder is currently ""', () => {
 				wrapper.update()
 				wrapper.instance().setState({ placeholder: '' })
@@ -146,20 +122,9 @@ describe('HomeForm', () => {
 
 	describe('Store', () => {
 		it('should show user value as empty object in state', () => {
-			const userSetUsernameSpy = sinon.spy()
-			const userAddSpy = sinon.spy()
-			const preventSpy = sinon.spy()
-			const pageChangeSpy = sinon.spy()
 			const wrapper = mount(
 				<Provider store={store}>
-					<HomeFormContainer
-						users={[{ id: 0, name: 'Jen' }]}
-						store={store}
-						history={[]}
-						userAdd={userAddSpy}
-						userSetUsername={userSetUsernameSpy}
-						pageChange={pageChangeSpy}
-					/>
+					<HomeFormContainer />
 				</Provider>
 			)
 			wrapper.update()
@@ -194,21 +159,7 @@ describe('HomeForm', () => {
 
 	describe('User Events', () => {
 		it('should call enterUsername onKeyPress', () => {
-			const userSetUsernameSpy = sinon.spy()
-			const userAddSpy = sinon.spy()
-			const preventSpy = sinon.spy()
-			const pageChangeSpy = sinon.spy()
-			const wrapper = mount(
-				<HomeForm
-					users={[{ id: 0, name: 'Jen' }]}
-					store={store}
-					history={[]}
-					userAdd={userAddSpy}
-					userSetUsername={userSetUsernameSpy}
-					pageChange={pageChangeSpy}
-					enterUsername={e => {}}
-				/>
-			)
+			const wrapper = mount(<HomeForm enterUsername={e => {}} />)
 			const enterUsername = sinon.spy(wrapper.instance(), 'enterUsername')
 			wrapper.update()
 			wrapper.find('.usernameinput').simulate('keypress', { key: 'Enter' })
@@ -217,21 +168,7 @@ describe('HomeForm', () => {
 		})
 
 		it('should call handleUsername onClick', () => {
-			const setUsernameSpy = sinon.spy()
-			const addUserSpy = sinon.spy()
-			const preventSpy = sinon.spy()
-			const pageChangeSpy = sinon.spy()
-			const wrapper = mount(
-				<HomeForm
-					users={[{ id: 0, name: 'Jen' }]}
-					store={store}
-					history={[]}
-					addUser={addUserSpy}
-					setUsername={setUsernameSpy}
-					pageChange={pageChangeSpy}
-					handleUsername={() => {}}
-				/>
-			)
+			const wrapper = mount(<HomeForm handleUsername={() => {}} />)
 			const handleUsername = sinon.spy(wrapper.instance(), 'handleUsername')
 			wrapper.update()
 			wrapper.find('.username-button').simulate('click')
@@ -240,23 +177,7 @@ describe('HomeForm', () => {
 		})
 
 		it('should setState error to false onChange', () => {
-			const setUsernameSpy = sinon.spy()
-			const addUserSpy = sinon.spy()
-			const preventSpy = sinon.spy()
-			const pageChangeSpy = sinon.spy()
-			const wrapper = mount(
-				<HomeForm
-					noError={() => {}}
-					users={[{ id: 0, name: 'Jen' }]}
-					store={store}
-					history={[]}
-					addUser={addUserSpy}
-					setUsername={setUsernameSpy}
-					pageChange={pageChangeSpy}
-					enterUsername={e => {}}
-				/>
-			)
-			// expect(addUserSpy.called).to.be.true
+			const wrapper = mount(<HomeForm />)
 			wrapper.update()
 			wrapper.setState({ error: true })
 			expect(wrapper.state().error).to.be.true
