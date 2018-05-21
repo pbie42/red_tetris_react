@@ -1,6 +1,6 @@
 import * as types from '../constants/ActionTypes'
 
-export const addUserToRoom = (username, roomName) => ({
+export const roomAddUser = (username, roomName) => ({
 	type: types.ROOM_ADD_USER,
 	roomName,
 	username

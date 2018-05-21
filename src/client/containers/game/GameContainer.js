@@ -4,7 +4,7 @@ import {
 	userSetUsername,
 	userAdd,
 	addRoom,
-	addUserToRoom,
+	roomAddUser,
 	gameStart,
 	gameJoined,
 	gameRemoveBoards,
@@ -33,8 +33,8 @@ export const mapDispatchToProps = dispatch => ({
 	addRoom: (roomName, members) => {
 		dispatch(addRoom(roomName, members))
 	},
-	addUserToRoom: (username, roomName) => {
-		dispatch(addUserToRoom(username, roomName))
+	roomAddUser: (username, roomName) => {
+		dispatch(roomAddUser(username, roomName))
 	},
 	errorUsernameTaken: username => {
 		dispatch(errorUsernameTaken(username))

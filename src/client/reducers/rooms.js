@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes'
-import { addUserToRoom, removeUserFromRoom } from '../utils'
+import { roomAddUser, removeUserFromRoom } from '../utils'
 
 const rooms = (state = [], action) => {
 	let rooms
@@ -17,7 +17,7 @@ const rooms = (state = [], action) => {
 			return action.rooms
 		case types.ROOM_ADD_USER:
 			rooms = state
-			rooms = addUserToRoom(action.username, action.roomName, rooms)
+			rooms = roomAddUser(action.username, action.roomName, rooms)
 			return rooms
 		case types.ROOM_REMOVE_USER:
 			rooms = state

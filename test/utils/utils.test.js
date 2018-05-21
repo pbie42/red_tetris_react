@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import {
-	addUserToRoom,
+	roomAddUser,
 	parseUrl,
 	removeUserFromRoom,
 	verifyMemberCount,
@@ -39,7 +39,7 @@ describe('Utils', () => {
 		})
 	})
 
-	describe('addUserToRoom', () => {
+	describe('roomAddUser', () => {
 		it('returns new rooms array after adding user to desired room', () => {
 			const username = 'pbie'
 			const roomName = 'Todd Room'
@@ -47,7 +47,7 @@ describe('Utils', () => {
 				{ roomName: 'Todd Room', members: ['toddster'] },
 				{ roomName: 'Danger Room', members: ['wolverine', 'cyclops'] }
 			]
-			rooms = addUserToRoom(username, roomName, rooms)
+			rooms = roomAddUser(username, roomName, rooms)
 			expect(rooms[0].members).to.eql(['toddster', 'pbie'])
 		})
 
@@ -58,7 +58,7 @@ describe('Utils', () => {
 				{ roomName: 'Todd Room', members: ['pbie', 'toddster'] },
 				{ roomName: 'Danger Room', members: ['wolverine', 'cyclops'] }
 			]
-			rooms = addUserToRoom(username, roomName, rooms)
+			rooms = roomAddUser(username, roomName, rooms)
 			expect(rooms[1].members).to.eql(['wolverine', 'cyclops'])
 		})
 
@@ -69,7 +69,7 @@ describe('Utils', () => {
 				{ roomName: 'Todd Room', members: ['pbie', 'toddster'] },
 				{ roomName: 'Danger Room', members: ['wolverine', 'cyclops'] }
 			]
-			rooms = addUserToRoom(username, roomName, rooms)
+			rooms = roomAddUser(username, roomName, rooms)
 			expect(rooms[0].members).to.eql(['pbie', 'toddster'])
 			expect(rooms[1].members).to.eql(['wolverine', 'cyclops'])
 		})

@@ -8,7 +8,7 @@ const {
 const { parseUrl } = require('./parse_url')
 const { prependZero } = require('./prepend_zero')
 const { pieceOrder } = require('./piece')
-const { addUserToRoom, removeUserFromRoom } = require('./rooms')
+const { roomAddUser, removeUserFromRoom } = require('./rooms')
 const {
 	calcPieceBottom,
 	calcPieceEnd,
@@ -41,7 +41,7 @@ const {
 } = require('./pieces')
 
 module.exports = {
-	addUserToRoom,
+	roomAddUser,
 	calcPieceBottom,
 	calcPieceEnd,
 	calcPieceStart,

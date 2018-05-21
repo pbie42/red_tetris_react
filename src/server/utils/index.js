@@ -1,4 +1,4 @@
-function addUserToRoom(username, roomName, rooms, users) {
+function roomAddUser(username, roomName, rooms, users) {
 	const roomIndex = rooms.findIndex(room => room.getRoomName() === roomName)
 	if (
 		roomIndex >= 0 &&
@@ -44,7 +44,7 @@ function getRoom(roomName, rooms) {
 }
 
 module.exports = {
-	addUserToRoom,
+	roomAddUser,
 	getRoom,
 	getUser,
 	getUserById,

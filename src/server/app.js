@@ -3,7 +3,7 @@ const User = require('./classes/User')
 const Game = require('./classes/Game')
 const Piece = require('./classes/Piece')
 const {
-	addUserToRoom,
+	roomAddUser,
 	getRoom,
 	getUser,
 	getUserById,
@@ -174,7 +174,7 @@ io.on('connection', socket => {
 			case 'ROOM_ADD_USER':
 				// console.log(`ROOM_ADD_USER`)
 				// console.log(`add to room data`, data)
-				rooms = addUserToRoom(data.username, data.roomName, rooms, users)
+				rooms = roomAddUser(data.username, data.roomName, rooms, users)
 
 				// console.log(`rooms`, rooms)
 				socket.join(data.roomName)

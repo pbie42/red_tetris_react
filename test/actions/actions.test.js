@@ -4,7 +4,7 @@ import {
 	userAdd,
 	addRoom,
 	roomAdded,
-	addUserToRoom,
+	roomAddUser,
 	removeUserFromRoom,
 	userRemove,
 	addMessage,
@@ -87,8 +87,8 @@ describe('Actions', () => {
 	})
 
 	describe('Rooms', () => {
-		it('addUserToRoom returns an object for the add user to room action', () => {
-			const addUserToRoomAction = addUserToRoom(username, roomName)
+		it('roomAddUser returns an object for the add user to room action', () => {
+			const addUserToRoomAction = roomAddUser(username, roomName)
 			expect(addUserToRoomAction).to.eql({
 				type: 'ROOM_ADD_USER',
 				roomName,

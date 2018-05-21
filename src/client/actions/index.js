@@ -36,7 +36,7 @@ import {
 
 import {
 	addRoom,
-	addUserToRoom,
+	roomAddUser,
 	populateRoomsList,
 	removeUserFromRoom,
 	roomAdded,
@@ -47,7 +47,7 @@ export {
 	addMessage,
 	addRoom,
 	userAdd,
-	addUserToRoom,
+	roomAddUser,
 	connected,
 	disconnected,
 	errorTooManyMembers,

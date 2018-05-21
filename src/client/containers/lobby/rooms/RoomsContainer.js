@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import { RoomsComponent } from '../../../components/lobby/rooms/RoomsComponent'
-import { addUserToRoom, gameJoined } from '../../../actions'
+import { roomAddUser, gameJoined } from '../../../actions'
 
 const mapDispatchToProps = dispatch => ({
-	addUserToRoom: (username, roomName) => {
-		dispatch(addUserToRoom(username, roomName))
+	roomAddUser: (username, roomName) => {
+		dispatch(roomAddUser(username, roomName))
 	},
 	gameJoined: roomName => {
 		dispatch(gameJoined(roomName))

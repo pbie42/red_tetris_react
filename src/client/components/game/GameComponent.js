@@ -177,7 +177,7 @@ function GameComponent(props) {
 			C.setState({ room })
 			if (verifyMemberCount(C.props.rooms, room)) {
 				if (verifyMembers(player, room, C.props.rooms))
-					C.props.addUserToRoom(C.props.username, room)
+					C.props.roomAddUser(C.props.username, room)
 				// else console.log(`already room member member`)
 			} else C.errorTooManyMembers()
 		}

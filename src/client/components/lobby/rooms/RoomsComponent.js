@@ -24,7 +24,7 @@ export function RoomsComponent(props) {
 
 	C.selectRoom = function(roomName) {
 		C.setState({ change: true })
-		C.props.addUserToRoom(C.props.username, roomName)
+		C.props.roomAddUser(C.props.username, roomName)
 		// C.props.gameJoined(roomName)
 		function delayRouteChange() {
 			C.props.history.push(
