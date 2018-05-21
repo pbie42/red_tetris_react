@@ -11,16 +11,16 @@ import createSagaMiddleware from 'redux-saga'
 import reducers from './client/reducers'
 import setupSocket from './client/sockets'
 import {
-	handleNewMessage,
-	handleNewUser,
-	handleRemoveUser,
-	handleNewRoom,
-	handleAddUserToRoom,
-	handleRemoveUserFromRoom,
+	handleMessageAdd,
+	handleUserAddition,
+	handleUserRemoval,
+	handleRoomAddition,
+	handleRoomUserAddition,
+	handleRoomUserRemoval,
 	handleGameJoined,
 	handleGameBoardUpdate,
-	handleNewPieces,
-	handleNewPieceRequest,
+	handleGameNewPieces,
+	handleGameNewPiece,
 	handleGameStart
 } from './client/sagas'
 
@@ -37,53 +37,27 @@ export const store = createStore(reducers, enhancer)
 
 const socket = setupSocket(store.dispatch)
 
-sagaMiddleware.run(handleNewMessage, {
-	socket
-})
+sagaMiddleware.run(handleGameBoardUpdate, { socket })
 
-sagaMiddleware.run(handleNewUser, {
-	socket
-})
+sagaMiddleware.run(handleGameJoined, { socket })
 
-sagaMiddleware.run(handleRemoveUser, {
-	socket
-})
+sagaMiddleware.run(handleGameNewPiece, { socket })
 
-sagaMiddleware.run(handleRemoveUserFromRoom, {
-	socket
-})
+sagaMiddleware.run(handleGameNewPieces, { socket })
 
-sagaMiddleware.run(handleNewRoom, {
-	socket
-})
+sagaMiddleware.run(handleGameStart, { socket })
 
-sagaMiddleware.run(handleAddUserToRoom, {
-	socket
-})
+sagaMiddleware.run(handleMessageAdd, { socket })
 
-// sagaMiddleware.run(handleGameReady, {
-// 	socket
-// })
+sagaMiddleware.run(handleRoomAddition, { socket })
 
-sagaMiddleware.run(handleGameBoardUpdate, {
-	socket
-})
+sagaMiddleware.run(handleRoomUserAddition, { socket })
 
-sagaMiddleware.run(handleGameJoined, {
-	socket
-})
+sagaMiddleware.run(handleRoomUserRemoval, { socket })
 
-sagaMiddleware.run(handleNewPieces, {
-	socket
-})
+sagaMiddleware.run(handleUserAddition, { socket })
 
-sagaMiddleware.run(handleNewPieceRequest, {
-	socket
-})
-
-sagaMiddleware.run(handleGameStart, {
-	socket
-})
+sagaMiddleware.run(handleUserRemoval, { socket })
 
 ReactDOM.render(
 	<Provider store={store} saga={sagaMiddleware}>
