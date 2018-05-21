@@ -32,14 +32,14 @@ let pieceNumber = 0
 io.on('connection', socket => {
 	// console.log(`a client is connected`)
 	socket.emit(
-		'message',
+		'user',
 		JSON.stringify({
 			type: 'USERS_LIST',
 			users: users.map(user => user.getInfo())
 		})
 	)
 	socket.emit(
-		'message',
+		'room',
 		JSON.stringify({
 			type: 'ROOMS_LIST',
 			rooms: rooms.map(room => room.getInfo())
@@ -51,6 +51,26 @@ io.on('connection', socket => {
 		const data = JSON.parse(message)
 		// console.log(`data`, data)
 		switch (data.type) {
+			//---------------------------------------------------------------------ADD_MESSAGE
+			case 'MESSAGE_ADD':
+				// console.log(`MESSAGE_ADD`)
+				socket.broadcast.emit(
+					'message',
+					JSON.stringify({
+						type: 'MESSAGE_ADD',
+						message: data.message,
+						author: data.author
+					})
+				)
+				break
+			default:
+				break
+		}
+	})
+
+	socket.on('user', message => {
+		const data = JSON.parse(message)
+		switch (data.type) {
 			//---------------------------------------------------------------------ADD_USER
 			case 'USER_ADD_USER':
 				console.log(`USER_ADD_USER`)
@@ -59,27 +79,27 @@ io.on('connection', socket => {
 				users.push(new User(socket.id, data.username))
 				// console.log(`users`, users)
 				socket.broadcast.emit(
-					'message',
+					'user',
 					JSON.stringify({
 						type: 'USERS_LIST',
 						users: users.map(user => user.getInfo())
 					})
 				)
 				socket.emit(
-					'message',
+					'user',
 					JSON.stringify({
 						type: 'USERS_LIST',
 						users: users.map(user => user.getInfo())
 					})
 				)
 				socket.emit(
-					'message',
+					'user',
 					JSON.stringify({
 						type: 'USER_USERNAME_SET'
 					})
 				)
 				socket.emit(
-					'message',
+					'user',
 					JSON.stringify({
 						type: 'USER_SET_ID',
 						id: socket.id
@@ -93,7 +113,7 @@ io.on('connection', socket => {
 				users = users.filter(user => user.username === data.username)
 				// console.log(`users`, users)
 				socket.broadcast.emit(
-					'message',
+					'user',
 					JSON.stringify({
 						type: 'USERS_LIST',
 						users: users.map(user => user.getInfo())
@@ -107,18 +127,7 @@ io.on('connection', socket => {
 				// 	})
 				// )
 				break
-			//---------------------------------------------------------------------ADD_MESSAGE
-			case 'MESSAGE_ADD':
-				// console.log(`MESSAGE_ADD`)
-				socket.broadcast.emit(
-					'message',
-					JSON.stringify({
-						type: 'MESSAGE_ADD',
-						message: data.message,
-						author: data.author
-					})
-				)
-				break
+
 			default:
 				break
 		}
@@ -146,14 +155,14 @@ io.on('connection', socket => {
 				currentRooms = rooms.map(room => room.getInfo())
 				// console.log(`currentRooms`, currentRooms)
 				socket.broadcast.emit(
-					'message',
+					'room',
 					JSON.stringify({
 						type: 'ROOMS_LIST',
 						rooms: rooms.map(room => room.getInfo())
 					})
 				)
 				socket.emit(
-					'message',
+					'game',
 					JSON.stringify({
 						type: 'GAME_ID_SET',
 						id: game.getId()
@@ -161,7 +170,7 @@ io.on('connection', socket => {
 				)
 				// console.log(`sending GAME_MEMBERS_UPDATE`)
 				io.to(data.roomName).emit(
-					'message',
+					'game',
 					JSON.stringify({
 						type: 'GAME_MEMBERS_UPDATE',
 						members: rooms
@@ -181,7 +190,7 @@ io.on('connection', socket => {
 				currentRooms = rooms.map(room => room.getInfo())
 				// console.log(`currentRooms`, currentRooms)
 				socket.broadcast.emit(
-					'message',
+					'room',
 					JSON.stringify({
 						type: 'ROOMS_LIST',
 						rooms: currentRooms
@@ -189,7 +198,7 @@ io.on('connection', socket => {
 				)
 				// console.log(`sending GAME_MEMBERS_UPDATE`)
 				io.to(data.roomName).emit(
-					'message',
+					'game',
 					JSON.stringify({
 						type: 'GAME_MEMBERS_UPDATE',
 						members: rooms
@@ -216,21 +225,21 @@ io.on('connection', socket => {
 				}
 				// if (room) console.log(`room.getMembers()`, room.getMembers())
 				socket.emit(
-					'message',
+					'game',
 					JSON.stringify({
 						type: 'GAME_STOP_COUNTDOWN'
 					})
 				)
 				socket.leave(data.roomName)
 				socket.broadcast.emit(
-					'message',
+					'room',
 					JSON.stringify({
 						type: 'ROOMS_LIST',
 						rooms
 					})
 				)
 				socket.emit(
-					'message',
+					'room',
 					JSON.stringify({
 						type: 'ROOMS_LIST',
 						rooms
@@ -238,7 +247,7 @@ io.on('connection', socket => {
 				)
 				room = rooms.find(room => room.getRoomName() === data.roomName)
 				io.to(data.roomName).emit(
-					'message',
+					'game',
 					JSON.stringify({
 						type: 'GAME_MEMBERS_UPDATE',
 						members: room
@@ -255,7 +264,7 @@ io.on('connection', socket => {
 					}))
 				if (roomBoards)
 					io.to(data.roomName).emit(
-						'message',
+						'game',
 						JSON.stringify({
 							type: 'GAME_BOARDS_UPDATE',
 							boards: roomBoards
@@ -294,7 +303,7 @@ io.on('connection', socket => {
 					}))
 				if (roomBoards)
 					io.to(data.roomName).emit(
-						'message',
+						'game',
 						JSON.stringify({
 							type: 'GAME_BOARDS_UPDATE',
 							boards: roomBoards
@@ -318,7 +327,7 @@ io.on('connection', socket => {
 						// 	.getMembers()
 						// 	.forEach(member => console.log(member.getCurrent()))
 						io.to(data.roomName).emit(
-							'message',
+							'game',
 							JSON.stringify({
 								type: 'GAME_PIECE_UPDATE',
 								piece: nextPiece
@@ -326,13 +335,13 @@ io.on('connection', socket => {
 						)
 					}
 					io.to(data.roomName).emit(
-						'message',
+						'game',
 						JSON.stringify({
 							type: 'GAME_START_COUNTDOWN'
 						})
 					)
 					io.to(data.roomName).emit(
-						'message',
+						'game',
 						JSON.stringify({
 							type: 'GAME_PIECE_UPDATE',
 							piece: nextPiece
@@ -369,7 +378,7 @@ io.on('connection', socket => {
 				if (roomBoards) {
 					// console.log(`roomBoards`, JSON.stringify(roomBoards))
 					io.to(data.roomName).emit(
-						'message',
+						'game',
 						JSON.stringify({
 							type: 'GAME_BOARDS_UPDATE',
 							boards: roomBoards
@@ -407,7 +416,7 @@ io.on('connection', socket => {
 					user.updateCurrent()
 					// console.log(`user.getCurrent()`, user.getCurrent())
 					socket.emit(
-						'message',
+						'game',
 						JSON.stringify({
 							type: 'GAME_PIECE_UPDATE',
 							piece: nextPiece
@@ -423,7 +432,7 @@ io.on('connection', socket => {
 				// console.log(`room`, room)
 				let newPieces = room.getNewPieces()
 				io.to(data.roomName).emit(
-					'message',
+					'game',
 					JSON.stringify({
 						type: 'GAME_PIECES',
 						pieces: newPieces
@@ -446,7 +455,7 @@ io.on('connection', socket => {
 		// users.splice(index, 1)
 		// console.log(`DISCONNECT`)
 		socket.broadcast.emit(
-			'message',
+			'user',
 			JSON.stringify({
 				type: 'USERS_LIST',
 				users

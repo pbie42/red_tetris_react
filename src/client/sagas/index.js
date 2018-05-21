@@ -9,13 +9,13 @@ const handleNewMessage = function* handleNewMessage(params) {
 
 const handleNewUser = function* handleNewUser(params) {
 	yield takeEvery(types.USER_ADD_USER, action => {
-		params.socket.emit('message', JSON.stringify(action))
+		params.socket.emit('user', JSON.stringify(action))
 	})
 }
 
 const handleRemoveUser = function* handleRemoveUser(params) {
 	yield takeEvery(types.USER_REMOVE_USER, action => {
-		params.socket.emit('message', JSON.stringify(action))
+		params.socket.emit('user', JSON.stringify(action))
 	})
 }
 
