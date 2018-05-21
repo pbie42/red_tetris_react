@@ -25,29 +25,25 @@ import {
 
 import {
 	userAdd,
-	usersPopulateList,
 	userRemove,
 	userSetId,
 	userSetUsername,
 	userUnsetUsername,
 	userUsernameSet,
-	usersListReceived
+	usersListReceived,
+	usersPopulateList
 } from './users'
 
 import {
 	roomAdd,
 	roomAddUser,
-	roomsPopulateList,
-	roomRemoveUser,
 	roomAdded,
-	roomsListReceived
+	roomRemoveUser,
+	roomsListReceived,
+	roomsPopulateList
 } from './rooms'
 
 export {
-	messageAdd,
-	roomAdd,
-	userAdd,
-	roomAddUser,
 	connected,
 	disconnected,
 	errorTooManyMembers,
@@ -68,16 +64,20 @@ export {
 	gameStart,
 	gameStartCountdown,
 	gameStopCountdown,
+	messageAdd,
 	messageReceived,
-	roomsPopulateList,
-	usersPopulateList,
-	userRemove,
-	roomRemoveUser,
+	roomAdd,
+	roomAddUser,
 	roomAdded,
+	roomRemoveUser,
 	roomsListReceived,
+	roomsPopulateList,
+	userAdd,
+	userRemove,
 	userSetId,
 	userSetUsername,
 	userUnsetUsername,
 	userUsernameSet,
-	usersListReceived
+	usersListReceived,
+	usersPopulateList
 }
