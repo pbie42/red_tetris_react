@@ -29,8 +29,8 @@ import {
 	userRemove,
 	userSetId,
 	userSetUsername,
-	unsetUsername,
-	usernameSet,
+	userUnsetUsername,
+	userUsernameSet,
 	usersListReceived
 } from './users'
 
@@ -77,7 +77,7 @@ export {
 	roomsListReceived,
 	userSetId,
 	userSetUsername,
-	unsetUsername,
-	usernameSet,
+	userUnsetUsername,
+	userUsernameSet,
 	usersListReceived
 }

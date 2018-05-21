@@ -17,12 +17,17 @@ export const userSetUsername = username => ({
 	username
 })
 
+export const userUsernameSet = () => ({
+	type: types.USER_USERNAME_SET,
+	usernameSet: true
+})
+
 export const userSetId = id => ({
 	type: types.USER_SET_ID,
 	id
 })
 
-export const unsetUsername = username => ({
+export const userUnsetUsername = username => ({
 	type: types.USER_UNSET_USERNAME,
 	username
 })
@@ -35,9 +40,4 @@ export const populateUsersList = users => ({
 export const usersListReceived = () => ({
 	type: types.USERS_LIST_RECEIVED,
 	users: true
-})
-
-export const usernameSet = () => ({
-	type: types.USER_USERNAME_SET,
-	usernameSet: true
 })

@@ -8,10 +8,10 @@ import {
 	removeUserFromRoom,
 	userRemove,
 	addMessage,
-	unsetUsername,
+	userUnsetUsername,
 	populateUsersList,
 	usersListReceived,
-	usernameSet,
+	userUsernameSet,
 	connected,
 	disconnected,
 	errorTooManyMembers,
@@ -169,16 +169,16 @@ describe('Actions', () => {
 			})
 		})
 
-		it('unsetUsername returns an object for the unsetting username action', () => {
-			const unsetUsernameAction = unsetUsername(username)
+		it('userUnsetUsername returns an object for the unsetting username action', () => {
+			const unsetUsernameAction = userUnsetUsername(username)
 			expect(unsetUsernameAction).to.eql({
 				type: 'USER_UNSET_USERNAME',
 				username: 'pbie'
 			})
 		})
 
-		it('usernameSet returns an object for the updating username set connection action', () => {
-			const usernameSetAction = usernameSet()
+		it('userUsernameSet returns an object for the updating username set connection action', () => {
+			const usernameSetAction = userUsernameSet()
 			expect(usernameSetAction).to.eql({
 				type: 'USER_USERNAME_SET',
 				usernameSet: true

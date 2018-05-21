@@ -14,7 +14,7 @@ import {
 	gameBoardsUpdate,
 	gamePieceUpdate,
 	gamePiecesUpdate,
-	usernameSet,
+	userUsernameSet,
 	gameStartCountdown,
 	gameStopCountdown
 } from '../actions'
@@ -51,7 +51,7 @@ const setupSocket = dispatch => {
 				break
 			case types.USER_USERNAME_SET:
 				// console.log(`USER_USERNAME_SET`)
-				dispatch(usernameSet())
+				dispatch(userUsernameSet())
 				break
 			case types.USERS_LIST:
 				// console.log(`USERS_LIST`)
