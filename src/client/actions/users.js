@@ -12,8 +12,18 @@ export const userRemove = username => ({
 	username
 })
 
+export const userSetId = id => ({
+	type: types.USER_SET_ID,
+	id
+})
+
 export const userSetUsername = username => ({
 	type: types.USER_SET_USERNAME,
+	username
+})
+
+export const userUnsetUsername = username => ({
+	type: types.USER_UNSET_USERNAME,
 	username
 })
 
@@ -22,22 +32,12 @@ export const userUsernameSet = () => ({
 	usernameSet: true
 })
 
-export const userSetId = id => ({
-	type: types.USER_SET_ID,
-	id
-})
-
-export const userUnsetUsername = username => ({
-	type: types.USER_UNSET_USERNAME,
-	username
+export const usersListReceived = () => ({
+	type: types.USERS_LIST_RECEIVED,
+	users: true
 })
 
 export const usersPopulateList = users => ({
 	type: types.USERS_LIST,
 	users
-})
-
-export const usersListReceived = () => ({
-	type: types.USERS_LIST_RECEIVED,
-	users: true
 })
