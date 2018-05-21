@@ -16,7 +16,7 @@ import {
 	disconnected,
 	errorTooManyMembers,
 	errorUsernameTaken,
-	populateRoomsList,
+	roomsPopulateList,
 	roomsListReceived,
 	messageReceived
 } from '../../src/client/actions'
@@ -119,8 +119,8 @@ describe('Actions', () => {
 				members
 			})
 		})
-		it('populateRoomsList returns an object for updating rooms array action', () => {
-			const populateRoomsListAction = populateRoomsList(rooms)
+		it('roomsPopulateList returns an object for updating rooms array action', () => {
+			const populateRoomsListAction = roomsPopulateList(rooms)
 			expect(populateRoomsListAction).to.eql({
 				type: 'ROOMS_LIST',
 				rooms

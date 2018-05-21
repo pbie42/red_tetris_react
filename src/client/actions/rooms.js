@@ -24,7 +24,7 @@ export const roomAdded = (roomName, members) => ({
 	members
 })
 
-export const populateRoomsList = rooms => ({
+export const roomsPopulateList = rooms => ({
 	type: types.ROOMS_LIST,
 	rooms
 })

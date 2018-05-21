@@ -37,7 +37,7 @@ import {
 import {
 	roomAdd,
 	roomAddUser,
-	populateRoomsList,
+	roomsPopulateList,
 	roomRemoveUser,
 	roomAdded,
 	roomsListReceived
@@ -69,7 +69,7 @@ export {
 	gameStartCountdown,
 	gameStopCountdown,
 	messageReceived,
-	populateRoomsList,
+	roomsPopulateList,
 	usersPopulateList,
 	userRemove,
 	roomRemoveUser,

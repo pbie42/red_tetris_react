@@ -4,7 +4,7 @@ import {
 	roomAdd,
 	messageReceived,
 	usersPopulateList,
-	populateRoomsList,
+	roomsPopulateList,
 	connected,
 	usersListReceived,
 	roomsListReceived,
@@ -62,7 +62,7 @@ const setupSocket = dispatch => {
 			case types.ROOMS_LIST:
 				// console.log(`ROOMS_LIST`)
 				// console.log(`data.rooms`, data.rooms)
-				dispatch(populateRoomsList(data.rooms))
+				dispatch(roomsPopulateList(data.rooms))
 				dispatch(roomsListReceived())
 				break
 			case types.GAME_MEMBERS_UPDATE:
