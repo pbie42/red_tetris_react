@@ -11,7 +11,7 @@ export const ChatInputComponent = props => {
 				ref={node => (input = node)}
 				onKeyPress={e => {
 					if (e.key === 'Enter') {
-						props.addMessage(input.value, props.username)
+						props.messageAdd(input.value, props.username)
 						input.value = ''
 					}
 				}}

@@ -7,7 +7,7 @@ import {
 	roomAddUser,
 	roomRemoveUser,
 	userRemove,
-	addMessage,
+	messageAdd,
 	userUnsetUsername,
 	usersPopulateList,
 	usersListReceived,
@@ -31,9 +31,9 @@ describe('Actions', () => {
 	]
 
 	describe('Chat', () => {
-		it('addMessage returns an object for the add message action', () => {
+		it('messageAdd returns an object for the add message action', () => {
 			const message = 'hello'
-			const addMessageAction = addMessage(message, username)
+			const addMessageAction = messageAdd(message, username)
 			expect(addMessageAction).to.eql({
 				type: 'MESSAGE_ADD',
 				id: 0,

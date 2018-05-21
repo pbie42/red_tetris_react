@@ -9,7 +9,7 @@ export const messageReceived = (message, author) => ({
 	author
 })
 
-export const addMessage = (message, author) => ({
+export const messageAdd = (message, author) => ({
 	type: types.MESSAGE_ADD,
 	id: nextMessageId++,
 	message,

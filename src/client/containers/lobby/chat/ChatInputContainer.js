@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import { ChatInputComponent } from '../../../components/lobby/chat/ChatInputComponent'
-import { addMessage } from '../../../actions'
+import { messageAdd } from '../../../actions'
 
 const mapDispatchToProps = dispatch => ({
-	addMessage: (message, author) => {
-		dispatch(addMessage(message, author))
+	messageAdd: (message, author) => {
+		dispatch(messageAdd(message, author))
 	}
 })
 

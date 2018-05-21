@@ -1,4 +1,4 @@
-import { addMessage, messageReceived } from './chat'
+import { messageAdd, messageReceived } from './chat'
 
 import { connected, disconnected } from './connections'
 
@@ -44,7 +44,7 @@ import {
 } from './rooms'
 
 export {
-	addMessage,
+	messageAdd,
 	roomAdd,
 	userAdd,
 	roomAddUser,
