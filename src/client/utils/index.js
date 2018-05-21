@@ -8,7 +8,7 @@ const {
 const { parseUrl } = require('./parse_url')
 const { prependZero } = require('./prepend_zero')
 const { pieceOrder } = require('./piece')
-const { roomAddUser, removeUserFromRoom } = require('./rooms')
+const { roomAddUser, roomRemoveUser } = require('./rooms')
 const {
 	calcPieceBottom,
 	calcPieceEnd,
@@ -71,7 +71,7 @@ module.exports = {
 	positionsZ,
 	prependZero,
 	randomPiece,
-	removeUserFromRoom,
+	roomRemoveUser,
 	verifyMemberCount,
 	verifyMembers,
 	verifyRoomName,

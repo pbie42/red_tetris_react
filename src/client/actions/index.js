@@ -38,7 +38,7 @@ import {
 	addRoom,
 	roomAddUser,
 	populateRoomsList,
-	removeUserFromRoom,
+	roomRemoveUser,
 	roomAdded,
 	roomsListReceived
 } from './rooms'
@@ -72,7 +72,7 @@ export {
 	populateRoomsList,
 	usersPopulateList,
 	userRemove,
-	removeUserFromRoom,
+	roomRemoveUser,
 	roomAdded,
 	roomsListReceived,
 	userSetId,

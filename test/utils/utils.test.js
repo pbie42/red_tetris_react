@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import {
 	roomAddUser,
 	parseUrl,
-	removeUserFromRoom,
+	roomRemoveUser,
 	verifyMemberCount,
 	verifyMembers,
 	verifyRoomName,
@@ -75,7 +75,7 @@ describe('Utils', () => {
 		})
 	})
 
-	describe('removeUserFromRoom', () => {
+	describe('roomRemoveUser', () => {
 		it('returns new rooms array after removing user from desired room', () => {
 			const username = 'pbie'
 			const roomName = 'Todd Room'
@@ -83,7 +83,7 @@ describe('Utils', () => {
 				{ roomName: 'Todd Room', members: ['pbie', 'toddster'] },
 				{ roomName: 'Danger Room', members: ['wolverine', 'cyclops'] }
 			]
-			rooms = removeUserFromRoom(username, roomName, rooms)
+			rooms = roomRemoveUser(username, roomName, rooms)
 			expect(rooms[0].members).to.eql(['toddster'])
 		})
 
@@ -94,7 +94,7 @@ describe('Utils', () => {
 				{ roomName: 'Todd Room', members: ['pbie', 'toddster'] },
 				{ roomName: 'Danger Room', members: ['wolverine', 'cyclops'] }
 			]
-			rooms = removeUserFromRoom(username, roomName, rooms)
+			rooms = roomRemoveUser(username, roomName, rooms)
 			expect(rooms[1].members).to.eql(['wolverine', 'cyclops'])
 		})
 
@@ -105,7 +105,7 @@ describe('Utils', () => {
 				{ roomName: 'Todd Room', members: ['pbie', 'toddster'] },
 				{ roomName: 'Danger Room', members: ['wolverine', 'cyclops'] }
 			]
-			rooms = removeUserFromRoom(username, roomName, rooms)
+			rooms = roomRemoveUser(username, roomName, rooms)
 			expect(rooms[0].members).to.eql(['pbie', 'toddster'])
 			expect(rooms[1].members).to.eql(['wolverine', 'cyclops'])
 		})

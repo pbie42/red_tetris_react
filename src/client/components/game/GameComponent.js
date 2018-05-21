@@ -34,7 +34,7 @@ function GameComponent(props) {
 
 	C.componentWillUnmount = function() {
 		C.props.gameRoomUnset(C.state.room)
-		C.props.removeUserFromRoom(C.props.username, C.state.room)
+		C.props.roomRemoveUser(C.props.username, C.state.room)
 		C.props.gameRemoveBoards()
 		C.props.gameRemoveId()
 		// console.log(`removing user from room`)
@@ -131,7 +131,7 @@ function GameComponent(props) {
 
 	C.componentCleanup = function() {
 		C.props.gameRoomUnset(C.state.room)
-		C.props.removeUserFromRoom(C.props.username, C.state.room)
+		C.props.roomRemoveUser(C.props.username, C.state.room)
 		// C.props.userRemove(C.props.username)
 		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
 	}

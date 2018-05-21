@@ -7,7 +7,7 @@ const {
 	getRoom,
 	getUser,
 	getUserById,
-	removeUserFromRoom,
+	roomRemoveUser,
 	removeRoom
 } = require('./utils')
 const { pieceOrder } = require('../client/utils')
@@ -202,7 +202,7 @@ io.on('connection', socket => {
 			case 'ROOM_REMOVE_USER':
 				// console.log(`ROOM_REMOVE_USER`)
 				// console.log(`data`, data)
-				rooms = removeUserFromRoom(data.username, data.roomName, rooms, users)
+				rooms = roomRemoveUser(data.username, data.roomName, rooms, users)
 				// console.log(`rooms`, rooms)
 				let user = getUser(data.username, users)
 				if (user) user.setBoard(newUserBoard())

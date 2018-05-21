@@ -8,7 +8,7 @@ function roomAddUser(username, roomName, rooms, users) {
 	return rooms
 }
 
-function removeUserFromRoom(username, roomName, rooms, users) {
+function roomRemoveUser(username, roomName, rooms, users) {
 	const roomIndex = rooms.findIndex(room => room.getRoomName() === roomName)
 	if (
 		roomIndex >= 0 &&
@@ -48,6 +48,6 @@ module.exports = {
 	getRoom,
 	getUser,
 	getUserById,
-	removeUserFromRoom,
+	roomRemoveUser,
 	removeRoom
 }

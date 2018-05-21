@@ -26,14 +26,14 @@ describe('Game', () => {
 
 	it('should render the game component', () => {
 		const gameRoomUnsetSpy = sinon.spy()
-		const removeUserFromRoomSpy = sinon.spy()
+		const roomRemoveUserSpy = sinon.spy()
 		const gameRemoveBoardsSpy = sinon.spy()
 		const gameRemoveIdSpy = sinon.spy()
 		const wrapper = mount(
 			<Provider store={store}>
 				<GameComponent
 					gameRoomUnset={gameRoomUnsetSpy}
-					removeUserFromRoom={removeUserFromRoomSpy}
+					roomRemoveUser={roomRemoveUserSpy}
 					gameRemoveBoards={gameRemoveBoardsSpy}
 					gameRemoveId={gameRemoveIdSpy}
 				/>
@@ -114,11 +114,11 @@ describe('Game', () => {
 				expect(spyLastCall.username).to.equal(username)
 			})
 
-			it('removeUserFromRoom called with property username', () => {
+			it('roomRemoveUser called with property username', () => {
 				const dispatchSpy = sinon.spy()
-				const { removeUserFromRoom } = mapDispatchToProps(dispatchSpy)
-				removeUserFromRoom(username, roomName)
-				const expectedAction = actions.removeUserFromRoom()
+				const { roomRemoveUser } = mapDispatchToProps(dispatchSpy)
+				roomRemoveUser(username, roomName)
+				const expectedAction = actions.roomRemoveUser()
 				const spyLastCall = dispatchSpy.args[0][0]
 				expect(spyLastCall.type).to.eql(expectedAction.type)
 				expect(spyLastCall.username).to.equal(username)

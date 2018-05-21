@@ -5,7 +5,7 @@ import {
 	addRoom,
 	roomAdded,
 	roomAddUser,
-	removeUserFromRoom,
+	roomRemoveUser,
 	userRemove,
 	addMessage,
 	userUnsetUsername,
@@ -95,8 +95,8 @@ describe('Actions', () => {
 				username
 			})
 		})
-		it('removeUserFromRoom returns an object for the remove user from a room action', () => {
-			const removeUserFromRoomAction = removeUserFromRoom(username, roomName)
+		it('roomRemoveUser returns an object for the remove user from a room action', () => {
+			const removeUserFromRoomAction = roomRemoveUser(username, roomName)
 			expect(removeUserFromRoomAction).to.eql({
 				type: 'ROOM_REMOVE_USER',
 				roomName,
