@@ -7,7 +7,7 @@ export const userAdd = username => ({
 	username
 })
 
-export const removeUser = username => ({
+export const userRemove = username => ({
 	type: types.USER_REMOVE_USER,
 	username
 })

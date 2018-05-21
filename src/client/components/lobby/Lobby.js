@@ -21,7 +21,7 @@ function LobbyComponent(props) {
 	}
 
 	C.componentWillUnmount = function() {
-		// C.props.removeUser(C.props.username)
+		// C.props.userRemove(C.props.username)
 	}
 
 	C.showNewRoom = function() {

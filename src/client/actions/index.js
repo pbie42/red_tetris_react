@@ -26,7 +26,7 @@ import {
 import {
 	userAdd,
 	populateUsersList,
-	removeUser,
+	userRemove,
 	setId,
 	setUsername,
 	unsetUsername,
@@ -71,7 +71,7 @@ export {
 	messageReceived,
 	populateRoomsList,
 	populateUsersList,
-	removeUser,
+	userRemove,
 	removeUserFromRoom,
 	roomAdded,
 	roomsListReceived,
