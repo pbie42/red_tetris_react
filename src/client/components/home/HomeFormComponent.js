@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { verifyUsername } from '../../utils'
 
 function HomeForm(props) {
 	const C = new Component(props)
@@ -24,23 +25,6 @@ function HomeForm(props) {
 		clearInterval(C.state.interval)
 	}
 
-	C.enterUsername = function(e) {
-		let value = C.refs.input.value
-		if (e.key === 'Enter') {
-			e.preventDefault()
-			if (value && C.verifyUsername(value)) {
-				props.userSetUsername(value)
-				props.userAdd(value)
-				function delayRouteChange() {
-					props.history.push('/lobby')
-				}
-				C.props.pageChange()
-				setTimeout(delayRouteChange, 800)
-			} else C.setSubmitError()
-			C.refs.input.value = ''
-		}
-	}
-
 	C.placeHolder = function() {
 		if (C.state.error) {
 			C.setState({ placeholder: 'Username already taken' })
@@ -49,24 +33,31 @@ function HomeForm(props) {
 		else C.setState({ placeholder: '' })
 	}
 
-	C.submitUsername = function() {
-		let value = C.refs.input.value
-		if (value && C.verifyUsername(value)) {
-			props.userSetUsername(value)
-			props.userAdd(value)
-			function delayRouteChange() {
-				props.history.push('/lobby')
-			}
+	C.handleUsername = function(username) {
+		if (username && verifyUsername(username, C.props.users)) {
+			C.props.userSetUsername(username)
+			C.props.userAdd(username)
 			C.props.pageChange()
-			setTimeout(delayRouteChange, 800)
+			setTimeout(C.changeRoute, 800)
 		} else C.setSubmitError()
 		C.refs.input.value = ''
 	}
 
-	C.verifyUsername = function(value) {
-		const index = C.props.users.findIndex(user => value === user.username)
-		if (index >= 0) return false
-		return true
+	C.enterUsername = function(e) {
+		let username = C.refs.input.value
+		if (e.key === 'Enter') {
+			e.preventDefault()
+			C.handleUsername(username)
+		}
+	}
+
+	C.submitUsername = function() {
+		let username = C.refs.input.value
+		C.handleUsername(username)
+	}
+
+	C.changeRoute = function() {
+		C.props.history.push('/lobby')
 	}
 
 	C.setSubmitError = function() {

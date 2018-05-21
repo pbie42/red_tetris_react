@@ -191,32 +191,6 @@ describe('HomeForm', () => {
 				expect(wrapper.ref('input').value).to.equal('')
 			})
 		})
-
-		describe('verifyUsername', () => {
-			const userSetUsernameSpy = sinon.spy()
-			const userAddSpy = sinon.spy()
-			const preventSpy = sinon.spy()
-			const pageChangeSpy = sinon.spy()
-			const wrapper = mount(
-				<HomeForm
-					users={[{ id: 0, username: 'Jen' }]}
-					store={store}
-					history={[]}
-					userAdd={userAddSpy}
-					userSetUsername={userSetUsernameSpy}
-					pageChange={pageChangeSpy}
-				/>
-			)
-			wrapper.update()
-			it('returns true if new username is unique', () => {
-				const result = wrapper.instance().verifyUsername('Paul')
-				expect(result).to.be.true
-			})
-			it('returns false if new username is not unique', () => {
-				const result = wrapper.instance().verifyUsername('Jen')
-				expect(result).to.be.false
-			})
-		})
 	})
 
 	describe('Store', () => {
