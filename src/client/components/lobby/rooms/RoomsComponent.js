@@ -25,7 +25,6 @@ export function RoomsComponent(props) {
 	C.selectRoom = function(roomName) {
 		C.setState({ change: true })
 		C.props.roomAddUser(C.props.username, roomName)
-		// C.props.gameJoined(roomName)
 		function delayRouteChange() {
 			C.props.history.push(
 				`/${roomName.replace(/ /g, '_')}[${C.props.username}]`
