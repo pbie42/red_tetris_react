@@ -7,6 +7,7 @@ export const MESSAGE_RECEIVED = 'MESSAGE_RECEIVED'
 //------------------------------------------------------------------------------Game
 export const GAME_BOARDS_UPDATE = 'GAME_BOARDS_UPDATE'
 export const GAME_BOARD_UPDATE = 'GAME_BOARD_UPDATE'
+export const GAME_CLEAR = 'GAME_CLEAR'
 export const GAME_ID_SET = 'GAME_ID_SET'
 export const GAME_JOINED = 'GAME_JOINED'
 export const GAME_MEMBERS_UPDATE = 'GAME_MEMBERS_UPDATE'

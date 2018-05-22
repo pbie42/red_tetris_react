@@ -3,6 +3,7 @@ import GameComponent from '../../components/game/GameComponent'
 import {
 	errorTooManyMembers,
 	errorUsernameTaken,
+	gameClear,
 	gameJoined,
 	gameRemoveBoards,
 	gameRemoveId,
@@ -39,14 +40,17 @@ export const mapDispatchToProps = dispatch => ({
 	errorTooManyMembers: username => {
 		dispatch(errorTooManyMembers(username))
 	},
+	gameClear: () => {
+		dispatch(gameClear())
+	},
 	gameStart: (roomName, userId) => {
 		dispatch(gameStart(roomName, userId))
 	},
 	gameRoomSet: roomName => {
 		dispatch(gameRoomSet(roomName))
 	},
-	gameRoomUnset: roomName => {
-		dispatch(gameRoomUnset(roomName))
+	gameRoomUnset: () => {
+		dispatch(gameRoomUnset())
 	},
 	gameJoined: roomName => {
 		dispatch(gameJoined(roomName))

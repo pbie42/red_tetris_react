@@ -37,14 +37,12 @@ function GameComponent(props) {
 	C.componentDidMount = function() {
 		C.state.interval = setInterval(C.flashMessage, 1000)
 		window.addEventListener('beforeunload', C.componentCleanup)
+		window.addEventListener('keydown', e => C.handleSpaceBar(e))
 	}
 
 	C.componentCleanup = function() {
-		C.props.gameRoomUnset(C.state.room)
 		C.props.roomRemoveUser(C.props.username, C.state.room)
-		C.props.gameRemoveBoards()
-		C.props.gameRemoveId()
-		C.props.gameRemoveMembers()
+		C.props.gameClear()
 		clearInterval(C.state.interval)
 		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
 	}
@@ -66,6 +64,7 @@ function GameComponent(props) {
 		const msgStart = 'Press Space to Start'
 		const msgWaitPlayers = 'Or wait for more players'
 		const msgWaitCreator = 'Waiting for creator to start game'
+		const msgGameStarting = 'Game starting in 5...'
 		if (verifyCreatorMessage(C.props, message, msgStart))
 			C.setState({ message: msgWaitPlayers })
 		else if (verifyCreatorMessage(C.props, message, msgWaitPlayers))
@@ -81,8 +80,8 @@ function GameComponent(props) {
 				message === msgWaitCreator ||
 				message === ''
 			) {
-				C.setState({ message: 'Game starting in 5...' })
-			} else if (C.state.message === 'Game starting in 5...')
+				C.setState({ message: msgGameStarting })
+			} else if (C.state.message === msgGameStarting)
 				C.setState({ message: '4' })
 			else if (message === '4') C.setState({ message: '3' })
 			else if (message === '3') C.setState({ message: '2' })

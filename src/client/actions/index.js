@@ -7,6 +7,7 @@ import { errorUsernameTaken, errorTooManyMembers } from './errors'
 import {
 	gameBoardUpdate,
 	gameBoardsUpdate,
+	gameClear,
 	gameJoined,
 	gameMembersUpdate,
 	gameNewPiece,
@@ -51,6 +52,7 @@ export {
 	errorUsernameTaken,
 	gameBoardUpdate,
 	gameBoardsUpdate,
+	gameClear,
 	gameJoined,
 	gameMembersUpdate,
 	gameNewPiece,

@@ -13,6 +13,10 @@ export const gameBoardsUpdate = boards => ({
 	boards
 })
 
+export const gameClear = () => ({
+	type: types.GAME_CLEAR
+})
+
 export const gameJoined = roomName => ({
 	type: types.GAME_JOINED,
 	roomName
@@ -63,12 +67,14 @@ export const gameRoomSet = roomName => ({
 	roomName
 })
 
-export const gameRoomUnset = roomName => ({
-	type: types.GAME_ROOM_UNSET,
-	roomName
+export const gameRoomUnset = () => ({
+	type: types.GAME_ROOM_UNSET
 })
 
-export const gameSetId = id => ({ type: types.GAME_ID_SET, id })
+export const gameSetId = id => ({
+	type: types.GAME_ID_SET,
+	id
+})
 
 export const gameStart = (roomName, userId) => ({
 	type: types.GAME_START,

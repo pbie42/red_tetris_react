@@ -18,6 +18,15 @@ const games = (state = initialGameState, action) => {
 		case types.GAME_BOARD_UPDATE:
 			return state
 
+		case types.GAME_CLEAR:
+			return {
+				...state,
+				boards: [],
+				id: '',
+				members: [],
+				roomName: ''
+			}
+
 		case types.GAME_ID_SET:
 			return { ...state, id: action.id }
 
