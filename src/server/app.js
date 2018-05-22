@@ -209,21 +209,13 @@ io.on('connection', socket => {
 				break
 			//---------------------------------------------------------------------REMOVE_USER_FROM_ROOM
 			case 'ROOM_REMOVE_USER':
-				// console.log(`ROOM_REMOVE_USER`)
-				// console.log(`data`, data)
 				rooms = roomRemoveUser(data.username, data.roomName, rooms, users)
-				// console.log(`rooms`, rooms)
 				let user = getUser(data.username, users)
 				if (user) user.setBoard(newUserBoard())
-				// console.log(`user`, user)
-				// console.log(`rooms`, rooms)
 				room = getRoom(data.roomName, rooms)
 				if (room && room.getMembers().length === 0) {
 					rooms = removeRoom(data.roomName, rooms)
-					// console.log(`rooms`, rooms)
-					// console.log(`should have removed room`)
 				}
-				// if (room) console.log(`room.getMembers()`, room.getMembers())
 				socket.emit(
 					'game',
 					JSON.stringify({
@@ -246,7 +238,7 @@ io.on('connection', socket => {
 					})
 				)
 				room = rooms.find(room => room.getRoomName() === data.roomName)
-				io.to(data.roomName).emit(
+				socket.to(data.roomName).emit(
 					'game',
 					JSON.stringify({
 						type: 'GAME_MEMBERS_UPDATE',
@@ -358,7 +350,8 @@ io.on('connection', socket => {
 				// console.log(`data.id`, data.id)
 				if (
 					user &&
-					(user.getId() !== data.id || user.getUsername()) !== data.username
+					(user.getId() !== data.id || user.getUsername()) !==
+						data.username
 				) {
 					console.log(`CHEATING!!!!!!!!!!!`)
 					console.log(`data`, data)

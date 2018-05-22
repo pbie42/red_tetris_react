@@ -43,6 +43,7 @@ function GameComponent(props) {
 		C.props.roomRemoveUser(C.props.username, C.state.room)
 		C.props.gameRemoveBoards()
 		C.props.gameRemoveId()
+		C.props.gameRemoveMembers()
 		clearInterval(C.state.interval)
 		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
 	}

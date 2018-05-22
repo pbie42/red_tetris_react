@@ -48,6 +48,9 @@ const games = (state = initialGameState, action) => {
 		case types.GAME_REMOVE_ID:
 			return { ...state, id: '' }
 
+		case types.GAME_REMOVE_MEMBERS:
+			return { ...state, members: [] }
+
 		case types.GAME_ROOM_SET:
 			return { ...state, roomName: action.roomName }
 

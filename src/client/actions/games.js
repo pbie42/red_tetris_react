@@ -54,6 +54,10 @@ export const gameRemoveId = () => ({
 	type: types.GAME_REMOVE_ID
 })
 
+export const gameRemoveMembers = () => ({
+	type: types.GAME_REMOVE_MEMBERS
+})
+
 export const gameRoomSet = roomName => ({
 	type: types.GAME_ROOM_SET,
 	roomName

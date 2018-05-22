@@ -6,18 +6,15 @@ function LobbyComponent(props) {
 	const C = new Component(props)
 
 	C.state = {
-		change: false
+		change: false,
+		hide: true,
+		display: false
 	}
 
 	C.componentWillMount = function() {
 		if (!C.props.username) {
 			C.props.history.push('/')
 		}
-	}
-
-	C.state = {
-		hide: true,
-		display: false
 	}
 
 	C.showNewRoom = function() {
