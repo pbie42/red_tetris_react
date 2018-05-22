@@ -20,20 +20,17 @@ function LobbyComponent(props) {
 		display: false
 	}
 
-	C.componentWillUnmount = function() {
-		// C.props.userRemove(C.props.username)
-	}
-
 	C.showNewRoom = function() {
 		C.setState({ hide: false, display: true })
 	}
 
 	C.hideNewRoom = function() {
 		C.setState({ hide: true })
-		function delayDisplay() {
-			C.setState({ display: false })
-		}
-		setTimeout(delayDisplay, 500)
+		setTimeout(C.displayChange, 500)
+	}
+
+	C.displayChange = function() {
+		C.setState({ display: false })
 	}
 
 	C.pageChange = function() {
@@ -44,7 +41,9 @@ function LobbyComponent(props) {
 		return (
 			<div
 				className={
-					!C.state.change ? 'container-lobby' : 'container-lobby container-fade'
+					!C.state.change
+						? 'container-lobby'
+						: 'container-lobby container-fade'
 				}
 			>
 				<RoomsContainer
