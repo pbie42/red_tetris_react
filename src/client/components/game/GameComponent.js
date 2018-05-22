@@ -22,31 +22,29 @@ function GameComponent(props) {
 		room: '',
 		interval: '',
 		countdownInterval: '',
-		creatorMessage: '',
+		message: '',
 		exitText: '',
 		change: false,
 		gameStarted: false
 	}
 
-	C.componentWillMount = function() {
-		// console.log(`props`, props)
-	}
-
 	C.componentWillUnmount = function() {
-		C.props.gameRoomUnset(C.state.room)
-		C.props.roomRemoveUser(C.props.username, C.state.room)
-		C.props.gameRemoveBoards()
-		C.props.gameRemoveId()
-		// console.log(`removing user from room`)
-		clearInterval(C.state.interval)
+		C.componentCleanup()
 		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
 	}
 
 	C.componentDidMount = function() {
-		// console.log(`NOT CONNECTED`)
 		C.state.interval = setInterval(C.flashMessage, 1000)
 		window.addEventListener('beforeunload', C.componentCleanup)
-		window.addEventListener('keydown', e => C.handleSpaceBar(e))
+	}
+
+	C.componentCleanup = function() {
+		C.props.gameRoomUnset(C.state.room)
+		C.props.roomRemoveUser(C.props.username, C.state.room)
+		C.props.gameRemoveBoards()
+		C.props.gameRemoveId()
+		clearInterval(C.state.interval)
+		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
 	}
 
 	C.componentDidUpdate = function() {
@@ -66,53 +64,48 @@ function GameComponent(props) {
 		if (
 			!C.props.countDown &&
 			C.props.userId === C.props.roomId &&
-			(C.state.creatorMessage === 'Press Space to Start' ||
-				C.state.creatorMessage === '')
+			(C.state.message === 'Press Space to Start' || C.state.message === '')
 		) {
-			C.setState({ creatorMessage: 'Or wait for more players' })
+			C.setState({ message: 'Or wait for more players' })
 		} else if (
 			!C.props.countDown &&
 			C.props.userId === C.props.roomId &&
-			C.state.creatorMessage === 'Or wait for more players'
+			C.state.message === 'Or wait for more players'
 		) {
-			C.setState({ creatorMessage: 'Press Space to Start' })
+			C.setState({ message: 'Press Space to Start' })
 		}
 		if (
 			!C.props.countDown &&
 			C.props.userId !== C.props.roomId &&
-			(C.state.creatorMessage === 'Press Space to Start' ||
-				C.state.creatorMessage === '')
+			(C.state.message === 'Press Space to Start' || C.state.message === '')
 		) {
-			C.setState({ creatorMessage: 'Waiting for creator to start game' })
+			C.setState({ message: 'Waiting for creator to start game' })
 		} else if (
 			!C.props.countDown &&
 			C.props.userId !== C.props.roomId &&
-			C.state.creatorMessage === 'Waiting for creator to start game'
+			C.state.message === 'Waiting for creator to start game'
 		) {
-			C.setState({ creatorMessage: '' })
+			C.setState({ message: '' })
 		}
 		if (C.props.countDown) {
 			// console.log(`countdown started`)
-			// console.log(`C.state.creatorMessage`, C.state.creatorMessage)
+			// console.log(`C.state.message`, C.state.message)
 			if (
-				C.state.creatorMessage === 'Press Space to Start' ||
-				C.state.creatorMessage === 'Or wait for more players' ||
-				C.state.creatorMessage === 'Waiting for creator to start game' ||
-				C.state.creatorMessage === ''
+				C.state.message === 'Press Space to Start' ||
+				C.state.message === 'Or wait for more players' ||
+				C.state.message === 'Waiting for creator to start game' ||
+				C.state.message === ''
 			) {
 				// console.log(`setting game started`)
-				C.setState({ creatorMessage: 'Game starting in 5...' })
-			} else if (C.state.creatorMessage === 'Game starting in 5...')
-				C.setState({ creatorMessage: '4' })
-			else if (C.state.creatorMessage === '4')
-				C.setState({ creatorMessage: '3' })
-			else if (C.state.creatorMessage === '3')
-				C.setState({ creatorMessage: '2' })
-			else if (C.state.creatorMessage === '2')
-				C.setState({ creatorMessage: '1' })
-			else if (C.state.creatorMessage === '1') {
+				C.setState({ message: 'Game starting in 5...' })
+			} else if (C.state.message === 'Game starting in 5...')
+				C.setState({ message: '4' })
+			else if (C.state.message === '4') C.setState({ message: '3' })
+			else if (C.state.message === '3') C.setState({ message: '2' })
+			else if (C.state.message === '2') C.setState({ message: '1' })
+			else if (C.state.message === '1') {
 				C.setState({ gameStarted: true })
-				C.setState({ creatorMessage: 'GO!' })
+				C.setState({ message: 'GO!' })
 				clearInterval(C.state.interval)
 			}
 		}
@@ -127,12 +120,6 @@ function GameComponent(props) {
 				C.props.gameStart(C.props.roomName, C.props.userId)
 			}
 		}
-	}
-
-	C.componentCleanup = function() {
-		C.props.gameRoomUnset(C.state.room)
-		C.props.roomRemoveUser(C.props.username, C.state.room)
-		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
 	}
 
 	C.verifyConnection = function() {
@@ -222,7 +209,7 @@ function GameComponent(props) {
 	}
 
 	C.gameOver = function() {
-		C.setState({ creatorMessage: 'Game Over!' })
+		C.setState({ message: 'Game Over!' })
 	}
 
 	C.render = () => {
@@ -287,12 +274,12 @@ function GameComponent(props) {
 						>
 							<div>
 								{C.props.userId === C.props.roomId ? (
-									<h1>{C.state.creatorMessage}</h1>
+									<h1>{C.state.message}</h1>
 								) : (
 									<h1> </h1>
 								)}
 								{C.props.userId !== C.props.roomId ? (
-									<h1>{C.state.creatorMessage}</h1>
+									<h1>{C.state.message}</h1>
 								) : (
 									<h1> </h1>
 								)}
