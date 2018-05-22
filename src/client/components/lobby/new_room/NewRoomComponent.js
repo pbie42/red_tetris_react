@@ -1,58 +1,36 @@
 import React, { Component } from 'react'
+import { verifyRoomName } from '../../../utils'
 
 export function NewRoomComponent(props) {
 	const C = new Component(props)
 
 	C.state = {
-		error: false
+		error: false,
+		roomName: ''
 	}
 
 	C.enterRoomName = function(e) {
-		let value = C.refs.input.value
 		if (e.key === 'Enter') {
 			e.preventDefault()
-			if (value && C.verifyRoomName(value)) {
-				props.roomAdd(value, [C.props.username])
-				function delayRouteChange() {
-					C.props.history.push(
-						`/${value.replace(/ /g, '_')}[${C.props.username}]`
-					)
-				}
-				C.props.pageChange()
-				setTimeout(delayRouteChange, 800)
-			} else C.setSubmitError()
-			C.refs.input.value = ''
+			C.submitRoomName()
 		}
 	}
 
 	C.submitRoomName = function() {
-		let value = C.refs.input.value
-		if (value && C.verifyRoomName(value)) {
-			props.roomAdd(value, [C.props.username])
-			// props.history.push('/lobby')
-			// C.props.hideNewRoom()
-			function delayRouteChange() {
-				C.props.history.push(
-					`/${value.replace(/ /g, '_')}[${C.props.username}]`
-				)
-			}
+		let roomName = C.refs.input.value
+		if (roomName && verifyRoomName(roomName, C.props.rooms)) {
+			C.setState({ roomName })
+			C.props.roomAdd(roomName, [C.props.username])
 			C.props.pageChange()
-			setTimeout(delayRouteChange, 800)
-			// props.pageChange()
-			// setTimeout(test, 600)
-			// C.props.hideNewRoom()
-		} else C.setSubmitError()
+			setTimeout(C.changeRoute, 800)
+		} else C.setState({ error: true })
 		C.refs.input.value = ''
 	}
 
-	C.verifyRoomName = function(value) {
-		const index = C.props.rooms.findIndex(room => value === room.roomName)
-		if (index >= 0) return false
-		return true
-	}
-
-	C.setSubmitError = function() {
-		C.setState({ error: true })
+	C.changeRoute = function() {
+		C.props.history.push(
+			`/${C.state.roomName.replace(/ /g, '_')}[${C.props.username}]`
+		)
 	}
 
 	C.render = () => {

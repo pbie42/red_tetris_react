@@ -229,7 +229,9 @@ function GameComponent(props) {
 		return (
 			<div
 				className={
-					!C.state.change ? 'container-game' : 'container-game container-fade'
+					!C.state.change
+						? 'container-game'
+						: 'container-game container-fade'
 				}
 				onKeyDown={e => C.handleSpaceBar(e)}
 			>
