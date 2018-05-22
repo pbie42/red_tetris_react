@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import {
+	verifyConnection,
 	verifyCreatorMessage,
+	verifyGameStart,
 	verifyMemberCount,
 	verifyMembers,
+	verifyPlayerHandled,
 	verifyPlayerMessage,
 	verifyRoomName,
 	verifyUsername,
@@ -12,6 +15,9 @@ import {
 
 import { BoardContainer } from '../../containers/game/BoardContainer'
 import { ViewerBoardContainer } from '../../containers/game/ViewerBoardContainer'
+import LeftBoardsComponent from './LeftBoardsComponent'
+import RightBoardsComponent from './RightBoardsComponent'
+import GameMessageComponent from './GameMessageComponent'
 
 function GameComponent(props) {
 	const C = new Component(props)
@@ -26,18 +32,34 @@ function GameComponent(props) {
 		message: '',
 		exitText: '',
 		change: false,
-		gameStarted: false
-	}
-
-	C.componentWillUnmount = function() {
-		C.componentCleanup()
-		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
+		gameStarted: false,
+		msgStart: 'Press Space to Start',
+		msgWaitPlayers: 'Or wait for more players',
+		msgWaitCreator: 'Waiting for creator to start game',
+		msgGameStarting: 'Game starting in 5...'
 	}
 
 	C.componentDidMount = function() {
 		C.state.interval = setInterval(C.flashMessage, 1000)
 		window.addEventListener('beforeunload', C.componentCleanup)
 		window.addEventListener('keydown', e => C.handleSpaceBar(e))
+	}
+
+	C.componentDidUpdate = function() {
+		const url = C.props.match.params.game
+		if (!verifyUrl(url)) C.props.history.push('/')
+		const { room, player } = parseUrl(url)
+		if (verifyConnection(props, doneUser)) doneUser = C.handlePlayer(player)
+		if (verifyPlayerHandled(props, doneUser, doneRoom)) {
+			doneRoom = C.handleRoom(room, player)
+			C.props.gameRoomSet(room)
+			C.props.gameJoined(room)
+		}
+	}
+
+	C.componentWillUnmount = function() {
+		C.componentCleanup()
+		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
 	}
 
 	C.componentCleanup = function() {
@@ -47,50 +69,58 @@ function GameComponent(props) {
 		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
 	}
 
-	C.componentDidUpdate = function() {
-		const url = C.props.match.params.game
-		if (!verifyUrl(url)) C.props.history.push('/')
-		const { room, player } = parseUrl(url)
-		if (C.verifyConnection()) doneUser = C.handlePlayer(player)
-		if (C.verifyPlayerHandled()) {
-			doneRoom = C.handleRoom(room, player)
-			C.props.gameRoomSet(room)
-			C.props.gameJoined(room)
-		}
+	C.flashMessage = function() {
+		C.handleCreatorMessage()
+		C.handlePlayerMessage()
+		if (C.props.countDown) C.handleCountdownMessage()
 	}
 
-	C.flashMessage = function() {
-		const { message } = C.state
-		const msgStart = 'Press Space to Start'
-		const msgWaitPlayers = 'Or wait for more players'
-		const msgWaitCreator = 'Waiting for creator to start game'
-		const msgGameStarting = 'Game starting in 5...'
+	C.handleCreatorMessage = function() {
+		const { message, msgStart, msgWaitPlayers } = C.state
 		if (verifyCreatorMessage(C.props, message, msgStart))
 			C.setState({ message: msgWaitPlayers })
 		else if (verifyCreatorMessage(C.props, message, msgWaitPlayers))
 			C.setState({ message: msgStart })
+	}
+
+	C.handlePlayerMessage = function() {
+		const { message, msgStart, msgWaitCreator } = C.state
 		if (verifyPlayerMessage(C.props, message, msgStart))
 			C.setState({ message: msgWaitCreator })
 		else if (verifyPlayerMessage(C.props, message, msgWaitCreator))
 			C.setState({ message: '' })
-		if (C.props.countDown) {
-			if (
-				message === msgStart ||
-				message === msgWaitPlayers ||
-				message === msgWaitCreator ||
-				message === ''
-			) {
-				C.setState({ message: msgGameStarting })
-			} else if (C.state.message === msgGameStarting)
-				C.setState({ message: '4' })
-			else if (message === '4') C.setState({ message: '3' })
-			else if (message === '3') C.setState({ message: '2' })
-			else if (message === '2') C.setState({ message: '1' })
-			else if (message === '1') {
-				C.setState({ gameStarted: true, message: 'GO!' })
-				clearInterval(C.state.interval)
-			}
+	}
+
+	C.handleCountdownMessage = function() {
+		const { message, msgGameStarting } = C.state
+		if (verifyGameStart(C.state)) C.setState({ message: msgGameStarting })
+		else if (message === msgGameStarting) C.setState({ message: '4' })
+		else if (message === '4') C.setState({ message: '3' })
+		else if (message === '3') C.setState({ message: '2' })
+		else if (message === '2') C.setState({ message: '1' })
+		else if (message === '1') {
+			C.setState({ gameStarted: true, message: 'GO!' })
+			clearInterval(C.state.interval)
 		}
+	}
+
+	C.handlePlayer = function(player) {
+		if (!C.props.username)
+			if (verifyUsername(player, C.props.users)) C.updateUser(player)
+			else C.errorUsername()
+		return true
+	}
+
+	C.handleRoom = function(room, player) {
+		if (verifyRoomName(room, C.props.rooms)) C.updateRoom(room, player)
+		else {
+			C.setState({ room })
+			if (verifyMemberCount(C.props.rooms, room)) {
+				if (verifyMembers(player, room, C.props.rooms))
+					C.props.roomAddUser(C.props.username, room)
+			} else C.errorTooManyMembers()
+		}
+		return true
 	}
 
 	C.handleSpaceBar = function(event) {
@@ -99,54 +129,6 @@ function GameComponent(props) {
 				C.props.gameStart(C.props.roomName, C.props.userId)
 			}
 		}
-	}
-
-	C.verifyConnection = function() {
-		if (
-			C.props.connection &&
-			C.props.usersReceived &&
-			C.props.roomsReceived &&
-			!C.propsusernameIsSet &&
-			!doneUser
-		)
-			return true
-		return false
-	}
-
-	C.verifyPlayerHandled = function() {
-		if (
-			C.props.connection &&
-			C.props.usersReceived &&
-			C.props.roomsReceived &&
-			C.props.usernameIsSet &&
-			doneUser &&
-			!doneRoom
-		)
-			return true
-		return false
-	}
-
-	C.handlePlayer = function(player) {
-		// console.log(`HANDLE PLAYERRRRRRR`)
-		if (!C.props.username) {
-			if (verifyUsername(player, C.props.users)) C.updateUser(player)
-			else C.errorUsername()
-		}
-		return true
-	}
-
-	C.handleRoom = function(room, player) {
-		// console.log(`HANDLE ROOOOOMMMMMMMM`)
-		if (verifyRoomName(room, C.props.rooms)) C.updateRoom(room, player)
-		else {
-			C.setState({ room })
-			if (verifyMemberCount(C.props.rooms, room)) {
-				if (verifyMembers(player, room, C.props.rooms))
-					C.props.roomAddUser(C.props.username, room)
-				// else console.log(`already room member member`)
-			} else C.errorTooManyMembers()
-		}
-		return true
 	}
 
 	C.updateUser = function(player) {
@@ -178,13 +160,12 @@ function GameComponent(props) {
 	}
 
 	C.quitToLobby = function() {
-		// console.log(`quitting to lobby`)
 		C.setState({ change: true })
-		function delayRouteChange() {
-			C.props.history.push(`/lobby`)
-		}
-		// C.props.pageChange()
-		setTimeout(delayRouteChange, 800)
+		setTimeout(C.changeRoute, 800)
+	}
+
+	C.changeRoute = function() {
+		C.props.history.push(`/lobby`)
 	}
 
 	C.gameOver = function() {
@@ -199,7 +180,6 @@ function GameComponent(props) {
 						? 'container-game'
 						: 'container-game container-fade'
 				}
-				onKeyDown={e => C.handleSpaceBar(e)}
 			>
 				<div>
 					<div
@@ -216,34 +196,8 @@ function GameComponent(props) {
 				{!C.props.connection ? (
 					<i className="fas fa-spinner fa-pulse" />
 				) : (
-					// <h1>{C.props.connection ? 'CONNECTED' : 'NOT CONNECTED'}</h1>
 					<div className="container-boards">
-						<div
-							className={
-								C.props.boards[0] || C.props.boards[2]
-									? 'players-others moveInDivRight showBackground'
-									: 'players-others moveInDivRight'
-							}
-						>
-							{C.props.boards[0] ? (
-								<ViewerBoardContainer
-									board={C.props.boards[0].board}
-									username={C.props.boards[0].username}
-									id="others-grid"
-								/>
-							) : (
-								''
-							)}
-							{C.props.boards[2] ? (
-								<ViewerBoardContainer
-									id="others-grid"
-									board={C.props.boards[2].board}
-									username={C.props.boards[2].username}
-								/>
-							) : (
-								''
-							)}
-						</div>
+						<LeftBoardsComponent boards={C.props.boards} />
 						<div
 							className={
 								!C.state.change
@@ -251,18 +205,11 @@ function GameComponent(props) {
 									: 'player-main moveOutDivDown'
 							}
 						>
-							<div>
-								{C.props.userId === C.props.roomId ? (
-									<h1>{C.state.message}</h1>
-								) : (
-									<h1> </h1>
-								)}
-								{C.props.userId !== C.props.roomId ? (
-									<h1>{C.state.message}</h1>
-								) : (
-									<h1> </h1>
-								)}
-							</div>
+							<GameMessageComponent
+								userId={C.props.userId}
+								roomId={C.props.roomId}
+								message={C.state.message}
+							/>
 							<BoardContainer
 								id="player-grid"
 								doneRoom={doneRoom}
@@ -271,32 +218,7 @@ function GameComponent(props) {
 								gameStarted={C.state.gameStarted}
 							/>
 						</div>
-						<div
-							className={
-								C.props.boards[1] || C.props.boards[3]
-									? 'players-others moveInDivLeft showBackground'
-									: 'players-others moveInDivLeft'
-							}
-						>
-							{C.props.boards[1] ? (
-								<ViewerBoardContainer
-									id="others-grid"
-									board={C.props.boards[1].board}
-									username={C.props.boards[1].username}
-								/>
-							) : (
-								''
-							)}
-							{C.props.boards[3] ? (
-								<ViewerBoardContainer
-									id="others-grid"
-									board={C.props.boards[3].board}
-									username={C.props.boards[3].username}
-								/>
-							) : (
-								''
-							)}
-						</div>
+						<RightBoardsComponent boards={C.props.boards} />
 					</div>
 				)}
 			</div>

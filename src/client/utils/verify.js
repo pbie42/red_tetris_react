@@ -47,10 +47,50 @@ function verifyPlayerMessage(props, msg, str) {
 	return false
 }
 
+function verifyConnection(props, doneUser) {
+	const { connection, usersReceived, roomsReceived } = props
+	// !C.propsusernameIsSet &&
+	if (connection && usersReceived && roomsReceived && !doneUser) return true
+	return false
+}
+
+function verifyPlayerHandled(props, doneUser, doneRoom) {
+	const { connection, usersReceived, roomsReceived, usernameIsSet } = props
+	if (
+		connection &&
+		usersReceived &&
+		roomsReceived &&
+		usernameIsSet &&
+		doneUser &&
+		!doneRoom
+	)
+		return true
+	return false
+}
+
+function verifyGameStart({
+	message,
+	msgStart,
+	msgWaitPlayers,
+	msgWaitCreator
+}) {
+	if (
+		message === msgStart ||
+		message === msgWaitPlayers ||
+		message === msgWaitCreator ||
+		message === ''
+	)
+		return true
+	return false
+}
+
 module.exports = {
+	verifyConnection,
 	verifyCreatorMessage,
+	verifyGameStart,
 	verifyMemberCount,
 	verifyMembers,
+	verifyPlayerHandled,
 	verifyPlayerMessage,
 	verifyRoomName,
 	verifyUrl,
