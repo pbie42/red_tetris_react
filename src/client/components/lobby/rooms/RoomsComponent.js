@@ -11,7 +11,8 @@ export function RoomsComponent(props) {
 		hideOthers: false,
 		index: 0,
 		display: '',
-		change: false
+		change: false,
+		selectedRoom: ''
 	}
 
 	C.componentDidMount = function() {
@@ -23,22 +24,17 @@ export function RoomsComponent(props) {
 	}
 
 	C.selectRoom = function(roomName) {
-		C.setState({ change: true })
+		C.setState({ change: true, selectedRoom: roomName })
 		C.props.roomAddUser(C.props.username, roomName)
-		function delayRouteChange() {
-			C.props.history.push(
-				`/${roomName.replace(/ /g, '_')}[${C.props.username}]`
-			)
-		}
 		C.props.pageChange()
-		setTimeout(delayRouteChange, 800)
+		setTimeout(C.changeRoute, 800)
 	}
 
-	// C.scrollToLeft = function() {
-	// 	const { scrollWidth, clientWidth } = div
-	// 	const maxScrollTop = scrollWidth - clientWidth
-	// 	div.scrollLeft = maxScrollTop > 0 ? maxScrollTop : 0
-	// }
+	C.changeRoute = function() {
+		C.props.history.push(
+			`/${C.state.selectedRoom.replace(/ /g, '_')}[${C.props.username}]`
+		)
+	}
 
 	C.goRight = function() {
 		scroll += 270
@@ -98,7 +94,11 @@ export function RoomsComponent(props) {
 												<h1>{room.roomName}</h1>
 												<div>
 													{room.members.map((person, index) => {
-														return <h2 key={index}>{person.username}</h2>
+														return (
+															<h2 key={index}>
+																{person.username}
+															</h2>
+														)
 													})}
 												</div>
 												<div>
@@ -117,7 +117,9 @@ export function RoomsComponent(props) {
 									: C.props.rooms.map((room, index) => (
 											<div
 												key={index}
-												className={index !== C.state.index ? 'hide-it' : ''}
+												className={
+													index !== C.state.index ? 'hide-it' : ''
+												}
 												onMouseLeave={() => C.showOthers()}
 												onClick={() => C.selectRoom(room.roomName)}
 											>
@@ -148,7 +150,10 @@ export function RoomsComponent(props) {
 							<h1>{C.props.hideInput ? '+' : '-'}</h1>
 						</div>
 						<div>
-							<i className="fas fa-caret-right" onClick={() => C.goRight()} />
+							<i
+								className="fas fa-caret-right"
+								onClick={() => C.goRight()}
+							/>
 						</div>
 					</div>
 				</div>
