@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import {
+	verifyCreatorMessage,
 	verifyMemberCount,
 	verifyMembers,
+	verifyPlayerMessage,
 	verifyRoomName,
 	verifyUsername,
 	verifyUrl,
 	parseUrl
 } from '../../utils/'
 
-// import BoardComponent from './BoardComponent'
 import { BoardContainer } from '../../containers/game/BoardContainer'
 import { ViewerBoardContainer } from '../../containers/game/ViewerBoardContainer'
 
@@ -49,7 +50,6 @@ function GameComponent(props) {
 	}
 
 	C.componentDidUpdate = function() {
-		// console.log(`C.props.members`, C.props.members)
 		const url = C.props.match.params.game
 		if (!verifyUrl(url)) C.props.history.push('/')
 		const { room, player } = parseUrl(url)
@@ -62,62 +62,41 @@ function GameComponent(props) {
 	}
 
 	C.flashMessage = function() {
-		if (
-			!C.props.countDown &&
-			C.props.userId === C.props.roomId &&
-			(C.state.message === 'Press Space to Start' || C.state.message === '')
-		) {
-			C.setState({ message: 'Or wait for more players' })
-		} else if (
-			!C.props.countDown &&
-			C.props.userId === C.props.roomId &&
-			C.state.message === 'Or wait for more players'
-		) {
-			C.setState({ message: 'Press Space to Start' })
-		}
-		if (
-			!C.props.countDown &&
-			C.props.userId !== C.props.roomId &&
-			(C.state.message === 'Press Space to Start' || C.state.message === '')
-		) {
-			C.setState({ message: 'Waiting for creator to start game' })
-		} else if (
-			!C.props.countDown &&
-			C.props.userId !== C.props.roomId &&
-			C.state.message === 'Waiting for creator to start game'
-		) {
+		const { message } = C.state
+		const msgStart = 'Press Space to Start'
+		const msgWaitPlayers = 'Or wait for more players'
+		const msgWaitCreator = 'Waiting for creator to start game'
+		if (verifyCreatorMessage(C.props, message, msgStart))
+			C.setState({ message: msgWaitPlayers })
+		else if (verifyCreatorMessage(C.props, message, msgWaitPlayers))
+			C.setState({ message: msgStart })
+		if (verifyPlayerMessage(C.props, message, msgStart))
+			C.setState({ message: msgWaitCreator })
+		else if (verifyPlayerMessage(C.props, message, msgWaitCreator))
 			C.setState({ message: '' })
-		}
 		if (C.props.countDown) {
-			// console.log(`countdown started`)
-			// console.log(`C.state.message`, C.state.message)
 			if (
-				C.state.message === 'Press Space to Start' ||
-				C.state.message === 'Or wait for more players' ||
-				C.state.message === 'Waiting for creator to start game' ||
-				C.state.message === ''
+				message === msgStart ||
+				message === msgWaitPlayers ||
+				message === msgWaitCreator ||
+				message === ''
 			) {
-				// console.log(`setting game started`)
 				C.setState({ message: 'Game starting in 5...' })
 			} else if (C.state.message === 'Game starting in 5...')
 				C.setState({ message: '4' })
-			else if (C.state.message === '4') C.setState({ message: '3' })
-			else if (C.state.message === '3') C.setState({ message: '2' })
-			else if (C.state.message === '2') C.setState({ message: '1' })
-			else if (C.state.message === '1') {
-				C.setState({ gameStarted: true })
-				C.setState({ message: 'GO!' })
+			else if (message === '4') C.setState({ message: '3' })
+			else if (message === '3') C.setState({ message: '2' })
+			else if (message === '2') C.setState({ message: '1' })
+			else if (message === '1') {
+				C.setState({ gameStarted: true, message: 'GO!' })
 				clearInterval(C.state.interval)
 			}
 		}
 	}
 
 	C.handleSpaceBar = function(event) {
-		// console.log(`KeyDown`)
 		if (doneUser && doneRoom && event.keyCode === 32) {
-			// console.log(`SPACE bar pressed`)
 			if (C.props.userId && C.props.roomName) {
-				// C.setState({ countDown: true })
 				C.props.gameStart(C.props.roomName, C.props.userId)
 			}
 		}

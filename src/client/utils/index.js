@@ -1,6 +1,8 @@
 const {
+	verifyCreatorMessage,
 	verifyMemberCount,
 	verifyMembers,
+	verifyPlayerMessage,
 	verifyRoomName,
 	verifyUrl,
 	verifyUsername
@@ -72,8 +74,10 @@ module.exports = {
 	prependZero,
 	randomPiece,
 	roomRemoveUser,
+	verifyCreatorMessage,
 	verifyMemberCount,
 	verifyMembers,
+	verifyPlayerMessage,
 	verifyRoomName,
 	verifyUrl,
 	verifyUsername

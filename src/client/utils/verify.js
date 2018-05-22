@@ -33,10 +33,26 @@ function verifyUsername(username, users) {
 	return true
 }
 
+function verifyCreatorMessage(props, msg, str) {
+	const { countDown, userId, roomId } = props
+	if (!countDown && userId === roomId && (msg === str || msg === ''))
+		return true
+	return false
+}
+
+function verifyPlayerMessage(props, msg, str) {
+	const { countDown, userId, roomId } = props
+	if (!countDown && userId !== roomId && (msg === str || msg === ''))
+		return true
+	return false
+}
+
 module.exports = {
+	verifyCreatorMessage,
 	verifyMemberCount,
 	verifyMembers,
-	verifyUrl,
+	verifyPlayerMessage,
 	verifyRoomName,
+	verifyUrl,
 	verifyUsername
 }
