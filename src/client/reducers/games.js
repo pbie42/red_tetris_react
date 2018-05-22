@@ -48,23 +48,11 @@ const games = (state = initialGameState, action) => {
 		case types.GAME_PIECE_UPDATE:
 			return { ...state, piece: action.piece }
 
-		case types.GAME_REMOVE_BOARDS:
-			return { ...state, boards: [] }
-
 		case types.GAME_REMOVE_COUNTDOWN:
 			return { ...state, countDown: false }
 
-		case types.GAME_REMOVE_ID:
-			return { ...state, id: '' }
-
-		case types.GAME_REMOVE_MEMBERS:
-			return { ...state, members: [] }
-
 		case types.GAME_ROOM_SET:
 			return { ...state, roomName: action.roomName }
-
-		case types.GAME_ROOM_UNSET:
-			return { ...state, roomName: '' }
 
 		case types.GAME_START:
 			return state

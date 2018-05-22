@@ -50,25 +50,9 @@ export const gamePiecesUpdate = pieces => ({
 	pieces
 })
 
-export const gameRemoveBoards = () => ({
-	type: types.GAME_REMOVE_BOARDS
-})
-
-export const gameRemoveId = () => ({
-	type: types.GAME_REMOVE_ID
-})
-
-export const gameRemoveMembers = () => ({
-	type: types.GAME_REMOVE_MEMBERS
-})
-
 export const gameRoomSet = roomName => ({
 	type: types.GAME_ROOM_SET,
 	roomName
-})
-
-export const gameRoomUnset = () => ({
-	type: types.GAME_ROOM_UNSET
 })
 
 export const gameSetId = id => ({

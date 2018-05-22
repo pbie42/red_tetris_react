@@ -5,11 +5,7 @@ import {
 	errorUsernameTaken,
 	gameClear,
 	gameJoined,
-	gameRemoveBoards,
-	gameRemoveId,
-	gameRemoveMembers,
 	gameRoomSet,
-	gameRoomUnset,
 	gameStart,
 	roomAdd,
 	roomAddUser,
@@ -49,20 +45,8 @@ export const mapDispatchToProps = dispatch => ({
 	gameRoomSet: roomName => {
 		dispatch(gameRoomSet(roomName))
 	},
-	gameRoomUnset: () => {
-		dispatch(gameRoomUnset())
-	},
 	gameJoined: roomName => {
 		dispatch(gameJoined(roomName))
-	},
-	gameRemoveBoards: () => {
-		dispatch(gameRemoveBoards())
-	},
-	gameRemoveId: () => {
-		dispatch(gameRemoveId())
-	},
-	gameRemoveMembers: () => {
-		dispatch(gameRemoveMembers())
 	}
 })
 
