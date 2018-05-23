@@ -4,6 +4,8 @@ import {
 	calcPieceBottom,
 	calcPieceEnd,
 	calcPieceStart,
+	movePieceLeft,
+	movePieceRight,
 	newBoard,
 	positionsI,
 	positionsJ,
@@ -213,40 +215,6 @@ function BoardComponent(props) {
 		if (!gameOver) C.placePiece()
 	}
 
-	C.movePieceRight = function() {
-		let { shape, location, piece } = C.state.piece
-		let offset = calcPieceEnd(shape, piece)
-		if (location.x + 6 - offset <= 10 && !C.state.piece.set) {
-			if (
-				verifyPlacement(
-					{ x: location.x + 1, y: location.y },
-					shape,
-					C.state.savedBoard,
-					C.state.piece
-				)
-			)
-				location = { ...location, x: (location.x += 1) }
-		}
-		C.placePiece()
-	}
-
-	C.movePieceLeft = function() {
-		let { shape, location, piece } = C.state.piece
-		let offset = calcPieceStart(shape, piece)
-		if (location.x - 1 + offset >= 0 && !C.state.piece.set) {
-			if (
-				verifyPlacement(
-					{ x: location.x - 1, y: location.y },
-					shape,
-					C.state.savedBoard,
-					C.state.piece
-				)
-			)
-				location = { ...location, x: (location.x -= 1) }
-		}
-		C.placePiece()
-	}
-
 	C.verifyRotation = function(location, newPosition, offset) {
 		return (
 			verifyPlacement(
@@ -337,11 +305,22 @@ function BoardComponent(props) {
 	}
 
 	C.handleKeydown = function(event) {
+		let { piece, savedBoard } = C.state
 		if (!gameOver && C.props.gameStarted) {
-			if (event.keyCode === 37) C.movePieceLeft()
-			if (event.keyCode === 38) C.rotatePieces()
-			if (event.keyCode === 39) C.movePieceRight()
-			if (event.keyCode === 40) C.movePieceDown()
+			if (event.keyCode === 37) {
+				C.state.piece.location = movePieceLeft(piece, savedBoard)
+				C.placePiece()
+			}
+			if (event.keyCode === 38) {
+				C.rotatePieces()
+			}
+			if (event.keyCode === 39) {
+				C.state.piece.location = movePieceRight(piece, savedBoard)
+				C.placePiece()
+			}
+			if (event.keyCode === 40) {
+				C.movePieceDown()
+			}
 		}
 	}
 

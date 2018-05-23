@@ -15,6 +15,7 @@ const { parseUrl } = require('./parse_url')
 const { prependZero } = require('./prepend_zero')
 const { pieceOrder } = require('./piece')
 const { roomAddUser, roomRemoveUser } = require('./rooms')
+const { movePieceLeft, movePieceRight } = require('./movement')
 const {
 	calcOffsets,
 	calcPieceBottom,
@@ -70,6 +71,8 @@ module.exports = {
 	initializeS,
 	initializeT,
 	initializeZ,
+	movePieceLeft,
+	movePieceRight,
 	newBoard,
 	parseUrl,
 	pieceOrder,
