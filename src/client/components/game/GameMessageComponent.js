@@ -14,11 +14,17 @@ function GameMessageComponent(props) {
 		msgWaitPlayers: 'Or wait for more players',
 		msgWaitCreator: 'Waiting for creator to start game',
 		msgGameStarting: 'Game starting in 5...',
-		interval: ''
+		interval: '',
+		gameOver: false
 	}
 
 	C.componentDidMount = function() {
 		C.state.interval = setInterval(C.flashMessage, 1000)
+	}
+
+	C.componentDidUpdate = function() {
+		if (C.props.gameOver && !C.state.gameOver)
+			C.setState({ message: 'Game Over!', gameOver: true })
 	}
 
 	C.componentWillUnmount = function() {

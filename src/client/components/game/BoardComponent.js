@@ -79,18 +79,12 @@ function BoardComponent(props) {
 
 	C.nextPiece = function() {
 		let piece = C.state.piece
-		// console.log(`C.state.current`, C.state.current)
+		let position = {}
 		if (C.state.current === 90)
 			C.props.gameNewPieces(C.props.roomId, C.props.roomName)
 		let nextPiece = C.props.piece
-		if (!nextPiece) {
-			// console.log(`nextPiece does not exist`)
-			nextPiece = piece.pieces[C.state.current]
-		}
-		let position = {}
 		C.state.piece.prevPiece = C.state.piece.piece
 		C.state.piece.piece = nextPiece
-		// C.state.C.state.current += 1
 		C.setState({ current: ++C.state.current })
 		C.state.piece.location = { x: 3, y: 0 }
 		if (piece.piece === 'i') position = getI(piece)
@@ -125,8 +119,6 @@ function BoardComponent(props) {
 			if (boardY + 4 > 26) C.state.board = prevBoard
 			else {
 				let y = 0
-				// if (!shape) console.log(`NO SHAPE!!!!`)
-				// if (!board) console.log(`NO BOARD!!!!`)
 				while (shape[y] && board[y]) {
 					let boardX = location.x
 					let x = 0

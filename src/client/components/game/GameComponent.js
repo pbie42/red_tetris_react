@@ -28,6 +28,7 @@ function GameComponent(props) {
 		exitText: '',
 		change: false,
 		gameStarted: false,
+		gameOver: false,
 		mounted: false
 	}
 
@@ -128,7 +129,7 @@ function GameComponent(props) {
 	}
 
 	C.gameOver = function() {
-		C.setState({ message: 'Game Over!' })
+		if (!C.state.gameOver) C.setState({ gameOver: true })
 	}
 
 	C.render = () => {
@@ -170,6 +171,7 @@ function GameComponent(props) {
 								message={C.state.message}
 								countDown={C.props.countDown}
 								gameStart={C.gameStart}
+								gameOver={C.state.gameOver}
 							/>
 							<BoardContainer
 								id="player-grid"
