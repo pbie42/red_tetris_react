@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import {
 	verifyConnection,
-	verifyCreatorMessage,
-	verifyGameStart,
 	verifyMemberCount,
 	verifyMembers,
 	verifyPlayerHandled,
-	verifyPlayerMessage,
 	verifyRoomName,
 	verifyUsername,
 	verifyUrl,

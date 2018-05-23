@@ -23,8 +23,8 @@ import {
 
 function BoardComponent(props) {
 	const C = new Component(props)
-	let grid
 	let gameOver = false
+	let grid
 
 	C.state = {
 		board: newBoard(),
@@ -46,8 +46,6 @@ function BoardComponent(props) {
 	}
 
 	C.componentDidMount = function() {
-		// C.setState({ pieces: C.pieceOrder() })
-		// C.pieceOrder() //Need to get rid of this
 		C.buildBoard()
 		window.addEventListener('keydown', e => C.handleKeydown(e))
 	}

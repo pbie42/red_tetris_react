@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { ViewerBoardContainer } from '../../containers/game/ViewerBoardContainer'
 import {
 	verifyCreatorMessage,
 	verifyGameStart,
