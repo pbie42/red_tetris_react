@@ -57,7 +57,11 @@ function BoardComponent(props) {
 			setTimeout(() => {
 				C.state.interval = setInterval(C.movePieceDown, 750)
 				C.nextPiece()
-				C.props.gameNewPiece(C.props.roomId, C.props.roomName, C.props.username)
+				C.props.gameNewPiece(
+					C.props.roomId,
+					C.props.roomName,
+					C.props.username
+				)
 			}, 5000)
 			C.state.countDown = true
 		}
@@ -263,7 +267,11 @@ function BoardComponent(props) {
 			C.state.piece.set = false
 			C.state.savedBoard = C.state.board.slice(0)
 			C.checkGame()
-			C.props.gameNewPiece(C.props.roomId, C.props.roomName, C.props.username)
+			C.props.gameNewPiece(
+				C.props.roomId,
+				C.props.roomName,
+				C.props.username
+			)
 			C.nextPiece()
 		}
 		// if (C.state.savedBoard.length > 0) C.checkGame()
