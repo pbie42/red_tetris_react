@@ -211,11 +211,28 @@ function randomPiece() {
 	return pieces[Math.floor(Math.random() * pieces.length)]
 }
 
+function getPiecePositionShape(piece) {
+	if (piece.piece === 'i') return getI(piece)
+	if (piece.piece === 'j') return getJ(piece)
+	if (piece.piece === 'l') return getL(piece)
+	if (piece.piece === 'o') return getO(piece)
+	if (piece.piece === 's') return getS(piece)
+	if (piece.piece === 't') return getT(piece)
+	if (piece.piece === 'z') return getZ(piece)
+}
+
+function setPiecePositionShape(piece) {
+	let position = getPiecePositionShape(piece)
+	piece.position = position.position
+	piece.shape = position.shape
+}
+
 module.exports = {
 	getI,
 	getJ,
 	getL,
 	getO,
+	getPiecePositionShape,
 	getS,
 	getT,
 	getZ,
@@ -234,5 +251,6 @@ module.exports = {
 	positionsT,
 	positionsZ,
 	randomPiece,
-	selectPosition
+	selectPosition,
+	setPiecePositionShape
 }

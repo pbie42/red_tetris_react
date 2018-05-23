@@ -24,6 +24,12 @@ function calcPieceBottom(shape, piece) {
 	return 3 - bottom
 }
 
+function calcOffsets(piece, shape) {
+	const start = calcPieceStart(shape, piece)
+	const end = calcPieceEnd(shape, piece)
+	return { start, end }
+}
+
 function newBoard() {
 	return [
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -54,4 +60,10 @@ function newBoard() {
 	]
 }
 
-module.exports = { calcPieceEnd, calcPieceStart, calcPieceBottom, newBoard }
+module.exports = {
+	calcOffsets,
+	calcPieceEnd,
+	calcPieceStart,
+	calcPieceBottom,
+	newBoard
+}

@@ -84,12 +84,33 @@ function verifyGameStart({
 	return false
 }
 
+function verifyPlacement(location, shape, savedBoard, piece) {
+	if (savedBoard.length === 0) return true
+	let y = -1
+	let boardY = location.y
+	while (shape[++y] && savedBoard[y]) {
+		let x = -1
+		let boardX = location.x
+		while (++x < 4) {
+			if (
+				(shape[y][x] === piece.piece || shape[y][x] === piece.prevPiece) &&
+				savedBoard[boardY][boardX] !== 0
+			)
+				return false
+			boardX++
+		}
+		boardY++
+	}
+	return true
+}
+
 module.exports = {
 	verifyConnection,
 	verifyCreatorMessage,
 	verifyGameStart,
 	verifyMemberCount,
 	verifyMembers,
+	verifyPlacement,
 	verifyPlayerHandled,
 	verifyPlayerMessage,
 	verifyRoomName,

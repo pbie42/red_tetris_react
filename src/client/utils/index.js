@@ -4,6 +4,7 @@ const {
 	verifyGameStart,
 	verifyMemberCount,
 	verifyMembers,
+	verifyPlacement,
 	verifyPlayerHandled,
 	verifyPlayerMessage,
 	verifyRoomName,
@@ -15,6 +16,7 @@ const { prependZero } = require('./prepend_zero')
 const { pieceOrder } = require('./piece')
 const { roomAddUser, roomRemoveUser } = require('./rooms')
 const {
+	calcOffsets,
 	calcPieceBottom,
 	calcPieceEnd,
 	calcPieceStart,
@@ -25,6 +27,7 @@ const {
 	getJ,
 	getL,
 	getO,
+	getPiecePositionShape,
 	getS,
 	getT,
 	getZ,
@@ -42,11 +45,13 @@ const {
 	positionsS,
 	positionsT,
 	positionsZ,
-	randomPiece
+	randomPiece,
+	setPiecePositionShape
 } = require('./pieces')
 
 module.exports = {
 	roomAddUser,
+	calcOffsets,
 	calcPieceBottom,
 	calcPieceEnd,
 	calcPieceStart,
@@ -54,6 +59,7 @@ module.exports = {
 	getJ,
 	getL,
 	getO,
+	getPiecePositionShape,
 	getS,
 	getT,
 	getZ,
@@ -77,11 +83,13 @@ module.exports = {
 	prependZero,
 	randomPiece,
 	roomRemoveUser,
+	setPiecePositionShape,
 	verifyConnection,
 	verifyCreatorMessage,
 	verifyGameStart,
 	verifyMemberCount,
 	verifyMembers,
+	verifyPlacement,
 	verifyPlayerHandled,
 	verifyPlayerMessage,
 	verifyRoomName,
