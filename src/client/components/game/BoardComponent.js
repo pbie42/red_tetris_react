@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import {
 	calcOffsets,
 	calcPieceBottom,
-	calcPieceEnd,
-	calcPieceStart,
 	movePieceLeft,
 	movePieceRight,
 	newBoard,
@@ -15,7 +13,8 @@ import {
 	positionsT,
 	positionsZ,
 	setPiecePositionShape,
-	verifyPlacement
+	verifyPlacement,
+	verifyRotation
 } from '../../utils'
 
 function BoardComponent(props) {
@@ -215,14 +214,15 @@ function BoardComponent(props) {
 		if (!gameOver) C.placePiece()
 	}
 
-	C.verifyRotation = function(location, newPosition, offset) {
+	C.verifyRotation = function(
+		location,
+		newPosition,
+		offset,
+		savedBoard,
+		piece
+	) {
 		return (
-			verifyPlacement(
-				location,
-				newPosition.shape,
-				C.state.savedBoard,
-				C.state.piece
-			) &&
+			verifyPlacement(location, newPosition.shape, savedBoard, piece) &&
 			location.x + 6 - offset.end <= 11 &&
 			location.x - 1 + offset.start >= -1
 		)
@@ -252,26 +252,48 @@ function BoardComponent(props) {
 	C.rotatePiece = function(positions) {
 		let { piece, position, location } = C.state.piece
 		let index, newPosition, offset
+		let newLocation = {}
 		let success = false
 		const locations = C.setupLocations(location)
 		if ((index = position + 1) > 3) index = 0
 		newPosition = positions[index]
 		offset = calcOffsets(piece, newPosition.shape)
 
-		success = locations.locations.some(location => {
-			let success = false
-			if (C.verifyRotation(location, newPosition, offset))
-				success = C.doRotation(newPosition, index, location)
-			return success
+		success = locations.locations.some(loc => {
+			if (
+				C.verifyRotation(
+					loc,
+					newPosition,
+					offset,
+					C.state.savedBoard,
+					C.state.piece
+				)
+			) {
+				newLocation = loc
+				return true
+			}
+			return false
 		})
 
+		if (success) C.doRotation(newPosition, index, newLocation)
+
 		if (piece === 'i' && !success) {
-			locations.locationsI.some(location => {
-				let success = false
-				if (C.verifyRotation(location, newPosition, offset))
-					success = C.doRotation(newPosition, index, location)
-				return success
+			success = locations.locationsI.some(loc => {
+				if (
+					C.verifyRotation(
+						loc,
+						newPosition,
+						offset,
+						C.state.savedBoard,
+						C.state.piece
+					)
+				) {
+					newLocation = loc
+					return true
+				}
+				return false
 			})
+			if (success) C.doRotation(newPosition, index, newLocation)
 		}
 	}
 

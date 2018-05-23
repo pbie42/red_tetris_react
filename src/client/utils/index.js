@@ -8,6 +8,7 @@ const {
 	verifyPlayerHandled,
 	verifyPlayerMessage,
 	verifyRoomName,
+	verifyRotation,
 	verifyUrl,
 	verifyUsername
 } = require('./verify')
@@ -96,6 +97,7 @@ module.exports = {
 	verifyPlayerHandled,
 	verifyPlayerMessage,
 	verifyRoomName,
+	verifyRotation,
 	verifyUrl,
 	verifyUsername
 }

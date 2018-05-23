@@ -95,13 +95,24 @@ function verifyPlacement(location, shape, savedBoard, piece) {
 			if (
 				(shape[y][x] === piece.piece || shape[y][x] === piece.prevPiece) &&
 				savedBoard[boardY][boardX] !== 0
-			)
+			) {
+				// console.log(`placement false`)
 				return false
+			}
 			boardX++
 		}
 		boardY++
 	}
+	// console.log(`placement true`)
 	return true
+}
+
+function verifyRotation(location, newPosition, offset, savedBoard, piece) {
+	return (
+		verifyPlacement(location, newPosition.shape, savedBoard, piece) &&
+		location.x + 6 - offset.end <= 11 &&
+		location.x - 1 + offset.start >= -1
+	)
 }
 
 module.exports = {
@@ -114,6 +125,7 @@ module.exports = {
 	verifyPlayerHandled,
 	verifyPlayerMessage,
 	verifyRoomName,
+	verifyRotation,
 	verifyUrl,
 	verifyUsername
 }
