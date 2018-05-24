@@ -16,7 +16,15 @@ const { parseUrl } = require('./parse_url')
 const { prependZero } = require('./prepend_zero')
 const { pieceOrder } = require('./piece')
 const { roomAddUser, roomRemoveUser } = require('./rooms')
-const { movePieceLeft, movePieceRight } = require('./movement')
+const {
+	handleStatePiece,
+	movePieceLeft,
+	movePieceRight,
+	rotatePiece,
+	rotatePieces,
+	setupLocations,
+	tryRotations
+} = require('./movement')
 const {
 	calcOffsets,
 	calcPieceBottom,
@@ -52,7 +60,6 @@ const {
 } = require('./pieces')
 
 module.exports = {
-	roomAddUser,
 	calcOffsets,
 	calcPieceBottom,
 	calcPieceEnd,
@@ -65,6 +72,7 @@ module.exports = {
 	getS,
 	getT,
 	getZ,
+	handleStatePiece,
 	initializeI,
 	initializeJ,
 	initializeL,
@@ -86,8 +94,13 @@ module.exports = {
 	positionsZ,
 	prependZero,
 	randomPiece,
+	roomAddUser,
 	roomRemoveUser,
+	rotatePiece,
+	rotatePieces,
 	setPiecePositionShape,
+	setupLocations,
+	tryRotations,
 	verifyConnection,
 	verifyCreatorMessage,
 	verifyGameStart,

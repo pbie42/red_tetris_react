@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
 	calcOffsets,
 	calcPieceBottom,
+	handleStatePiece,
 	movePieceLeft,
 	movePieceRight,
 	newBoard,
@@ -12,9 +13,12 @@ import {
 	positionsS,
 	positionsT,
 	positionsZ,
+	rotatePiece,
+	rotatePieces,
 	setPiecePositionShape,
+	setupLocations,
 	verifyPlacement,
-	verifyRotation
+	tryRotations
 } from '../../utils'
 
 function BoardComponent(props) {
@@ -64,8 +68,7 @@ function BoardComponent(props) {
 
 	C.nextPiece = function() {
 		let { piece, current } = C.state
-		if (current === 90)
-			C.props.gameNewPieces(C.props.roomId, C.props.roomName)
+		if (current === 90) C.props.gameNewPieces(C.props.roomId, C.props.roomName)
 		piece.piece = C.props.piece
 		C.setState({ current: ++current })
 		piece.location = { x: 3, y: 0 }
@@ -204,140 +207,28 @@ function BoardComponent(props) {
 			C.state.piece.set = false
 			C.state.savedBoard = C.state.board.slice(0)
 			C.checkGame()
-			C.props.gameNewPiece(
-				C.props.roomId,
-				C.props.roomName,
-				C.props.username
-			)
+			C.props.gameNewPiece(C.props.roomId, C.props.roomName, C.props.username)
 			C.nextPiece()
 		}
 		if (!gameOver) C.placePiece()
 	}
 
-	C.verifyRotation = function(
-		location,
-		newPosition,
-		offset,
-		savedBoard,
-		piece
-	) {
-		return (
-			verifyPlacement(location, newPosition.shape, savedBoard, piece) &&
-			location.x + 6 - offset.end <= 11 &&
-			location.x - 1 + offset.start >= -1
-		)
-	}
-
-	C.doRotation = function(position, index, location) {
-		C.state.piece.location = location
-		C.state.piece.shape = position.shape
-		C.state.piece.position = index
-		C.placePiece()
-		return true
-	}
-
-	C.setupLocations = function(location) {
-		const locations = [
-			location,
-			{ x: location.x + 1, y: location.y },
-			{ x: location.x - 1, y: location.y }
-		]
-		const locationsI = [
-			{ x: location.x + 2, y: location.y },
-			{ x: location.x - 2, y: location.y }
-		]
-		return { locations, locationsI }
-	}
-
-	C.rotatePiece = function(positions) {
-		let { piece, position, location } = C.state.piece
-		let index, newPosition, offset
-		let newLocation = {}
-		let success = false
-		const locations = C.setupLocations(location)
-		if ((index = position + 1) > 3) index = 0
-		newPosition = positions[index]
-		offset = calcOffsets(piece, newPosition.shape)
-
-		success = locations.locations.some(loc => {
-			if (
-				C.verifyRotation(
-					loc,
-					newPosition,
-					offset,
-					C.state.savedBoard,
-					C.state.piece
-				)
-			) {
-				newLocation = loc
-				return true
-			}
-			return false
-		})
-
-		if (success) C.doRotation(newPosition, index, newLocation)
-
-		if (piece === 'i' && !success) {
-			success = locations.locationsI.some(loc => {
-				if (
-					C.verifyRotation(
-						loc,
-						newPosition,
-						offset,
-						C.state.savedBoard,
-						C.state.piece
-					)
-				) {
-					newLocation = loc
-					return true
-				}
-				return false
-			})
-			if (success) C.doRotation(newPosition, index, newLocation)
-		}
-	}
-
-	C.rotatePieces = function() {
-		switch (C.state.piece.piece) {
-			case 'i':
-				C.rotatePiece(positionsI)
-				break
-			case 'j':
-				C.rotatePiece(positionsJ)
-				break
-			case 'l':
-				C.rotatePiece(positionsL)
-				break
-			case 'o':
-				C.rotatePiece(positionsO)
-				break
-			case 's':
-				C.rotatePiece(positionsS)
-				break
-			case 't':
-				C.rotatePiece(positionsT)
-				break
-			case 'z':
-				C.rotatePiece(positionsZ)
-				break
-
-			default:
-				break
-		}
-	}
-
 	C.handleKeydown = function(event) {
 		let { piece, savedBoard } = C.state
+		let result
+		let success = false
 		if (!gameOver && C.props.gameStarted) {
 			if (event.keyCode === 37) {
-				C.state.piece.location = movePieceLeft(piece, savedBoard)
+				piece.location = movePieceLeft(piece, savedBoard)
 				C.placePiece()
 			}
 			if (event.keyCode === 38) {
-				C.rotatePieces()
+				result = rotatePieces(piece, savedBoard)
+				piece = result.statePiece
+				if (result.success) C.placePiece()
 			}
 			if (event.keyCode === 39) {
-				C.state.piece.location = movePieceRight(piece, savedBoard)
+				piece.location = movePieceRight(piece, savedBoard)
 				C.placePiece()
 			}
 			if (event.keyCode === 40) {
