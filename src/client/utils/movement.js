@@ -1,4 +1,10 @@
-const { calcPieceEnd, calcPieceStart, calcOffsets } = require('./game')
+const {
+	calcPieceEnd,
+	calcPieceStart,
+	calcPieceBottom,
+	calcOffsets,
+	checkGame
+} = require('./game')
 const { verifyPlacement, verifyRotation } = require('./verify')
 const {
 	positionsI,
@@ -42,6 +48,37 @@ function movePieceLeft(statePiece, savedBoard) {
 			return { ...location, x: (location.x -= 1) }
 	}
 	return location
+}
+
+function movePieceDown(statePiece, board, savedBoard) {
+	let gameOverCheck = false
+	let newPiece = false
+	let { shape, location, piece } = statePiece
+	let set = statePiece.set
+	let offset = calcPieceBottom(shape, piece)
+	let newLocation = location
+	if (newLocation.y - offset <= 19 && !set) {
+		if (
+			verifyPlacement(
+				{ x: newLocation.x, y: newLocation.y + 1 },
+				shape,
+				savedBoard,
+				statePiece
+			)
+		) {
+			newLocation = { ...newLocation, y: (newLocation.y += 1) }
+		} else {
+			set = true
+			savedBoard = board.slice(0)
+			gameOverCheck = checkGame(savedBoard)
+		}
+	} else {
+		set = false
+		savedBoard = board.slice(0)
+		gameOverCheck = checkGame(savedBoard)
+		newPiece = true
+	}
+	return { gameOverCheck, set, savedBoard, newPiece, newLocation }
 }
 
 function setupLocations(location) {
@@ -130,6 +167,7 @@ function handleStatePiece(statePiece, rotationResult) {
 
 module.exports = {
 	handleStatePiece,
+	movePieceDown,
 	movePieceLeft,
 	movePieceRight,
 	rotatePiece,

@@ -18,6 +18,7 @@ const { pieceOrder } = require('./piece')
 const { roomAddUser, roomRemoveUser } = require('./rooms')
 const {
 	handleStatePiece,
+	movePieceDown,
 	movePieceLeft,
 	movePieceRight,
 	rotatePiece,
@@ -30,6 +31,7 @@ const {
 	calcPieceBottom,
 	calcPieceEnd,
 	calcPieceStart,
+	checkGame,
 	newBoard
 } = require('./game')
 const {
@@ -64,6 +66,7 @@ module.exports = {
 	calcPieceBottom,
 	calcPieceEnd,
 	calcPieceStart,
+	checkGame,
 	getI,
 	getJ,
 	getL,
@@ -80,6 +83,7 @@ module.exports = {
 	initializeS,
 	initializeT,
 	initializeZ,
+	movePieceDown,
 	movePieceLeft,
 	movePieceRight,
 	newBoard,

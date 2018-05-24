@@ -30,6 +30,15 @@ function calcOffsets(piece, shape) {
 	return { start, end }
 }
 
+function checkGame(savedBoard) {
+	let y = -1
+	while (++y < 4) {
+		let x = -1
+		while (++x < 11) if (savedBoard[y][x] !== 0) return true
+	}
+	return false
+}
+
 function newBoard() {
 	return [
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -65,5 +74,6 @@ module.exports = {
 	calcPieceEnd,
 	calcPieceStart,
 	calcPieceBottom,
+	checkGame,
 	newBoard
 }
