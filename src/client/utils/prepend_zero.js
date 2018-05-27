@@ -3,6 +3,4 @@ function prependZero(num) {
 	return num
 }
 
-module.exports = {
-	prependZero
-}
+export { prependZero }

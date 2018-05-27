@@ -16,6 +16,4 @@ function parseUrl(url) {
 	return { room, player }
 }
 
-module.exports = {
-	parseUrl
-}
+export { parseUrl }

@@ -21,7 +21,4 @@ function roomRemoveUser(username, roomName, rooms) {
 	return rooms
 }
 
-module.exports = {
-	roomAddUser,
-	roomRemoveUser
-}
+export { roomAddUser, roomRemoveUser }

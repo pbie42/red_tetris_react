@@ -115,7 +115,7 @@ function verifyRotation(location, newPosition, offset, savedBoard, piece) {
 	)
 }
 
-module.exports = {
+export {
 	verifyConnection,
 	verifyCreatorMessage,
 	verifyGameStart,

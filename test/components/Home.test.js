@@ -46,4 +46,17 @@ describe('Home', () => {
 		mountedHome.unmount()
 		mountedHome = undefined
 	})
+
+	describe('Methods', () => {
+		describe('pageChange', () => {
+			it('sets state change to true', () => {
+				mountedHome = mount(
+					<Provider store={store}>
+						<Home />
+					</Provider>
+				)
+				mountedHome.setState({ change: false })
+			})
+		})
+	})
 })

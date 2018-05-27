@@ -227,7 +227,7 @@ function setPiecePositionShape(piece) {
 	piece.shape = position.shape
 }
 
-module.exports = {
+export {
 	getI,
 	getJ,
 	getL,

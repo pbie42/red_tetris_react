@@ -1,12 +1,12 @@
-const {
+import {
 	calcPieceEnd,
 	calcPieceStart,
 	calcPieceBottom,
 	calcOffsets,
 	checkGame
-} = require('./game')
-const { verifyPlacement, verifyRotation } = require('./verify')
-const {
+} from './game'
+import { verifyPlacement, verifyRotation } from './verify'
+import {
 	positionsI,
 	positionsJ,
 	positionsL,
@@ -14,7 +14,7 @@ const {
 	positionsS,
 	positionsT,
 	positionsZ
-} = require('./pieces')
+} from './pieces'
 
 function movePieceRight(statePiece, savedBoard) {
 	let { shape, location, piece, set } = statePiece
@@ -165,7 +165,7 @@ function handleStatePiece(statePiece, rotationResult) {
 	return { success: rotationResult.success, statePiece }
 }
 
-module.exports = {
+export {
 	handleStatePiece,
 	movePieceDown,
 	movePieceLeft,

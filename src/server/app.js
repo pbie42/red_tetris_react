@@ -10,7 +10,6 @@ const {
 	roomRemoveUser,
 	removeRoom
 } = require('./utils')
-const { pieceOrder } = require('../client/utils')
 
 let users = []
 let rooms = []
@@ -28,6 +27,17 @@ let boards = [
 let index
 let roomIndex
 let pieceNumber = 0
+
+function randomPiece() {
+	const pieces = ['i', 'j', 'l', 'o', 's', 't', 'z']
+	return pieces[Math.floor(Math.random() * pieces.length)]
+}
+
+function pieceOrder() {
+	const pieces = []
+	for (let i = 0; i < 100; i++) pieces.push(randomPiece())
+	return pieces
+}
 
 io.on('connection', socket => {
 	// console.log(`a client is connected`)
@@ -350,8 +360,7 @@ io.on('connection', socket => {
 				// console.log(`data.id`, data.id)
 				if (
 					user &&
-					(user.getId() !== data.id || user.getUsername()) !==
-						data.username
+					(user.getId() !== data.id || user.getUsername()) !== data.username
 				) {
 					console.log(`CHEATING!!!!!!!!!!!`)
 					console.log(`data`, data)

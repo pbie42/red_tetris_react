@@ -9,7 +9,4 @@ function pieceOrder() {
 	return pieces
 }
 
-module.exports = {
-	randomPiece,
-	pieceOrder
-}
+export { randomPiece, pieceOrder }

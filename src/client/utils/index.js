@@ -1,4 +1,4 @@
-const {
+import {
 	verifyConnection,
 	verifyCreatorMessage,
 	verifyGameStart,
@@ -11,12 +11,12 @@ const {
 	verifyRotation,
 	verifyUrl,
 	verifyUsername
-} = require('./verify')
-const { parseUrl } = require('./parse_url')
-const { prependZero } = require('./prepend_zero')
-const { pieceOrder } = require('./piece')
-const { roomAddUser, roomRemoveUser } = require('./rooms')
-const {
+} from './verify'
+import { parseUrl } from './parse_url'
+import { prependZero } from './prepend_zero'
+import { pieceOrder } from './piece'
+import { roomAddUser, roomRemoveUser } from './rooms'
+import {
 	handleStatePiece,
 	movePieceDown,
 	movePieceLeft,
@@ -25,16 +25,16 @@ const {
 	rotatePieces,
 	setupLocations,
 	tryRotations
-} = require('./movement')
-const {
+} from './movement'
+import {
 	calcOffsets,
 	calcPieceBottom,
 	calcPieceEnd,
 	calcPieceStart,
 	checkGame,
 	newBoard
-} = require('./game')
-const {
+} from './game'
+import {
 	getI,
 	getJ,
 	getL,
@@ -59,9 +59,9 @@ const {
 	positionsZ,
 	randomPiece,
 	setPiecePositionShape
-} = require('./pieces')
+} from './pieces'
 
-module.exports = {
+export {
 	calcOffsets,
 	calcPieceBottom,
 	calcPieceEnd,

@@ -69,7 +69,7 @@ function newBoard() {
 	]
 }
 
-module.exports = {
+export {
 	calcOffsets,
 	calcPieceEnd,
 	calcPieceStart,
