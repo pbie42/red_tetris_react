@@ -40,13 +40,17 @@ function BoardComponent(props) {
 	}
 
 	C.componentDidUpdate = function() {
+		let { board, piece, savedBoard, current } = C.state
 		const { countDown, roomId, roomName, username } = C.props
 		if (countDown && !C.state.countDown) {
 			setTimeout(() => {
 				C.state.interval = setInterval(function() {
 					C.handleKeydown({ keyCode: 40 })
 				}, 750)
+				if (current === 90)
+					C.props.gameNewPieces(C.props.roomId, C.props.roomName)
 				C.nextPiece()
+				if (!gameOver) C.setHandleBuild(piece, board, savedBoard)
 				C.props.gameNewPiece(roomId, roomName, username)
 			}, 5000)
 			C.state.countDown = true
@@ -59,14 +63,11 @@ function BoardComponent(props) {
 	}
 
 	C.nextPiece = function() {
-		let { piece, current, board, savedBoard } = C.state
-		if (current === 90)
-			C.props.gameNewPieces(C.props.roomId, C.props.roomName)
+		let { piece, current } = C.state
 		piece.piece = C.props.piece
 		C.setState({ current: ++current })
 		piece.location = { x: 3, y: 0 }
 		setPiecePositionShape(piece)
-		if (!gameOver) C.setHandleBuild(piece, board, savedBoard)
 	}
 
 	C.handleUpdate = function(board, savedBoard) {
@@ -110,13 +111,22 @@ function BoardComponent(props) {
 		C.props.gameOver()
 	}
 
+	C.handleNewPiece = function() {
+		let { board, piece, savedBoard, current } = C.state
+		let { roomId, roomName, username } = C.props
+		C.props.gameNewPiece(roomId, roomName, username)
+		if (current === 90)
+			C.props.gameNewPieces(C.props.roomId, C.props.roomName)
+		C.nextPiece()
+		if (!gameOver) C.setHandleBuild(piece, board, savedBoard)
+	}
+
 	C.handleKeydown = function(event) {
 		const leftArrow = 37
 		const upArrow = 38
 		const rightArrow = 39
 		const downArrow = 40
 		let result
-		let { roomId, roomName, username } = C.props
 		let { board, piece, savedBoard } = C.state
 
 		if (!gameOver && C.props.gameStarted) {
@@ -142,13 +152,10 @@ function BoardComponent(props) {
 					result = movePieceDown(piece, board, savedBoard)
 					gameOver = result.gameOverCheck
 					savedBoard = result.savedBoard
-					if (gameOver) C.handleGameOver()
 					piece.location = result.newLocation
 					piece.set = result.set
-					if (result.newPiece) {
-						C.props.gameNewPiece(roomId, roomName, username)
-						C.nextPiece()
-					}
+					if (gameOver) C.handleGameOver()
+					if (result.newPiece) C.handleNewPiece()
 					if (!gameOver) C.setHandleBuild(piece, board, savedBoard)
 					break
 
