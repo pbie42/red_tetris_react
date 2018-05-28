@@ -1,3 +1,5 @@
+import { newBoard } from './game'
+
 const positionsO = [
 	{
 		position: 0,
@@ -264,6 +266,16 @@ function placePiece(piece, fillBoard, location) {
 	return fillBoard
 }
 
+function handlePiece(piece, board, savedBoard) {
+	const prevBoard = board
+	let { location } = piece
+	let fillBoard = newBoard()
+	let boardY = location.y
+	if (savedBoard.length > 0) fillBoard = placePieces(fillBoard, savedBoard)
+	if (boardY + 4 > 26) return prevBoard
+	else return placePiece(piece, fillBoard, location)
+}
+
 export {
 	getI,
 	getJ,
@@ -273,6 +285,7 @@ export {
 	getS,
 	getT,
 	getZ,
+	handlePiece,
 	initializeI,
 	initializeJ,
 	initializeL,

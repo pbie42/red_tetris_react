@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+	handlePiece,
 	movePieceLeft,
 	movePieceRight,
 	movePieceDown,
@@ -66,23 +67,20 @@ function BoardComponent(props) {
 		C.setState({ current: ++current })
 		piece.location = { x: 3, y: 0 }
 		setPiecePositionShape(piece)
-		if (!gameOver) C.handlePiece()
+		if (!gameOver) {
+			C.setState({
+				board: handlePiece(C.state.piece, C.state.board, C.state.savedBoard)
+			})
+			C.handleUpdate(C.state.board, C.state.savedBoard)
+			C.buildBoard()
+		}
 	}
 
-	C.handlePiece = function() {
-		let { savedBoard, piece, board } = C.state
+	C.handleUpdate = function(board, savedBoard) {
 		let { userId, roomName, username, doneUser, doneRoom } = C.props
-		const prevBoard = board
-		let { location } = piece
-		let fillBoard = newBoard()
-		let boardY = location.y
-		if (savedBoard.length > 0) fillBoard = placePieces(fillBoard, savedBoard)
-		if (boardY + 4 > 26) board = prevBoard
-		else C.setState({ board: placePiece(piece, fillBoard, location) })
 		if (savedBoard.length > 0) C.checkLines()
 		if (doneUser && doneRoom)
 			C.props.gameBoardUpdate(board, userId, roomName, username)
-		C.buildBoard()
 	}
 
 	C.buildBoard = function() {
@@ -135,16 +133,46 @@ function BoardComponent(props) {
 		if (!gameOver && C.props.gameStarted) {
 			if (event.keyCode === 37) {
 				piece.location = movePieceLeft(piece, savedBoard)
-				if (!gameOver) C.handlePiece()
+				if (!gameOver) {
+					C.setState({
+						board: handlePiece(
+							C.state.piece,
+							C.state.board,
+							C.state.savedBoard
+						)
+					})
+					C.handleUpdate(C.state.board, C.state.savedBoard)
+					C.buildBoard()
+				}
 			}
 			if (event.keyCode === 38) {
 				result = rotatePieces(piece, savedBoard)
 				piece = result.statePiece
-				if (result.success && !gameOver) C.handlePiece()
+				if (result.success && !gameOver) {
+					C.setState({
+						board: handlePiece(
+							C.state.piece,
+							C.state.board,
+							C.state.savedBoard
+						)
+					})
+					C.handleUpdate(C.state.board, C.state.savedBoard)
+					C.buildBoard()
+				}
 			}
 			if (event.keyCode === 39) {
 				piece.location = movePieceRight(piece, savedBoard)
-				if (!gameOver) C.handlePiece()
+				if (!gameOver) {
+					C.setState({
+						board: handlePiece(
+							C.state.piece,
+							C.state.board,
+							C.state.savedBoard
+						)
+					})
+					C.handleUpdate(C.state.board, C.state.savedBoard)
+					C.buildBoard()
+				}
 			}
 			if (event.keyCode === 40) {
 				result = movePieceDown(piece, C.state.board, savedBoard)
@@ -164,7 +192,17 @@ function BoardComponent(props) {
 					)
 					C.nextPiece()
 				}
-				if (!gameOver) C.handlePiece()
+				if (!gameOver) {
+					C.setState({
+						board: handlePiece(
+							C.state.piece,
+							C.state.board,
+							C.state.savedBoard
+						)
+					})
+					C.handleUpdate(C.state.board, C.state.savedBoard)
+					C.buildBoard()
+				}
 			}
 		}
 	}
