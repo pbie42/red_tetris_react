@@ -78,7 +78,7 @@ function BoardComponent(props) {
 
 	C.handleUpdate = function(board, savedBoard) {
 		let { userId, roomName, username, doneUser, doneRoom } = C.props
-		if (savedBoard.length > 0) C.checkLines()
+		if (savedBoard.length > 0) C.setState({ savedBoard: C.checkLines() })
 		if (doneUser && doneRoom)
 			C.props.gameBoardUpdate(board, userId, roomName, username)
 	}
@@ -124,7 +124,7 @@ function BoardComponent(props) {
 			if (count === 10) linesToRemove.push(y)
 			count = 0
 		}
-		C.state.savedBoard = C.clearLines(linesToRemove, board)
+		return C.clearLines(linesToRemove, board)
 	}
 
 	C.handleKeydown = function(event) {
