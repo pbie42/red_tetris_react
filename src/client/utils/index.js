@@ -32,6 +32,8 @@ import {
 	calcPieceEnd,
 	calcPieceStart,
 	checkGame,
+	checkLines,
+	clearLines,
 	newBoard
 } from './game'
 import {
@@ -71,6 +73,8 @@ export {
 	calcPieceEnd,
 	calcPieceStart,
 	checkGame,
+	checkLines,
+	clearLines,
 	getI,
 	getJ,
 	getL,

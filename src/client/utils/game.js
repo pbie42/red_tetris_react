@@ -39,6 +39,28 @@ function checkGame(savedBoard) {
 	return false
 }
 
+function clearLines(linesToRemove, savedBoard) {
+	linesToRemove.forEach(line => {
+		savedBoard.splice(line, 1)
+		savedBoard.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+	})
+	return savedBoard
+}
+
+function checkLines(savedBoard) {
+	let board = savedBoard
+	let count = 0
+	let y = 3
+	let linesToRemove = []
+	while (++y < 24) {
+		let x = -1
+		while (++x < 11) if (board[y][x] !== 0) count++
+		if (count === 10) linesToRemove.push(y)
+		count = 0
+	}
+	return clearLines(linesToRemove, board)
+}
+
 function newBoard() {
 	return [
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -75,5 +97,7 @@ export {
 	calcPieceStart,
 	calcPieceBottom,
 	checkGame,
+	checkLines,
+	clearLines,
 	newBoard
 }

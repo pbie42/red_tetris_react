@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import {
+	checkLines,
 	handlePiece,
 	movePieceLeft,
 	movePieceRight,
 	movePieceDown,
 	newBoard,
-	placePiece,
-	placePieces,
 	rotatePieces,
 	setColorClass,
 	setPiecePositionShape
@@ -56,29 +55,24 @@ function BoardComponent(props) {
 
 	C.componentWillUnmount = function() {
 		clearInterval(C.state.interval)
-		window.removeEventListener('keydown', e => this.handleKeydown(e))
+		window.removeEventListener('keydown', e => C.handleKeydown(e))
 	}
 
 	C.nextPiece = function() {
-		let { piece, current } = C.state
+		let { piece, current, board, savedBoard } = C.state
 		if (current === 90)
 			C.props.gameNewPieces(C.props.roomId, C.props.roomName)
 		piece.piece = C.props.piece
 		C.setState({ current: ++current })
 		piece.location = { x: 3, y: 0 }
 		setPiecePositionShape(piece)
-		if (!gameOver) {
-			C.setState({
-				board: handlePiece(C.state.piece, C.state.board, C.state.savedBoard)
-			})
-			C.handleUpdate(C.state.board, C.state.savedBoard)
-			C.buildBoard()
-		}
+		if (!gameOver) C.setHandleBuild(piece, board, savedBoard)
 	}
 
 	C.handleUpdate = function(board, savedBoard) {
 		let { userId, roomName, username, doneUser, doneRoom } = C.props
-		if (savedBoard.length > 0) C.setState({ savedBoard: C.checkLines() })
+		if (savedBoard.length > 0)
+			C.setState({ savedBoard: checkLines(savedBoard) })
 		if (doneUser && doneRoom)
 			C.props.gameBoardUpdate(board, userId, roomName, username)
 	}
@@ -105,104 +99,61 @@ function BoardComponent(props) {
 		}
 	}
 
-	C.clearLines = function(linesToRemove, savedBoard) {
-		linesToRemove.forEach(line => {
-			savedBoard.splice(line, 1)
-			savedBoard.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
-		})
-		return savedBoard
+	C.setHandleBuild = function(piece, board, savedBoard) {
+		C.setState({ board: handlePiece(piece, board, savedBoard) })
+		C.handleUpdate(board, savedBoard)
+		C.buildBoard()
 	}
 
-	C.checkLines = function() {
-		let board = C.state.savedBoard
-		let count = 0
-		let y = 3
-		let linesToRemove = []
-		while (++y < 24) {
-			let x = -1
-			while (++x < 11) if (board[y][x] !== 0) count++
-			if (count === 10) linesToRemove.push(y)
-			count = 0
-		}
-		return C.clearLines(linesToRemove, board)
+	C.handleGameOver = function() {
+		clearInterval(C.state.interval)
+		C.props.gameOver()
 	}
 
 	C.handleKeydown = function(event) {
-		let { piece, savedBoard } = C.state
+		const leftArrow = 37
+		const upArrow = 38
+		const rightArrow = 39
+		const downArrow = 40
 		let result
+		let { roomId, roomName, username } = C.props
+		let { board, piece, savedBoard } = C.state
+
 		if (!gameOver && C.props.gameStarted) {
-			if (event.keyCode === 37) {
-				piece.location = movePieceLeft(piece, savedBoard)
-				if (!gameOver) {
-					C.setState({
-						board: handlePiece(
-							C.state.piece,
-							C.state.board,
-							C.state.savedBoard
-						)
-					})
-					C.handleUpdate(C.state.board, C.state.savedBoard)
-					C.buildBoard()
-				}
-			}
-			if (event.keyCode === 38) {
-				result = rotatePieces(piece, savedBoard)
-				piece = result.statePiece
-				if (result.success && !gameOver) {
-					C.setState({
-						board: handlePiece(
-							C.state.piece,
-							C.state.board,
-							C.state.savedBoard
-						)
-					})
-					C.handleUpdate(C.state.board, C.state.savedBoard)
-					C.buildBoard()
-				}
-			}
-			if (event.keyCode === 39) {
-				piece.location = movePieceRight(piece, savedBoard)
-				if (!gameOver) {
-					C.setState({
-						board: handlePiece(
-							C.state.piece,
-							C.state.board,
-							C.state.savedBoard
-						)
-					})
-					C.handleUpdate(C.state.board, C.state.savedBoard)
-					C.buildBoard()
-				}
-			}
-			if (event.keyCode === 40) {
-				result = movePieceDown(piece, C.state.board, savedBoard)
-				gameOver = result.gameOverCheck
-				this.state.savedBoard = result.savedBoard
-				if (gameOver) {
-					clearInterval(C.state.interval)
-					C.props.gameOver()
-				}
-				C.state.piece.location = result.newLocation
-				C.state.piece.set = result.set
-				if (result.newPiece) {
-					C.props.gameNewPiece(
-						C.props.roomId,
-						C.props.roomName,
-						C.props.username
-					)
-					C.nextPiece()
-				}
-				if (!gameOver) {
-					C.setState({
-						board: handlePiece(
-							C.state.piece,
-							C.state.board,
-							C.state.savedBoard
-						)
-					})
-					C.handleUpdate(C.state.board, C.state.savedBoard)
-					C.buildBoard()
-				}
+			switch (event.keyCode) {
+				case leftArrow:
+					piece.location = movePieceLeft(piece, savedBoard)
+					if (!gameOver) C.setHandleBuild(piece, board, savedBoard)
+					break
+
+				case upArrow:
+					result = rotatePieces(piece, savedBoard)
+					piece = result.statePiece
+					if (result.success && !gameOver)
+						C.setHandleBuild(piece, board, savedBoard)
+					break
+
+				case rightArrow:
+					piece.location = movePieceRight(piece, savedBoard)
+					if (!gameOver) C.setHandleBuild(piece, board, savedBoard)
+					break
+
+				case downArrow:
+					result = movePieceDown(piece, board, savedBoard)
+					gameOver = result.gameOverCheck
+					savedBoard = result.savedBoard
+					if (gameOver) C.handleGameOver()
+					piece.location = result.newLocation
+					piece.set = result.set
+					if (result.newPiece) {
+						C.props.gameNewPiece(roomId, roomName, username)
+						C.nextPiece()
+					}
+					if (!gameOver) C.setHandleBuild(piece, board, savedBoard)
+					break
+
+				default:
+					break
 			}
 		}
 	}
