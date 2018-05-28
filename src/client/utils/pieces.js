@@ -223,12 +223,6 @@ function getPiecePositionShape(piece) {
 	if (piece.piece === 'z') return getZ(piece)
 }
 
-function setPiecePositionShape(piece) {
-	let position = getPiecePositionShape(piece)
-	piece.position = position.position
-	piece.shape = position.shape
-}
-
 function setColorClass(i, x, board) {
 	if (board[i][x] === 'i') return 'cyan'
 	if (board[i][x] === 'j') return 'blue'
@@ -276,6 +270,15 @@ function handlePiece(piece, board, savedBoard) {
 	else return placePiece(piece, fillBoard, location)
 }
 
+function nextPiece(piece, newPiece, current) {
+	piece.piece = newPiece
+	piece.location = { x: 3, y: 0 }
+	let position = getPiecePositionShape(piece)
+	piece.position = position.position
+	piece.shape = position.shape
+	return piece
+}
+
 export {
 	getI,
 	getJ,
@@ -293,6 +296,7 @@ export {
 	initializeS,
 	initializeT,
 	initializeZ,
+	nextPiece,
 	placePiece,
 	placePieces,
 	positionsI,
@@ -304,6 +308,5 @@ export {
 	positionsZ,
 	randomPiece,
 	selectPosition,
-	setColorClass,
-	setPiecePositionShape
+	setColorClass
 }

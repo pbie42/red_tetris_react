@@ -6,9 +6,9 @@ import {
 	movePieceRight,
 	movePieceDown,
 	newBoard,
+	nextPiece,
 	rotatePieces,
-	setColorClass,
-	setPiecePositionShape
+	setColorClass
 } from '../../utils'
 
 function BoardComponent(props) {
@@ -26,7 +26,6 @@ function BoardComponent(props) {
 			location: { x: 0, y: 0 },
 			shape: [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
 			piece: '',
-			pieces: [],
 			position: 0,
 			set: false
 		},
@@ -47,9 +46,8 @@ function BoardComponent(props) {
 				C.state.interval = setInterval(function() {
 					C.handleKeydown({ keyCode: 40 })
 				}, 750)
-				if (current === 90)
-					C.props.gameNewPieces(C.props.roomId, C.props.roomName)
-				C.nextPiece()
+				piece = nextPiece(piece, C.props.piece, current)
+				C.setState({ current: ++current })
 				if (!gameOver) C.setHandleBuild(piece, board, savedBoard)
 				C.props.gameNewPiece(roomId, roomName, username)
 			}, 5000)
@@ -60,14 +58,6 @@ function BoardComponent(props) {
 	C.componentWillUnmount = function() {
 		clearInterval(C.state.interval)
 		window.removeEventListener('keydown', e => C.handleKeydown(e))
-	}
-
-	C.nextPiece = function() {
-		let { piece, current } = C.state
-		piece.piece = C.props.piece
-		C.setState({ current: ++current })
-		piece.location = { x: 3, y: 0 }
-		setPiecePositionShape(piece)
 	}
 
 	C.handleUpdate = function(board, savedBoard) {
@@ -117,7 +107,8 @@ function BoardComponent(props) {
 		C.props.gameNewPiece(roomId, roomName, username)
 		if (current === 90)
 			C.props.gameNewPieces(C.props.roomId, C.props.roomName)
-		C.nextPiece()
+		piece = nextPiece(piece, C.props.piece, current)
+		C.setState({ current: ++current })
 		if (!gameOver) C.setHandleBuild(piece, board, savedBoard)
 	}
 

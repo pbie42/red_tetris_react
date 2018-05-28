@@ -45,6 +45,7 @@ import {
 	getS,
 	getT,
 	getZ,
+	handlePiece,
 	initializeI,
 	initializeJ,
 	initializeL,
@@ -52,7 +53,7 @@ import {
 	initializeS,
 	initializeT,
 	initializeZ,
-	handlePiece,
+	nextPiece,
 	placePiece,
 	placePieces,
 	positionsI,
@@ -63,8 +64,7 @@ import {
 	positionsT,
 	positionsZ,
 	randomPiece,
-	setColorClass,
-	setPiecePositionShape
+	setColorClass
 } from './pieces'
 
 export {
@@ -96,6 +96,7 @@ export {
 	movePieceLeft,
 	movePieceRight,
 	newBoard,
+	nextPiece,
 	parseUrl,
 	pieceOrder,
 	placePiece,
@@ -114,7 +115,6 @@ export {
 	rotatePiece,
 	rotatePieces,
 	setColorClass,
-	setPiecePositionShape,
 	setupLocations,
 	tryRotations,
 	verifyConnection,
