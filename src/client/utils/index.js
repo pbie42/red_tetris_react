@@ -50,6 +50,8 @@ import {
 	initializeS,
 	initializeT,
 	initializeZ,
+	placePiece,
+	placePieces,
 	positionsI,
 	positionsJ,
 	positionsL,
@@ -58,6 +60,7 @@ import {
 	positionsT,
 	positionsZ,
 	randomPiece,
+	setColorClass,
 	setPiecePositionShape
 } from './pieces'
 
@@ -89,6 +92,8 @@ export {
 	newBoard,
 	parseUrl,
 	pieceOrder,
+	placePiece,
+	placePieces,
 	positionsI,
 	positionsJ,
 	positionsL,
@@ -102,6 +107,7 @@ export {
 	roomRemoveUser,
 	rotatePiece,
 	rotatePieces,
+	setColorClass,
 	setPiecePositionShape,
 	setupLocations,
 	tryRotations,

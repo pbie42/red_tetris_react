@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import {
-	calcPieceBottom,
-	checkGame,
 	movePieceLeft,
 	movePieceRight,
 	movePieceDown,
 	newBoard,
+	placePiece,
+	placePieces,
 	rotatePieces,
-	setPiecePositionShape,
-	verifyPlacement
+	setColorClass,
+	setPiecePositionShape
 } from '../../utils'
 
 function BoardComponent(props) {
@@ -60,59 +60,33 @@ function BoardComponent(props) {
 
 	C.nextPiece = function() {
 		let { piece, current } = C.state
-		if (current === 90) C.props.gameNewPieces(C.props.roomId, C.props.roomName)
+		if (current === 90)
+			C.props.gameNewPieces(C.props.roomId, C.props.roomName)
 		piece.piece = C.props.piece
 		C.setState({ current: ++current })
 		piece.location = { x: 3, y: 0 }
 		setPiecePositionShape(piece)
-		this.placePiece()
+		if (!gameOver) C.handlePiece()
 	}
 
-	C.placePieces = function(board) {
-		let y = -1
-		while (board[++y]) {
-			let x = -1
-			while (++x < 11)
-				if (C.state.savedBoard[y][x] !== 0)
-					board[y][x] = C.state.savedBoard[y][x]
-		}
-	}
-
-	C.placePiece = function() {
-		if (!gameOver) {
-			const prevBoard = C.state.board
-			let { location, shape } = C.state.piece
-			let board = newBoard()
-			let boardY = location.y
-			if (C.state.savedBoard.length > 0) C.placePieces(board)
-			if (boardY + 4 > 26) C.state.board = prevBoard
-			else {
-				let y = -1
-				while (shape[++y] && board[y]) {
-					let boardX = location.x
-					let x = -1
-					while (++x < 4) {
-						if (shape[y][x] === C.state.piece.piece)
-							board[boardY][boardX] = C.state.piece.piece
-						boardX++
-					}
-					boardY++
-				}
-				C.state.board = board
-			}
-			if (C.state.savedBoard.length > 0) C.checkLines()
-			if (C.props.doneUser && C.props.doneRoom)
-				C.props.gameBoardUpdate(
-					C.state.board,
-					C.props.userId,
-					C.props.roomName,
-					C.props.username
-				)
-			C.buildBoard()
-		}
+	C.handlePiece = function() {
+		let { savedBoard, piece, board } = C.state
+		let { userId, roomName, username, doneUser, doneRoom } = C.props
+		const prevBoard = board
+		let { location } = piece
+		let fillBoard = newBoard()
+		let boardY = location.y
+		if (savedBoard.length > 0) fillBoard = placePieces(fillBoard, savedBoard)
+		if (boardY + 4 > 26) board = prevBoard
+		else C.setState({ board: placePiece(piece, fillBoard, location) })
+		if (savedBoard.length > 0) C.checkLines()
+		if (doneUser && doneRoom)
+			C.props.gameBoardUpdate(board, userId, roomName, username)
+		C.buildBoard()
 	}
 
 	C.buildBoard = function() {
+		let color = ''
 		if (grid) {
 			grid.innerHTML = ''
 			for (let i = 0; i < C.state.board.length; i++) {
@@ -124,22 +98,13 @@ function BoardComponent(props) {
 					if (x > 9) continue
 					const square = document.createElement('div')
 					square.setAttribute('id', `col-${x}`)
-					C.setColorClass(i, x, square)
+					color = setColorClass(i, x, C.state.board)
+					square.setAttribute('class', color)
 					row.appendChild(square)
 				}
 				grid.appendChild(row)
 			}
 		}
-	}
-
-	C.setColorClass = function(i, x, square) {
-		if (C.state.board[i][x] === 'i') square.setAttribute('class', 'cyan')
-		if (C.state.board[i][x] === 'j') square.setAttribute('class', 'blue')
-		if (C.state.board[i][x] === 'l') square.setAttribute('class', 'orange')
-		if (C.state.board[i][x] === 'o') square.setAttribute('class', 'yellow')
-		if (C.state.board[i][x] === 's') square.setAttribute('class', 'green')
-		if (C.state.board[i][x] === 't') square.setAttribute('class', 'purple')
-		if (C.state.board[i][x] === 'z') square.setAttribute('class', 'red')
 	}
 
 	C.clearLines = function(linesToRemove, savedBoard) {
@@ -170,16 +135,16 @@ function BoardComponent(props) {
 		if (!gameOver && C.props.gameStarted) {
 			if (event.keyCode === 37) {
 				piece.location = movePieceLeft(piece, savedBoard)
-				C.placePiece()
+				if (!gameOver) C.handlePiece()
 			}
 			if (event.keyCode === 38) {
 				result = rotatePieces(piece, savedBoard)
 				piece = result.statePiece
-				if (result.success) C.placePiece()
+				if (result.success && !gameOver) C.handlePiece()
 			}
 			if (event.keyCode === 39) {
 				piece.location = movePieceRight(piece, savedBoard)
-				C.placePiece()
+				if (!gameOver) C.handlePiece()
 			}
 			if (event.keyCode === 40) {
 				result = movePieceDown(piece, C.state.board, savedBoard)
@@ -199,7 +164,7 @@ function BoardComponent(props) {
 					)
 					C.nextPiece()
 				}
-				if (!gameOver) C.placePiece()
+				if (!gameOver) C.handlePiece()
 			}
 		}
 	}

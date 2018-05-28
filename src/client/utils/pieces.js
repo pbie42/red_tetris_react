@@ -227,6 +227,43 @@ function setPiecePositionShape(piece) {
 	piece.shape = position.shape
 }
 
+function setColorClass(i, x, board) {
+	if (board[i][x] === 'i') return 'cyan'
+	if (board[i][x] === 'j') return 'blue'
+	if (board[i][x] === 'l') return 'orange'
+	if (board[i][x] === 'o') return 'yellow'
+	if (board[i][x] === 's') return 'green'
+	if (board[i][x] === 't') return 'purple'
+	if (board[i][x] === 'z') return 'red'
+	return ''
+}
+
+function placePieces(board, savedBoard) {
+	let y = -1
+	while (board[++y]) {
+		let x = -1
+		while (++x < 11)
+			if (savedBoard[y][x] !== 0) board[y][x] = savedBoard[y][x]
+	}
+	return board
+}
+
+function placePiece(piece, fillBoard, location) {
+	let boardY = location.y
+	let y = -1
+	while (piece.shape[++y] && fillBoard[y]) {
+		let boardX = location.x
+		let x = -1
+		while (++x < 4) {
+			if (piece.shape[y][x] === piece.piece)
+				fillBoard[boardY][boardX] = piece.piece
+			boardX++
+		}
+		boardY++
+	}
+	return fillBoard
+}
+
 export {
 	getI,
 	getJ,
@@ -243,6 +280,8 @@ export {
 	initializeS,
 	initializeT,
 	initializeZ,
+	placePiece,
+	placePieces,
 	positionsI,
 	positionsJ,
 	positionsL,
@@ -252,5 +291,6 @@ export {
 	positionsZ,
 	randomPiece,
 	selectPosition,
+	setColorClass,
 	setPiecePositionShape
 }
