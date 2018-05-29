@@ -73,8 +73,7 @@ function BoardComponent(props) {
 		if (grid) {
 			grid.innerHTML = ''
 			for (let i = 0; i < C.state.board.length; i++) {
-				if (i < 4) continue
-				if (i > 23) continue
+				if (i < 4 || i > 23) continue
 				const row = document.createElement('div')
 				row.setAttribute('id', `row-${i - 4}`)
 				for (let x = 0; x < C.state.board[i].length; x++) {

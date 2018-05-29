@@ -2,7 +2,9 @@ function roomAddUser(username, roomName, rooms, users) {
 	const roomIndex = rooms.findIndex(room => room.getRoomName() === roomName)
 	if (
 		roomIndex >= 0 &&
-		!rooms[roomIndex].members.find(member => member.getUsername() === username)
+		!rooms[roomIndex].members.find(
+			member => member.getUsername() === username
+		)
 	)
 		rooms[roomIndex].members.push(getUser(username, users))
 	return rooms
@@ -43,11 +45,62 @@ function getRoom(roomName, rooms) {
 	return room
 }
 
+function randomPiece() {
+	const pieces = ['i', 'j', 'l', 'o', 's', 't', 'z']
+	return pieces[Math.floor(Math.random() * pieces.length)]
+}
+
+function pieceOrder() {
+	const pieces = []
+	for (let i = 0; i < 100; i++) pieces.push(randomPiece())
+	return pieces
+}
+
+function newUserBoard() {
+	return [
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	]
+}
+
+function newGamePieces(roomName, pieces) {
+	pieces.push({ roomName, pieces: pieceOrder() })
+}
+
+function newBoards(members, roomName, boards) {
+	members.forEach(member => {
+		boards.push({ username: member, roomName, board: newUserBoard() })
+	})
+}
+
 module.exports = {
+	newUserBoard,
 	roomAddUser,
 	getRoom,
 	getUser,
 	getUserById,
+	pieceOrder,
+	newGamePieces,
+	newBoards,
 	roomRemoveUser,
+	randomPiece,
 	removeRoom
 }
