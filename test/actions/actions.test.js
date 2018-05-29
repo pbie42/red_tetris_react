@@ -1,24 +1,25 @@
 import { expect } from 'chai'
 import {
-	userSetUsername,
-	userAdd,
-	roomAdd,
-	roomAdded,
-	roomAddUser,
-	roomRemoveUser,
-	userRemove,
-	messageAdd,
-	userUnsetUsername,
-	usersPopulateList,
-	usersListReceived,
-	userUsernameSet,
 	connected,
 	disconnected,
 	errorTooManyMembers,
 	errorUsernameTaken,
-	roomsPopulateList,
+	gameBoardUpdate,
+	messageAdd,
+	messageReceived,
+	roomAdd,
+	roomAddUser,
+	roomAdded,
+	roomRemoveUser,
 	roomsListReceived,
-	messageReceived
+	roomsPopulateList,
+	userAdd,
+	userRemove,
+	userSetUsername,
+	userUnsetUsername,
+	userUsernameSet,
+	usersListReceived,
+	usersPopulateList
 } from '../../src/client/actions'
 
 describe('Actions', () => {
