@@ -40,7 +40,10 @@ function socketGameHandler(io, socket, users, rooms) {
 			//---------------------------------------------------------------------GAME_START
 			case 'GAME_START':
 				console.log(`GAME_START`)
+				console.log(`data`, data)
+				console.log(`rooms`, rooms)
 				room = getRoom(data.roomName, rooms)
+				console.log(`room`, room)
 				if (room) {
 					room.setCountdown()
 					user = getUserById(data.userId, users)
@@ -55,6 +58,8 @@ function socketGameHandler(io, socket, users, rooms) {
 							})
 						)
 					}
+					console.log(`About to send game countdown start`)
+					console.log(`data.roomName`, data.roomName)
 					io.to(data.roomName).emit(
 						'game',
 						JSON.stringify({
@@ -140,6 +145,7 @@ function socketGameHandler(io, socket, users, rooms) {
 				break
 		}
 	})
+	return { rooms, users }
 }
 
 module.exports = { socketGameHandler }

@@ -35,7 +35,7 @@ function BoardComponent(props) {
 
 	C.componentDidMount = function() {
 		C.buildBoard()
-		window.addEventListener('keydown', e => C.handleKeydown(e))
+		window.addEventListener('keydown', C.handleKeydown)
 	}
 
 	C.componentDidUpdate = function() {
@@ -57,7 +57,7 @@ function BoardComponent(props) {
 
 	C.componentWillUnmount = function() {
 		clearInterval(C.state.interval)
-		window.removeEventListener('keydown', e => C.handleKeydown(e))
+		window.removeEventListener('keydown', C.handleKeydown)
 	}
 
 	C.handleUpdate = function(board, savedBoard) {
@@ -118,7 +118,7 @@ function BoardComponent(props) {
 		const downArrow = 40
 		let result
 		let { board, piece, savedBoard } = C.state
-
+		console.log(`C.props.roomName BOARD`, C.props.roomName)
 		if (!gameOver && C.props.gameStarted) {
 			switch (event.keyCode) {
 				case leftArrow:

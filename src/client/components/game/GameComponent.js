@@ -35,7 +35,7 @@ function GameComponent(props) {
 	C.componentDidMount = function() {
 		C.setState({ mounted: true })
 		window.addEventListener('beforeunload', C.componentCleanup)
-		window.addEventListener('keydown', e => C.handleSpaceBar(e))
+		window.addEventListener('keydown', C.handleSpaceBar)
 	}
 
 	C.componentDidUpdate = function() {
@@ -52,14 +52,15 @@ function GameComponent(props) {
 
 	C.componentWillUnmount = function() {
 		C.componentCleanup()
-		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
+		window.removeEventListener('keydown', C.handleSpaceBar)
+		console.log(`component unmounting`)
 	}
 
 	C.componentCleanup = function() {
 		C.props.roomRemoveUser(C.props.username, C.state.room)
 		C.props.gameClear()
 		clearInterval(C.state.interval)
-		window.removeEventListener('keydown', e => C.handleSpaceBar(e))
+		window.removeEventListener('keydown', C.handleSpaceBar)
 	}
 
 	C.handlePlayer = function(player) {
@@ -82,6 +83,7 @@ function GameComponent(props) {
 	}
 
 	C.handleSpaceBar = function(event) {
+		console.log(`C.props.roomName GAME`, C.props.roomName)
 		if (doneUser && doneRoom && event.keyCode === 32)
 			if (C.props.userId && C.props.roomName)
 				C.props.gameStart(C.props.roomName, C.props.userId)

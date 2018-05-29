@@ -135,6 +135,7 @@ function socketRoomHandler(io, socket, users, rooms) {
 				break
 		}
 	})
+	return { rooms, users }
 }
 
 module.exports = { socketRoomHandler }

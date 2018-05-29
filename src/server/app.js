@@ -6,6 +6,7 @@ const { socketGameHandler } = require('./sockets/game')
 
 let users = []
 let rooms = []
+let result = {}
 
 io.on('connection', socket => {
 	console.log(`CONNECTED`)
@@ -29,9 +30,13 @@ io.on('connection', socket => {
 
 	socketUserHandler(socket, users)
 
-	socketRoomHandler(io, socket, users, rooms)
+	result = socketRoomHandler(io, socket, users, rooms)
+	rooms = result.rooms
+	users = result.users
 
-	socketGameHandler(io, socket, users, rooms)
+	result = socketGameHandler(io, socket, users, rooms)
+	rooms = result.rooms
+	users = result.users
 
 	socket.on('disconnect', () => {
 		//------------------------------------------------------------------------DISCONNECTION
