@@ -13,7 +13,6 @@ import {
 	verifyUsername
 } from './verify'
 import { parseUrl } from './parse_url'
-import { prependZero } from './prepend_zero'
 import { pieceOrder } from './piece'
 import { roomAddUser, roomRemoveUser } from './rooms'
 import {
@@ -108,7 +107,6 @@ export {
 	positionsS,
 	positionsT,
 	positionsZ,
-	prependZero,
 	randomPiece,
 	roomAddUser,
 	roomRemoveUser,

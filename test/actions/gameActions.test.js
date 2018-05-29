@@ -10,11 +10,15 @@ import {
 	gamePieceUpdate,
 	gamePiecesUpdate,
 	gameRoomSet,
-	gameSetId
+	gameIdSet,
+	gameStart,
+	gameStartCountdown,
+	gameStopCountdown
 } from '../../src/client/actions'
 
 describe('Game Actions', () => {
 	let id = 'dafjh9238kida'
+	let userId = '23ijhp2309'
 	let username = 'Todd'
 	let roomName = 'Todd Room'
 	let board = [
@@ -136,11 +140,34 @@ describe('Game Actions', () => {
 		})
 	})
 
-	// it('gameSetId returns an object with game room to set front state', () => {
-	// 	const gameSetIdAction = gameSetId(roomName)
-	// 	expect(gameSetIdAction).to.eql({
-	// 		type: 'GAME_ROOM_SET',
-	// 		roomName
-	// 	})
-	// })
+	it('gameIdSet returns an object with game room to set front state', () => {
+		const gameIdSetAction = gameIdSet(id)
+		expect(gameIdSetAction).to.eql({
+			type: 'GAME_ID_SET',
+			id
+		})
+	})
+
+	it('gameStart returns an object used to start a new game', () => {
+		const gameStartAction = gameStart(roomName, userId)
+		expect(gameStartAction).to.eql({
+			type: 'GAME_START',
+			roomName,
+			userId
+		})
+	})
+
+	it('gameStartCountdown returns an object used to start the game countdown', () => {
+		const gameStartCountdownAction = gameStartCountdown()
+		expect(gameStartCountdownAction).to.eql({
+			type: 'GAME_START_COUNTDOWN'
+		})
+	})
+
+	it('gameStopCountdown returns an object used to Stop the game countdown', () => {
+		const gameStopCountdownAction = gameStopCountdown()
+		expect(gameStopCountdownAction).to.eql({
+			type: 'GAME_STOP_COUNTDOWN'
+		})
+	})
 })

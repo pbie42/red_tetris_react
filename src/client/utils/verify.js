@@ -110,7 +110,7 @@ function verifyPlacement(location, shape, savedBoard, piece) {
 function verifyRotation(location, newPosition, offset, savedBoard, piece) {
 	return (
 		verifyPlacement(location, newPosition.shape, savedBoard, piece) &&
-		location.x + 6 - offset.end <= 11 &&
+		location.x + 2 + offset.end <= 11 &&
 		location.x - 1 + offset.start >= -1
 	)
 }

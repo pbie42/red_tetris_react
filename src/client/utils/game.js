@@ -5,7 +5,7 @@ function calcPieceEnd(shape, piece) {
 		let y = -1
 		while (++y < 4) if (shape[y][x] === piece) end = x
 	}
-	return 4 - end
+	return end
 }
 function calcPieceStart(shape, piece) {
 	let x = -1
@@ -21,7 +21,7 @@ function calcPieceBottom(shape, piece) {
 		let x = -1
 		while (++x < 4) if (shape[y][x] === piece) bottom = y
 	}
-	return 3 - bottom
+	return bottom
 }
 
 function calcOffsets(piece, shape) {

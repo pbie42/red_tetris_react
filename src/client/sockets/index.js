@@ -5,7 +5,7 @@ import {
 	gameMembersUpdate,
 	gamePieceUpdate,
 	gamePiecesUpdate,
-	gameSetId,
+	gameIdSet,
 	gameStartCountdown,
 	gameStopCountdown,
 	messageReceived,
@@ -70,7 +70,7 @@ const setupSocket = dispatch => {
 			case types.GAME_ID_SET:
 				console.log(`GAME_ID_SET`)
 				// console.log(`data`, data)
-				dispatch(gameSetId(data.id))
+				dispatch(gameIdSet(data.id))
 				break
 			case types.GAME_BOARDS_UPDATE:
 				console.log(`GAME_BOARDS_UPDATE`)

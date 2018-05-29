@@ -19,7 +19,7 @@ import {
 function movePieceRight(statePiece, savedBoard) {
 	let { shape, location, piece, set } = statePiece
 	let offset = calcPieceEnd(shape, piece)
-	if (location.x + 6 - offset <= 10 && !set) {
+	if (location.x + 2 + offset <= 10 && !set) {
 		if (
 			verifyPlacement(
 				{ x: location.x + 1, y: location.y },
@@ -57,7 +57,7 @@ function movePieceDown(statePiece, board, savedBoard) {
 	let set = statePiece.set
 	let offset = calcPieceBottom(shape, piece)
 	let newLocation = location
-	if (newLocation.y - offset <= 19 && !set) {
+	if (newLocation.y - 3 + offset <= 19 && !set) {
 		if (
 			verifyPlacement(
 				{ x: newLocation.x, y: newLocation.y + 1 },

@@ -15,7 +15,7 @@ import {
 	gamePieceUpdate,
 	gamePiecesUpdate,
 	gameRoomSet,
-	gameSetId,
+	gameIdSet,
 	gameStart,
 	gameStartCountdown,
 	gameStopCountdown
@@ -56,7 +56,7 @@ export {
 	gamePieceUpdate,
 	gamePiecesUpdate,
 	gameRoomSet,
-	gameSetId,
+	gameIdSet,
 	gameStart,
 	gameStartCountdown,
 	gameStopCountdown,
