@@ -7,7 +7,7 @@ const initialErrorState = {
 	errorTooManyMembers: false
 }
 
-const errors = (state = initialErrorState, action) => {
+const errors = (state = initialErrorState, action = { type: null }) => {
 	switch (action.type) {
 		case types.ERROR_ROOMNAME_TAKEN:
 			return { ...state, errorRoom: true }

@@ -10,7 +10,7 @@ const initialGameState = {
 	countDown: false
 }
 
-const games = (state = initialGameState, action) => {
+const games = (state = initialGameState, action = { type: null }) => {
 	switch (action.type) {
 		case types.GAME_BOARDS_UPDATE:
 			return { ...state, boards: action.boards }

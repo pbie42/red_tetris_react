@@ -52,4 +52,12 @@ describe('User Reducers', () => {
 		})
 		expect(updatedState.username).to.equal('')
 	})
+	it('sets user ID', () => {
+		const state = { id: '' }
+		const updatedState = user(state, {
+			type: 'USER_SET_ID',
+			id: '5sg15fg3'
+		})
+		expect(updatedState.id).to.equal('5sg15fg3')
+	})
 })

@@ -6,7 +6,10 @@ const initialConnectionState = {
 	rooms: false
 }
 
-const connection = (state = initialConnectionState, action) => {
+const connection = (
+	state = initialConnectionState,
+	action = { type: null }
+) => {
 	switch (action.type) {
 		case types.CONNECTED:
 			return { ...state, connected: true }
