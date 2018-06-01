@@ -24,7 +24,8 @@ const games = (state = initialGameState, action = { type: null }) => {
 				boards: [],
 				id: '',
 				members: [],
-				roomName: ''
+				roomName: '',
+				piece: ''
 			}
 
 		case types.GAME_ID_SET:
@@ -47,9 +48,6 @@ const games = (state = initialGameState, action = { type: null }) => {
 
 		case types.GAME_PIECE_UPDATE:
 			return { ...state, piece: action.piece }
-
-		case types.GAME_REMOVE_COUNTDOWN:
-			return { ...state, countDown: false }
 
 		case types.GAME_ROOM_SET:
 			return { ...state, roomName: action.roomName }
