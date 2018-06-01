@@ -12,12 +12,6 @@ export const roomAddUser = (username, roomName) => ({
 	username
 })
 
-export const roomAdded = (roomName, members) => ({
-	type: types.ROOM_ADDED,
-	roomName,
-	members
-})
-
 export const roomRemoveUser = (username, roomName) => ({
 	type: types.ROOM_REMOVE_USER,
 	roomName,

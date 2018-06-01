@@ -112,14 +112,6 @@ describe('Actions', () => {
 				members
 			})
 		})
-		it('roomAdded returns an object for the room added action', () => {
-			const roomAddedAction = roomAdded(roomName, members)
-			expect(roomAddedAction).to.eql({
-				type: 'ROOM_ADDED',
-				roomName,
-				members
-			})
-		})
 		it('roomsPopulateList returns an object for updating rooms array action', () => {
 			const populateRoomsListAction = roomsPopulateList(rooms)
 			expect(populateRoomsListAction).to.eql({

@@ -1,10 +1,9 @@
 import * as types from '../constants/ActionTypes'
 import { roomAddUser, roomRemoveUser } from '../utils'
 
-const rooms = (state = [], action) => {
+const rooms = (state = [], action = { type: null }) => {
 	let rooms
 	switch (action.type) {
-		case types.ROOM_ADDED:
 		case types.ROOM_ADD_ROOM:
 			return state.concat([
 				{

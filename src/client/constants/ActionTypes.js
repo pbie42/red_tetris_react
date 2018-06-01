@@ -41,7 +41,6 @@ export const ERROR_USERNAME_TAKEN = 'ERROR_USERNAME_TAKEN'
 //------------------------------------------------------------------------------Room
 export const ROOMS_LIST = 'ROOMS_LIST'
 export const ROOMS_LIST_RECEIVED = 'ROOMS_LIST_RECEIVED'
-export const ROOM_ADDED = 'ROOM_ADDED'
 export const ROOM_ADD_ROOM = 'ROOM_ADD_ROOM'
 export const ROOM_ADD_USER = 'ROOM_ADD_USER'
 export const ROOM_REMOVE_USER = 'ROOM_REMOVE_USER'
