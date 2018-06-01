@@ -24,7 +24,7 @@ function calcPieceBottom(shape, piece) {
 	return bottom
 }
 
-function calcOffsets(piece, shape) {
+function calcOffsets(shape, piece) {
 	const start = calcPieceStart(shape, piece)
 	const end = calcPieceEnd(shape, piece)
 	return { start, end }

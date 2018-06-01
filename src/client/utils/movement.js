@@ -113,7 +113,7 @@ function rotatePiece(positions, savedBoard, statePiece) {
 	let index
 	if ((index = position + 1) > 3) index = 0
 	let newPos = positions[index]
-	let offset = calcOffsets(piece, newPos.shape)
+	let offset = calcOffsets(newPos.shape, piece)
 	let result = tryRotations(locations, newPos, offset, savedBoard, statePiece)
 	if (piece === 'i' && !result.success) {
 		result = tryRotations(locationsI, newPos, offset, savedBoard, statePiece)
