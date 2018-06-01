@@ -17,6 +17,8 @@ import {
 } from './pieces'
 
 function movePieceRight(statePiece, savedBoard) {
+	console.log(`statePiece`, JSON.stringify(statePiece))
+	console.log(`savedBoard`, JSON.stringify(savedBoard))
 	let { shape, location, piece, set } = statePiece
 	let offset = calcPieceEnd(shape, piece)
 	if (location.x + 2 + offset <= 10 && !set) {
