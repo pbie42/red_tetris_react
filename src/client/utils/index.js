@@ -13,7 +13,6 @@ import {
 	verifyUsername
 } from './verify'
 import { parseUrl } from './parse_url'
-import { pieceOrder } from './piece'
 import { roomAddUser, roomRemoveUser } from './rooms'
 import {
 	handleStatePiece,
@@ -97,7 +96,6 @@ export {
 	newBoard,
 	nextPiece,
 	parseUrl,
-	pieceOrder,
 	placePiece,
 	placePieces,
 	positionsI,
