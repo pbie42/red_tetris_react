@@ -214,16 +214,17 @@ function getPiecePositionShape(piece) {
 	if (piece.piece === 's') return getS(piece)
 	if (piece.piece === 't') return getT(piece)
 	if (piece.piece === 'z') return getZ(piece)
+	return piece
 }
 
-function setColorClass(i, x, board) {
-	if (board[i][x] === 'i') return 'cyan'
-	if (board[i][x] === 'j') return 'blue'
-	if (board[i][x] === 'l') return 'orange'
-	if (board[i][x] === 'o') return 'yellow'
-	if (board[i][x] === 's') return 'green'
-	if (board[i][x] === 't') return 'purple'
-	if (board[i][x] === 'z') return 'red'
+function setColorClass(y, x, board) {
+	if (board[y][x] === 'i') return 'cyan'
+	if (board[y][x] === 'j') return 'blue'
+	if (board[y][x] === 'l') return 'orange'
+	if (board[y][x] === 'o') return 'yellow'
+	if (board[y][x] === 's') return 'green'
+	if (board[y][x] === 't') return 'purple'
+	if (board[y][x] === 'z') return 'red'
 	return ''
 }
 
