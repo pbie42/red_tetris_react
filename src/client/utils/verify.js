@@ -68,7 +68,7 @@ function verifyPlayerHandled(props, doneUser, doneRoom) {
 	return false
 }
 
-function verifyGameStart({
+function verifyGameMessageStart({
 	message,
 	msgStart,
 	msgWaitPlayers,
@@ -118,7 +118,7 @@ function verifyRotation(location, newPosition, offset, savedBoard, piece) {
 export {
 	verifyConnection,
 	verifyCreatorMessage,
-	verifyGameStart,
+	verifyGameMessageStart,
 	verifyMemberCount,
 	verifyMembers,
 	verifyPlacement,

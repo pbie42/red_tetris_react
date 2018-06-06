@@ -1,7 +1,7 @@
 import {
 	verifyConnection,
 	verifyCreatorMessage,
-	verifyGameStart,
+	verifyGameMessageStart,
 	verifyMemberCount,
 	verifyMembers,
 	verifyPlacement,
@@ -115,7 +115,7 @@ export {
 	tryRotations,
 	verifyConnection,
 	verifyCreatorMessage,
-	verifyGameStart,
+	verifyGameMessageStart,
 	verifyMemberCount,
 	verifyMembers,
 	verifyPlacement,

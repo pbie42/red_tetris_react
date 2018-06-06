@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {
 	verifyCreatorMessage,
-	verifyGameStart,
+	verifyGameMessageStart,
 	verifyPlayerMessage
 } from '../../utils'
 
@@ -55,7 +55,8 @@ function GameMessageComponent(props) {
 
 	C.handleCountdownMessage = function() {
 		const { message, msgGameStarting } = C.state
-		if (verifyGameStart(C.state)) C.setState({ message: msgGameStarting })
+		if (verifyGameMessageStart(C.state))
+			C.setState({ message: msgGameStarting })
 		else if (message === msgGameStarting) C.setState({ message: '4' })
 		else if (message === '4') C.setState({ message: '3' })
 		else if (message === '3') C.setState({ message: '2' })
