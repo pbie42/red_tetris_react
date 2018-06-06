@@ -46,7 +46,7 @@ function BoardComponent(props) {
 				C.state.interval = setInterval(function() {
 					C.handleKeydown({ keyCode: 40 })
 				}, 750)
-				piece = nextPiece(piece, C.props.piece, current)
+				piece = nextPiece(piece, C.props.piece)
 				C.setState({ current: ++current })
 				if (!gameOver) C.setHandleBuild(piece, board, savedBoard)
 				C.props.gameNewPiece(roomId, roomName, username)
@@ -106,7 +106,7 @@ function BoardComponent(props) {
 		C.props.gameNewPiece(roomId, roomName, username)
 		if (current === 90)
 			C.props.gameNewPieces(C.props.roomId, C.props.roomName)
-		piece = nextPiece(piece, C.props.piece, current)
+		piece = nextPiece(piece, C.props.piece)
 		C.setState({ current: ++current })
 		if (!gameOver) C.setHandleBuild(piece, board, savedBoard)
 	}

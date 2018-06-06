@@ -264,7 +264,7 @@ function handlePiece(piece, board, savedBoard) {
 	else return placePiece(piece, fillBoard, location)
 }
 
-function nextPiece(piece, newPiece, current) {
+function nextPiece(piece, newPiece) {
 	piece.piece = newPiece
 	piece.location = { x: 3, y: 0 }
 	let position = getPiecePositionShape(piece)
