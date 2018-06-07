@@ -1,5 +1,15 @@
 import { expect } from 'chai'
-import { movePieceDown, movePieceLeft, movePieceRight, setupLocations } from '../../src/client/utils'
+import {
+	calcOffsets,
+	movePieceDown,
+	movePieceLeft,
+	movePieceRight,
+	positionsI,
+	positionsZ,
+	setupLocations,
+	tryRotations,
+	verifyRotation
+} from '../../src/client/utils'
 
 describe('Movement Utils', () => {
 	let shape = [[0, 0, 0, 0], [0, 0, 0, 0], ['i', 'i', 'i', 'i'], [0, 0, 0, 0]]
@@ -343,6 +353,73 @@ describe('Movement Utils', () => {
 			expect(result.locations[2]).to.eql({ x: location.x - 1, y: location.y })
 			expect(result.locationsI[0]).to.eql({ x: location.x + 2, y: location.y })
 			expect(result.locationsI[1]).to.eql({ x: location.x - 2, y: location.y })
+		})
+	})
+	describe('tryRotations', () => {
+		let savedBoard = [
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 'i', 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 'i', 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 'i', 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 'i', 0, 0, 0, 'z', 0, 0, 0, 0],
+			['z', 'z', 0, 0, 0, 'z', 'z', 0, 0, 0, 0],
+			[0, 'z', 'z', 0, 0, 'z', 'l', 0, 't', 0, 0],
+			['i', 'i', 'i', 'i', 'l', 'l', 'l', 't', 't', 't', 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+		]
+		it('returns true with new location if the piece can rotate', () => {
+			let piece = {
+				location: { "x": 3, "y": 5 },
+				shape: [
+					[0, 0, 0, 0],
+					["z", "z", 0, 0],
+					[0, "z", "z", 0],
+					[0, 0, 0, 0]],
+				piece: "z",
+				position: 0,
+				set: false
+			}
+			let newPos = positionsZ[1]
+			let offset = calcOffsets(newPos.shape, piece.piece)
+			let locations = setupLocations(piece.location)
+			let result = tryRotations(locations.locations, newPos, offset, savedBoard, piece)
+			expect(result.success).to.be.true
+			expect(result.newLocation).to.eql(piece.location)
+		})
+		it('returns false with empty location object if the piece can not rotate', () => {
+			let piece = {
+				location: { "x": 1, "y": 16 },
+				position: 3,
+				shape: [
+					[0, 'i', 0, 0],
+					[0, 'i', 0, 0],
+					[0, 'i', 0, 0],
+					[0, 'i', 0, 0]],
+				piece: "z",
+				set: false
+			}
+			let newPos = positionsI[0]
+			let offset = calcOffsets(newPos.shape, piece.piece)
+			let locations = setupLocations(piece.location)
+			let result = tryRotations(locations.locations, newPos, offset, savedBoard, piece)
+			expect(result.success).to.be.false
+			expect(result.newLocation).to.eql({})
 		})
 	})
 })
