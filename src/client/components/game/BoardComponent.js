@@ -33,17 +33,17 @@ function BoardComponent(props) {
 		current: 0
 	}
 
-	C.componentDidMount = function() {
+	C.componentDidMount = function () {
 		C.buildBoard()
 		window.addEventListener('keydown', C.handleKeydown)
 	}
 
-	C.componentDidUpdate = function() {
+	C.componentDidUpdate = function () {
 		let { board, piece, savedBoard, current } = C.state
 		const { countDown, roomId, roomName, username } = C.props
 		if (countDown && !C.state.countDown) {
 			setTimeout(() => {
-				C.state.interval = setInterval(function() {
+				C.state.interval = setInterval(function () {
 					C.handleKeydown({ keyCode: 40 })
 				}, 750)
 				piece = nextPiece(piece, C.props.piece)
@@ -55,12 +55,12 @@ function BoardComponent(props) {
 		}
 	}
 
-	C.componentWillUnmount = function() {
+	C.componentWillUnmount = function () {
 		clearInterval(C.state.interval)
 		window.removeEventListener('keydown', C.handleKeydown)
 	}
 
-	C.handleUpdate = function(board, savedBoard) {
+	C.handleUpdate = function (board, savedBoard) {
 		let { userId, roomName, username, doneUser, doneRoom } = C.props
 		if (savedBoard.length > 0)
 			C.setState({ savedBoard: checkLines(savedBoard) })
@@ -68,7 +68,7 @@ function BoardComponent(props) {
 			C.props.gameBoardUpdate(board, userId, roomName, username)
 	}
 
-	C.buildBoard = function() {
+	C.buildBoard = function () {
 		let color = ''
 		if (grid) {
 			grid.innerHTML = ''
@@ -89,18 +89,18 @@ function BoardComponent(props) {
 		}
 	}
 
-	C.setHandleBuild = function(piece, board, savedBoard) {
+	C.setHandleBuild = function (piece, board, savedBoard) {
 		C.setState({ board: handlePiece(piece, board, savedBoard) })
 		C.handleUpdate(board, savedBoard)
 		C.buildBoard()
 	}
 
-	C.handleGameOver = function() {
+	C.handleGameOver = function () {
 		clearInterval(C.state.interval)
 		C.props.gameOver()
 	}
 
-	C.handleNewPiece = function() {
+	C.handleNewPiece = function () {
 		let { board, piece, savedBoard, current } = C.state
 		let { roomId, roomName, username } = C.props
 		C.props.gameNewPiece(roomId, roomName, username)
@@ -111,14 +111,14 @@ function BoardComponent(props) {
 		if (!gameOver) C.setHandleBuild(piece, board, savedBoard)
 	}
 
-	C.handleKeydown = function(event) {
+	C.handleKeydown = function (event) {
 		const leftArrow = 37
 		const upArrow = 38
 		const rightArrow = 39
 		const downArrow = 40
 		let result
 		let { board, piece, savedBoard } = C.state
-		console.log(`C.props.roomName BOARD`, C.props.roomName)
+		// console.log(`C.props.roomName BOARD`, C.props.roomName)
 		if (!gameOver && C.props.gameStarted) {
 			switch (event.keyCode) {
 				case leftArrow:
@@ -139,6 +139,9 @@ function BoardComponent(props) {
 					break
 
 				case downArrow:
+					console.log(`piece`, JSON.stringify(piece))
+					console.log(`board`, JSON.stringify(board))
+					console.log(`savedBoard`, JSON.stringify(savedBoard))
 					result = movePieceDown(piece, board, savedBoard)
 					gameOver = result.gameOverCheck
 					savedBoard = result.savedBoard

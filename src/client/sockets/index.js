@@ -32,17 +32,17 @@ const setupSocket = dispatch => {
 		const data = JSON.parse(event)
 		switch (data.type) {
 			case types.USER_USERNAME_SET:
-				console.log(`USER_USERNAME_SET`)
+				// console.log(`USER_USERNAME_SET`)
 				dispatch(userUsernameSet())
 				break
 			case types.USERS_LIST:
-				console.log(`USERS_LIST`)
+				// console.log(`USERS_LIST`)
 				// console.log(`data.users`, data.users)
 				dispatch(usersPopulateList(data.users))
 				dispatch(usersListReceived())
 				break
 			case types.USER_SET_ID:
-				console.log(`SET_ID`)
+				// console.log(`SET_ID`)
 				// console.log(`data`, data)
 				dispatch(userSetId(data.id))
 				break
@@ -55,35 +55,35 @@ const setupSocket = dispatch => {
 		const data = JSON.parse(event)
 		switch (data.type) {
 			case types.GAME_MEMBERS_UPDATE:
-				console.log(`GAME_MEMBERS_UPDATE`)
+				// console.log(`GAME_MEMBERS_UPDATE`)
 				// console.log(`data`, data)
 				dispatch(gameMembersUpdate(data.members))
 				break
 			case types.GAME_PIECE_UPDATE:
-				console.log(`GAME_PIECE_UPDATE`)
+				// console.log(`GAME_PIECE_UPDATE`)
 				dispatch(gamePieceUpdate(data.piece))
 				break
 			case types.GAME_PIECES:
-				console.log(`GAME_PIECES`)
+				// console.log(`GAME_PIECES`)
 				dispatch(gamePiecesUpdate(data.pieces))
 				break
 			case types.GAME_ID_SET:
-				console.log(`GAME_ID_SET`)
+				// console.log(`GAME_ID_SET`)
 				// console.log(`data`, data)
 				dispatch(gameIdSet(data.id))
 				break
 			case types.GAME_BOARDS_UPDATE:
-				console.log(`GAME_BOARDS_UPDATE`)
+				// console.log(`GAME_BOARDS_UPDATE`)
 				// console.log(`data`, data)
 				dispatch(gameBoardsUpdate(data.boards))
 				break
 			case types.GAME_START_COUNTDOWN:
-				console.log(`GAME_START_COUNTDOWN`)
+				// console.log(`GAME_START_COUNTDOWN`)
 				// console.log(`data`, data)
 				dispatch(gameStartCountdown())
 				break
 			case types.GAME_STOP_COUNTDOWN:
-				console.log(`GAME_STOP_COUNTDOWN`)
+				// console.log(`GAME_STOP_COUNTDOWN`)
 				// console.log(`data`, data)
 				dispatch(gameStopCountdown())
 				break
