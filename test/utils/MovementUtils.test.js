@@ -206,40 +206,130 @@ describe('Movement Utils', () => {
 			let savedBoard = []
 			let result = movePieceDown(piece, board, savedBoard)
 			expect(result.newLocation).to.eql({ x: 3, y: 21 })
+			expect(result.set).to.be.false
+			expect(result.gameOverCheck).to.be.false
+			expect(result.newPiece).to.be.false
+			expect(result.savedBoard).to.eql([])
 		})
-		xit('returns previous location coordinates if the piece can not move down because a piece will be in the way', () => {
+		it('returns previous location coordinates if the piece can not move down further because it is at the bottom', () => {
+			let board = [
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, "z", "z", 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, "z", "z", 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+			]
 			let piece = {
-				piece: 'i',
-				position: 0,
+				location: { "x": 3, "y": 21 },
 				shape: [
 					[0, 0, 0, 0],
-					['i', 'i', 'i', 'i'],
-					[0, 0, 0, 0],
-					[0, 0, 0, 0]
-				],
-				location: { x: 0, y: 15 },
-				prevPiece: 'o',
+					["z", "z", 0, 0],
+					[0, "z", "z", 0],
+					[0, 0, 0, 0]],
+				piece: "z",
+				position: 0,
 				set: false
 			}
-			let result = movePieceDown(piece, savedBoard)
-			expect(result.newLocation).to.eql({ x: 0, y: 15 })
+			let savedBoard = []
+			let result = movePieceDown(piece, board, savedBoard)
+			expect(result.newLocation).to.eql({ x: 3, y: 21 })
+			expect(result.set).to.be.false
+			expect(result.gameOverCheck).to.be.false
+			expect(result.newPiece).to.be.true
+			expect(result.savedBoard).to.eql(board)
 		})
-		xit('returns previous location coordinates if the piece can not move down because of the border', () => {
+		it('returns previous location coordinates if the piece can not move down because a piece will be in the way', () => {
+			let board = [
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, "j", "j", 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, "j", 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, "j", 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, "l", 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, "l", 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, "l", "l", 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+			]
+			let savedBoard = [
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, "l", 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, "l", 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, "l", "l", 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+			]
 			let piece = {
-				piece: 'i',
-				position: 0,
+				location: { "x": 3, "y": 17 },
 				shape: [
 					[0, 0, 0, 0],
-					['i', 'i', 'i', 'i'],
-					[0, 0, 0, 0],
-					[0, 0, 0, 0]
-				],
-				location: { x: 0, y: 10 },
-				prevPiece: 'o',
+					[0, "j", "j", 0],
+					[0, "j", 0, 0],
+					[0, "j", 0, 0]],
+				piece: "j",
+				position: 1,
 				set: false
 			}
-			let result = movePieceDown(piece, savedBoard)
-			expect(result.newLocation).to.eql({ x: 0, y: 10 })
+			let result = movePieceDown(piece, board, savedBoard)
+			expect(result.newLocation).to.eql({ x: 3, y: 17 })
+			expect(result.set).to.be.true
+			expect(result.gameOverCheck).to.be.false
+			expect(result.newPiece).to.be.false
+			expect(result.savedBoard).to.eql(board)
 		})
 	})
 	describe('setupLocations', () => {

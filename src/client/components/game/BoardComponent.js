@@ -118,7 +118,6 @@ function BoardComponent(props) {
 		const downArrow = 40
 		let result
 		let { board, piece, savedBoard } = C.state
-		// console.log(`C.props.roomName BOARD`, C.props.roomName)
 		if (!gameOver && C.props.gameStarted) {
 			switch (event.keyCode) {
 				case leftArrow:
@@ -139,9 +138,6 @@ function BoardComponent(props) {
 					break
 
 				case downArrow:
-					console.log(`piece`, JSON.stringify(piece))
-					console.log(`board`, JSON.stringify(board))
-					console.log(`savedBoard`, JSON.stringify(savedBoard))
 					result = movePieceDown(piece, board, savedBoard)
 					gameOver = result.gameOverCheck
 					savedBoard = result.savedBoard
