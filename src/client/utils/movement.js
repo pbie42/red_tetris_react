@@ -107,6 +107,8 @@ function tryRotations(locations, newPosition, offset, savedBoard, piece) {
 }
 
 function rotatePiece(positions, savedBoard, statePiece) {
+	console.log(`savedBoard`, JSON.stringify(savedBoard))
+	console.log(`statePiece`, JSON.stringify(statePiece))
 	let { piece, position, location } = statePiece
 	const locationsObj = setupLocations(location)
 	let { locations, locationsI } = locationsObj

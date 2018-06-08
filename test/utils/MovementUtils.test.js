@@ -1,11 +1,13 @@
 import { expect } from 'chai'
 import {
 	calcOffsets,
+	handleStatePiece,
 	movePieceDown,
 	movePieceLeft,
 	movePieceRight,
 	positionsI,
 	positionsZ,
+	rotatePiece,
 	setupLocations,
 	tryRotations,
 	verifyRotation
@@ -420,6 +422,164 @@ describe('Movement Utils', () => {
 			let result = tryRotations(locations.locations, newPos, offset, savedBoard, piece)
 			expect(result.success).to.be.false
 			expect(result.newLocation).to.eql({})
+		})
+	})
+	describe('rotatePiece', () => {
+		let savedBoard = [
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 'i', 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 'i', 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 'i', 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 'i', 0, 0, 0, 'z', 0, 0, 0, 0],
+			['z', 'z', 0, 0, 0, 'z', 'z', 0, 0, 0, 0],
+			[0, 'z', 'z', 0, 0, 'z', 'l', 0, 't', 0, 0],
+			['i', 'i', 'i', 'i', 'l', 'l', 'l', 't', 't', 't', 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+		]
+		it('returns success true with a new pos and location if the piece was able to rotate', () => {
+			let piece = {
+				location: { "x": 3, "y": 5 },
+				shape: [
+					[0, 0, 0, 0],
+					["z", "z", 0, 0],
+					[0, "z", "z", 0],
+					[0, 0, 0, 0]],
+				piece: "z",
+				position: 0,
+				set: false
+			}
+			let result = rotatePiece(positionsZ, savedBoard, piece)
+			expect(result.success).to.be.true
+			expect(result.newPos).to.eql(positionsZ[1])
+			expect(result.index).to.equal(1)
+			expect(result.newLoc).to.eql(piece.location)
+		})
+		it('returns success false if the rotation would not work', () => {
+			let piece = {
+				location: { "x": 1, "y": 16 },
+				position: 3,
+				shape: [
+					[0, 'i', 0, 0],
+					[0, 'i', 0, 0],
+					[0, 'i', 0, 0],
+					[0, 'i', 0, 0]],
+				piece: "z",
+				set: false
+			}
+			let result = rotatePiece(positionsI, savedBoard, piece)
+			expect(result.success).to.be.false
+			expect(result.newPos).to.eql(positionsI[0])
+			expect(result.index).to.equal(0)
+			expect(result.newLoc).to.eql({})
+		})
+		it('returns success true on second try with i piece', () => {
+			let iBoard = [
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				["o", "o", 0, 0, "l", 0, "t", 0, "o", "o", 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+			]
+			let piece = {
+				location: { "x": -2, "y": 10 },
+				shape: [
+					[0, 0, "i", 0],
+					[0, 0, "i", 0],
+					[0, 0, "i", 0],
+					[0, 0, "i", 0]
+				],
+				piece: "i",
+				position: 1,
+				set: false
+			}
+			let result = rotatePiece(positionsI, iBoard, piece)
+			expect(result.success).to.be.true
+			expect(result.newPos).to.eql(positionsI[2])
+			expect(result.index).to.equal(2)
+			expect(result.newLoc).to.eql({ x: 0, y: 10 })
+		})
+	})
+	describe('handleStatePiece', () => {
+		it('takes the current piece state and updates it with rotation results from rotatePiece', () => {
+			let iBoard = [
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				["o", "o", 0, 0, "l", 0, "t", 0, "o", "o", 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+			]
+			let piece = {
+				location: { "x": -2, "y": 10 },
+				shape: [
+					[0, 0, "i", 0],
+					[0, 0, "i", 0],
+					[0, 0, "i", 0],
+					[0, 0, "i", 0]
+				],
+				piece: "i",
+				position: 1,
+				set: false
+			}
+			let result = rotatePiece(positionsI, iBoard, piece)
+			let newPieceState = handleStatePiece(piece, result)
+			expect(newPieceState.success).to.be.true
+			expect(newPieceState.statePiece).to.eql({ location: { x: 0, y: 10 } })
 		})
 	})
 })
