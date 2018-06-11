@@ -154,7 +154,7 @@ function rotatePieces(statePiece, savedBoard) {
 			return handleStatePiece(statePiece, res)
 
 		default:
-			return statePiece
+			return { success: false, statePiece }
 	}
 }
 

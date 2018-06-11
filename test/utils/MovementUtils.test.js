@@ -6,8 +6,14 @@ import {
 	movePieceLeft,
 	movePieceRight,
 	positionsI,
+	positionsJ,
+	positionsL,
+	positionsO,
+	positionsS,
+	positionsT,
 	positionsZ,
 	rotatePiece,
+	rotatePieces,
 	setupLocations,
 	tryRotations,
 	verifyRotation
@@ -199,19 +205,20 @@ describe('Movement Utils', () => {
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, "z", "z", 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, "z", "z", 0, 0, 0, 0, 0],
+				[0, 0, 0, 'z', 'z', 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 'z', 'z', 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 			]
 			let piece = {
-				location: { "x": 3, "y": 20 },
+				location: { x: 3, y: 20 },
 				shape: [
 					[0, 0, 0, 0],
-					["z", "z", 0, 0],
-					[0, "z", "z", 0],
-					[0, 0, 0, 0]],
-				piece: "z",
+					['z', 'z', 0, 0],
+					[0, 'z', 'z', 0],
+					[0, 0, 0, 0]
+				],
+				piece: 'z',
 				position: 0,
 				set: false
 			}
@@ -247,18 +254,19 @@ describe('Movement Utils', () => {
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, "z", "z", 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, "z", "z", 0, 0, 0, 0, 0],
+				[0, 0, 0, 'z', 'z', 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 'z', 'z', 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 			]
 			let piece = {
-				location: { "x": 3, "y": 21 },
+				location: { x: 3, y: 21 },
 				shape: [
 					[0, 0, 0, 0],
-					["z", "z", 0, 0],
-					[0, "z", "z", 0],
-					[0, 0, 0, 0]],
-				piece: "z",
+					['z', 'z', 0, 0],
+					[0, 'z', 'z', 0],
+					[0, 0, 0, 0]
+				],
+				piece: 'z',
 				position: 0,
 				set: false
 			}
@@ -290,12 +298,12 @@ describe('Movement Utils', () => {
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, "j", "j", 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, "j", 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, "j", 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, "l", 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, "l", 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, "l", "l", 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 'j', 'j', 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 'j', 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 'j', 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 'l', 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 'l', 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 'l', 'l', 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 			]
 			let savedBoard = [
@@ -320,19 +328,20 @@ describe('Movement Utils', () => {
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, "l", 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, "l", 0, 0, 0, 0, 0, 0],
-				[0, 0, 0, 0, "l", "l", 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 'l', 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 'l', 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 'l', 'l', 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 			]
 			let piece = {
-				location: { "x": 3, "y": 17 },
+				location: { x: 3, y: 17 },
 				shape: [
 					[0, 0, 0, 0],
-					[0, "j", "j", 0],
-					[0, "j", 0, 0],
-					[0, "j", 0, 0]],
-				piece: "j",
+					[0, 'j', 'j', 0],
+					[0, 'j', 0, 0],
+					[0, 'j', 0, 0]
+				],
+				piece: 'j',
 				position: 1,
 				set: false
 			}
@@ -351,10 +360,22 @@ describe('Movement Utils', () => {
 			expect(result.locations.length).to.equal(3)
 			expect(result.locationsI.length).to.equal(2)
 			expect(result.locations[0]).to.eql(location)
-			expect(result.locations[1]).to.eql({ x: location.x + 1, y: location.y })
-			expect(result.locations[2]).to.eql({ x: location.x - 1, y: location.y })
-			expect(result.locationsI[0]).to.eql({ x: location.x + 2, y: location.y })
-			expect(result.locationsI[1]).to.eql({ x: location.x - 2, y: location.y })
+			expect(result.locations[1]).to.eql({
+				x: location.x + 1,
+				y: location.y
+			})
+			expect(result.locations[2]).to.eql({
+				x: location.x - 1,
+				y: location.y
+			})
+			expect(result.locationsI[0]).to.eql({
+				x: location.x + 2,
+				y: location.y
+			})
+			expect(result.locationsI[1]).to.eql({
+				x: location.x - 2,
+				y: location.y
+			})
 		})
 	})
 	describe('tryRotations', () => {
@@ -387,39 +408,53 @@ describe('Movement Utils', () => {
 		]
 		it('returns true with new location if the piece can rotate', () => {
 			let piece = {
-				location: { "x": 3, "y": 5 },
+				location: { x: 3, y: 5 },
 				shape: [
 					[0, 0, 0, 0],
-					["z", "z", 0, 0],
-					[0, "z", "z", 0],
-					[0, 0, 0, 0]],
-				piece: "z",
+					['z', 'z', 0, 0],
+					[0, 'z', 'z', 0],
+					[0, 0, 0, 0]
+				],
+				piece: 'z',
 				position: 0,
 				set: false
 			}
 			let newPos = positionsZ[1]
 			let offset = calcOffsets(newPos.shape, piece.piece)
 			let locations = setupLocations(piece.location)
-			let result = tryRotations(locations.locations, newPos, offset, savedBoard, piece)
+			let result = tryRotations(
+				locations.locations,
+				newPos,
+				offset,
+				savedBoard,
+				piece
+			)
 			expect(result.success).to.be.true
 			expect(result.newLocation).to.eql(piece.location)
 		})
 		it('returns false with empty location object if the piece can not rotate', () => {
 			let piece = {
-				location: { "x": 1, "y": 16 },
+				location: { x: 1, y: 16 },
 				position: 3,
 				shape: [
 					[0, 'i', 0, 0],
 					[0, 'i', 0, 0],
 					[0, 'i', 0, 0],
-					[0, 'i', 0, 0]],
-				piece: "z",
+					[0, 'i', 0, 0]
+				],
+				piece: 'z',
 				set: false
 			}
 			let newPos = positionsI[0]
 			let offset = calcOffsets(newPos.shape, piece.piece)
 			let locations = setupLocations(piece.location)
-			let result = tryRotations(locations.locations, newPos, offset, savedBoard, piece)
+			let result = tryRotations(
+				locations.locations,
+				newPos,
+				offset,
+				savedBoard,
+				piece
+			)
 			expect(result.success).to.be.false
 			expect(result.newLocation).to.eql({})
 		})
@@ -454,13 +489,14 @@ describe('Movement Utils', () => {
 		]
 		it('returns success true with a new pos and location if the piece was able to rotate', () => {
 			let piece = {
-				location: { "x": 3, "y": 5 },
+				location: { x: 3, y: 5 },
 				shape: [
 					[0, 0, 0, 0],
-					["z", "z", 0, 0],
-					[0, "z", "z", 0],
-					[0, 0, 0, 0]],
-				piece: "z",
+					['z', 'z', 0, 0],
+					[0, 'z', 'z', 0],
+					[0, 0, 0, 0]
+				],
+				piece: 'z',
 				position: 0,
 				set: false
 			}
@@ -472,14 +508,15 @@ describe('Movement Utils', () => {
 		})
 		it('returns success false if the rotation would not work', () => {
 			let piece = {
-				location: { "x": 1, "y": 16 },
+				location: { x: 1, y: 16 },
 				position: 3,
 				shape: [
 					[0, 'i', 0, 0],
 					[0, 'i', 0, 0],
 					[0, 'i', 0, 0],
-					[0, 'i', 0, 0]],
-				piece: "z",
+					[0, 'i', 0, 0]
+				],
+				piece: 'z',
 				set: false
 			}
 			let result = rotatePiece(positionsI, savedBoard, piece)
@@ -513,18 +550,18 @@ describe('Movement Utils', () => {
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				["o", "o", 0, 0, "l", 0, "t", 0, "o", "o", 0],
+				['o', 'o', 0, 0, 'l', 0, 't', 0, 'o', 'o', 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 			]
 			let piece = {
-				location: { "x": -2, "y": 10 },
+				location: { x: -2, y: 10 },
 				shape: [
-					[0, 0, "i", 0],
-					[0, 0, "i", 0],
-					[0, 0, "i", 0],
-					[0, 0, "i", 0]
+					[0, 0, 'i', 0],
+					[0, 0, 'i', 0],
+					[0, 0, 'i', 0],
+					[0, 0, 'i', 0]
 				],
-				piece: "i",
+				piece: 'i',
 				position: 1,
 				set: false
 			}
@@ -561,25 +598,248 @@ describe('Movement Utils', () => {
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-				["o", "o", 0, 0, "l", 0, "t", 0, "o", "o", 0],
+				['o', 'o', 0, 0, 'l', 0, 't', 0, 'o', 'o', 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 			]
 			let piece = {
-				location: { "x": -2, "y": 10 },
+				location: { x: -2, y: 10 },
 				shape: [
-					[0, 0, "i", 0],
-					[0, 0, "i", 0],
-					[0, 0, "i", 0],
-					[0, 0, "i", 0]
+					[0, 0, 'i', 0],
+					[0, 0, 'i', 0],
+					[0, 0, 'i', 0],
+					[0, 0, 'i', 0]
 				],
-				piece: "i",
+				piece: 'i',
 				position: 1,
 				set: false
 			}
 			let result = rotatePiece(positionsI, iBoard, piece)
 			let newPieceState = handleStatePiece(piece, result)
 			expect(newPieceState.success).to.be.true
-			expect(newPieceState.statePiece).to.eql({ location: { x: 0, y: 10 } })
+			expect(newPieceState.statePiece).to.eql({
+				location: { x: 0, y: 10 },
+				piece: 'i',
+				position: 2,
+				shape: [
+					[0, 0, 0, 0],
+					[0, 0, 0, 0],
+					['i', 'i', 'i', 'i'],
+					[0, 0, 0, 0]
+				],
+				set: false
+			})
+		})
+		it('returns success false and an unchanged piece state if rotation is not successfull', () => {
+			let savedBoard = [
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 'i', 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 'i', 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 'i', 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 'i', 0, 0, 0, 'z', 0, 0, 0, 0],
+				['z', 'z', 0, 0, 0, 'z', 'z', 0, 0, 0, 0],
+				[0, 'z', 'z', 0, 0, 'z', 'l', 0, 't', 0, 0],
+				['i', 'i', 'i', 'i', 'l', 'l', 'l', 't', 't', 't', 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+			]
+			let piece = {
+				location: { x: 1, y: 16 },
+				position: 3,
+				shape: [
+					[0, 'i', 0, 0],
+					[0, 'i', 0, 0],
+					[0, 'i', 0, 0],
+					[0, 'i', 0, 0]
+				],
+				piece: 'z',
+				set: false
+			}
+			let result = rotatePiece(positionsI, savedBoard, piece)
+			let newPieceState = handleStatePiece(piece, result)
+			expect(newPieceState.success).to.be.false
+			expect(newPieceState.statePiece).to.eql(piece)
+		})
+	})
+	describe('rotatePieces', () => {
+		let savedBoard = [
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 'i', 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 'i', 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 'i', 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 'i', 0, 0, 0, 'z', 0, 0, 0, 0],
+			['z', 'z', 0, 0, 0, 'z', 'z', 0, 0, 0, 0],
+			[0, 'z', 'z', 0, 0, 'z', 'l', 0, 't', 0, 0],
+			['i', 'i', 'i', 'i', 'l', 'l', 'l', 't', 't', 't', 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+		]
+		it('returns updated piece state for I rotation', () => {
+			let statePiece = {
+				location: { x: 3, y: 5 },
+				position: 2,
+				shape: positionsI[2].shape,
+				piece: 'i',
+				set: false
+			}
+			let result = rotatePieces(statePiece, savedBoard)
+			expect(result.success).to.be.true
+			expect(result.statePiece).to.eql({
+				location: { x: 3, y: 5 },
+				position: 3,
+				shape: positionsI[3].shape,
+				piece: 'i',
+				set: false
+			})
+		})
+		it('returns updated piece state for J rotation', () => {
+			let statePiece = {
+				location: { x: 3, y: 5 },
+				position: 2,
+				shape: positionsJ[2].shape,
+				piece: 'j',
+				set: false
+			}
+			let result = rotatePieces(statePiece, savedBoard)
+			expect(result.success).to.be.true
+			expect(result.statePiece).to.eql({
+				location: { x: 3, y: 5 },
+				position: 3,
+				shape: positionsJ[3].shape,
+				piece: 'j',
+				set: false
+			})
+		})
+		it('returns updated piece state for L rotation', () => {
+			let statePiece = {
+				location: { x: 3, y: 5 },
+				position: 2,
+				shape: positionsL[2].shape,
+				piece: 'l',
+				set: false
+			}
+			let result = rotatePieces(statePiece, savedBoard)
+			expect(result.success).to.be.true
+			expect(result.statePiece).to.eql({
+				location: { x: 3, y: 5 },
+				position: 3,
+				shape: positionsL[3].shape,
+				piece: 'l',
+				set: false
+			})
+		})
+		it('returns updated piece state for O rotation', () => {
+			let statePiece = {
+				location: { x: 3, y: 5 },
+				position: 2,
+				shape: positionsO[2].shape,
+				piece: 'o',
+				set: false
+			}
+			let result = rotatePieces(statePiece, savedBoard)
+			expect(result.success).to.be.true
+			expect(result.statePiece).to.eql({
+				location: { x: 3, y: 5 },
+				position: 3,
+				shape: positionsO[3].shape,
+				piece: 'o',
+				set: false
+			})
+		})
+		it('returns updated piece state for S rotation', () => {
+			let statePiece = {
+				location: { x: 3, y: 5 },
+				position: 2,
+				shape: positionsS[2].shape,
+				piece: 's',
+				set: false
+			}
+			let result = rotatePieces(statePiece, savedBoard)
+			expect(result.success).to.be.true
+			expect(result.statePiece).to.eql({
+				location: { x: 3, y: 5 },
+				position: 3,
+				shape: positionsS[3].shape,
+				piece: 's',
+				set: false
+			})
+		})
+		it('returns updated piece state for T rotation', () => {
+			let statePiece = {
+				location: { x: 3, y: 5 },
+				position: 2,
+				shape: positionsT[2].shape,
+				piece: 't',
+				set: false
+			}
+			let result = rotatePieces(statePiece, savedBoard)
+			expect(result.success).to.be.true
+			expect(result.statePiece).to.eql({
+				location: { x: 3, y: 5 },
+				position: 3,
+				shape: positionsT[3].shape,
+				piece: 't',
+				set: false
+			})
+		})
+		it('returns updated piece state for Z rotation', () => {
+			let statePiece = {
+				location: { x: 3, y: 5 },
+				position: 2,
+				shape: positionsZ[2].shape,
+				piece: 'z',
+				set: false
+			}
+			let result = rotatePieces(statePiece, savedBoard)
+			expect(result.success).to.be.true
+			expect(result.statePiece).to.eql({
+				location: { x: 3, y: 5 },
+				position: 3,
+				shape: positionsZ[3].shape,
+				piece: 'z',
+				set: false
+			})
+		})
+		it('returns previous piece state if no matching piece (should never happen)', () => {
+			let statePiece = {
+				location: { x: 3, y: 5 },
+				position: 2,
+				shape: positionsZ[2].shape,
+				piece: 'x',
+				set: false
+			}
+			let result = rotatePieces(statePiece, savedBoard)
+			expect(result.success).to.be.false
+			expect(result.statePiece).to.eql(statePiece)
 		})
 	})
 })
