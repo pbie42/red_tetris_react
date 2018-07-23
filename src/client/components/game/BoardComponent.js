@@ -34,6 +34,7 @@ function BoardComponent(props) {
 	}
 
 	C.componentDidMount = function () {
+		console.log(`did mount mang`)
 		C.buildBoard()
 		window.addEventListener('keydown', C.handleKeydown)
 	}

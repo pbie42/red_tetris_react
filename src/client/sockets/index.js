@@ -21,7 +21,7 @@ import { store } from '../../index'
 import openSocket from 'socket.io-client'
 
 const setupSocket = dispatch => {
-	const socket = openSocket('http://localhost:8000')
+	const socket = openSocket('http://localhost:7000')
 
 	socket.on('connect', () => {
 		console.log(`connected`)

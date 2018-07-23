@@ -10,6 +10,16 @@ function roomAddUser(username, roomName, rooms, users) {
 	return rooms
 }
 
+function roomMembersCheck(rooms) {
+	let emptyRooms = rooms.filter(room => room.getMembers().length === 0)
+	if (emptyRooms.length > 0) {
+		emptyRooms.forEach(emptyRoom => {
+			rooms = removeRoom(emptyRoom.roomName, rooms)
+		})
+	}
+	return rooms
+}
+
 function roomRemoveUser(username, roomName, rooms, users) {
 	const roomIndex = rooms.findIndex(room => room.getRoomName() === roomName)
 	if (
@@ -100,6 +110,7 @@ module.exports = {
 	pieceOrder,
 	newGamePieces,
 	newBoards,
+	roomMembersCheck,
 	roomRemoveUser,
 	randomPiece,
 	removeRoom

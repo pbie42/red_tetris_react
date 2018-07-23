@@ -3,6 +3,7 @@ const { socketMessageHandler } = require('./sockets/message')
 const { socketUserHandler } = require('./sockets/user')
 const { socketRoomHandler } = require('./sockets/room')
 const { socketGameHandler } = require('./sockets/game')
+const { roomMembersCheck, removeRoom } = require('./utils')
 
 let users = []
 let rooms = []
@@ -10,6 +11,7 @@ let result = {}
 
 io.on('connection', socket => {
 	console.log(`CONNECTED`)
+	rooms = roomMembersCheck(rooms)
 	//---------------------------------------------------------------------------CONNECTION
 	socket.emit(
 		'user',
@@ -51,6 +53,6 @@ io.on('connection', socket => {
 	})
 })
 
-const port = 8000
+const port = 7000
 io.listen(port)
 console.log(`listening on port`, port)

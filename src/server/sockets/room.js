@@ -81,9 +81,8 @@ function socketRoomHandler(io, socket, users, rooms) {
 				let user = getUser(data.username, users)
 				if (user) user.setBoard(newUserBoard())
 				room = getRoom(data.roomName, rooms)
-				if (room && room.getMembers().length === 0) {
+				if (room && room.getMembers().length === 0)
 					rooms = removeRoom(data.roomName, rooms)
-				}
 				socket.emit(
 					'game',
 					JSON.stringify({
@@ -134,6 +133,8 @@ function socketRoomHandler(io, socket, users, rooms) {
 			default:
 				break
 		}
+		console.log(`about to return rooms, users`)
+		return { rooms, users }
 	})
 	return { rooms, users }
 }

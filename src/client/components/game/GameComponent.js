@@ -32,13 +32,13 @@ function GameComponent(props) {
 		mounted: false
 	}
 
-	C.componentDidMount = function() {
+	C.componentDidMount = function () {
 		C.setState({ mounted: true })
 		window.addEventListener('beforeunload', C.componentCleanup)
 		window.addEventListener('keydown', C.handleSpaceBar)
 	}
 
-	C.componentDidUpdate = function() {
+	C.componentDidUpdate = function () {
 		const url = C.props.match.params.game
 		if (!verifyUrl(url)) C.props.history.push('/')
 		const { room, player } = parseUrl(url)
@@ -50,27 +50,27 @@ function GameComponent(props) {
 		}
 	}
 
-	C.componentWillUnmount = function() {
+	C.componentWillUnmount = function () {
 		C.componentCleanup()
 		window.removeEventListener('keydown', C.handleSpaceBar)
 		console.log(`component unmounting`)
 	}
 
-	C.componentCleanup = function() {
+	C.componentCleanup = function () {
 		C.props.roomRemoveUser(C.props.username, C.state.room)
-		C.props.gameClear()
+		C.props.gameClear(C.props.roomName)
 		clearInterval(C.state.interval)
 		window.removeEventListener('keydown', C.handleSpaceBar)
 	}
 
-	C.handlePlayer = function(player) {
+	C.handlePlayer = function (player) {
 		if (!C.props.username)
 			if (verifyUsername(player, C.props.users)) C.updateUser(player)
 			else C.errorUsername()
 		return true
 	}
 
-	C.handleRoom = function(room, player) {
+	C.handleRoom = function (room, player) {
 		if (verifyRoomName(room, C.props.rooms)) C.updateRoom(room, player)
 		else {
 			C.setState({ room })
@@ -82,55 +82,55 @@ function GameComponent(props) {
 		return true
 	}
 
-	C.handleSpaceBar = function(event) {
+	C.handleSpaceBar = function (event) {
 		console.log(`C.props.roomName GAME`, C.props.roomName)
 		if (doneUser && doneRoom && event.keyCode === 32)
 			if (C.props.userId && C.props.roomName)
 				C.props.gameStart(C.props.roomName, C.props.userId)
 	}
 
-	C.updateUser = function(player) {
+	C.updateUser = function (player) {
 		C.props.userSetUsername(player)
 		C.props.userAdd(player)
 	}
 
-	C.updateRoom = function(room, player) {
+	C.updateRoom = function (room, player) {
 		C.props.roomAdd(room, [player])
 		C.setState({ room })
 	}
 
-	C.errorUsername = function() {
+	C.errorUsername = function () {
 		C.props.errorUsernameTaken()
 		C.props.history.push('/error')
 	}
 
-	C.errorTooManyMembers = function() {
+	C.errorTooManyMembers = function () {
 		C.props.errorTooManyMembers()
 		C.props.history.push('/error')
 	}
 
-	C.showExitText = function() {
+	C.showExitText = function () {
 		C.setState({ exitText: 'Exit/Quit Game to Lobby?' })
 	}
 
-	C.hideExitText = function() {
+	C.hideExitText = function () {
 		C.setState({ exitText: '' })
 	}
 
-	C.quitToLobby = function() {
+	C.quitToLobby = function () {
 		C.setState({ change: true })
 		setTimeout(C.changeRoute, 800)
 	}
 
-	C.changeRoute = function() {
+	C.changeRoute = function () {
 		C.props.history.push(`/lobby`)
 	}
 
-	C.gameStart = function() {
+	C.gameStart = function () {
 		C.setState({ gameStarted: true })
 	}
 
-	C.gameOver = function() {
+	C.gameOver = function () {
 		if (!C.state.gameOver) C.setState({ gameOver: true })
 	}
 
@@ -158,34 +158,34 @@ function GameComponent(props) {
 				{!C.props.connection ? (
 					<i className="fas fa-spinner fa-pulse" />
 				) : (
-					<div className="container-boards">
-						<LeftBoardsComponent boards={C.props.boards} />
-						<div
-							className={
-								!C.state.change
-									? 'player-main moveInDivTop'
-									: 'player-main moveOutDivDown'
-							}
-						>
-							<GameMessageComponent
-								userId={C.props.userId}
-								roomId={C.props.roomId}
-								message={C.state.message}
-								countDown={C.props.countDown}
-								gameStart={C.gameStart}
-								gameOver={C.state.gameOver}
-							/>
-							<BoardContainer
-								id="player-grid"
-								doneRoom={doneRoom}
-								doneUser={doneUser}
-								gameOver={C.gameOver}
-								gameStarted={C.state.gameStarted}
-							/>
+						<div className="container-boards">
+							<LeftBoardsComponent boards={C.props.boards} />
+							<div
+								className={
+									!C.state.change
+										? 'player-main moveInDivTop'
+										: 'player-main moveOutDivDown'
+								}
+							>
+								<GameMessageComponent
+									userId={C.props.userId}
+									roomId={C.props.roomId}
+									message={C.state.message}
+									countDown={C.props.countDown}
+									gameStart={C.gameStart}
+									gameOver={C.state.gameOver}
+								/>
+								<BoardContainer
+									id="player-grid"
+									doneRoom={doneRoom}
+									doneUser={doneUser}
+									gameOver={C.gameOver}
+									gameStarted={C.state.gameStarted}
+								/>
+							</div>
+							<RightBoardsComponent boards={C.props.boards} />
 						</div>
-						<RightBoardsComponent boards={C.props.boards} />
-					</div>
-				)}
+					)}
 			</div>
 		)
 	}
