@@ -3,7 +3,15 @@ const { socketMessageHandler } = require('./sockets/message')
 const { socketUserHandler } = require('./sockets/user')
 const { socketRoomHandler } = require('./sockets/room')
 const { socketGameHandler } = require('./sockets/game')
-const { roomMembersCheck, removeRoom } = require('./utils')
+const User = require('./classes/User')
+const Game = require('./classes/Game')
+const { roomMembersCheck, getRoom,
+	getUser,
+	getUserById,
+	newUserBoard,
+	removeRoom,
+	roomAddUser,
+	roomRemoveUser } = require('./utils')
 
 let users = []
 let rooms = []
@@ -32,13 +40,21 @@ io.on('connection', socket => {
 
 	socketUserHandler(socket, users)
 
-	result = socketRoomHandler(io, socket, users, rooms)
-	rooms = result.rooms
-	users = result.users
 
-	result = socketGameHandler(io, socket, users, rooms)
-	rooms = result.rooms
-	users = result.users
+	socket.on('room', (message) => {
+		//------------------------------------------------------------------------ROOM
+		result = socketRoomHandler(io, socket, message, users, rooms)
+		rooms = result.rooms
+		users = result.users
+	})
+
+
+	socket.on('game', message => {
+		//------------------------------------------------------------------------GAME
+		result = socketGameHandler(io, socket, message, users, rooms)
+		rooms = result.rooms
+		users = result.users
+	})
 
 	socket.on('disconnect', () => {
 		//------------------------------------------------------------------------DISCONNECTION

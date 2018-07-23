@@ -21,6 +21,8 @@ function roomMembersCheck(rooms) {
 }
 
 function roomRemoveUser(username, roomName, rooms, users) {
+	console.log(`rooms in removeuser`, rooms)
+	if (rooms.length === 0) return []
 	const roomIndex = rooms.findIndex(room => room.getRoomName() === roomName)
 	if (
 		roomIndex >= 0 &&
