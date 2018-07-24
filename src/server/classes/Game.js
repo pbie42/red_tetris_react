@@ -1,6 +1,8 @@
+const Piece = require('./Piece')
+
 function randomPiece() {
 	const pieces = ['i', 'j', 'l', 'o', 's', 't', 'z']
-	return pieces[Math.floor(Math.random() * pieces.length)]
+	return new Piece(pieces[Math.floor(Math.random() * pieces.length)])
 }
 
 function pieceOrder() {
@@ -56,7 +58,7 @@ module.exports = class Game {
 		return this.members
 	}
 	getPiece(current) {
-		return this.pieces[current]
+		return this.pieces[current].getPiece()
 	}
 	getPieces() {
 		return this.pieces
