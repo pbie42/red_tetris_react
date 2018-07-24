@@ -14,10 +14,11 @@ const {
 
 function socketGameHandler(io, socket, message, users, rooms) {
 	const data = JSON.parse(message)
+	console.log(`data.type`, data.type)
 	const { roomName } = data
 	let room, members, roomBoards, nextPiece, user
 	switch (data.type) {
-		//---------------------------------------------------------------------GAME_JOINED
+		//------------------------------------------------------------------------GAME_JOINED
 		case 'GAME_JOINED':
 			console.log(`GAME_JOINED`)
 			room = getRoom(data.roomName, rooms)
@@ -44,13 +45,13 @@ function socketGameHandler(io, socket, message, users, rooms) {
 					})
 				)
 			break
-		//---------------------------------------------------------------------GAME_START
+		//------------------------------------------------------------------------GAME_START
 		case 'GAME_START':
 			console.log(`GAME_START`)
 			console.log(`data`, data)
-			console.log(`rooms`, rooms)
+			// console.log(`rooms`, rooms)
 			room = getRoom(data.roomName, rooms)
-			console.log(`room`, room)
+			// console.log(`room`, room)
 			if (room) {
 				room.setCountdown()
 				user = getUserById(data.userId, users)
@@ -82,7 +83,7 @@ function socketGameHandler(io, socket, message, users, rooms) {
 				)
 			}
 			break
-		//---------------------------------------------------------------------GAME_BOARD_UPDATE
+		//------------------------------------------------------------------------GAME_BOARD_UPDATE
 		case 'GAME_BOARD_UPDATE':
 			console.log(`GAME_BOARD_UPDATE`)
 			user = getUser(data.username, users)
@@ -112,7 +113,7 @@ function socketGameHandler(io, socket, message, users, rooms) {
 				)
 			}
 			break
-		//---------------------------------------------------------------------GAME_NEW_PIECE
+		//------------------------------------------------------------------------GAME_NEW_PIECE
 		case 'GAME_NEW_PIECE':
 			console.log(`GAME_NEW_PIECE`)
 			room = getRoom(data.roomName, rooms)
@@ -129,7 +130,33 @@ function socketGameHandler(io, socket, message, users, rooms) {
 				)
 			}
 			break
-		//---------------------------------------------------------------------GAME_NEW_PIECES
+		//------------------------------------------------------------------------GAME_LOBBY_NEW_MESSAGE
+		case 'GAME_LOBBY_NEW_MESSAGE':
+			console.log(`GAME_LOBBY_NEW_MESSAGE`)
+			console.log(`data`, data)
+			room = getRoom(data.roomName, rooms)
+			if (room) {
+				socket.broadcast.emit(
+					'game',
+					JSON.stringify({
+						type: 'ROOM_LOBBY_MESSAGE_UPDATE',
+						roomId: room.getId(),
+						roomName: room.getRoomName(),
+						message: data.message
+					})
+				)
+				socket.emit(
+					'game',
+					JSON.stringify({
+						type: 'ROOM_LOBBY_MESSAGE_UPDATE',
+						roomId: room.getId(),
+						roomName: room.getRoomName(),
+						message: data.message
+					})
+				)
+			}
+			break
+		//------------------------------------------------------------------------GAME_NEW_PIECES
 		case 'GAME_NEW_PIECES':
 			console.log(`GAME_NEW_PIECES`)
 			room = getRoom(data.roomName, rooms)

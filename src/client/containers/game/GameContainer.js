@@ -5,6 +5,7 @@ import {
 	errorUsernameTaken,
 	gameClear,
 	gameJoined,
+	gameLobbyNewMessage,
 	gameRoomSet,
 	gameStart,
 	roomAdd,
@@ -47,6 +48,9 @@ export const mapDispatchToProps = dispatch => ({
 	},
 	gameJoined: roomName => {
 		dispatch(gameJoined(roomName))
+	},
+	gameLobbyNewMessage: (message, roomName) => {
+		dispatch(gameLobbyNewMessage(message, roomName))
 	}
 })
 

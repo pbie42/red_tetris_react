@@ -9,6 +9,7 @@ import {
 	gameBoardsUpdate,
 	gameClear,
 	gameJoined,
+	gameLobbyNewMessage,
 	gameMembersUpdate,
 	gameNewPiece,
 	gameNewPieces,
@@ -38,6 +39,7 @@ import {
 	roomAdded,
 	roomRemoveUser,
 	roomsListReceived,
+	roomLobbyMessageUpdate,
 	roomsPopulateList
 } from './rooms'
 
@@ -50,6 +52,7 @@ export {
 	gameBoardsUpdate,
 	gameClear,
 	gameJoined,
+	gameLobbyNewMessage,
 	gameMembersUpdate,
 	gameNewPiece,
 	gameNewPieces,
@@ -67,6 +70,7 @@ export {
 	roomAdded,
 	roomRemoveUser,
 	roomsListReceived,
+	roomLobbyMessageUpdate,
 	roomsPopulateList,
 	userAdd,
 	userRemove,

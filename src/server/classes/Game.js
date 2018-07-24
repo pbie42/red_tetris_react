@@ -20,16 +20,18 @@ module.exports = class Game {
 		this.countdown = false
 		this.members = members
 		this.pieces = pieceOrder()
+		this.message = "Waiting for more players..."
 	}
 
 	getInfo() {
-		const { id, roomName, creator, inSession, countdown, members } = this
+		const { id, roomName, creator, inSession, countdown, members, message } = this
 		return {
 			id,
 			roomName,
 			creator,
 			inSession,
 			countdown,
+			message,
 			members: members.map(member => member.getInfo())
 		}
 	}

@@ -34,6 +34,9 @@ const games = (state = initialGameState, action = { type: null }) => {
 		case types.GAME_JOINED:
 			return state
 
+		case types.GAME_LOBBY_NEW_MESSAGE:
+			return state
+
 		case types.GAME_MEMBERS_UPDATE:
 			return { ...state, members: action.members }
 

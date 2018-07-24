@@ -170,7 +170,9 @@ function GameComponent(props) {
 								<GameMessageComponent
 									userId={C.props.userId}
 									roomId={C.props.roomId}
+									roomName={C.props.roomName}
 									message={C.state.message}
+									gameLobbyNewMessage={C.props.gameLobbyNewMessage}
 									countDown={C.props.countDown}
 									gameStart={C.gameStart}
 									gameOver={C.state.gameOver}

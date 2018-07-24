@@ -13,6 +13,12 @@ const handleGameJoined = function* handleGameJoined(params) {
 	})
 }
 
+const handleGameLobbyNewMessage = function* handlegameLobbyNewMessage(params) {
+	yield takeEvery(types.GAME_LOBBY_NEW_MESSAGE, action => {
+		params.socket.emit('game', JSON.stringify(action))
+	})
+}
+
 const handleGameNewPiece = function* handleGameNewPiece(params) {
 	yield takeEvery(types.GAME_NEW_PIECE, action => {
 		params.socket.emit('game', JSON.stringify(action))
@@ -70,6 +76,7 @@ const handleUserRemoval = function* handleUserRemoval(params) {
 export {
 	handleGameBoardUpdate,
 	handleGameJoined,
+	handleGameLobbyNewMessage,
 	handleGameNewPiece,
 	handleGameNewPieces,
 	handleGameStart,

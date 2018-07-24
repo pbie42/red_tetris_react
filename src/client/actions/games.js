@@ -22,6 +22,12 @@ export const gameJoined = roomName => ({
 	roomName
 })
 
+export const gameLobbyNewMessage = (message, roomName) => ({
+	type: types.GAME_LOBBY_NEW_MESSAGE,
+	message,
+	roomName
+})
+
 export const gameMembersUpdate = members => ({
 	type: types.GAME_MEMBERS_UPDATE,
 	members

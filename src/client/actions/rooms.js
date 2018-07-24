@@ -12,6 +12,13 @@ export const roomAddUser = (username, roomName) => ({
 	username
 })
 
+export const roomLobbyMessageUpdate = (roomId, roomName, message) => ({
+	type: types.ROOM_LOBBY_MESSAGE_UPDATE,
+	message,
+	roomId,
+	roomName
+})
+
 export const roomRemoveUser = (username, userId, roomName) => ({
 	type: types.ROOM_REMOVE_USER,
 	roomName,

@@ -18,26 +18,26 @@ function GameMessageComponent(props) {
 		gameOver: false
 	}
 
-	C.componentDidMount = function() {
+	C.componentDidMount = function () {
 		C.state.interval = setInterval(C.flashMessage, 1000)
 	}
 
-	C.componentDidUpdate = function() {
+	C.componentDidUpdate = function () {
 		if (C.props.gameOver && !C.state.gameOver)
 			C.setState({ message: 'Game Over!', gameOver: true })
 	}
 
-	C.componentWillUnmount = function() {
+	C.componentWillUnmount = function () {
 		clearInterval(C.state.interval)
 	}
 
-	C.flashMessage = function() {
+	C.flashMessage = function () {
 		C.handleCreatorMessage()
 		C.handlePlayerMessage()
 		if (C.props.countDown) C.handleCountdownMessage()
 	}
 
-	C.handleCreatorMessage = function() {
+	C.handleCreatorMessage = function () {
 		const { message, msgStart, msgWaitPlayers } = C.state
 		if (verifyCreatorMessage(C.props, message, msgStart))
 			C.setState({ message: msgWaitPlayers })
@@ -45,7 +45,7 @@ function GameMessageComponent(props) {
 			C.setState({ message: msgStart })
 	}
 
-	C.handlePlayerMessage = function() {
+	C.handlePlayerMessage = function () {
 		const { message, msgStart, msgWaitCreator } = C.state
 		if (verifyPlayerMessage(C.props, message, msgStart))
 			C.setState({ message: msgWaitCreator })
@@ -53,16 +53,31 @@ function GameMessageComponent(props) {
 			C.setState({ message: '' })
 	}
 
-	C.handleCountdownMessage = function() {
+	C.handleCountdownMessage = function () {
 		const { message, msgGameStarting } = C.state
-		if (verifyGameMessageStart(C.state))
+		if (verifyGameMessageStart(C.state)) {
+			C.props.gameLobbyNewMessage(msgGameStarting, C.props.roomName)
 			C.setState({ message: msgGameStarting })
-		else if (message === msgGameStarting) C.setState({ message: '4' })
-		else if (message === '4') C.setState({ message: '3' })
-		else if (message === '3') C.setState({ message: '2' })
-		else if (message === '2') C.setState({ message: '1' })
+		}
+		else if (message === msgGameStarting) {
+			C.props.gameLobbyNewMessage('4', C.props.roomName)
+			C.setState({ message: '4' })
+		}
+		else if (message === '4') {
+			C.props.gameLobbyNewMessage('3', C.props.roomName)
+			C.setState({ message: '3' })
+		}
+		else if (message === '3') {
+			C.props.gameLobbyNewMessage('2', C.props.roomName)
+			C.setState({ message: '2' })
+		}
+		else if (message === '2') {
+			C.props.gameLobbyNewMessage('1', C.props.roomName)
+			C.setState({ message: '1' })
+		}
 		else if (message === '1') {
 			C.props.gameStart()
+			C.props.gameLobbyNewMessage('Game has started!', C.props.roomName)
 			C.setState({ message: 'GO!' })
 			clearInterval(C.state.interval)
 		}
@@ -74,13 +89,13 @@ function GameMessageComponent(props) {
 				{C.props.userId === C.props.roomId ? (
 					<h1>{C.state.message}</h1>
 				) : (
-					<h1> </h1>
-				)}
+						<h1> </h1>
+					)}
 				{C.props.userId !== C.props.roomId ? (
 					<h1>{C.state.message}</h1>
 				) : (
-					<h1> </h1>
-				)}
+						<h1> </h1>
+					)}
 			</div>
 		)
 	}

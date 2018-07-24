@@ -8,6 +8,15 @@ function roomAddUser(username, roomName, rooms) {
 	return rooms
 }
 
+function roomLobbyMessageUpdate(roomId, roomName, message, rooms) {
+	console.log(`rooms inside message update`, rooms)
+	let roomsUpdate = rooms.map(room => {
+		if (room.roomName === roomName) room.message = message
+		return room
+	})
+	return roomsUpdate
+}
+
 function roomRemoveUser(username, roomName, rooms) {
 	const roomIndex = rooms.findIndex(room => room.roomName === roomName)
 	if (
@@ -21,4 +30,4 @@ function roomRemoveUser(username, roomName, rooms) {
 	return rooms
 }
 
-export { roomAddUser, roomRemoveUser }
+export { roomAddUser, roomLobbyMessageUpdate, roomRemoveUser }

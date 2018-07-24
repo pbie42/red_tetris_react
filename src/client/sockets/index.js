@@ -9,6 +9,7 @@ import {
 	gameStartCountdown,
 	gameStopCountdown,
 	messageReceived,
+	roomLobbyMessageUpdate,
 	roomsListReceived,
 	roomsPopulateList,
 	userSetId,
@@ -53,7 +54,13 @@ const setupSocket = dispatch => {
 
 	socket.on('game', event => {
 		const data = JSON.parse(event)
+		console.log(`data.type`, data.type)
 		switch (data.type) {
+			case types.ROOM_LOBBY_MESSAGE_UPDATE:
+				console.log(`ROOM_LOBBY_MESSAGE_UPDATE`)
+				console.log(`data`, data)
+				dispatch(roomLobbyMessageUpdate(data.roomId, data.roomName, data.message))
+				break
 			case types.GAME_MEMBERS_UPDATE:
 				// console.log(`GAME_MEMBERS_UPDATE`)
 				// console.log(`data`, data)

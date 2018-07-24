@@ -18,6 +18,7 @@ import {
 	handleRoomUserAddition,
 	handleRoomUserRemoval,
 	handleGameJoined,
+	handleGameLobbyNewMessage,
 	handleGameBoardUpdate,
 	handleGameNewPieces,
 	handleGameNewPiece,
@@ -40,6 +41,8 @@ const socket = setupSocket(store.dispatch)
 sagaMiddleware.run(handleGameBoardUpdate, { socket })
 
 sagaMiddleware.run(handleGameJoined, { socket })
+
+sagaMiddleware.run(handleGameLobbyNewMessage, { socket })
 
 sagaMiddleware.run(handleGameNewPiece, { socket })
 

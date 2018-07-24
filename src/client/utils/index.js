@@ -13,7 +13,7 @@ import {
 	verifyUsername
 } from './verify'
 import { parseUrl } from './parse_url'
-import { roomAddUser, roomRemoveUser } from './rooms'
+import { roomAddUser, roomLobbyMessageUpdate, roomRemoveUser } from './rooms'
 import {
 	handleStatePiece,
 	movePieceDown,
@@ -107,6 +107,7 @@ export {
 	positionsZ,
 	randomPiece,
 	roomAddUser,
+	roomLobbyMessageUpdate,
 	roomRemoveUser,
 	rotatePiece,
 	rotatePieces,
