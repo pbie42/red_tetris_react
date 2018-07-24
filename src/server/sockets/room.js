@@ -19,7 +19,7 @@ function socketRoomHandler(io, socket, message, users, rooms) {
 		case 'ROOM_ADD_ROOM':
 			console.log(`ROOM_ADD_ROOM`)
 			socket.join(data.roomName)
-			console.log(`data.members`, data.members)
+			// console.log(`data.members`, data.members)
 			let game = new Game(
 				socket.id,
 				data.roomName,
@@ -79,10 +79,21 @@ function socketRoomHandler(io, socket, message, users, rooms) {
 		//---------------------------------------------------------------------ROOM_REMOVE_USER
 		case 'ROOM_REMOVE_USER':
 			console.log(`ROOM_REMOVE_USER`)
+			console.log(`data`, data)
 			rooms = roomRemoveUser(data.username, data.roomName, rooms, users)
 			let user = getUser(data.username, users)
 			if (user) user.setBoard(newUserBoard())
 			room = getRoom(data.roomName, rooms)
+			if (room && room.getId() === data.userId && room.getMembers().length > 0) {
+				room.setId(room.getMembers()[0].getId())
+				io.to(data.roomName).emit(
+					'game',
+					JSON.stringify({
+						type: 'GAME_ID_SET',
+						id: room.getId()
+					})
+				)
+			}
 			if (room && room.getMembers().length === 0)
 				rooms = removeRoom(data.roomName, rooms)
 			socket.emit(
@@ -135,7 +146,6 @@ function socketRoomHandler(io, socket, message, users, rooms) {
 		default:
 			break
 	}
-	console.log(`about to return rooms, users from inside`)
 	return { rooms, users }
 }
 

@@ -37,8 +37,10 @@ io.on('connection', socket => {
 	)
 
 	socketMessageHandler(socket)
+	//---------------------------------------------------------------------------MESSAGES
 
 	socketUserHandler(socket, users)
+	//---------------------------------------------------------------------------USERS
 
 
 	socket.on('room', (message) => {

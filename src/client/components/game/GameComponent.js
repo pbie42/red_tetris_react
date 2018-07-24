@@ -57,7 +57,7 @@ function GameComponent(props) {
 	}
 
 	C.componentCleanup = function () {
-		C.props.roomRemoveUser(C.props.username, C.state.room)
+		C.props.roomRemoveUser(C.props.username, C.props.userId, C.props.roomName)
 		C.props.gameClear(C.props.roomName)
 		clearInterval(C.state.interval)
 		window.removeEventListener('keydown', C.handleSpaceBar)

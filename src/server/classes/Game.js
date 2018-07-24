@@ -34,6 +34,9 @@ module.exports = class Game {
 	getId() {
 		return this.id
 	}
+	setId(newId) {
+		this.id = newId
+	}
 	getRoomName() {
 		return this.roomName
 	}

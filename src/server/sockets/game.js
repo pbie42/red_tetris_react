@@ -35,6 +35,14 @@ function socketGameHandler(io, socket, message, users, rooms) {
 						boards: roomBoards
 					})
 				)
+			if (room)
+				io.to(data.roomName).emit(
+					'game',
+					JSON.stringify({
+						type: 'GAME_ID_SET',
+						id: room.getId()
+					})
+				)
 			break
 		//---------------------------------------------------------------------GAME_START
 		case 'GAME_START':

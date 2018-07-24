@@ -21,8 +21,8 @@ export const mapDispatchToProps = dispatch => ({
 	userAdd: username => {
 		dispatch(userAdd(username))
 	},
-	roomRemoveUser: (username, roomName) => {
-		dispatch(roomRemoveUser(username, roomName))
+	roomRemoveUser: (username, userId, roomName) => {
+		dispatch(roomRemoveUser(username, userId, roomName))
 	},
 	roomAdd: (roomName, members) => {
 		dispatch(roomAdd(roomName, members))
