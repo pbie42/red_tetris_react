@@ -97,11 +97,13 @@ describe('Actions', () => {
 			})
 		})
 		it('roomRemoveUser returns an object for the remove user from a room action', () => {
-			const removeUserFromRoomAction = roomRemoveUser(username, roomName)
+			const userId = '1nhasdli98e3'
+			const removeUserFromRoomAction = roomRemoveUser(username, userId, roomName)
 			expect(removeUserFromRoomAction).to.eql({
 				type: 'ROOM_REMOVE_USER',
 				roomName,
-				username
+				username,
+				userId
 			})
 		})
 		it('roomAdd returns an object for the add a room to rooms array action', () => {

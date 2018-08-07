@@ -108,13 +108,15 @@ describe('Game', () => {
 			})
 
 			it('roomRemoveUser called with property username', () => {
+				const userId = '1nhasdli98e3'
 				const dispatchSpy = sinon.spy()
 				const { roomRemoveUser } = mapDispatchToProps(dispatchSpy)
-				roomRemoveUser(username, roomName)
+				roomRemoveUser(username, userId, roomName)
 				const expectedAction = actions.roomRemoveUser()
 				const spyLastCall = dispatchSpy.args[0][0]
 				expect(spyLastCall.type).to.eql(expectedAction.type)
 				expect(spyLastCall.username).to.equal(username)
+				expect(spyLastCall.userId).to.equal(userId)
 				expect(spyLastCall.roomName).to.equal(roomName)
 			})
 
