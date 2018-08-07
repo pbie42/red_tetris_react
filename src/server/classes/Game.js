@@ -69,4 +69,7 @@ module.exports = class Game {
 		this.pieces = this.pieces.concat(pieceOrder())
 		return this.pieces
 	}
+	updateMessage(newMessage) {
+		this.message = newMessage
+	}
 }

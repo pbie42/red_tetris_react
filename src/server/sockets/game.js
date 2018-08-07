@@ -136,6 +136,7 @@ function socketGameHandler(io, socket, message, users, rooms) {
 			console.log(`data`, data)
 			room = getRoom(data.roomName, rooms)
 			if (room) {
+				room.updateMessage(data.message)
 				socket.broadcast.emit(
 					'game',
 					JSON.stringify({

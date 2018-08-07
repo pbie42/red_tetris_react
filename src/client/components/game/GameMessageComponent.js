@@ -77,7 +77,7 @@ function GameMessageComponent(props) {
 		}
 		else if (message === '1') {
 			C.props.gameStart()
-			C.props.gameLobbyNewMessage('Game has started!', C.props.roomName)
+			C.props.gameLobbyNewMessage('Game in session!', C.props.roomName)
 			C.setState({ message: 'GO!' })
 			clearInterval(C.state.interval)
 		}
