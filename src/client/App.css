@@ -1002,6 +1002,19 @@ p {
 .lobby-rooms > div > div:nth-of-type(2) > div:last-of-type > div .hide-it {
   opacity: 0.5;
 }
+.lobby-rooms > div > div:nth-of-type(2) > div:last-of-type > div .room-error {
+  background-color: #fc1576;
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+.lobby-rooms > div > div:nth-of-type(2) > div:last-of-type > div .room-error:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 38px -1px rgba(0,0,0,0.75);
+  background: #fc1576;
+  color: #fff;
+}
 .moveInDivLeft {
   animation: moveInLeft 2s ease-in-out;
   animation-fill-mode: forwards;
@@ -1062,6 +1075,62 @@ p {
     box-shadow: 0px 0px 38px -1px rgba(0,0,0,0.75);
     background: rgba(35,214,192,0.85);
     color: #fff;
+  }
+}
+@-moz-keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+@-webkit-keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+@-o-keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
   }
 }
 @-moz-keyframes moveInUp {

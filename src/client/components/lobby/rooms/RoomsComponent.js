@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import $ from 'jquery'
+import { verifyMemberCount } from '../../../utils'
 
 export function RoomsComponent(props) {
 	const C = new Component(props)
@@ -12,7 +13,8 @@ export function RoomsComponent(props) {
 		index: 0,
 		display: '',
 		change: false,
-		selectedRoom: ''
+		selectedRoom: '',
+		roomError: false
 	}
 
 	C.componentDidMount = function () {
@@ -24,10 +26,19 @@ export function RoomsComponent(props) {
 	}
 
 	C.selectRoom = function (roomName) {
-		C.setState({ change: true, selectedRoom: roomName })
-		C.props.roomAddUser(C.props.username, roomName)
-		C.props.pageChange()
-		setTimeout(C.changeRoute, 800)
+		if (verifyMemberCount(C.props.rooms, roomName)) {
+			console.log(`Members verified`)
+			C.setState({ change: true, selectedRoom: roomName })
+			C.props.roomAddUser(C.props.username, roomName)
+			C.props.pageChange()
+			setTimeout(C.changeRoute, 800)
+		} else {
+			console.log(`Too many members`)
+			C.setState({ selectedRoom: roomName, roomError: true })
+			setTimeout(() => {
+				C.setState({ selectedRoom: '', roomError: false })
+			}, 1000);
+		}
 	}
 
 	C.changeRoute = function () {
@@ -85,63 +96,74 @@ export function RoomsComponent(props) {
 						<div>
 							<div ref={node => (div = node)} className="testing">
 								{!C.state.hideOthers
-									? C.props.rooms.map((room, index) => (
-										<div
-											key={index}
-											onMouseOver={() => C.hideOthers(index)}
-											onClick={() => C.selectRoom(room.roomName)}
-										>
-											<h1>{room.roomName}</h1>
-											<div>
-												{room.members.map((person, index) => {
-													return (
-														<h2 key={index}>
-															{person.username}
-														</h2>
-													)
-												})}
-											</div>
-											<div>
-												<h2>
-													{5 - room.members.length} player{5 -
-														room.members.length >
-														1
-														? 's'
-														: ''}{' '}
-													can still join
+									? C.props.rooms.map((room, index) => {
+										const error = C.state.roomError && C.state.selectedRoom === room.roomName ? 'room-error' : ''
+										console.log(`C.state.roomError`, C.state.roomError)
+										console.log(`C.state.selectedRoom`, C.state.selectedRoom)
+										console.log(`error`, error)
+										return (
+											<div
+												key={index}
+												onMouseOver={() => C.hideOthers(index)}
+												onClick={() => C.selectRoom(room.roomName)}
+												className={error}
+											>
+												<h1>{room.roomName}</h1>
+												<div>
+													{room.members.map((person, index) => {
+														return (
+															<h2 key={index}>
+																{person.username}
+															</h2>
+														)
+													})}
+												</div>
+												<div>
+													<h2>
+														{5 - room.members.length} player{5 -
+															room.members.length >
+															1
+															? 's'
+															: ''}{' '}
+														can still join
 													</h2>
+												</div>
+												<div>{room.message}</div>
 											</div>
-											<div>{room.message}</div>
-										</div>
-									))
-									: C.props.rooms.map((room, index) => (
-										<div
-											key={index}
-											className={
-												index !== C.state.index ? 'hide-it' : ''
-											}
-											onMouseLeave={() => C.showOthers()}
-											onClick={() => C.selectRoom(room.roomName)}
-										>
-											<h1>{room.roomName}</h1>
-											<div>
-												{room.members.map((person, index) => (
-													<h2 key={index}>{person.username}</h2>
-												))}
-											</div>
-											<div>
-												<h2>
-													{5 - room.members.length} player{5 -
-														room.members.length >
-														1
-														? 's'
-														: ''}{' '}
-													can still join
+										)
+									})
+									: C.props.rooms.map((room, index) => {
+										const error = C.state.roomError && C.state.selectedRoom === room.roomName ? 'room-error' : ''
+										console.log(`error`, error)
+										return (
+											<div
+												key={index}
+												className={
+													index !== C.state.index ? 'hide-it' + error : '' + error
+												}
+												onMouseLeave={() => C.showOthers()}
+												onClick={() => C.selectRoom(room.roomName)}
+											>
+												<h1>{room.roomName}</h1>
+												<div>
+													{room.members.map((person, index) => (
+														<h2 key={index}>{person.username}</h2>
+													))}
+												</div>
+												<div>
+													<h2>
+														{5 - room.members.length} player{5 -
+															room.members.length >
+															1
+															? 's'
+															: ''}{' '}
+														can still join
 													</h2>
+												</div>
+												<div>{room.message}</div>
 											</div>
-											<div>{room.message}</div>
-										</div>
-									))}
+										)
+									})}
 							</div>
 						</div>
 					</div>

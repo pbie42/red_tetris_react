@@ -7,13 +7,17 @@ function ErrorComponent(props) {
 		change: false
 	}
 
-	C.componentDidMount = function() {
+	C.componentDidMount = function () {
 		function delayFade() {
 			C.setState({ change: true })
 		}
 		setTimeout(delayFade, 4000)
 		function delayRouteChange() {
-			props.history.push('/')
+			if (!C.props.errorName &&
+				!C.props.roomName &&
+				!C.props.error &&
+				C.props.errorTooManyMembers) props.history.push('/lobby')
+			else props.history.push('/')
 		}
 		setTimeout(delayRouteChange, 6000)
 	}
