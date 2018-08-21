@@ -33,18 +33,18 @@ function BoardComponent(props) {
 		current: 0
 	}
 
-	C.componentDidMount = function () {
+	C.componentDidMount = function() {
 		console.log(`did mount mang`)
 		C.buildBoard()
 		window.addEventListener('keydown', C.handleKeydown)
 	}
 
-	C.componentDidUpdate = function () {
-		let { board, piece, savedBoard, current } = C.state
-		const { countDown, roomId, roomName, username } = C.props
+	C.componentDidUpdate = function() {
+		let { piece, savedBoard, current } = C.state
+		const { countDown, roomId, roomName, username, board } = C.props
 		if (countDown && !C.state.countDown) {
 			setTimeout(() => {
-				C.state.interval = setInterval(function () {
+				C.state.interval = setInterval(function() {
 					C.handleKeydown({ keyCode: 40 })
 				}, 750)
 				piece = nextPiece(piece, C.props.piece)
@@ -56,12 +56,12 @@ function BoardComponent(props) {
 		}
 	}
 
-	C.componentWillUnmount = function () {
+	C.componentWillUnmount = function() {
 		clearInterval(C.state.interval)
 		window.removeEventListener('keydown', C.handleKeydown)
 	}
 
-	C.handleUpdate = function (board, savedBoard) {
+	C.handleUpdate = function(board, savedBoard) {
 		let { userId, roomName, username, doneUser, doneRoom } = C.props
 		if (savedBoard.length > 0)
 			C.setState({ savedBoard: checkLines(savedBoard) })
@@ -69,19 +69,19 @@ function BoardComponent(props) {
 			C.props.gameBoardUpdate(board, userId, roomName, username)
 	}
 
-	C.buildBoard = function () {
+	C.buildBoard = function() {
 		let color = ''
 		if (grid) {
 			grid.innerHTML = ''
-			for (let i = 0; i < C.state.board.length; i++) {
+			for (let i = 0; i < C.props.board.length; i++) {
 				if (i < 4 || i > 23) continue
 				const row = document.createElement('div')
 				row.setAttribute('id', `row-${i - 4}`)
-				for (let x = 0; x < C.state.board[i].length; x++) {
+				for (let x = 0; x < C.props.board[i].length; x++) {
 					if (x > 9) continue
 					const square = document.createElement('div')
 					square.setAttribute('id', `col-${x}`)
-					color = setColorClass(i, x, C.state.board)
+					color = setColorClass(i, x, C.props.board)
 					square.setAttribute('class', color)
 					row.appendChild(square)
 				}
@@ -90,20 +90,22 @@ function BoardComponent(props) {
 		}
 	}
 
-	C.setHandleBuild = function (piece, board, savedBoard) {
-		C.setState({ board: handlePiece(piece, board, savedBoard) })
-		C.handleUpdate(board, savedBoard)
+	C.setHandleBuild = function(piece, board, savedBoard) {
+		// C.setState({ board: handlePiece(piece, board, savedBoard) })
+		let newBoard = handlePiece(piece, board, savedBoard)
+		C.props.gameSetBoard(newBoard)
+		C.handleUpdate(newBoard, savedBoard)
 		C.buildBoard()
 	}
 
-	C.handleGameOver = function () {
+	C.handleGameOver = function() {
 		clearInterval(C.state.interval)
 		C.props.gameOver()
 	}
 
-	C.handleNewPiece = function () {
-		let { board, piece, savedBoard, current } = C.state
-		let { roomId, roomName, username } = C.props
+	C.handleNewPiece = function() {
+		let { piece, savedBoard, current } = C.state
+		let { board, roomId, roomName, username } = C.props
 		C.props.gameNewPiece(roomId, roomName, username)
 		if (current === 90)
 			C.props.gameNewPieces(C.props.roomId, C.props.roomName)
@@ -112,13 +114,14 @@ function BoardComponent(props) {
 		if (!gameOver) C.setHandleBuild(piece, board, savedBoard)
 	}
 
-	C.handleKeydown = function (event) {
+	C.handleKeydown = function(event) {
 		const leftArrow = 37
 		const upArrow = 38
 		const rightArrow = 39
 		const downArrow = 40
 		let result
-		let { board, piece, savedBoard } = C.state
+		let { piece, savedBoard } = C.state
+		let { board } = C.props
 		if (!gameOver && C.props.gameStarted) {
 			switch (event.keyCode) {
 				case leftArrow:

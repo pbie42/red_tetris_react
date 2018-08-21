@@ -1,4 +1,5 @@
 import * as types from '../constants/ActionTypes'
+import { newBoard } from '../utils'
 
 const initialGameState = {
 	roomName: '',
@@ -7,7 +8,8 @@ const initialGameState = {
 	members: [],
 	boards: [],
 	id: '',
-	countDown: false
+	countDown: false,
+	board: newBoard()
 }
 
 const games = (state = initialGameState, action = { type: null }) => {
@@ -54,6 +56,9 @@ const games = (state = initialGameState, action = { type: null }) => {
 
 		case types.GAME_ROOM_SET:
 			return { ...state, roomName: action.roomName }
+
+		case types.GAME_SET_BOARD:
+			return { ...state, board: action.board }
 
 		case types.GAME_START:
 			return state

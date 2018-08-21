@@ -1,6 +1,11 @@
 import { connect } from 'react-redux'
 import BoardComponent from '../../components/game/BoardComponent'
-import { gameBoardUpdate, gameNewPieces, gameNewPiece } from '../../actions'
+import {
+	gameBoardUpdate,
+	gameNewPieces,
+	gameNewPiece,
+	gameSetBoard
+} from '../../actions'
 
 export const mapDispatchToProps = dispatch => ({
 	gameBoardUpdate: (board, id, roomName, username) => {
@@ -11,6 +16,9 @@ export const mapDispatchToProps = dispatch => ({
 	},
 	gameNewPiece: (id, roomName, username) => {
 		dispatch(gameNewPiece(id, roomName, username))
+	},
+	gameSetBoard: board => {
+		dispatch(gameSetBoard(board))
 	}
 })
 
@@ -21,10 +29,12 @@ export function mapStateToProps(state) {
 		roomId: state.games.id,
 		userId: state.user.id,
 		piece: state.games.piece,
-		countDown: state.games.countDown
+		countDown: state.games.countDown,
+		board: state.games.board
 	}
 }
 
-export const BoardContainer = connect(mapStateToProps, mapDispatchToProps)(
-	BoardComponent
-)
+export const BoardContainer = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(BoardComponent)

@@ -66,6 +66,11 @@ export const gameIdSet = id => ({
 	id
 })
 
+export const gameSetBoard = board => ({
+	type: types.GAME_SET_BOARD,
+	board
+})
+
 export const gameStart = (roomName, userId) => ({
 	type: types.GAME_START,
 	roomName,

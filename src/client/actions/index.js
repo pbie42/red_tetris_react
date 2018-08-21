@@ -17,6 +17,7 @@ import {
 	gamePiecesUpdate,
 	gameRoomSet,
 	gameIdSet,
+	gameSetBoard,
 	gameStart,
 	gameStartCountdown,
 	gameStopCountdown
@@ -60,6 +61,7 @@ export {
 	gamePiecesUpdate,
 	gameRoomSet,
 	gameIdSet,
+	gameSetBoard,
 	gameStart,
 	gameStartCountdown,
 	gameStopCountdown,
