@@ -1,6 +1,12 @@
 import { takeEvery } from 'redux-saga/effects'
 import * as types from '../constants/ActionTypes'
 
+const handleGameAddLines = function* handleGameAddLines(params) {
+	yield takeEvery(types.GAME_ADD_LINES, action => {
+		params.socket.emit('game', JSON.stringify(action))
+	})
+}
+
 const handleGameBoardUpdate = function* handleGameBoardUpdate(params) {
 	yield takeEvery(types.GAME_BOARD_UPDATE, action => {
 		params.socket.emit('game', JSON.stringify(action))
@@ -74,6 +80,7 @@ const handleUserRemoval = function* handleUserRemoval(params) {
 }
 
 export {
+	handleGameAddLines,
 	handleGameBoardUpdate,
 	handleGameJoined,
 	handleGameLobbyNewMessage,

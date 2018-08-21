@@ -1,5 +1,12 @@
 import * as types from '../constants/ActionTypes'
 
+export const gameAddLines = (roomName, username, lines) => ({
+	type: types.GAME_ADD_LINES,
+	roomName,
+	username,
+	lines
+})
+
 export const gameBoardUpdate = (board, id, roomName, username) => ({
 	type: types.GAME_BOARD_UPDATE,
 	board,

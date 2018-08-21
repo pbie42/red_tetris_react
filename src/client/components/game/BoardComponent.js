@@ -61,10 +61,37 @@ function BoardComponent(props) {
 		window.removeEventListener('keydown', C.handleKeydown)
 	}
 
+	C.clearLines = function(linesToRemove, savedBoard) {
+		const { roomName, username } = C.props
+		linesToRemove.forEach(line => {
+			savedBoard.splice(line, 1)
+			savedBoard.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+		})
+		if (linesToRemove.length - 1 > 0) {
+			console.log(`Enough lines to add!`)
+			C.props.gameAddLines(roomName, username, linesToRemove.length - 1)
+		}
+		return savedBoard
+	}
+
+	C.checkLines = function(savedBoard) {
+		let board = savedBoard
+		let count = 0
+		let y = 3
+		let linesToRemove = []
+		while (++y < 24) {
+			let x = -1
+			while (++x < 11) if (board[y][x] !== 0 && board[y][x] !== 1) count++
+			if (count === 10) linesToRemove.push(y)
+			count = 0
+		}
+		return C.clearLines(linesToRemove, board)
+	}
+
 	C.handleUpdate = function(board, savedBoard) {
 		let { userId, roomName, username, doneUser, doneRoom } = C.props
 		if (savedBoard.length > 0)
-			C.setState({ savedBoard: checkLines(savedBoard) })
+			C.setState({ savedBoard: C.checkLines(savedBoard) })
 		if (doneUser && doneRoom)
 			C.props.gameBoardUpdate(board, userId, roomName, username)
 	}

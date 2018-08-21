@@ -14,7 +14,7 @@ const {
 
 function socketGameHandler(io, socket, message, users, rooms) {
 	const data = JSON.parse(message)
-	console.log(`data.type`, data.type)
+	// console.log(`data.type`, data.type)
 	const { roomName } = data
 	let room, members, roomBoards, nextPiece, user
 	switch (data.type) {
@@ -83,14 +83,30 @@ function socketGameHandler(io, socket, message, users, rooms) {
 				)
 			}
 			break
+		//------------------------------------------------------------------------GAME_ADD_LINES
+		case 'GAME_ADD_LINES':
+			console.log(`GAME_ADD_LINES`)
+			room = getRoom(data.roomName, rooms)
+			if (room) members = room.getMembers()
+			if (members)
+				members.forEach(member => {
+					if (member.getUsername() !== data.username) member.addSolidLine()
+					io.to(`${member.getId()}`).emit(
+						'game',
+						JSON.stringify({
+							type: 'GAME_LINES_UPDATE',
+							board: member.getBoard()
+						})
+					)
+				})
+			break
 		//------------------------------------------------------------------------GAME_BOARD_UPDATE
 		case 'GAME_BOARD_UPDATE':
-			console.log(`GAME_BOARD_UPDATE`)
+			// console.log(`GAME_BOARD_UPDATE`)
 			user = getUser(data.username, users)
 			if (
 				user &&
-				(user.getId() !== data.id || user.getUsername()) !==
-				data.username
+				(user.getId() !== data.id || user.getUsername()) !== data.username
 			) {
 				console.log(`CHEATING!!!!!!!!!!!`)
 				console.log(`data`, data)

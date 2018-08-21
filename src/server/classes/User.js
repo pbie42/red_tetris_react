@@ -35,6 +35,10 @@ module.exports = class User {
 		this.board = newBoard()
 		this.current = 0
 	}
+	addSolidLine() {
+		this.board.shift()
+		this.board.splice(23, 0, [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+	}
 	setBoard(newBoard) {
 		this.board = newBoard
 	}

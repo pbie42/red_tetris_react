@@ -14,6 +14,9 @@ const initialGameState = {
 
 const games = (state = initialGameState, action = { type: null }) => {
 	switch (action.type) {
+		case types.GAME_ADD_LINES:
+			return state
+
 		case types.GAME_BOARDS_UPDATE:
 			return { ...state, boards: action.boards }
 

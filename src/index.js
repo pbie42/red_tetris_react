@@ -11,18 +11,19 @@ import createSagaMiddleware from 'redux-saga'
 import reducers from './client/reducers'
 import setupSocket from './client/sockets'
 import {
+	handleGameAddLines,
+	handleGameBoardUpdate,
+	handleGameJoined,
+	handleGameLobbyNewMessage,
+	handleGameNewPiece,
+	handleGameNewPieces,
+	handleGameStart,
 	handleMessageAdd,
-	handleUserAddition,
-	handleUserRemoval,
 	handleRoomAddition,
 	handleRoomUserAddition,
 	handleRoomUserRemoval,
-	handleGameJoined,
-	handleGameLobbyNewMessage,
-	handleGameBoardUpdate,
-	handleGameNewPieces,
-	handleGameNewPiece,
-	handleGameStart
+	handleUserAddition,
+	handleUserRemoval
 } from './client/sagas'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -37,6 +38,8 @@ const enhancer = composeEnhancers(
 export const store = createStore(reducers, enhancer)
 
 const socket = setupSocket(store.dispatch)
+
+sagaMiddleware.run(handleGameAddLines, { socket })
 
 sagaMiddleware.run(handleGameBoardUpdate, { socket })
 

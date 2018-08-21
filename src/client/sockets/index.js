@@ -54,12 +54,14 @@ const setupSocket = dispatch => {
 
 	socket.on('game', event => {
 		const data = JSON.parse(event)
-		console.log(`data.type`, data.type)
+		// console.log(`data.type`, data.type)
 		switch (data.type) {
 			case types.ROOM_LOBBY_MESSAGE_UPDATE:
 				console.log(`ROOM_LOBBY_MESSAGE_UPDATE`)
 				console.log(`data`, data)
-				dispatch(roomLobbyMessageUpdate(data.roomId, data.roomName, data.message))
+				dispatch(
+					roomLobbyMessageUpdate(data.roomId, data.roomName, data.message)
+				)
 				break
 			case types.GAME_MEMBERS_UPDATE:
 				// console.log(`GAME_MEMBERS_UPDATE`)
@@ -83,6 +85,11 @@ const setupSocket = dispatch => {
 				// console.log(`GAME_BOARDS_UPDATE`)
 				// console.log(`data`, data)
 				dispatch(gameBoardsUpdate(data.boards))
+				break
+			case types.GAME_LINES_UPDATE:
+				console.log(`GAME_LINES_UPDATE`)
+				// console.log(`data`, data)
+				// dispatch(gameBoardsUpdate(data.boards))
 				break
 			case types.GAME_START_COUNTDOWN:
 				// console.log(`GAME_START_COUNTDOWN`)
