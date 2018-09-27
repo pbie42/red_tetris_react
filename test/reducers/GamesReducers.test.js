@@ -1,5 +1,6 @@
 import { expect } from 'chai'
 import games from '../../src/client/reducers/games'
+import { newBoard } from '../../src/client/utils'
 
 let boards = [
 	[
@@ -56,7 +57,8 @@ describe('Game Reducers', () => {
 		members: [],
 		boards: [],
 		id: '',
-		countDown: false
+		countDown: false,
+		board: newBoard()
 	}
 	it('adds boards to game state', () => {
 		const updatedState = games(initialGameState, {
@@ -79,7 +81,8 @@ describe('Game Reducers', () => {
 			members,
 			boards,
 			id: '4525345dsa',
-			countDown: false
+			countDown: false,
+			board: newBoard()
 		}
 		const updatedState = games(exampleGameState, {
 			type: 'GAME_CLEAR'
